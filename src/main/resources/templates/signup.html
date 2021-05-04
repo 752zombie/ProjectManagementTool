@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up</title>
+
+</head>
+<body>
+<!--header.html  that's here  -->
+<div th:replace="fragments/header :: header"></div>
+<div class="content-area">
+    <h1> Sign up </h1>
+<form action="sign-up" method="post">
+    <div>
+        <input type="name" class="form-control" name="name" id="name" placeholder="Name" autofocus required>
+    </div>
+
+    <div>
+        <input type="email" class="form-control" name="email" id="email" placeholder="Email address" required>
+    </div>
+
+    <div>
+        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+    </div>
+
+
+        <button class="signup" type="submit">Create account</button>
+
+
+
+</form>
+</body>
+</html>

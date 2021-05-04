@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile page</title>
+    <link rel="stylesheet" href="primarystyle.css">
+</head>
+<body>
+        <div th:replace="fragments/header :: header"></div>
+
+        <div class="content-area">
+            <div>
+            <a href="see-wishlist" class="signup-fp" methods="get">View and edit wishlist</a>
+
+            <a href="change-user-info" class="signup-fp" methods="get">Change name, email or password</a>
+            </div>
+        </div>
+
+</body>
+</html>

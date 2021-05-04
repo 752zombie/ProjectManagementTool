@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="primarystyle.css">
+</head>
+<body>
+<!--header.html  that's here  -->
+<div th:replace="fragments/header :: header">
+</div>
+<div class="content-area">
+    <form action="change-email" method="post">
+        <div>
+            <input type="text" class="input" name="email" id="name" placeholder="Enter new email here" autofocus required>
+        </div>
+        <div>
+            <button class=signup type="submit">Confirm email change</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
