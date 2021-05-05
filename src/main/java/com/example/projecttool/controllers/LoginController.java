@@ -39,7 +39,7 @@ public class LoginController {
 
         //User already exists
         else {
-            return "signupFailed";
+            return "signup-failed";
         }
 
         return "index";
@@ -56,7 +56,7 @@ public class LoginController {
 
         //incorrect email or password
         catch (NoSuchElementException e) {
-            return "loginFailed";
+            return "login-failed";
         }
     }
 
