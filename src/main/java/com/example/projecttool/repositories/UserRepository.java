@@ -25,24 +25,19 @@ public class UserRepository {
     }
 
 
-    public static void removeUser(int userid) {
+    public static void removeUser(int userid) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
 
-        try {
+
             //Should user projects på deleted?
             // ProjectRepository.deleteWishlist(userid);
 
             String command = String.format("DELETE FROM users WHERE user_id = %d", userid);
             PreparedStatement statement = connection.prepareStatement(command);
             statement.execute();
-        } catch (SQLException e) {
-            System.out.println("Error deleting user");
-        }
+
     }
 
-    public static void removeUser(User user) {
-        removeUser(user.getId());
-    }
 
     public static void updateUserInfo(int userId, UserAttribute attributeToUpdate, String newValueOfAttribute) {
         Connection connection = DatabaseConnection.getConnection();
