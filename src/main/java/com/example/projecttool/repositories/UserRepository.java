@@ -21,13 +21,11 @@ public class UserRepository {
             PreparedStatement statement = connection.prepareStatement(command);
             statement.execute();
 
-
     }
 
 
     public static void removeUser(int userid) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
-
 
             //Should user projects på deleted?
             // ProjectRepository.deleteWishlist(userid);
