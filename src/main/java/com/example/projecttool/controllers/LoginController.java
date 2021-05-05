@@ -25,7 +25,7 @@ public class LoginController {
 
     @GetMapping("/sign-in")
     public String signIn() {
-        return "login";
+        return "login/login";
     }
 
     @PostMapping("/sign-up")
@@ -41,7 +41,7 @@ public class LoginController {
 
         } catch (SQLException e) {
             System.out.println("Error adding user");
-            return "signup-failed";
+            return "login/signup-failed";
         }
 
         return "index";
@@ -58,13 +58,13 @@ public class LoginController {
 
         //incorrect email or password
         catch (NoSuchElementException e) {
-            return "login-failed";
+            return "login/login-failed";
         }
     }
 
     @GetMapping("/sign-up")
     public String signUp() {
-        return "signup";
+        return "login/signup";
     }
 
 }

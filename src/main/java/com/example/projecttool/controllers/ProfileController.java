@@ -17,20 +17,16 @@ public class ProfileController {
 
 
     @GetMapping("/change-user-info")
-    public String changeSettings() {
-
-        return "user";
-
-    }
+    public String changeSettings() { return "profile/user"; }
 
     @GetMapping("/profile")
     public String profilePage() {
-        return "profile";
+        return "profile/profile";
     }
 
     @GetMapping("/change-user-name")
     public String usernameChangeForm() {
-        return "username-form";
+        return "profile/username-form";
     }
 
     @PostMapping("/change-user-name")
@@ -39,16 +35,17 @@ public class ProfileController {
         try {
             User user = (User) session.getAttribute("user");
             UserRepository.updateUserInfo(user.getId(), UserAttribute.name, username);
-            return "success";
+            return "profile/success";
+
         } catch (SQLException e) {
             System.out.println("Error updating user info");
-            return "failed-changing-user-info";
+            return "profile/failed-changing-user-info";
         }
     }
 
     @GetMapping("/change-email")
     public String emailChangeForm() {
-        return "email-form";
+        return "profile/email-form";
     }
 
     @PostMapping("/change-email")
@@ -57,17 +54,17 @@ public class ProfileController {
         try {
             User user = (User) session.getAttribute("user");
             UserRepository.updateUserInfo(user.getId(), UserAttribute.email, email);
-            return "success";
+            return "profile/success";
 
         } catch (SQLException e) {
             System.out.println("Error updating user info");
-            return "failed-changing-user-info";
+            return "profile/failed-changing-user-info";
         }
     }
 
     @GetMapping("/change-password")
     public String passwordChangeForm() {
-        return "password-form";
+        return "profile/password-form";
     }
 
     @PostMapping("/change-password")
@@ -80,7 +77,7 @@ public class ProfileController {
             try {
                 UserRepository.attemptLogin(user.getEmail(), currentPassword);
             } catch (NoSuchElementException e) {
-                return "password-form";
+                return "profile/password-form";
             }
 
             UserRepository.updateUserInfo(user.getId(), UserAttribute.password, newPassword);
@@ -88,8 +85,9 @@ public class ProfileController {
 
         } catch (SQLException e) {
             System.out.println("Error updating user info");
-            return "failed-changing-user-info";
+            return "profile/failed-changing-user-info";
         }
 
     }
 }
+

@@ -38,13 +38,14 @@ public class DatabaseConnection {
 
 
 
-    public static Connection getConnection() {
+    public static Connection getConnection()  {
 
-        if (connection != null) {
-            return connection;
-        }
+
 
         try {
+            if (connection != null && connection.isValid(10)) {
+                return connection;
+            }
             connection = DriverManager.getConnection(urlStatic, userStatic, passwordStatic);
         }
 
