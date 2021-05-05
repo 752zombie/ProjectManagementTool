@@ -13,22 +13,15 @@ import java.util.NoSuchElementException;
 
 public class UserRepository {
 
-    public static boolean addUser(String name, String email, String password) {
+    public static void addUser(String name, String email, String password) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
 
-        try {
+
             String command = String.format("INSERT INTO users (user_name, email, user_password) VALUES ('%s', '%s', MD5('%s'))", name, email, password);
             PreparedStatement statement = connection.prepareStatement(command);
             statement.execute();
-            return true;
-        } catch (SQLException e) {
-            System.out.println("Error adding user");
-            return false;
-        }
-    }
 
-    public static boolean addUser(User user) {
-        return addUser(user.getName(), user.getEmail(), user.getPassword());
+
     }
 
 
