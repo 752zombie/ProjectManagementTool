@@ -1,10 +1,10 @@
 package com.example.projecttool.models.project;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Task {
 
-    ArrayList<Subtask> subtasks;
+    List<Subtask> subtasks;
 
 
 }
