@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.NoSuchElementException;
 
 @Controller
@@ -16,7 +17,7 @@ public class ProfileController {
 
 
     @GetMapping("/change-user-info")
-    public String changeSettings(){
+    public String changeSettings() {
 
         return "user";
 
@@ -34,9 +35,15 @@ public class ProfileController {
 
     @PostMapping("/change-user-name")
     public String changeUserName(@RequestParam("name") String username, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        UserRepository.updateUserInfo(user.getId(), UserAttribute.name, username);
-        return "success";
+
+        try {
+            User user = (User) session.getAttribute("user");
+            UserRepository.updateUserInfo(user.getId(), UserAttribute.name, username);
+            return "success";
+        } catch (SQLException e) {
+            System.out.println("Error updating user info");
+            return "failed-changing-user-info";
+        }
     }
 
     @GetMapping("/change-email")
@@ -46,9 +53,16 @@ public class ProfileController {
 
     @PostMapping("/change-email")
     public String changeEmail(@RequestParam("email") String email, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        UserRepository.updateUserInfo(user.getId(), UserAttribute.email, email);
-        return "success";
+
+        try {
+            User user = (User) session.getAttribute("user");
+            UserRepository.updateUserInfo(user.getId(), UserAttribute.email, email);
+            return "success";
+
+        } catch (SQLException e) {
+            System.out.println("Error updating user info");
+            return "failed-changing-user-info";
+        }
     }
 
     @GetMapping("/change-password")
@@ -59,18 +73,23 @@ public class ProfileController {
     @PostMapping("/change-password")
     public String changePassword(@RequestParam("current-password") String currentPassword,
                                  @RequestParam("new-password") String newPassword, HttpSession session) {
-        User user = (User) session.getAttribute("user");
 
         try {
-            UserRepository.attemptLogin(user.getEmail(), currentPassword);
+            User user = (User) session.getAttribute("user");
+
+            try {
+                UserRepository.attemptLogin(user.getEmail(), currentPassword);
+            } catch (NoSuchElementException e) {
+                return "password-form";
+            }
+
+            UserRepository.updateUserInfo(user.getId(), UserAttribute.password, newPassword);
+            return "success";
+
+        } catch (SQLException e) {
+            System.out.println("Error updating user info");
+            return "failed-changing-user-info";
         }
 
-        catch (NoSuchElementException e) {
-            return "password-form";
-        }
-
-        UserRepository.updateUserInfo(user.getId(), UserAttribute.password, newPassword);
-        return "success";
     }
-
 }

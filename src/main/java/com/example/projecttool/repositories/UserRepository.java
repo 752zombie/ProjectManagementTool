@@ -39,10 +39,10 @@ public class UserRepository {
     }
 
 
-    public static void updateUserInfo(int userId, UserAttribute attributeToUpdate, String newValueOfAttribute) {
+    public static void updateUserInfo(int userId, UserAttribute attributeToUpdate, String newValueOfAttribute) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
 
-        try {
+
             String command;
             String column = userAttributeToColumn(attributeToUpdate);
 
@@ -53,9 +53,7 @@ public class UserRepository {
             }
             PreparedStatement statement = connection.prepareStatement(command);
             statement.execute();
-        } catch (SQLException e) {
-            System.out.println("Error updating user info");
-        }
+
     }
 
     public static User attemptLogin(String email, String password) {
