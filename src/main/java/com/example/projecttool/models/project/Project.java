@@ -7,8 +7,16 @@ import java.util.Map;
 public class Project {
     int id;
     String name;
+    String start_time;
+    String end_time;
     // The user who created the project
     User owner;
+
+    public Project(String name, String start_time, String end_time) {
+        this.name = name;
+        this.start_time = start_time;
+        this.end_time = end_time;
+    }
 
     // List of collaborators excluding owner
     Map<Integer, User> collaborators;

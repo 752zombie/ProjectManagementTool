@@ -8,6 +8,19 @@
 
     <h1> See all your projects here </h1>
 
+    <ul th:each="project : ${projectList}">
+        <li>
+            <div class="sharedWishes">
+                <h1 class="project-name" th:text="${project.name}"></h1>
+
+                <span class="project-start" id="project-start" th:text="${project.start_time}"></span><br>
+
+                <span class="project-end" id="project-end" th:text="${project.end_time}"></span><br>
+
+            </div>
+        </li>
+    </ul>
+
 
 </body>
 </html>
