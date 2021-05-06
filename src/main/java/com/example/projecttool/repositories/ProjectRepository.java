@@ -60,7 +60,7 @@ public class ProjectRepository {
         }
 
         catch (SQLException e) {
-            System.out.println("Error deleting wishlist");
+            System.out.println("Error getting project");
         }
 
         return projectList;
