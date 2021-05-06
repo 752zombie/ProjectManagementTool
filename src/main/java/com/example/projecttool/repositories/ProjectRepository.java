@@ -11,6 +11,27 @@ import java.util.ArrayList;
 
 public class ProjectRepository {
 
+
+    public static void createProject(int id){
+
+        Connection connection = DatabaseConnection.getConnection();
+
+        try {
+
+            String command = String.format("INSERT INTO test_project (user_id, project_name, project_description, start_time, end_time) values ('%d', '', '', '', '')", id);
+            PreparedStatement statement = connection.prepareStatement(command);
+            statement.execute();
+
+        }
+
+        catch (SQLException e) {
+            System.out.println("Error creating new project to DB");
+        }
+    }
+
+
+
+
     public static void editProject(int id, String name, String description, String start_time, String end_time) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
 
@@ -29,7 +50,7 @@ public class ProjectRepository {
 
             try {
 
-                String command = String.format("INSERT INTO test_project (project_name, project_description, start_time, end_time) values ('%s', '%s', '%s', '%s')", name, description, start_time, end_time);
+                String command = String.format("INSERT INTO test_project (user_id, project_name, project_description, start_time, end_time) values ('%d', '%s', '%s', '%s', '%s')", id, name, description, start_time, end_time);
                 PreparedStatement statement = connection.prepareStatement(command);
                 statement.execute();
 
@@ -40,14 +61,14 @@ public class ProjectRepository {
             }
         }
 
-    public static ArrayList<ProjectTest> getProject() {
+    public static ArrayList<ProjectTest> getProject(int userId) {
 
         Connection connection = DatabaseConnection.getConnection();
         ArrayList<ProjectTest> projectList = new ArrayList<>();
 
         try {
 
-            String command = String.format("SELECT * FROM test_project");
+            String command = String.format("SELECT * FROM test_project WHERE user_id = '%d'", userId );
             PreparedStatement statement = connection.prepareStatement(command);
             ResultSet resultSet = statement.executeQuery();
 

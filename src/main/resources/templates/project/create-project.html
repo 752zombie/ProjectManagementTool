@@ -11,39 +11,22 @@
 
 <div th:replace="fragments/header :: header"></div>
 
-<div style="width:100%; text-align: center; margin-top:50px; margin-bottom: 30px;">
+<h2> Welcome to the project page </h2>
+
+<form action="share-project" method="post">
+    <label for="receiverName"> If you want to share project add name here </label>
+    <input type="text" name="receiverName" id="receiverName" placeholder="Name of user">
+    <button class="share" type="submit"> Share </button>
+    </form>
+
+
+    <form action="/old-project" method="get">
+        <button class="share" type="submit"> Create </button>
+    </form>
 
 
 
-    <table>
-        <tr>
-
-            <td>Name</td>
-            <td>Description</td>
-            <td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td><form action="/edit-project" method="post"><input type="hidden" name="id" value="1" /></td>
-            <td><input type="text" name="name" value="" /></td>
-            <td><input type="text" name="description" value="" /></td>
-            <td><input type="submit" value="Save" /></td>
-            </form>
-        </tr>
-
-
-
-        <tr>
-            <td><form action="/edit-project" method="post" ><input type="hidden" name="id" value="2" /></td>
-            <td><input type="text" name="name" th:value="${session.user.getName()}" /></td>
-            <td><input type="text" name="description" value="Description2" /></td>
-            <td><input type="submit" value="Save" /></td>
-            </form>
-        </tr>
-
-    </table>
-
-
-
+</div>
 </body>
 </html>
 

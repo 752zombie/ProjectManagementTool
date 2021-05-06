@@ -18,7 +18,10 @@ import java.util.ArrayList;
 public class ProjectController {
 
     @GetMapping("/create-project")
-    public String createProject() {
+    public String createProject(HttpSession session) {
+
+        User user = (User) session.getAttribute("user");
+        ProjectRepository.createProject(user.getId());
 
 
     return "project/create-project";
@@ -46,7 +49,8 @@ public class ProjectController {
 
 
         User user = (User) session.getAttribute("user");
-        ArrayList<ProjectTest> projectList = ProjectRepository.getProject();
+
+        ArrayList<ProjectTest> projectList = ProjectRepository.getProject(user.getId());
 
 
         model.addAttribute("projectList", projectList);
@@ -56,13 +60,14 @@ public class ProjectController {
     }
 
     @PostMapping("add-row")
-    public String addRowToProject(@RequestParam("id") int id, @RequestParam("name") String name, @RequestParam("description") String description,
-                                  @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time){
+    public String addRowToProject(@RequestParam("name") String name, @RequestParam("description") String description,
+                                  @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, HttpSession session){
 
-        ProjectRepository.addRowToProject(id, name, description, start_time, end_time);
+        User user = (User) session.getAttribute("user");
+
+        ProjectRepository.addRowToProject(user.getId(), name, description, start_time, end_time);
 
         return "redirect:/old-project";
     }
-
 
 }
