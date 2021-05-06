@@ -1,6 +1,8 @@
 package com.example.projecttool.repositories;
 
+import com.example.projecttool.models.project.Project;
 import com.example.projecttool.models.project.ProjectTest;
+import com.example.projecttool.models.project.Task;
 import com.example.projecttool.services.DatabaseConnection;
 
 import java.sql.Connection;
@@ -45,7 +47,7 @@ public class ProjectRepository {
         }
 
         catch (SQLException e) {
-            System.out.println("Error creating new project to DB");
+            System.out.println("Error creating new task to DB");
         }
 
     }
@@ -82,14 +84,14 @@ public class ProjectRepository {
             }
         }
 
-    public static ArrayList<ProjectTest> getProject(int userId) {
+    public static ArrayList<Project> getProjects(int userId){
 
         Connection connection = DatabaseConnection.getConnection();
-        ArrayList<ProjectTest> projectList = new ArrayList<>();
+        ArrayList<Project> projectList = new ArrayList<>();
 
         try {
 
-            String command = String.format("SELECT * FROM test_project WHERE user_id = '%d'", userId );
+            String command = String.format("SELECT * FROM project WHERE user_id = '%d'", userId );
             PreparedStatement statement = connection.prepareStatement(command);
             ResultSet resultSet = statement.executeQuery();
 
@@ -100,7 +102,7 @@ public class ProjectRepository {
                 String start_time = resultSet.getString("start_time");
                 String end_time = resultSet.getString("end_time");
 
-                projectList.add(new ProjectTest(id, project_name, project_description, start_time, end_time));
+                projectList.add(new Project(project_name, start_time, end_time));
             }
         }
 
@@ -109,6 +111,38 @@ public class ProjectRepository {
         }
 
         return projectList;
+    }
+
+
+
+
+    public static ArrayList<Task> getTasks(int userId) {
+
+        Connection connection = DatabaseConnection.getConnection();
+        ArrayList<Task> taskList = new ArrayList<>();
+
+        try {
+
+            String command = String.format("SELECT * FROM project WHERE user_id = '%d'", userId );
+            PreparedStatement statement = connection.prepareStatement(command);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String project_name = resultSet.getString("project_name");
+                String project_description =  resultSet.getString("project_description");
+                String start_time = resultSet.getString("start_time");
+                String end_time = resultSet.getString("end_time");
+
+                taskList.add(new Task(id, project_name, project_description, start_time, end_time));
+            }
+        }
+
+        catch (SQLException e) {
+            System.out.println("Error getting project");
+        }
+
+        return taskList;
     }
 
     public static void addEmployeeToSubtask(int subtaskId, int employeeId) {

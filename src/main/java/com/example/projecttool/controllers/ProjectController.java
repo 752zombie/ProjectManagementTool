@@ -1,7 +1,8 @@
 package com.example.projecttool.controllers;
 
 import com.example.projecttool.models.User;
-import com.example.projecttool.models.project.ProjectTest;
+import com.example.projecttool.models.project.Project;
+import com.example.projecttool.models.project.Task;
 import com.example.projecttool.repositories.ProjectRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +31,8 @@ public class ProjectController {
        User user = (User) session.getAttribute("user");
        ProjectRepository.createProject(user.getId(), project_name);
 
-
+       ArrayList<Project> allProjects = ProjectRepository.getProjects(user.getId());
+       model.addAttribute("projectList", allProjects);
 
        return "project/all-projects";
    }
@@ -53,12 +55,12 @@ public class ProjectController {
     }
 
     @GetMapping("old-project")
-    public String getProject(Model model, HttpSession session) {
+    public String getTask(Model model, HttpSession session) {
 
 
         User user = (User) session.getAttribute("user");
 
-        ArrayList<ProjectTest> projectList = ProjectRepository.getProject(user.getId());
+        ArrayList<Task> projectList = ProjectRepository.getTasks(user.getId());
 
 
         model.addAttribute("projectList", projectList);
