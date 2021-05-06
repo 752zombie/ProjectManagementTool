@@ -1,5 +1,6 @@
 package com.example.projecttool.repositories;
 
+
 import com.example.projecttool.services.DatabaseConnection;
 
 import java.sql.Connection;
@@ -17,6 +18,4 @@ public class ProjectRepository {
         statement.execute();
 
     }
-
-
 }
