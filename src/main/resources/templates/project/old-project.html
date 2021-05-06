@@ -19,17 +19,17 @@
 
   <tr  th:each="project : ${projectList}">
     <td><form action="/edit-project" method="post" id="form1"><input type="hidden" name="id" th:value="${project.id}" /></td>
-    <td><input form="form1" type="text" name="name" th:value="${project.project_name}" /></td>
-    <td><input form="form1" type="text" name="description" th:value="${project.project_description}" /></td>
-    <td><input form="form1" type="submit" value="Save" /></td>
+    <td><input type="text" name="name" th:value="${project.project_name}" /></td>
+    <td><input type="text" name="description" th:value="${project.project_description}" /></td>
+    <td><input type="submit" value="Save" /></td>
     </form>
   </tr>
 
     <tr>
         <td><form action="/add-row" method="post" id="form2"><input type="hidden" name="id" value="1" /></td>
-        <td><input form="form2" type="text" name="name" value="" /></td>
-        <td><input form="form2" type="text" name="description" value="" /></td>
-        <td><input form="form2" type="submit" value="Save" /></td>
+        <td><input type="text" name="name" value="" /></td>
+        <td><input type="text" name="description" value="" /></td>
+        <td><input type="submit" value="Save" /></td>
         </form>
     </tr>
 
