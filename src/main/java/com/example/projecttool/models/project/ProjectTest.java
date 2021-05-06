@@ -2,11 +2,11 @@ package com.example.projecttool.models.project;
 
 public class ProjectTest {
 
-    int id;
-    String project_name;
-    String project_description;
-    String start_time;
-    String end_time;
+    private int id;
+    private String project_name;
+    private String project_description;
+    private String start_time;
+    private String end_time;
 
     public ProjectTest(int id, String project_name, String project_description, String start_time, String end_time) {
         this.id = id;
