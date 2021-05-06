@@ -4,18 +4,6 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <script src="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.js"></script>
-    <link href="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.css" rel="stylesheet">
-
-
-    <style type="text/css">
-        html, body{
-            height:100%;
-            padding:0px;
-            margin:0px;
-            overflow: hidden;
-        }
-    </style>
 
 
 </head>
@@ -23,21 +11,38 @@
 
 <div th:replace="fragments/header :: header"></div>
 
-<div id="gantt_here" style='width:100%; height:100%;'></div>
-<script type="text/javascript">
-    gantt.config.xml_date = "%Y-%m-%d %H:%i:%s";
+<div style="width:100%; text-align: center; margin-top:50px; margin-bottom: 30px;">
 
-    gantt.config.order_branch = true;/*!*/
-    gantt.config.order_branch_free = true;/*!*/
 
-    gantt.init("gantt_here");
-    gantt.load("/data");
 
-    var dp = new gantt.dataProcessor("/data");
-    dp.init(gantt);
-    dp.setTransactionMode("REST");
+    <table>
+        <tr>
 
-</script>
+            <td>Name</td>
+            <td>Description</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td><form action="/edit-project" method="post" id="form1"><input type="hidden" name="id" value="1" /></td>
+            <td><input form="form1" type="text" name="name" value="Name" /></td>
+            <td><input form="form1" type="text" name="description" value="Description" /></td>
+            <td><input form="form1" type="submit" value="Save" /></td>
+            </form>
+        </tr>
+
+
+
+        <tr>
+            <td><form action="/edit-project" method="post" id="form2"><input type="hidden" name="id" value="2" /></td>
+            <td><input form="form2" type="text" name="name" th:value="${session.user.getName()}" /></td>
+            <td><input form="form2" type="text" name="description" value="Description2" /></td>
+            <td><input form="form2" type="submit" value="Save" /></td>
+            </form>
+        </tr>
+
+    </table>
+
+
 
 </body>
 </html>

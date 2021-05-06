@@ -5,7 +5,8 @@ import com.example.projecttool.models.Skill;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Subtask {
+public class
+Subtask {
     private int start;
     private int end;
     private List<Employee> assignedEmployees;
