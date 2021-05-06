@@ -12,13 +12,12 @@ import java.util.ArrayList;
 public class ProjectRepository {
 
 
-    public static void createProject(int id){
-
+    public static void createProject(int id, String project_name){
         Connection connection = DatabaseConnection.getConnection();
 
         try {
-
-            String command = String.format("INSERT INTO test_project (user_id, project_name, project_description, start_time, end_time) values ('%d', '', '', '', '')", id);
+            createTask(id);
+            String command = String.format("INSERT INTO project (name, owner_id, start_time, end_time) values ('%s', '', '', '', '')", project_name, id);
             PreparedStatement statement = connection.prepareStatement(command);
             statement.execute();
 
@@ -27,6 +26,28 @@ public class ProjectRepository {
         catch (SQLException e) {
             System.out.println("Error creating new project to DB");
         }
+
+
+    }
+
+    public static void createTask(int id){
+
+
+
+        Connection connection = DatabaseConnection.getConnection();
+
+        try {
+
+            String command = String.format("INSERT INTO tasks (user_id, project_name, project_description, start_time, end_time) values ('%d', '', '', '', '')", id);
+            PreparedStatement statement = connection.prepareStatement(command);
+            statement.execute();
+
+        }
+
+        catch (SQLException e) {
+            System.out.println("Error creating new project to DB");
+        }
+
     }
 
 
@@ -106,6 +127,7 @@ public class ProjectRepository {
 
     }
 
-    }
+
+}
 
 

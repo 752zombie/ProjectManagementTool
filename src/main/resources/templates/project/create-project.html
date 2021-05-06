@@ -13,14 +13,8 @@
 
 <h2> Welcome to the project page </h2>
 
-<form action="share-project" method="post">
-    <label for="receiverName"> If you want to share project add name here </label>
-    <input type="text" name="receiverName" id="receiverName" placeholder="Name of user">
-    <button class="share" type="submit"> Share </button>
-    </form>
-
-
-    <form action="/old-project" method="get">
+    <form action="/name-your-project" method="post">
+        <input type="text" name="project_name" id="project-name" placeholder="Name of project">
         <button class="share" type="submit"> Create </button>
     </form>
 

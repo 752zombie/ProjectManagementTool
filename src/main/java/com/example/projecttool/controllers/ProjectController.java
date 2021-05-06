@@ -1,7 +1,6 @@
 package com.example.projecttool.controllers;
 
 import com.example.projecttool.models.User;
-import com.example.projecttool.models.project.Project;
 import com.example.projecttool.models.project.ProjectTest;
 import com.example.projecttool.repositories.ProjectRepository;
 import org.springframework.stereotype.Controller;
@@ -18,14 +17,23 @@ import java.util.ArrayList;
 public class ProjectController {
 
     @GetMapping("/create-project")
-    public String createProject(HttpSession session) {
+    public String createProject() {
 
-        User user = (User) session.getAttribute("user");
-        ProjectRepository.createProject(user.getId());
-
-
-    return "project/create-project";
+               return "project/create-project";
     }
+
+
+
+   @PostMapping("name-your-project")
+   public String nameYourProject(@RequestParam("project_name") String project_name,  HttpSession session, Model model) {
+
+       User user = (User) session.getAttribute("user");
+       ProjectRepository.createProject(user.getId(), project_name);
+
+
+
+       return "project/all-projects";
+   }
 
 
     @PostMapping("/edit-project")
