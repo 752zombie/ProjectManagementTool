@@ -24,7 +24,7 @@ public class ProjectController {
         try {
 
 
-            System.out.println(name + description);
+
 
 
             ProjectRepository.editProject(id, name, description);
