@@ -55,9 +55,10 @@ public class ProjectController {
     }
 
     @PostMapping("add-row")
-    public String addRowToProject(@RequestParam("id") int id, @RequestParam("name") String name, @RequestParam("description") String description){
+    public String addRowToProject(@RequestParam("id") int id, @RequestParam("name") String name, @RequestParam("description") String description,
+                                  @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time){
 
-        ProjectRepository.addRowToProject(id, name, description);
+        ProjectRepository.addRowToProject(id, name, description, start_time, end_time);
 
         return "redirect:/old-project";
     }
