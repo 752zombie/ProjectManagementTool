@@ -68,6 +68,22 @@ public class ProjectRepository {
         return projectList;
     }
 
+    public static void addEmployeeToSubtask(int subtaskId, int employeeId) {
+
+    }
+
+    public static void removeEmployeeFromSubtask(int subtaskId, int employeeId) {
+
+    }
+
+    public static void addSkillToSubtask(int subtaskId, String skillName) {
+
+    }
+
+    public static void removeSkillFromSubtask(int subtaskId, String skillName) {
+
+    }
+
     }
 
 
