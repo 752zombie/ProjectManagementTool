@@ -1,5 +1,6 @@
 package com.example.projecttool.repositories;
 
+import com.example.projecttool.models.project.Project;
 import com.example.projecttool.models.project.ProjectTest;
 import com.example.projecttool.models.project.Task;
 import com.example.projecttool.services.DatabaseConnection;
@@ -142,6 +143,35 @@ public class ProjectRepository {
         }
 
         return taskList;
+    }
+
+    public static ArrayList<Project> getProjects(int userId){
+
+        Connection connection = DatabaseConnection.getConnection();
+        ArrayList<Project> projectList = new ArrayList<>();
+
+        try {
+
+            String command = String.format("SELECT * FROM project WHERE user_id = '%d'", userId );
+            PreparedStatement statement = connection.prepareStatement(command);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String project_name = resultSet.getString("project_name");
+                String project_description =  resultSet.getString("project_description");
+                String start_time = resultSet.getString("start_time");
+                String end_time = resultSet.getString("end_time");
+
+                projectList.add(new Project(project_name, start_time, end_time));
+            }
+        }
+
+        catch (SQLException e) {
+            System.out.println("Error getting project");
+        }
+
+        return projectList;
     }
 
 }
