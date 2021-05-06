@@ -23,8 +23,8 @@
     <td><form action="/edit-project" method="post" id="form1"><input type="hidden" name="id" th:value="${project.id}" /></td>
     <td><input type="text" name="name" th:value="${project.project_name}" /></td>
     <td><input type="text" name="description" th:value="${project.project_description}" /></td>
-      <td><input type="text" name="start_time" th:value="${project.start_time}" /></td>
-      <td><input type="text" name="start_time" th:value="${project.end_time}" /></td>
+      <td><input type="date" name="start_time" th:value="${project.start_time}" /></td>
+      <td><input type="date" name="start_time" th:value="${project.end_time}" /></td>
     <td><input type="submit" value="Save" /></td>
     </form>
   </tr>
@@ -33,8 +33,8 @@
         <td><form action="/add-row" method="post" id="form2"><input type="hidden" name="id" value="1" /></td>
         <td><input type="text" name="name" value="" /></td>
         <td><input type="text" name="description" value="" /></td>
-        <td><input type="text" name="start_time" value="" /></td>
-        <td><input type="text" name="end_time" value="" /></td>
+        <td><input type="date" name="start_time" value="" /></td>
+        <td><input type="date" name="end_time" value="" /></td>
         <td><input type="submit" value="Save" /></td>
         </form>
     </tr>

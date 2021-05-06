@@ -26,12 +26,13 @@ public class ProjectController {
 
 
     @PostMapping("/edit-project")
-    public String editProject(@RequestParam("id") int id, @RequestParam("name") String name, @RequestParam("description") String description) {
+    public String editProject(@RequestParam("id") int id, @RequestParam("name") String name, @RequestParam("description") String description,
+                              @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time) {
 
 
         try {
 
-          ProjectRepository.editProject(id, name, description);
+          ProjectRepository.editProject(id, name, description, start_time, end_time);
 
             return "redirect:/old-project";
 

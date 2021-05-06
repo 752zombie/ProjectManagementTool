@@ -11,11 +11,13 @@ import java.util.ArrayList;
 
 public class ProjectRepository {
 
-    public static void editProject(int id, String name, String description) throws SQLException {
+    public static void editProject(int id, String name, String description, String start_time, String end_time) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
 
 
-        String command = String.format("UPDATE test_project SET project_name = '%s', project_description = '%s' WHERE id = '%d'", name, description, id);
+
+
+        String command = String.format("UPDATE test_project SET project_name = '%s', project_description = '%s', start_time = '%s', end_time = '%s' WHERE id = '%d'", name, description, start_time, end_time, id);
         PreparedStatement statement = connection.prepareStatement(command);
         statement.execute();
 
