@@ -23,20 +23,20 @@
             <td>&nbsp;</td>
         </tr>
         <tr>
-            <td><form action="/edit-project" method="post" id="form1"><input type="hidden" name="id" value="1" /></td>
-            <td><input form="form1" type="text" name="name" value="" /></td>
-            <td><input form="form1" type="text" name="description" value="" /></td>
-            <td><input form="form1" type="submit" value="Save" /></td>
+            <td><form action="/edit-project" method="post"><input type="hidden" name="id" value="1" /></td>
+            <td><input type="text" name="name" value="" /></td>
+            <td><input type="text" name="description" value="" /></td>
+            <td><input type="submit" value="Save" /></td>
             </form>
         </tr>
 
 
 
         <tr>
-            <td><form action="/edit-project" method="post" id="form2"><input type="hidden" name="id" value="2" /></td>
-            <td><input form="form2" type="text" name="name" th:value="${session.user.getName()}" /></td>
-            <td><input form="form2" type="text" name="description" value="Description2" /></td>
-            <td><input form="form2" type="submit" value="Save" /></td>
+            <td><form action="/edit-project" method="post" ><input type="hidden" name="id" value="2" /></td>
+            <td><input type="text" name="name" th:value="${session.user.getName()}" /></td>
+            <td><input type="text" name="description" value="Description2" /></td>
+            <td><input type="submit" value="Save" /></td>
             </form>
         </tr>
 

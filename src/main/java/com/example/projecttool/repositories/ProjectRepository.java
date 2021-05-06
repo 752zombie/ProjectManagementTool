@@ -15,8 +15,6 @@ public class ProjectRepository {
         Connection connection = DatabaseConnection.getConnection();
 
 
-
-
         String command = String.format("UPDATE test_project SET project_name = '%s', project_description = '%s', start_time = '%s', end_time = '%s' WHERE id = '%d'", name, description, start_time, end_time, id);
         PreparedStatement statement = connection.prepareStatement(command);
         statement.execute();
@@ -59,6 +57,7 @@ public class ProjectRepository {
                 String project_description =  resultSet.getString("project_description");
                 String start_time = resultSet.getString("start_time");
                 String end_time = resultSet.getString("end_time");
+
                 projectList.add(new ProjectTest(id, project_name, project_description, start_time, end_time));
             }
         }

@@ -1,5 +1,7 @@
 package com.example.projecttool.models.project;
 
+import java.util.ArrayList;
+
 public class ProjectTest {
 
     private int id;
@@ -7,6 +9,7 @@ public class ProjectTest {
     private String project_description;
     private String start_time;
     private String end_time;
+    private ArrayList<Subtask> subtasks;
 
     public ProjectTest(int id, String project_name, String project_description, String start_time, String end_time) {
         this.id = id;
@@ -14,6 +17,7 @@ public class ProjectTest {
         this.project_description = project_description;
         this.start_time = start_time;
         this.end_time = end_time;
+        this.subtasks = subtasks;
     }
 
 
@@ -35,5 +39,9 @@ public class ProjectTest {
 
     public String getEnd_time() {
         return end_time;
+    }
+
+    public ArrayList<Subtask> getSubtasks() {
+        return subtasks;
     }
 }
