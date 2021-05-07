@@ -73,8 +73,8 @@ public class ProjectController {
     public String editTask(@RequestParam("id") int id, @RequestParam("name") String name, @RequestParam("description") String description,
                            @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, HttpSession session) {
 
-
         try {
+
             // WE NEED TO GET project_id to edit the TASK
 
 
@@ -103,9 +103,5 @@ public class ProjectController {
 
         return "redirect:/old-project";
     }
-
-
-
-
 
 }
