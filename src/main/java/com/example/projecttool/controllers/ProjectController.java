@@ -32,16 +32,28 @@ public class ProjectController {
 
 
        User user = (User) session.getAttribute("user");
-
+        // CREATES A PROJECT
        int project_id = ProjectRepository.createProject(user.getId(), project_name, project_start, project_end);
+
+       // CREATES AN EMPTY TASK IN THE PROJECT
        TaskRepository.createTask(project_id);
 
-       ArrayList<Project> allProjects = ProjectRepository.getProjects(user.getId());
 
-       model.addAttribute("projectList", allProjects);
-
-       return "project/all-projects";
+       return "project/old-project";
    }
+
+    @GetMapping("/see-all-projects")
+    public String seeProjectList(HttpSession session, Model model) {
+
+        User user = (User) session.getAttribute("user");
+
+        ArrayList<Project> allProjects = ProjectRepository.getProjects(user.getId());
+
+        model.addAttribute("projectList", allProjects);
+
+        return "project/all-projects";
+    }
+
 
 
 
@@ -61,6 +73,25 @@ public class ProjectController {
    }
 
 
+    /*
+    @GetMapping("old-project")
+    public String getTask(Model model, HttpSession session) {
+
+
+        User user = (User) session.getAttribute("user");
+
+        ArrayList<Task> projectList = TaskRepository.getTasks(user.getId());
+
+
+        model.addAttribute("projectList", projectList);
+
+        return "project/old-project";
+
+    }
+
+     */
+
+
     @PostMapping("/edit-tasks")
     public String editTasks(@RequestParam("id") int id, @RequestParam("name") String name, @RequestParam("description") String description,
                             @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, HttpSession session) {
@@ -69,6 +100,7 @@ public class ProjectController {
         try {
 
             System.out.println(id);
+       // ProjectRepository.getProjectId();
 
           ProjectRepository.editTask(id, name, description, start_time, end_time);
 
@@ -91,19 +123,6 @@ public class ProjectController {
         return "redirect:/old-project";
     }
 
-    @GetMapping("old-project")
-    public String getTask(Model model, HttpSession session) {
 
-
-        User user = (User) session.getAttribute("user");
-
-        ArrayList<Task> projectList = TaskRepository.getTasks(user.getId());
-
-
-        model.addAttribute("projectList", projectList);
-
-        return "project/old-project";
-
-    }
 
 }
