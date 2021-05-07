@@ -12,21 +12,21 @@ import java.util.ArrayList;
 public class TaskRepository {
 
 
-    public static ArrayList<Task> getTasks(int userId) {
+    public static ArrayList<Task> getTasks(int project_id) {
 
         Connection connection = DatabaseConnection.getConnection();
         ArrayList<Task> taskList = new ArrayList<>();
 
         try {
 
-            String command = String.format("SELECT * FROM project WHERE user_id = '%d'", userId );
+            String command = String.format("SELECT * FROM tasks WHERE project_id = '%d'", project_id);
             PreparedStatement statement = connection.prepareStatement(command);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
-                String project_name = resultSet.getString("project_name");
-                String project_description =  resultSet.getString("project_description");
+                String project_name = resultSet.getString("task_name");
+                String project_description =  resultSet.getString("task_description");
                 String start_time = resultSet.getString("start_time");
                 String end_time = resultSet.getString("end_time");
 

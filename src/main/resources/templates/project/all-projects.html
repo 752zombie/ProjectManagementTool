@@ -5,8 +5,15 @@
     <title>Title</title>
 </head>
 <body>
-
+<div th:replace="fragments/header :: header"></div>
     <h1> See all your projects here </h1>
+
+<form action="/edit-project" method="post">
+    <label for="project-name"> Edit project </label>
+    <input type="text" class="project-name" name="project-name"
+           placeholder="Enter project name" autofocus required>
+    <button type="submit"> Click here </button>
+</form>
 
     <ul th:each="project : ${projectList}">
         <li>

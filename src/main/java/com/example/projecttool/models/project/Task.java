@@ -21,6 +21,9 @@ public class Task {
 
     }
 
+    public String getName() {
+        return name;
+    }
 
     public String getTask() {
         return name;

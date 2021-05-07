@@ -59,25 +59,25 @@ public class ProjectRepository {
     }
 
 
-    public static void editProject(int id, String name, String description, String start_time, String end_time) throws SQLException {
+    public static void editTask(int project_id, String name, String description, String start_time, String end_time) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
 
 
-        String command = String.format("UPDATE test_project SET project_name = '%s', project_description = '%s', start_time = '%s', end_time = '%s' WHERE id = '%d'", name, description, start_time, end_time, id);
+        String command = String.format("UPDATE tasks SET task_name = '%s', task_description = '%s', start_time = '%s', end_time = '%s' WHERE project_id = '%d'", name, description, start_time, end_time, project_id);
         PreparedStatement statement = connection.prepareStatement(command);
         statement.execute();
 
     }
 
 
-    public static void addRowToProject(int id, String name, String description, String start_time, String end_time) {
+    public static void addRowToTask(int project_id, String task_name, String task_description, String start_time, String end_time) {
 
 
             Connection connection = DatabaseConnection.getConnection();
 
             try {
 
-                String command = String.format("INSERT INTO test_project (user_id, project_name, project_description, start_time, end_time) values ('%d', '%s', '%s', '%s', '%s')", id, name, description, start_time, end_time);
+                String command = String.format("INSERT INTO tasks (project_id, task_name, task_description, start_time, end_time) values ('%d', '%s', '%s', '%s', '%s')", project_id, task_name, task_description, start_time, end_time);
                 PreparedStatement statement = connection.prepareStatement(command);
                 statement.execute();
 
@@ -116,6 +116,32 @@ public class ProjectRepository {
 
         return projectList;
     }
+
+    public static int getProjectId(String project_name) {
+
+
+        Connection connection = DatabaseConnection.getConnection();
+        int project_id = 0;
+
+
+        try {
+            String command = String.format("SELECT project_id FROM project WHERE name = '%s'", project_name);
+            PreparedStatement statement = connection.prepareStatement(command);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                project_id = resultSet.getInt(1);
+
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Something went wrong getting project_id");
+        }
+
+        return project_id;
+    }
+
 
 }
 

@@ -44,20 +44,51 @@ public class ProjectController {
    }
 
 
-    @PostMapping("/edit-project")
-    public String editProject(@RequestParam("id") int id, @RequestParam("name") String name, @RequestParam("description") String description,
-                              @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time) {
+
+   @PostMapping("edit-project")
+   public String editProject(@RequestParam("project-name") String project_name, Model model){
+
+
+        int project_id = ProjectRepository.getProjectId(project_name);
+
+
+        ArrayList<Task> projectTasks = TaskRepository.getTasks(project_id);
+
+
+        model.addAttribute("projectTasks", projectTasks);
+
+       return "project/old-project";
+   }
+
+
+    @PostMapping("/edit-tasks")
+    public String editTasks(@RequestParam("id") int id, @RequestParam("name") String name, @RequestParam("description") String description,
+                            @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, HttpSession session) {
 
 
         try {
 
-          ProjectRepository.editProject(id, name, description, start_time, end_time);
+            System.out.println(id);
+
+          ProjectRepository.editTask(id, name, description, start_time, end_time);
 
             return "redirect:/old-project";
 
         } catch (SQLException s) {
             return "project/edit-failed";
         }
+    }
+
+
+    @PostMapping("add-row")
+    public String addRowToTask(@RequestParam("name") String name, @RequestParam("description") String description,
+                               @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, HttpSession session){
+
+        User user = (User) session.getAttribute("user");
+
+        ProjectRepository.addRowToTask(user.getId(), name, description, start_time, end_time);
+
+        return "redirect:/old-project";
     }
 
     @GetMapping("old-project")
@@ -73,17 +104,6 @@ public class ProjectController {
 
         return "project/old-project";
 
-    }
-
-    @PostMapping("add-row")
-    public String addRowToProject(@RequestParam("name") String name, @RequestParam("description") String description,
-                                  @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, HttpSession session){
-
-        User user = (User) session.getAttribute("user");
-
-        ProjectRepository.addRowToProject(user.getId(), name, description, start_time, end_time);
-
-        return "redirect:/old-project";
     }
 
 }
