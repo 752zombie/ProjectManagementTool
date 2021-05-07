@@ -18,8 +18,6 @@ public class ProjectRepository {
     public static int createProject(int id, String project_name, String project_start, String project_end){
         Connection connection = DatabaseConnection.getConnection();
 
-
-
         try {
 
             String command = String.format("INSERT INTO project (name, owner_id, start_time, end_time) values ('%s', '%d', '%s', '%s')", project_name, id, project_start, project_end);
@@ -37,8 +35,6 @@ public class ProjectRepository {
     private static int getNewProjectId() {
         Connection connection = DatabaseConnection.getConnection();
         int project_id = 0;
-
-
 
         try {
             String command = String.format("SELECT MAX(project_id) FROM project");
@@ -61,7 +57,6 @@ public class ProjectRepository {
 
     public static void editTask(int project_id, String name, String description, String start_time, String end_time) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
-
 
         String command = String.format("UPDATE tasks SET task_name = '%s', task_description = '%s', start_time = '%s', end_time = '%s' WHERE project_id = '%d'", name, description, start_time, end_time, project_id);
         PreparedStatement statement = connection.prepareStatement(command);

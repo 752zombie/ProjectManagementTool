@@ -55,8 +55,6 @@ public class ProjectController {
     }
 
 
-
-
    @PostMapping("edit-project")
    public String editProject(@RequestParam("project-name") String project_name, Model model){
 
@@ -71,7 +69,7 @@ public class ProjectController {
 
     @PostMapping("/edit-task")
     public String editTask(@RequestParam("id") int id, @RequestParam("name") String name, @RequestParam("description") String description,
-                           @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, HttpSession session) {
+                           @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time) {
 
         try {
 
