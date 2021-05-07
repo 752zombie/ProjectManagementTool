@@ -19,12 +19,12 @@
         <th>End time</th>
     </tr>
 
-  <tr  th:each="project : ${projectTasks}">
-    <td><form action="/edit-tasks" method="post" id="form1"><input type="hidden" name="id" th:value="${project.id}" /></td>
-    <td><input type="text" name="name" th:value="${project.name}" /></td>
-    <td><input type="text" name="description" th:value="${project.description}" /></td>
-      <td><input type="date" name="start_time" th:value="${project.start_time}" /></td>
-      <td><input type="date" name="end_time" th:value="${project.end_time}" /></td>
+  <tr  th:each="task : ${projectTasks}">
+    <td><form action="/edit-task" method="post" id="form1"><input type="hidden" name="id" th:value="${task.id}" /></td>
+    <td><input type="text" name="name" th:value="${task.name}" /></td>
+    <td><input type="text" name="description" th:value="${task.description}" /></td>
+      <td><input type="date" name="start_time" th:value="${task.start_time}" /></td>
+      <td><input type="date" name="end_time" th:value="${task.end_time}" /></td>
     <td><input type="submit" value="Save" /></td>
     </form>
   </tr>

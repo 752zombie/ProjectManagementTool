@@ -42,15 +42,14 @@ public class TaskRepository {
     }
 
 
-    public static void createTask(int project_id){
-
-
+    public static void createTask(int project_id, int userId){
 
         Connection connection = DatabaseConnection.getConnection();
 
         try {
 
-            String command = String.format("INSERT INTO tasks (project_id) values ('%d')", project_id);
+            // THE REMAINING 'TASKS' VALUES ARE CREATED AS NULL VALUES
+            String command = String.format("INSERT INTO tasks (project_id, owner_id) values ('%d', '%d')", project_id, userId);
             PreparedStatement statement = connection.prepareStatement(command);
             statement.execute();
 

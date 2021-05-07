@@ -40,7 +40,7 @@ public class LoginController {
 
 
         } catch (SQLException e) {
-            System.out.println("Error adding user");
+            System.out.println("Error log in");
             return "login/signup-failed";
         }
 
