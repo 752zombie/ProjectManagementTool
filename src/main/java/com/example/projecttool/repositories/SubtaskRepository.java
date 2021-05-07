@@ -1,10 +1,13 @@
 package com.example.projecttool.repositories;
 
+import com.example.projecttool.models.Employee;
+import com.example.projecttool.models.Skill;
 import com.example.projecttool.services.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class SubtaskRepository {
 
@@ -91,4 +94,18 @@ public class SubtaskRepository {
             System.out.println("Error removing skill from employee");
         }
     }
+
+    public static ArrayList<Employee> getAssignedEmployees(int subtaskId) {
+        Connection connection = DatabaseConnection.getConnection();
+        ArrayList<Employee> employees = new ArrayList<>();
+
+        try {
+
+        }
+    }
+
+    public static ArrayList<Skill> getRequiredSkills(int subtaskId) {
+
+    }
+
 }

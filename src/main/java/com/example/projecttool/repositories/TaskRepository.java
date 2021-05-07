@@ -1,13 +1,13 @@
 package com.example.projecttool.repositories;
 
+import com.example.projecttool.models.project.Subtask;
 import com.example.projecttool.models.project.Task;
 import com.example.projecttool.services.DatabaseConnection;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class TaskRepository {
 
@@ -59,6 +59,36 @@ public class TaskRepository {
             System.out.println("Error creating new task to DB");
         }
 
+    }
+
+    public static HashMap<Integer, Subtask> getRelatedSubtasks(int taskId) {
+        Connection connection = DatabaseConnection.getConnection();
+        HashMap<Integer, Subtask> subtasks = new HashMap<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM subtasks WHERE task = ?");
+            statement.setInt(1, taskId);
+            ResultSet resultSet = statement.executeQuery();
+
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("subtask_name");
+                String description = resultSet.getString("subtask_description");
+                Date startTime = resultSet.getDate("start_time");
+                Date endTime = resultSet.getDate("end_time");
+
+                Subtask subtask = new Subtask(id, name, description, startTime, endTime,
+                        SubtaskRepository.getAssignedEmployees(id), SubtaskRepository.getRequiredSkills(id));
+                subtasks.put(id, subtask);
+            }
+
+        }
+
+        catch (SQLException e) {
+            System.out.println("Error could not find any subtasks for that task");
+        }
+
+        return subtasks;
     }
 
 }

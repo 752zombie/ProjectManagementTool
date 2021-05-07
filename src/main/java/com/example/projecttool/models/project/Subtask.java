@@ -2,23 +2,28 @@ package com.example.projecttool.models.project;
 
 import com.example.projecttool.models.Employee;
 import com.example.projecttool.models.Skill;
+
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-public class
-Subtask {
-    private int start;
-    private int end;
+public class Subtask {
+
+    private int id;
     private List<Employee> assignedEmployees;
     private List<Skill> requiredSkills;
     private String description;
-
-    public Subtask(int start, int end, String description) {
-        this.start = start;
-        this.end = end;
+    private String name;
+    private Date startTime;
+    private Date endTime;
+    public Subtask(int id, String name, String description, Date startTime, Date endTime, List<Employee> employees, List<Skill> skills) {
+        this.id = id;
+        this.name = name;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.description = description;
-        assignedEmployees = new ArrayList<>();
-        requiredSkills = new ArrayList<>();
+        assignedEmployees = employees;
+        requiredSkills = skills;
     }
 
     public void addEmployee(Employee employee) {
@@ -38,21 +43,6 @@ Subtask {
         requiredSkills.removeIf(skill -> skill.getName().equals(skillName));
     }
 
-    public int getStart() {
-        return start;
-    }
-
-    public void setStart(int start) {
-        this.start = start;
-    }
-
-    public int getEnd() {
-        return end;
-    }
-
-    public void setEnd(int end) {
-        this.end = end;
-    }
 
     public String getDescription() {
         return description;
