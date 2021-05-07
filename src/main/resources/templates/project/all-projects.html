@@ -10,11 +10,11 @@
 
     <ul th:each="project : ${projectList}">
         <li>
-            <div class="sharedWishes">
-                <h1 class="project-name" th:text="${project.name}"></h1>
-
+            <div class="project-list">
+                <h1 class="project-name" id="project-name" th:text="${project.name}"></h1>
+                <label for="project-start"> Start date</label>
                 <span class="project-start" id="project-start" th:text="${project.start_time}"></span><br>
-
+                <label for="project-end"> Deadline </label>
                 <span class="project-end" id="project-end" th:text="${project.end_time}"></span><br>
 
             </div>

@@ -4,6 +4,7 @@ import com.example.projecttool.models.User;
 import com.example.projecttool.models.project.Project;
 import com.example.projecttool.models.project.Task;
 import com.example.projecttool.repositories.ProjectRepository;
+import com.example.projecttool.repositories.TaskRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,13 +26,18 @@ public class ProjectController {
 
 
 
-   @PostMapping("name-your-project")
-   public String nameYourProject(@RequestParam("project_name") String project_name,  HttpSession session, Model model) {
+   @PostMapping("start-new-project")
+   public String nameYourProject(@RequestParam("project_name") String project_name, @RequestParam("project_start") String project_start,
+                                 @RequestParam("project_end") String project_end, HttpSession session, Model model) {
+
 
        User user = (User) session.getAttribute("user");
-       ProjectRepository.createProject(user.getId(), project_name);
+
+       int project_id = ProjectRepository.createProject(user.getId(), project_name, project_start, project_end);
+       TaskRepository.createTask(project_id);
 
        ArrayList<Project> allProjects = ProjectRepository.getProjects(user.getId());
+
        model.addAttribute("projectList", allProjects);
 
        return "project/all-projects";
@@ -60,7 +66,7 @@ public class ProjectController {
 
         User user = (User) session.getAttribute("user");
 
-        ArrayList<Task> projectList = ProjectRepository.getTasks(user.getId());
+        ArrayList<Task> projectList = TaskRepository.getTasks(user.getId());
 
 
         model.addAttribute("projectList", projectList);

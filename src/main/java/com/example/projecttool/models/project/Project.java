@@ -45,6 +45,14 @@ public class Project {
         this.owner = owner;
     }
 
+    public String getStart_time() {
+        return start_time;
+    }
+
+    public String getEnd_time() {
+        return end_time;
+    }
+
     public Map<Integer, User> getCollaborators() {
         return collaborators;
     }

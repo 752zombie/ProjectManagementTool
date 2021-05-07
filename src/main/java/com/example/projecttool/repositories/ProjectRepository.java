@@ -1,5 +1,6 @@
 package com.example.projecttool.repositories;
 
+import com.example.projecttool.models.User;
 import com.example.projecttool.models.project.Project;
 import com.example.projecttool.models.project.ProjectTest;
 import com.example.projecttool.models.project.Task;
@@ -14,12 +15,14 @@ import java.util.ArrayList;
 public class ProjectRepository {
 
 
-    public static void createProject(int id, String project_name){
+    public static int createProject(int id, String project_name, String project_start, String project_end){
         Connection connection = DatabaseConnection.getConnection();
 
+
+
         try {
-            createTask(id);
-            String command = String.format("INSERT INTO project (name, owner_id, start_time, end_time) values ('%s', '', '', '', '')", project_name, id);
+
+            String command = String.format("INSERT INTO project (name, owner_id, start_time, end_time) values ('%s', '%d', '%s', '%s')", project_name, id, project_start, project_end);
             PreparedStatement statement = connection.prepareStatement(command);
             statement.execute();
 
@@ -28,31 +31,32 @@ public class ProjectRepository {
         catch (SQLException e) {
             System.out.println("Error creating new project to DB");
         }
-
-
+        return getNewProjectId();
     }
 
-    public static void createTask(int id){
-
-
-
+    private static int getNewProjectId() {
         Connection connection = DatabaseConnection.getConnection();
+        int project_id = 0;
+
+
 
         try {
-
-            String command = String.format("INSERT INTO tasks (user_id, project_name, project_description, start_time, end_time) values ('%d', '', '', '', '')", id);
+            String command = String.format("SELECT MAX(project_id) FROM project");
             PreparedStatement statement = connection.prepareStatement(command);
-            statement.execute();
+            ResultSet resultSet = statement.executeQuery();
 
+            if (resultSet.next()) {
+                project_id = resultSet.getInt(1);
+
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Something went wrong getting project_id");
         }
 
-        catch (SQLException e) {
-            System.out.println("Error creating new task to DB");
-        }
-
+        return project_id;
     }
-
-
 
 
     public static void editProject(int id, String name, String description, String start_time, String end_time) throws SQLException {
@@ -84,66 +88,6 @@ public class ProjectRepository {
             }
         }
 
-    public static ArrayList<ProjectTest> getProject(int userId) {
-
-        Connection connection = DatabaseConnection.getConnection();
-        ArrayList<ProjectTest> projectList = new ArrayList<>();
-
-        try {
-
-            String command = String.format("SELECT * FROM test_project WHERE user_id = '%d'", userId );
-            PreparedStatement statement = connection.prepareStatement(command);
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String project_name = resultSet.getString("project_name");
-                String project_description =  resultSet.getString("project_description");
-                String start_time = resultSet.getString("start_time");
-                String end_time = resultSet.getString("end_time");
-
-                projectList.add(new ProjectTest(id, project_name, project_description, start_time, end_time));
-            }
-        }
-
-        catch (SQLException e) {
-            System.out.println("Error getting project");
-        }
-
-        return projectList;
-    }
-
-
-
-
-    public static ArrayList<Task> getTasks(int userId) {
-
-        Connection connection = DatabaseConnection.getConnection();
-        ArrayList<Task> taskList = new ArrayList<>();
-
-        try {
-
-            String command = String.format("SELECT * FROM project WHERE user_id = '%d'", userId );
-            PreparedStatement statement = connection.prepareStatement(command);
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String project_name = resultSet.getString("project_name");
-                String project_description =  resultSet.getString("project_description");
-                String start_time = resultSet.getString("start_time");
-                String end_time = resultSet.getString("end_time");
-
-                taskList.add(new Task(id, project_name, project_description, start_time, end_time));
-            }
-        }
-
-        catch (SQLException e) {
-            System.out.println("Error getting project");
-        }
-
-        return taskList;
-    }
 
     public static ArrayList<Project> getProjects(int userId){
 
@@ -152,14 +96,13 @@ public class ProjectRepository {
 
         try {
 
-            String command = String.format("SELECT * FROM project WHERE user_id = '%d'", userId );
+            String command = String.format("SELECT * FROM project WHERE owner_id = '%d'", userId );
             PreparedStatement statement = connection.prepareStatement(command);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String project_name = resultSet.getString("project_name");
-                String project_description =  resultSet.getString("project_description");
+
+                String project_name = resultSet.getString("name");
                 String start_time = resultSet.getString("start_time");
                 String end_time = resultSet.getString("end_time");
 
