@@ -72,8 +72,6 @@ public class ProjectController {
         Project project = ProjectRepository.getCurrentProjectObject(project_name);
         session.setAttribute("project", project);
 
-       System.out.println(project.getProjectId());
-
         // Directs tasks to View
         int project_id = ProjectRepository.getProjectId(project_name);
         ArrayList<Task> projectTasks = TaskRepository.getTasks(project_id);
@@ -83,21 +81,14 @@ public class ProjectController {
    }
 
     @PostMapping("/edit-task")
-    public String editTask(@RequestParam("id") int id, @RequestParam("name") String name, @RequestParam("description") String description,
+    public String editTask(@RequestParam("id") int taskId, @RequestParam("name") String name, @RequestParam("description") String description,
                            @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, HttpSession session, Model model) {
 
         try {
-
-            // WE NEED TO GET project_id to edit the TASK
+            //
             Project project = (Project) session.getAttribute("project");
-            User user = (User) session.getAttribute("user");
-            System.out.println("edit task:");
-            System.out.println(user.getId());
-            System.out.println(project.getProjectId());
-
-
             // SAVES EDITED TASK TO DB
-            ProjectRepository.editTask(project.getProjectId(), name, description, start_time, end_time);
+            TaskRepository.editTask(taskId, name, description, start_time, end_time);
 
             // Directs tasks to View
             ArrayList<Task> projectTasks = TaskRepository.getTasks(project.getProjectId());
@@ -125,14 +116,12 @@ public class ProjectController {
 
 
         // ADDS ROW TO DB
-        ProjectRepository.addRowToTask(project.getProjectId(), name, description, start_time, end_time);
+        TaskRepository.addRowToTask(project.getProjectId(), name, description, start_time, end_time);
 
 
         // Directs tasks to View
         ArrayList<Task> projectTasks = TaskRepository.getTasks(project.getProjectId());
         model.addAttribute("projectTasks", projectTasks);
-
-
 
 
 

@@ -1,8 +1,6 @@
 package com.example.projecttool.repositories;
 
-import com.example.projecttool.models.User;
 import com.example.projecttool.models.project.Project;
-import com.example.projecttool.models.project.Task;
 import com.example.projecttool.services.DatabaseConnection;
 
 import java.sql.Connection;
@@ -52,36 +50,6 @@ public class ProjectRepository {
 
         return project_id;
     }
-
-
-    public static void editTask(int project_id, String name, String description, String start_time, String end_time) throws SQLException {
-        Connection connection = DatabaseConnection.getConnection();
-
-        String command = String.format("UPDATE tasks SET task_name = '%s', task_description = '%s', start_time = '%s', end_time = '%s' WHERE project_id = '%d'", name, description, start_time, end_time, project_id);
-        PreparedStatement statement = connection.prepareStatement(command);
-        statement.execute();
-
-    }
-
-
-    public static void addRowToTask(int project_id, String task_name, String task_description, String start_time, String end_time) {
-
-
-            Connection connection = DatabaseConnection.getConnection();
-
-            try {
-
-                String command = String.format("INSERT INTO tasks (project_id, task_name, task_description, start_time, end_time) values ('%d', '%s', '%s', '%s', '%s')", project_id, task_name, task_description, start_time, end_time);
-                PreparedStatement statement = connection.prepareStatement(command);
-                statement.execute();
-
-            }
-
-            catch (SQLException e) {
-                System.out.println("Error adding row to database");
-            }
-        }
-
 
     public static ArrayList<Project> getProjects(int userId){
 
