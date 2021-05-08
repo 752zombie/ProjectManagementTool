@@ -7,7 +7,6 @@ import com.example.projecttool.services.DatabaseConnection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class TaskRepository {
 
@@ -19,8 +18,8 @@ public class TaskRepository {
 
         try {
 
-            String command = String.format("SELECT * FROM tasks WHERE project_id = '%d'", project_id);
-            PreparedStatement statement = connection.prepareStatement(command);
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM tasks WHERE project_id = ?");
+            statement.setInt(1, project_id);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
@@ -49,8 +48,9 @@ public class TaskRepository {
         try {
 
             // THE REMAINING 'TASKS' VALUES ARE CREATED AS NULL VALUES
-            String command = String.format("INSERT INTO tasks (project_id, owner_id) values ('%d', '%d')", project_id, userId);
-            PreparedStatement statement = connection.prepareStatement(command);
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO tasks (project_id, owner_id) values (?, ?)");
+            statement.setInt(1, project_id);
+            statement.setInt(2, userId);
             statement.execute();
 
         }

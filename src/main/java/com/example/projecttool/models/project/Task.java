@@ -1,6 +1,9 @@
 package com.example.projecttool.models.project;
 
+import com.example.projecttool.repositories.TaskRepository;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Task {
@@ -19,6 +22,10 @@ public class Task {
         this.start_time = start_time;
         this.end_time = end_time;
 
+    }
+
+    public HashMap<Integer, Subtask> getSubtasks() {
+        return TaskRepository.getRelatedSubtasks(id);
     }
 
     public String getName() {
