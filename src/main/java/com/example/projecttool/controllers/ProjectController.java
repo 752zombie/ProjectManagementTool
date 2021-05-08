@@ -32,21 +32,16 @@ public class ProjectController {
    public String nameYourProject(@RequestParam("project_name") String project_name, @RequestParam("project_start") String project_start,
                                  @RequestParam("project_end") String project_end, HttpSession session) {
 
-
-
        User user = (User) session.getAttribute("user");
-        // CREATES A PROJECT
+
+       // Creates a project
        int project_id = ProjectRepository.createProject(user.getId(), project_name, project_start, project_end);
 
+       // Saves project in session
        Project project = new Project(project_id, project_name, project_start, project_end);
-
        session.setAttribute("project", project);
 
-       System.out.println("start new project:");
-       System.out.println(project.getProjectId());
-
-
-       // CREATES AN EMPTY TASK IN THE PROJECT
+       // Creates an empty Task in the project
        TaskRepository.createTask(project_id, user.getId());
 
        return "project/old-project";
@@ -56,9 +51,8 @@ public class ProjectController {
     public String seeProjectList(HttpSession session, Model model) {
 
         User user = (User) session.getAttribute("user");
-
+        // Lists all project to view
         ArrayList<Project> allProjects = ProjectRepository.getProjects(user.getId());
-
         model.addAttribute("projectList", allProjects);
 
         return "project/all-projects";
@@ -72,7 +66,7 @@ public class ProjectController {
         Project project = ProjectRepository.getCurrentProjectObject(project_name);
         session.setAttribute("project", project);
 
-        // Directs tasks to View
+        // Directs Tasks to view
         int project_id = ProjectRepository.getProjectId(project_name);
         ArrayList<Task> projectTasks = TaskRepository.getTasks(project_id);
         model.addAttribute("projectTasks", projectTasks);
@@ -85,9 +79,10 @@ public class ProjectController {
                            @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, HttpSession session, Model model) {
 
         try {
-            // Need current project to get tasks
+            // Need current project to get Tasks
             Project project = (Project) session.getAttribute("project");
-            // SAVES EDITED TASK TO DB
+
+            // Saves edited Task to DB
             TaskRepository.editTask(taskId, name, description, start_time, end_time);
 
             // Directs tasks to View
@@ -109,15 +104,11 @@ public class ProjectController {
                                @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, HttpSession session, Model model){
 
 
-
-        // WE NEED TO GET project_id to edit the TASK
+        // We need project_id to edit Task
         Project project = (Project) session.getAttribute("project");
-        User user = (User) session.getAttribute("user");
 
-
-        // ADDS ROW TO DB
+        // Add rows to DB
         TaskRepository.addRowToTask(project.getProjectId(), name, description, start_time, end_time);
-
 
         // Directs tasks to View
         ArrayList<Task> projectTasks = TaskRepository.getTasks(project.getProjectId());
