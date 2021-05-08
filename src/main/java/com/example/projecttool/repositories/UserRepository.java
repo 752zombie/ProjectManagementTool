@@ -16,9 +16,10 @@ public class UserRepository {
     public static void addUser(String name, String email, String password) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
 
-
-            String command = String.format("INSERT INTO users (user_name, email, user_password) VALUES ('%s', '%s', MD5('%s'))", name, email, password);
-            PreparedStatement statement = connection.prepareStatement(command);
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO users (user_name, email, user_password) VALUES (?, ?, MD5(?))");
+            statement.setString(1, name);
+            statement.setString(2, email);
+            statement.setString(3, password);
             statement.execute();
 
     }
@@ -30,8 +31,8 @@ public class UserRepository {
             //Should user projects på deleted?
             // ProjectRepository.deleteWishlist(userid);
 
-            String command = String.format("DELETE FROM users WHERE user_id = %d", userid);
-            PreparedStatement statement = connection.prepareStatement(command);
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM users WHERE user_id = ?");
+            statement.setInt(1, userid);
             statement.execute();
 
     }

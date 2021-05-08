@@ -95,7 +95,7 @@ public class SubtaskRepository {
             System.out.println("Error removing skill from employee");
         }
     }
-/*
+
     public static ArrayList<Employee> getAssignedEmployees(int subtaskId) {
         Connection connection = DatabaseConnection.getConnection();
         ArrayList<Employee> employees = new ArrayList<>();
@@ -176,6 +176,5 @@ public class SubtaskRepository {
         return skills;
     }
 
- */
 
 }

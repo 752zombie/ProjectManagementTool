@@ -5,29 +5,29 @@ import com.example.projecttool.models.User;
 import java.util.Map;
 
 public class Project {
-    int project_id;
+    int projectId;
     String name;
-    String start_time;
-    String end_time;
+    String startTime;
+    String endTime;
     // The user who created the project
     User owner;
 
-    public Project(int project_id, String name, String start_time, String end_time) {
+    public Project(int projectId, String name, String startTime, String endTime) {
         this.name = name;
-        this.start_time = start_time;
-        this.end_time = end_time;
-        this.project_id = project_id;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.projectId = projectId;
     }
 
     // List of collaborators excluding owner
     Map<Integer, User> collaborators;
 
     public int getProjectId() {
-        return project_id;
+        return projectId;
     }
 
     public void setId(int id) {
-        this.project_id = id;
+        this.projectId = id;
     }
 
     public String getName() {
@@ -46,12 +46,12 @@ public class Project {
         this.owner = owner;
     }
 
-    public String getStart_time() {
-        return start_time;
+    public String getStartTime() {
+        return startTime;
     }
 
-    public String getEnd_time() {
-        return end_time;
+    public String getEndTime() {
+        return endTime;
     }
 
     public Map<Integer, User> getCollaborators() {

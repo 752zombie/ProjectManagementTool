@@ -98,7 +98,7 @@ public class TaskRepository {
     }
 
 
-    /*
+
     public static HashMap<Integer, Subtask> getRelatedSubtasks(int taskId) {
         Connection connection = DatabaseConnection.getConnection();
         HashMap<Integer, Subtask> subtasks = new HashMap<>();
@@ -129,7 +129,6 @@ public class TaskRepository {
         return subtasks;
     }
 
-     */
 
 
 }

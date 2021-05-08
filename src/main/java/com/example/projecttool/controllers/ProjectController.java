@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
@@ -58,7 +59,7 @@ public class ProjectController {
         return "project/all-projects";
     }
 
-
+/*
    @PostMapping("choose-project-to-edit")
    public String editProject(@RequestParam("project-name") String project_name, Model model, HttpSession session){
 
@@ -72,7 +73,14 @@ public class ProjectController {
         model.addAttribute("projectTasks", projectTasks);
 
        return "project/old-project";
-   }
+   }*/
+
+    @ResponseBody
+    @PostMapping("choose-project-to-edit")
+    public String editProject(@RequestParam("id") Integer projectId, Model model, HttpSession session){
+
+        return projectId.toString();
+    }
 
     @PostMapping("/edit-task")
     public String editTask(@RequestParam("id") int taskId, @RequestParam("name") String name, @RequestParam("description") String description,

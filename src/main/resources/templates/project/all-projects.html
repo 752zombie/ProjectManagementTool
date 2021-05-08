@@ -1,29 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
-    <h1> See all your projects here </h1>
-
-<form action="/choose-project-to-edit" method="post">
-    <label for="project-name"> Edit project </label>
-    <input type="text" class="project-name" name="project-name"
-           placeholder="Enter project name" autofocus required>
-    <button type="submit"> Click here </button>
-</form>
+    <h1>My projects</h1>
 
     <ul th:each="project : ${projectList}">
         <li>
             <div class="project-list">
-                <h1 class="project-name" id="project-name" th:text="${project.name}"></h1>
+                <h1 class="project-name" th:text="${project.name}"></h1>
                 <label for="project-start"> Start date</label>
-                <span class="project-start" id="project-start" th:text="${project.start_time}"></span><br>
+                <span class="project-start" id="project-start" th:text="${project.startTime}"></span><br>
                 <label for="project-end"> Deadline </label>
-                <span class="project-end" id="project-end" th:text="${project.end_time}"></span><br>
-
+                <span class="project-end" id="project-end" th:text="${project.endTime}"></span><br>
+                <form action="/choose-project-to-edit" method="post">
+                    <input type="hidden" name="id" th:value="${project.projectId}">
+                    <button type="submit">Edit project</button>
+                </form>
             </div>
         </li>
     </ul>
