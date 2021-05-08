@@ -85,7 +85,7 @@ public class ProjectController {
                            @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, HttpSession session, Model model) {
 
         try {
-            //
+            // Need current project to get tasks
             Project project = (Project) session.getAttribute("project");
             // SAVES EDITED TASK TO DB
             TaskRepository.editTask(taskId, name, description, start_time, end_time);
