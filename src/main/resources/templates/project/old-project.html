@@ -20,7 +20,7 @@
     </tr>
 
   <tr  th:each="task : ${projectTasks}">
-    <td><form action="/edit-task" method="post" id="form1"><input type="hidden" name="id" th:value="${task.id}" /></td>
+    <td><form action="/edit-task" method="post" id="form1"><input type="hidden" name="id" th:value="${task.id}"></td>
     <td><input type="text" name="name" th:value="${task.name}" /></td>
     <td><input type="text" name="description" th:value="${task.description}" /></td>
       <td><input type="date" name="start_time" th:value="${task.start_time}" /></td>

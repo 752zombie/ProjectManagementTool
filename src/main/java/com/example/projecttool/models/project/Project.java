@@ -1,7 +1,9 @@
 package com.example.projecttool.models.project;
 
 import com.example.projecttool.models.User;
+import com.example.projecttool.repositories.TaskRepository;
 
+import java.util.List;
 import java.util.Map;
 
 public class Project {
@@ -11,6 +13,8 @@ public class Project {
     String endTime;
     // The user who created the project
     User owner;
+    // List of collaborators excluding owner
+    Map<Integer, User> collaborators;
 
     public Project(int projectId, String name, String startTime, String endTime) {
         this.name = name;
@@ -19,8 +23,9 @@ public class Project {
         this.projectId = projectId;
     }
 
-    // List of collaborators excluding owner
-    Map<Integer, User> collaborators;
+    public List<Task> getTasks() {
+        return TaskRepository.getTasks(projectId);
+    }
 
     public int getProjectId() {
         return projectId;

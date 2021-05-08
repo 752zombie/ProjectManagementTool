@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 public class ProjectRepository {
 
@@ -130,6 +131,33 @@ public class ProjectRepository {
         return project;
 
 
+    }
+
+    public static Project getProject(int projectId) {
+        Connection connection = DatabaseConnection.getConnection();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM project WHERE project_id = ?");
+            statement.setInt(1, projectId);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                int id = resultSet.getInt("project_id");
+                String name = resultSet.getString("name");
+                String start_time = resultSet.getString("start_time");
+                String end_time = resultSet.getString("end_time");
+
+                return new Project(id, name, start_time, end_time);
+            }
+
+            else {
+                throw new NoSuchElementException();
+            }
+        }
+
+        catch (SQLException e) {
+            throw new NoSuchElementException();
+        }
     }
 
 }
