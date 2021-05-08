@@ -2,7 +2,6 @@ package com.example.projecttool.controllers;
 
 import com.example.projecttool.models.User;
 import com.example.projecttool.models.project.Project;
-import com.example.projecttool.models.project.ProjectTest;
 import com.example.projecttool.repositories.ProjectRepository;
 import com.example.projecttool.repositories.ShareProjectRepository;
 import org.springframework.stereotype.Controller;

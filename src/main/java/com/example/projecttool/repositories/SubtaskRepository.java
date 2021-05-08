@@ -6,6 +6,7 @@ import com.example.projecttool.services.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -100,12 +101,79 @@ public class SubtaskRepository {
         ArrayList<Employee> employees = new ArrayList<>();
 
         try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM emp_subtask " +
+                    "INNER JOIN employees " +
+                    "ON emp_subtask.emp_id = employees.emp_id " +
+                    "WHERE emp_subtask.subtask_id = ?");
+            statement.setInt(1, subtaskId);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                int employeeId = resultSet.getInt("emp_id");
+                String employeeName = resultSet.getString("emp_name");
+                ArrayList<Skill> skills = getEmployeeSkills(employeeId);
+
+                employees.add(new Employee(employeeId, employeeName, skills));
+
+            }
 
         }
+
+        catch (SQLException e) {
+            System.out.println("Error getting assigned employees");
+        }
+
+        return employees;
+    }
+
+    private static ArrayList<Skill> getEmployeeSkills(int employeeID) {
+        Connection connection = DatabaseConnection.getConnection();
+        ArrayList<Skill> skills = new ArrayList<>();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM emp_skills " +
+                    "INNER JOIN skills " +
+                    "ON emp_skill.skill_id = skills.skill_id " +
+                    "WHERE emp_id = ?");
+            statement.setInt(1, employeeID);
+            ResultSet resultSet = statement.executeQuery();
+
+            while(resultSet.next()) {
+                String skillName = resultSet.getString("skill_name");
+                skills.add(new Skill(skillName));
+            }
+        }
+
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return skills;
     }
 
     public static ArrayList<Skill> getRequiredSkills(int subtaskId) {
+        Connection connection = DatabaseConnection.getConnection();
+        ArrayList<Skill> skills = new ArrayList<>();
 
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM subtask_skill " +
+                    "INNER JOIN skills " +
+                    "ON subtask_skill.skill_id = skills.skill_id " +
+                    "WHERE subtask_id = ?");
+            statement.setInt(1, subtaskId);
+            ResultSet resultSet = statement.executeQuery();
+
+            while(resultSet.next()) {
+                String skillName = resultSet.getString("skill_name");
+                skills.add(new Skill(skillName));
+            }
+        }
+
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return skills;
     }
 
 }
