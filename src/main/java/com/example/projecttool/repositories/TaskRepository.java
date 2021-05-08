@@ -1,5 +1,6 @@
 package com.example.projecttool.repositories;
 
+import com.example.projecttool.models.project.Project;
 import com.example.projecttool.models.project.Subtask;
 import com.example.projecttool.models.project.Task;
 import com.example.projecttool.services.DatabaseConnection;
@@ -7,6 +8,7 @@ import com.example.projecttool.services.DatabaseConnection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class TaskRepository {
 
@@ -18,8 +20,8 @@ public class TaskRepository {
 
         try {
 
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM tasks WHERE project_id = ?");
-            statement.setInt(1, project_id);
+            String command = String.format("SELECT * FROM tasks WHERE project_id = '%d'", project_id);
+            PreparedStatement statement = connection.prepareStatement(command);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
@@ -48,9 +50,8 @@ public class TaskRepository {
         try {
 
             // THE REMAINING 'TASKS' VALUES ARE CREATED AS NULL VALUES
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO tasks (project_id, owner_id) values (?, ?)");
-            statement.setInt(1, project_id);
-            statement.setInt(2, userId);
+            String command = String.format("INSERT INTO tasks (project_id, owner_id) values ('%d', '%d')", project_id, userId);
+            PreparedStatement statement = connection.prepareStatement(command);
             statement.execute();
 
         }
@@ -60,7 +61,7 @@ public class TaskRepository {
         }
 
     }
-
+    /*
     public static HashMap<Integer, Subtask> getRelatedSubtasks(int taskId) {
         Connection connection = DatabaseConnection.getConnection();
         HashMap<Integer, Subtask> subtasks = new HashMap<>();
@@ -90,5 +91,8 @@ public class TaskRepository {
 
         return subtasks;
     }
+
+     */
+
 
 }

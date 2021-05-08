@@ -19,6 +19,8 @@ import java.util.ArrayList;
 public class ProjectController {
 
 
+
+
     @GetMapping("/create-project")
     public String createProject() {
 
@@ -28,16 +30,24 @@ public class ProjectController {
 
    @PostMapping("start-new-project")
    public String nameYourProject(@RequestParam("project_name") String project_name, @RequestParam("project_start") String project_start,
-                                 @RequestParam("project_end") String project_end, HttpSession session, Model model) {
+                                 @RequestParam("project_end") String project_end, HttpSession session) {
+
 
 
        User user = (User) session.getAttribute("user");
         // CREATES A PROJECT
        int project_id = ProjectRepository.createProject(user.getId(), project_name, project_start, project_end);
 
+       Project project = new Project(project_id, project_name, project_start, project_end);
+
+       session.setAttribute("project", project);
+
+       System.out.println("start new project:");
+       System.out.println(project.getProjectId());
+
+
        // CREATES AN EMPTY TASK IN THE PROJECT
        TaskRepository.createTask(project_id, user.getId());
-
 
        return "project/old-project";
    }
@@ -55,11 +65,16 @@ public class ProjectController {
     }
 
 
-   @PostMapping("edit-project")
-   public String editProject(@RequestParam("project-name") String project_name, Model model){
+   @PostMapping("choose-project-to-edit")
+   public String editProject(@RequestParam("project-name") String project_name, Model model, HttpSession session){
 
+        // Add current project to session
+        Project project = ProjectRepository.getCurrentProjectObject(project_name);
+        session.setAttribute("project", project);
 
+       System.out.println(project.getProjectId());
 
+        // Directs tasks to View
         int project_id = ProjectRepository.getProjectId(project_name);
         ArrayList<Task> projectTasks = TaskRepository.getTasks(project_id);
         model.addAttribute("projectTasks", projectTasks);
@@ -69,18 +84,28 @@ public class ProjectController {
 
     @PostMapping("/edit-task")
     public String editTask(@RequestParam("id") int id, @RequestParam("name") String name, @RequestParam("description") String description,
-                           @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time) {
+                           @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, HttpSession session, Model model) {
 
         try {
 
             // WE NEED TO GET project_id to edit the TASK
+            Project project = (Project) session.getAttribute("project");
+            User user = (User) session.getAttribute("user");
+            System.out.println("edit task:");
+            System.out.println(user.getId());
+            System.out.println(project.getProjectId());
 
 
-          ProjectRepository.editTask(project_id, name, description, start_time, end_time);
+            // SAVES EDITED TASK TO DB
+            ProjectRepository.editTask(project.getProjectId(), name, description, start_time, end_time);
+
+            // Directs tasks to View
+            ArrayList<Task> projectTasks = TaskRepository.getTasks(project.getProjectId());
+            model.addAttribute("projectTasks", projectTasks);
 
 
 
-            return "redirect:/old-project";
+            return "project/old-project";
 
         } catch (SQLException s) {
             return "project/edit-failed";
@@ -88,18 +113,30 @@ public class ProjectController {
     }
 
 
-    @PostMapping("add-row")
+    @PostMapping("add-row-to-tasks")
     public String addRowToTask(@RequestParam("name") String name, @RequestParam("description") String description,
-                               @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, HttpSession session){
+                               @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, HttpSession session, Model model){
 
-        User user = (User) session.getAttribute("user");
 
 
         // WE NEED TO GET project_id to edit the TASK
+        Project project = (Project) session.getAttribute("project");
+        User user = (User) session.getAttribute("user");
 
-        ProjectRepository.addRowToTask(project_id, name, description, start_time, end_time);
 
-        return "redirect:/old-project";
+        // ADDS ROW TO DB
+        ProjectRepository.addRowToTask(project.getProjectId(), name, description, start_time, end_time);
+
+
+        // Directs tasks to View
+        ArrayList<Task> projectTasks = TaskRepository.getTasks(project.getProjectId());
+        model.addAttribute("projectTasks", projectTasks);
+
+
+
+
+
+        return "project/old-project";
     }
 
 }

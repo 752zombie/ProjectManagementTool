@@ -23,10 +23,12 @@ public class Task {
         this.end_time = end_time;
 
     }
-
+/*
     public HashMap<Integer, Subtask> getSubtasks() {
         return TaskRepository.getRelatedSubtasks(id);
     }
+
+ */
 
     public String getName() {
         return name;

@@ -95,12 +95,12 @@ public class ProjectRepository {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-
+                int project_id = resultSet.getInt("project_id");
                 String project_name = resultSet.getString("name");
                 String start_time = resultSet.getString("start_time");
                 String end_time = resultSet.getString("end_time");
 
-                projectList.add(new Project(project_name, start_time, end_time));
+                projectList.add(new Project(project_id, project_name, start_time, end_time));
             }
         }
 
@@ -136,6 +136,33 @@ public class ProjectRepository {
         return project_id;
     }
 
+    public static Project getCurrentProjectObject(String project_name) {
+
+        Connection connection = DatabaseConnection.getConnection();
+        Project project = null;
+
+        try {
+            // currently only getting the oldest project with that name
+            String command = String.format("SELECT * FROM project WHERE name = '%s' LIMIT 1", project_name);
+            PreparedStatement statement = connection.prepareStatement(command);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("project_id");
+                String name = resultSet.getString("name");
+                String start_time = resultSet.getString("start_time");
+                String end_time = resultSet.getString("end_time");
+
+                project = new Project(id, name, start_time, end_time);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error getting project");
+        }
+
+        return project;
+
+
+    }
 
 }
 

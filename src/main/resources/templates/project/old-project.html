@@ -30,11 +30,11 @@
   </tr>
 
     <tr>
-        <td><form action="/add-row" method="post" id="form2"><input type="hidden" name="id" value="1" /></td>
-        <td><input type="text" name="name" value="" /></td>
-        <td><input type="text" name="description" value="" /></td>
-        <td><input type="date" name="start_time" value="" /></td>
-        <td><input type="date" name="end_time" value="" /></td>
+        <td><form action="/add-row-to-tasks" method="post" id="form2"><input type="hidden" name="id" value="1" /></td>
+        <td><input type="text" name="name" value="" required/></td>
+        <td><input type="text" name="description" value="" required/></td>
+        <td><input type="date" name="start_time" value="" required/></td>
+        <td><input type="date" name="end_time" value="" required/></td>
         <td><input type="submit" value="Save" /></td>
         </form>
     </tr>
