@@ -32,7 +32,7 @@ public class TaskRepository {
             String end_time = resultSet.getString("end_time");
 
 
-            taskList.add(new Task(id, project_name, project_description, priority, start_time, end_time));
+            taskList.add(new Task(id, project_name, project_description, start_time, end_time, priority));
         }
 
         return taskList;

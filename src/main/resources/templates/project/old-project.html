@@ -21,15 +21,13 @@
         <th>Priority</th>
         <th>Name</th>
         <th>Description</th>
-
-
         <th>Start time</th>
         <th>End time</th>
     </tr>
 
   <tr  th:each="task : ${projectTasks}">
     <td><form action="/edit-task" method="post" id="form1"><input type="hidden" name="id" th:value="${task.id}"></td>
-      <td><select th:value="${task.description}" name="priority" required>
+      <td><select th:value="${task.priority}" name="priority" required>
           <option value="high">High</option>
           <option value="medium">Medium</option>
           <option value="low">Low</option>
@@ -44,7 +42,8 @@
     </form>
   </tr>
 
-    <tr>
+
+   <tr>
         <td><form action="/add-row-to-tasks" method="post" id="form2"><input type="hidden" name="id" value="1" /></td>
         <td><select name="priority" required>
             <option value="high">High</option>

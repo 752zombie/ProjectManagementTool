@@ -100,6 +100,7 @@ public class ProjectController {
             }
             // Directs edited tasks to View
             ArrayList<Task> projectTasks = TaskRepository.getTasks(project.getProjectId());
+
             model.addAttribute("project", project);
             model.addAttribute("projectTasks", projectTasks);
 
