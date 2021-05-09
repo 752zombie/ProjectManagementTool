@@ -27,7 +27,8 @@
 
   <tr  th:each="task : ${projectTasks}">
     <td><form action="/edit-task" method="post" id="form1"><input type="hidden" name="id" th:value="${task.id}"></td>
-      <td><select th:value="${task.priority}" name="priority" required>
+      <td><select name="priority" required>
+          <option th:value="${task.priority}"></option>
           <option value="high">High</option>
           <option value="medium">Medium</option>
           <option value="low">Low</option>
