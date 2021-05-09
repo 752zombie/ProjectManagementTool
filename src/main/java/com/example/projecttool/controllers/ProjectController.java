@@ -25,16 +25,16 @@ public class ProjectController {
     }
 
     @PostMapping("start-new-project")
-    public String nameYourProject(@RequestParam("project_name") String project_name, @RequestParam("project_start") String project_start,
-                                  @RequestParam("project_end") String project_end, HttpSession session) {
+    public String nameYourProject(@RequestParam("project_name") String projectName, @RequestParam("project_start") String projectStart,
+                                  @RequestParam("project_end") String projectEnd, HttpSession session) {
 
         User user = (User) session.getAttribute("user");
 
         // Creates a project
-        int project_id = ProjectRepository.createProject(user.getId(), project_name, project_start, project_end);
+        int project_id = ProjectRepository.createProject(user.getId(), projectName, projectStart, projectEnd);
 
         // Saves project in session
-        Project project = new Project(project_id, project_name, project_start, project_end);
+        Project project = new Project(project_id, projectName, projectStart, projectEnd);
         session.setAttribute("project", project);
 
         return "project/old-project";
