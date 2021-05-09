@@ -56,9 +56,8 @@ public class ProjectRepository {
         ArrayList<Project> projectList = new ArrayList<>();
 
         try {
-
-            String command = String.format("SELECT * FROM project WHERE owner_id = '%d'", userId);
-            PreparedStatement statement = connection.prepareStatement(command);
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM project WHERE owner_id = ?");
+            statement.setInt(1, userId);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
@@ -128,8 +127,8 @@ public class ProjectRepository {
         Connection connection = DatabaseConnection.getConnection();
         Project project = null;
 
-        String command = String.format("SELECT * FROM project WHERE project_id = '%d'", projectId);
-        PreparedStatement statement = connection.prepareStatement(command);
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM project WHERE project_id = ?");
+        statement.setInt(1, projectId);
         ResultSet resultSet = statement.executeQuery();
 
         while (resultSet.next()) {
