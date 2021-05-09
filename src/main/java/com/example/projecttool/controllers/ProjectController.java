@@ -89,7 +89,7 @@ public class ProjectController {
 
     @PostMapping("/edit-task")
     public String editTask(@RequestParam("id") int taskId, @RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("priority") String priority,
-                           @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, HttpSession session, Model model,
+                           @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, @RequestParam("estimated-hours") int estimatedHours, HttpSession session, Model model,
                            @RequestParam("action") String action) {
 
         try {
@@ -100,7 +100,7 @@ public class ProjectController {
 
             // Adds row to project
             if (action.equals("Save")) {
-                TaskRepository.editTask(taskId, name, description, priority, start_time, end_time);
+                TaskRepository.editTask(taskId, name, description, priority, start_time, end_time, estimatedHours);
 
             }
             // Deletes row from project
@@ -123,7 +123,7 @@ public class ProjectController {
 
     @PostMapping("add-row-to-tasks")
     public String addRowToTask(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("priority") String priority,
-                               @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, HttpSession session, Model model) {
+                               @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, @RequestParam("estimated-hours") int estimatedHours, HttpSession session, Model model) {
 
         try {
 
@@ -131,7 +131,7 @@ public class ProjectController {
             Project project = (Project) session.getAttribute("project");
 
             // Adds rows to DB
-            TaskRepository.addRowToTask(project.getProjectId(), name, description, priority, start_time, end_time);
+            TaskRepository.addRowToTask(project.getProjectId(), name, description, priority, start_time, end_time, estimatedHours);
 
 
             // Directs tasks to View

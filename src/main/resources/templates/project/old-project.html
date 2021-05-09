@@ -47,6 +47,7 @@
 
             <span class="td"><input type="text" id="task-name" name="name" th:value="${task.name}"></span>
             <span class="td"><input type="text" id="task-description" name="description" th:value="${task.description}"></span>
+            <span class="td"><input type="text" name="estimated-hours" th:value="${task.estimatedHours}"></span>
             <span class="td"><input type="date" id="task-start" name="start_time" th:value="${task.start_time}"></span>
             <span class="td"><input type="date" id="task-end" name="end_time" th:value="${task.end_time}"></span>
 
@@ -62,6 +63,8 @@
                 <input type="submit" value="Save" name="action">
                 <input type="submit" value="Delete" name="action">
             </span>
+
+
 
         </form>
     </div>

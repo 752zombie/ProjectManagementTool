@@ -12,17 +12,19 @@ public class Task {
     private String name;
     private String description;
     private String priority;
+    private int estimatedHours;
     private String start_time;
     private String end_time;
 
 
-    public Task(int id, String name, String description, String start_time, String end_time, String priority) {
+    public Task(int id, String name, String description, String start_time, String end_time, String priority, int estimatedHours) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.start_time = start_time;
         this.end_time = end_time;
         this.priority = priority;
+        this.estimatedHours = estimatedHours;
 
     }
 
@@ -30,6 +32,7 @@ public class Task {
         return TaskRepository.getRelatedSubtasks(id);
     }
 
+    public int getEstimatedHours() { return estimatedHours; }
 
     public String getName() {
         return name;
