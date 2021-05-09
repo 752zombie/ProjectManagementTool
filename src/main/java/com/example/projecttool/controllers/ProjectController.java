@@ -77,26 +77,33 @@ public class ProjectController {
 
     @PostMapping("/edit-task")
     public String editTask(@RequestParam("id") int taskId, @RequestParam("name") String name, @RequestParam("description") String description,
-                           @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, HttpSession session, Model model) {
+                           @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, HttpSession session, Model model,
+                           @RequestParam(value="action") String action) {
 
         try {
+
             // Need current project to get Tasks
             Project project = (Project) session.getAttribute("project");
+
+           if (action.equals("Save")){
 
             // Saves edited Task to DB
             TaskRepository.editTask(taskId, name, description, start_time, end_time);
 
+           }
+
+           else if (action.equals("Delete")) {
+              TaskRepository.deleteTask(taskId);
+
+           }
             // Directs tasks to View
             ArrayList<Task> projectTasks = TaskRepository.getTasks(project.getProjectId());
             model.addAttribute("projectTasks", projectTasks);
 
-
-
-            return "project/old-project";
-
         } catch (SQLException s) {
             return "project/edit-failed";
         }
+        return "project/old-project";
     }
 
 

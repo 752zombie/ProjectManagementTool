@@ -28,7 +28,8 @@
     <td><input type="text" name="description" th:value="${task.description}" /></td>
       <td><input type="date" name="start_time" th:value="${task.start_time}" /></td>
       <td><input type="date" name="end_time" th:value="${task.end_time}" /></td>
-    <td><input type="submit" value="Save" /></td>
+    <td><input type="submit" value="Save" name="action"/></td>
+     <td> <input type="submit" value="Delete" name="action" /> </td>
     </form>
   </tr>
 

@@ -23,8 +23,8 @@ public class ShareProjectRepository {
 
             PreparedStatement statement = connection.prepareStatement("SELECT * \n" +
                     "FROM project\n" +
-                    "INNER JOIN collaboratorTEST\n" +
-                    "ON  project.project_id = collaborator.project_id\n" +
+                    "INNER JOIN collaborators\n" +
+                    "ON  project.project_id = collaborators.project_id\n" +
                     "WHERE collaborator_id = ?");
             statement.setInt(1, userId);
             ResultSet resultSet = statement.executeQuery();
@@ -53,7 +53,7 @@ public class ShareProjectRepository {
 
         try {
 
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO collaborator (project_id, collaborator_id) VALUES (?, ?)");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO collaborators (project_id, collaborator_id) VALUES (?, ?)");
             statement.setInt(1, projectId);
             statement.setInt(2, receiverId);
 

@@ -106,5 +106,21 @@ public class TaskRepository {
     }
 
 
+    public static void deleteTask(int taskId) {
+
+        Connection connection = DatabaseConnection.getConnection();
+
+        try {
+
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM tasks WHERE id = ?");
+            statement.setInt(1, taskId);
+            statement.execute();
+        }
+
+        catch (SQLException e) {
+            System.out.println("Error removing task from project");
+        }
+    }
 
 }
+
