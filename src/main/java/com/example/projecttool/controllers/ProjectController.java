@@ -65,7 +65,10 @@ public class ProjectController {
         Project project = ProjectRepository.getCurrentProjectById(projectId);
         session.setAttribute("project", project);
 
+        // Add project name to View
+        model.addAttribute("project", project);
 
+        // Add projects list to View
         ArrayList<Task> projectTasks = TaskRepository.getTasks(projectId);
         model.addAttribute("projectTasks", projectTasks);
 
