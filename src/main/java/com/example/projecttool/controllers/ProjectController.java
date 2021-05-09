@@ -51,7 +51,7 @@ public class ProjectController {
         return "project/all-projects";
     }
 
-
+    //Why do we need to both add the project to the session and the model? One of them should be enough.
     @PostMapping("choose-project-to-edit")
     public String editProject(@RequestParam("id") Integer projectId, Model model, HttpSession session) {
 
