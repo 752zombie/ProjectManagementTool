@@ -115,6 +115,7 @@ public class ProjectController {
             model.addAttribute("projectTasks", projectTasks);
 
         } catch (SQLException s) {
+            System.out.println("project editing failed from DB");
             return "project/edit-failed";
         }
         return "project/old-project";
