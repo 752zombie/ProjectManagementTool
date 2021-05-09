@@ -105,20 +105,20 @@ public class ProjectRepository {
     public static Project getProject(int projectId) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
 
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM project WHERE project_id = ?");
-            statement.setInt(1, projectId);
-            ResultSet resultSet = statement.executeQuery();
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM project WHERE project_id = ?");
+        statement.setInt(1, projectId);
+        ResultSet resultSet = statement.executeQuery();
 
-            if (resultSet.next()) {
-                int id = resultSet.getInt("project_id");
-                String name = resultSet.getString("name");
-                String start_time = resultSet.getString("start_time");
-                String end_time = resultSet.getString("end_time");
+        if (resultSet.next()) {
+            int id = resultSet.getInt("project_id");
+            String name = resultSet.getString("name");
+            String start_time = resultSet.getString("start_time");
+            String end_time = resultSet.getString("end_time");
 
-                return new Project(id, name, start_time, end_time);
-            } else {
-                throw new NoSuchElementException();
-            }
+            return new Project(id, name, start_time, end_time);
+        } else {
+            throw new NoSuchElementException();
+        }
 
     }
 
@@ -128,18 +128,18 @@ public class ProjectRepository {
         Connection connection = DatabaseConnection.getConnection();
         Project project = null;
 
-            String command = String.format("SELECT * FROM project WHERE project_id = '%d'", projectId);
-            PreparedStatement statement = connection.prepareStatement(command);
-            ResultSet resultSet = statement.executeQuery();
+        String command = String.format("SELECT * FROM project WHERE project_id = '%d'", projectId);
+        PreparedStatement statement = connection.prepareStatement(command);
+        ResultSet resultSet = statement.executeQuery();
 
-            while (resultSet.next()) {
-                int id = resultSet.getInt("project_id");
-                String name = resultSet.getString("name");
-                String start_time = resultSet.getString("start_time");
-                String end_time = resultSet.getString("end_time");
+        while (resultSet.next()) {
+            int id = resultSet.getInt("project_id");
+            String name = resultSet.getString("name");
+            String start_time = resultSet.getString("start_time");
+            String end_time = resultSet.getString("end_time");
 
-                project = new Project(id, name, start_time, end_time);
-            }
+            project = new Project(id, name, start_time, end_time);
+        }
 
 
         return project;

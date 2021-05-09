@@ -34,7 +34,7 @@ public class ShareProjectController {
 
         } catch (SQLException s) {
 
-            System.out.println("something went adding collaborator");
+            System.out.println("something went wrong adding collaborator");
         }
         return "share-project/share-complete";
     }

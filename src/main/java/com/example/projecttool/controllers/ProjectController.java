@@ -115,11 +115,11 @@ public class ProjectController {
                                @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, HttpSession session, Model model) {
 
         try {
-           // We need project id to edit Task
-           Project project = (Project) session.getAttribute("project");
+            // We need project id to edit Task
+            Project project = (Project) session.getAttribute("project");
 
-           // Adds rows to DB
-           TaskRepository.addRowToTask(project.getProjectId(), name, description, start_time, end_time);
+            // Adds rows to DB
+            TaskRepository.addRowToTask(project.getProjectId(), name, description, start_time, end_time);
 
 
             // Directs tasks to View

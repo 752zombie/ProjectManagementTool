@@ -17,7 +17,9 @@ public class ProfileController {
 
 
     @GetMapping("/change-user-info")
-    public String changeSettings() { return "profile/user"; }
+    public String changeSettings() {
+        return "profile/user";
+    }
 
     @GetMapping("/profile")
     public String profilePage() {

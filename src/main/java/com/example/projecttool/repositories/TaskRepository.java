@@ -19,19 +19,19 @@ public class TaskRepository {
         Connection connection = DatabaseConnection.getConnection();
         ArrayList<Task> taskList = new ArrayList<>();
 
-            String command = String.format("SELECT * FROM tasks WHERE project_id = '%d'", project_id);
-            PreparedStatement statement = connection.prepareStatement(command);
-            ResultSet resultSet = statement.executeQuery();
+        String command = String.format("SELECT * FROM tasks WHERE project_id = '%d'", project_id);
+        PreparedStatement statement = connection.prepareStatement(command);
+        ResultSet resultSet = statement.executeQuery();
 
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String project_name = resultSet.getString("task_name");
-                String project_description =  resultSet.getString("task_description");
-                String start_time = resultSet.getString("start_time");
-                String end_time = resultSet.getString("end_time");
+        while (resultSet.next()) {
+            int id = resultSet.getInt("id");
+            String project_name = resultSet.getString("task_name");
+            String project_description = resultSet.getString("task_description");
+            String start_time = resultSet.getString("start_time");
+            String end_time = resultSet.getString("end_time");
 
-                taskList.add(new Task(id, project_name, project_description, start_time, end_time));
-            }
+            taskList.add(new Task(id, project_name, project_description, start_time, end_time));
+        }
 
         return taskList;
     }
@@ -53,13 +53,11 @@ public class TaskRepository {
 
         Connection connection = DatabaseConnection.getConnection();
 
-            String command = String.format("INSERT INTO tasks (project_id, task_name, task_description, start_time, end_time) values ('%d', '%s', '%s', '%s', '%s')", project_id, task_name, task_description, start_time, end_time);
-            PreparedStatement statement = connection.prepareStatement(command);
-            statement.execute();
+        String command = String.format("INSERT INTO tasks (project_id, task_name, task_description, start_time, end_time) values ('%d', '%s', '%s', '%s', '%s')", project_id, task_name, task_description, start_time, end_time);
+        PreparedStatement statement = connection.prepareStatement(command);
+        statement.execute();
 
-        }
-
-
+    }
 
 
     public static HashMap<Integer, Subtask> getRelatedSubtasks(int taskId) {
@@ -83,9 +81,7 @@ public class TaskRepository {
                 subtasks.put(id, subtask);
             }
 
-        }
-
-        catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println("Error could not find any subtasks for that task");
         }
 
@@ -97,12 +93,12 @@ public class TaskRepository {
 
         Connection connection = DatabaseConnection.getConnection();
 
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM tasks WHERE id = ?");
-            statement.setInt(1, taskId);
-            statement.execute();
-        }
-
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM tasks WHERE id = ?");
+        statement.setInt(1, taskId);
+        statement.execute();
     }
+
+}
 
 
 
