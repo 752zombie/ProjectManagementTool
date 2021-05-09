@@ -1,15 +1,12 @@
 package com.example.projecttool.repositories;
 
-import com.example.projecttool.models.project.Project;
 import com.example.projecttool.models.project.Subtask;
 import com.example.projecttool.models.project.Task;
 import com.example.projecttool.services.DatabaseConnection;
 
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class TaskRepository {
 
@@ -66,7 +63,7 @@ public class TaskRepository {
         Connection connection = DatabaseConnection.getConnection();
         HashMap<Integer, Subtask> subtasks = new HashMap<>();
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM subtasks WHERE task = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM subtasks WHERE task = ? ORDER BY id");
             statement.setInt(1, taskId);
             ResultSet resultSet = statement.executeQuery();
 

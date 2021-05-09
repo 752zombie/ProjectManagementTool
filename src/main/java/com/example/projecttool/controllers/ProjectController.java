@@ -82,9 +82,10 @@ public class ProjectController {
     @PostMapping("/edit-task")
     public String editTask(@RequestParam("id") int taskId, @RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("priority") String priority,
                            @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, HttpSession session, Model model,
-                           @RequestParam(value = "action") String action) {
+                           @RequestParam("action") String action) {
 
         try {
+            System.out.println(priority);
 
             // Needs current project to get Tasks
             Project project = (Project) session.getAttribute("project");

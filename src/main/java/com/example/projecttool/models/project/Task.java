@@ -25,12 +25,11 @@ public class Task {
         this.priority = priority;
 
     }
-/*
+
     public HashMap<Integer, Subtask> getSubtasks() {
         return TaskRepository.getRelatedSubtasks(id);
     }
 
- */
 
     public String getName() {
         return name;
