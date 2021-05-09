@@ -28,72 +28,41 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 
-
-<table  border="1" style="width:300px">
-
-
-    <a href="/share-project" class="pnav" methods="get"> Share project </a> <a href="#"></a>
-
-
-    <h3 th:text="${project.name}"></h3>
-
-    <tr>
-        <th></th>
-        <th>Priority</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Start time</th>
-        <th>End time</th>
-    </tr>
-
-  <tr  th:each="task : ${projectTasks}">
-    <td><form action="/edit-task" method="post" id="form1"><input type="hidden" name="id" th:value="${task.id}"></td>
-      <td><select name="priority" required>
-          <option value="high">High</option>
-          <option value="medium">Medium</option>
-          <option value="low">Low</option>
-      </select></td>
-      <td><input type="text" name="name" th:value="${task.name}"></td>
-      <td><input type="text" name="description" th:value="${task.description}"></td>
-
-      <td><input type="date" name="start_time" th:value="${task.start_time}"></td>
-      <td><input type="date" name="end_time" th:value="${task.end_time}"></td>
-    <td><input type="submit" value="Save" name="action"></td>
-     <td> <input type="submit" value="Delete" name="action" /> </td>
-    </form>
-  </tr>
-
-
-   <tr>
-        <td><form action="/add-row-to-tasks" method="post" id="form2"><input type="hidden" name="id" value="1" /></td>
-        <td><select name="priority" required>
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="low">Low</option>
-        </select></td>
-        <td><input type="text" name="name" value="" required/></td>
-        <td><input type="text" name="description" value="" required/></td>
-
-        <td><input type="date" name="start_time" value="" required/></td>
-        <td><input type="date" name="end_time" value="" required/></td>
-        <td><input type="submit" value="Save" /></td>
-        </form>
-    </tr>
-
-</table>
+<a href="/share-project" class="pnav" methods="get"> Share project </a> <a href="#"></a><br>
+<h1 th:text="${project.name}"></h1>
 
 <div class="table">
     <div class="header-group">
-        <span class="td">Test</span>
-        <span class="td">Test2</span>
-        <span class="td">Tes3</span>
+        <span class="td">Name</span>
+        <span class="td">Description</span>
+        <span class="td">Start date</span>
+        <span class="td">End date</span>
+        <span class="td">Priority</span>
+        <span class="td"> </span>
     </div>
 
     <div class="row-group">
         <form method="post" action="/edit-task" class="tr" th:each="task : ${projectTasks}">
-            <span class="td"><input type="text"/></span>
-            <span class="td"><input type="text"/></span>
-            <span class="td"><input type="submit" value="Save"/></span>
+            <input type="hidden" th:value="${task.id}" name="id">
+
+            <span class="td"><input type="text" id="task-name" name="name" th:value="${task.name}"></span>
+            <span class="td"><input type="text" id="task-description" name="description" th:value="${task.description}"></span>
+            <span class="td"><input type="date" id="task-start" name="start_time" th:value="${task.start_time}"></span>
+            <span class="td"><input type="date" id="task-end" name="end_time" th:value="${task.end_time}"></span>
+
+            <span class="td">
+                <select id="task-priority" name="priority" required>
+                    <option value="high" th:selected="${task.priority=='high'}">High</option>
+                    <option value="medium" th:selected="${task.priority=='medium'}">Medium</option>
+                    <option value="low" th:selected="${task.priority=='low'}">Low</option>
+                </select>
+            </span>
+
+            <span class="td">
+                <input type="submit" value="Save" name="action">
+                <input type="submit" value="Delete" name="action">
+            </span>
+
         </form>
     </div>
 </div>
