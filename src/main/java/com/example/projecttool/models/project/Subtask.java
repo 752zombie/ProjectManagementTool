@@ -16,6 +16,7 @@ public class Subtask {
     private String name;
     private Date startTime;
     private Date endTime;
+
     public Subtask(int id, String name, String description, Date startTime, Date endTime, List<Employee> employees, List<Skill> skills) {
         this.id = id;
         this.name = name;
