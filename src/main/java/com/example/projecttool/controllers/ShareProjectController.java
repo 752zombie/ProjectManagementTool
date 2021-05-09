@@ -42,6 +42,7 @@ public class ShareProjectController {
 
         User user = (User) session.getAttribute("user");
 
+        // Add project to View
         ArrayList<Project> sharedProjects = ShareProjectRepository.getSharedProjects(user.getId());
         model.addAttribute("projectList", sharedProjects);
 

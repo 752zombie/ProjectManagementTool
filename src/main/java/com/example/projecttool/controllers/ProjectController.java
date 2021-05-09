@@ -75,7 +75,7 @@ public class ProjectController {
         return "project/old-project";
 
 
-     //   return projectId.toString();
+
     }
 
     @PostMapping("/edit-task")
@@ -89,18 +89,16 @@ public class ProjectController {
             Project project = (Project) session.getAttribute("project");
 
            if (action.equals("Save")){
-
-            // Saves edited Task to DB
-            TaskRepository.editTask(taskId, name, description, start_time, end_time);
+               TaskRepository.editTask(taskId, name, description, start_time, end_time);
 
            }
-
            else if (action.equals("Delete")) {
               TaskRepository.deleteTask(taskId);
 
            }
-            // Directs tasks to View
+            // Directs edited tasks to View
             ArrayList<Task> projectTasks = TaskRepository.getTasks(project.getProjectId());
+            model.addAttribute("project", project);
             model.addAttribute("projectTasks", projectTasks);
 
         } catch (SQLException s) {
@@ -115,7 +113,7 @@ public class ProjectController {
                                @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, HttpSession session, Model model){
 
 
-        // We need project_id to edit Task
+        // We need project id to edit Task
         Project project = (Project) session.getAttribute("project");
 
         // Add rows to DB
@@ -124,6 +122,7 @@ public class ProjectController {
         // Directs tasks to View
         ArrayList<Task> projectTasks = TaskRepository.getTasks(project.getProjectId());
         model.addAttribute("projectTasks", projectTasks);
+        model.addAttribute("project", project);
 
 
 
