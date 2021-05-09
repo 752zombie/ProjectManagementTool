@@ -50,6 +50,7 @@ public class ProjectRepository {
         return project_id;
     }
 
+    //gets all projects for a specific user but without attaching any tasks or subtasks.
     public static ArrayList<Project> getProjects(int userId) {
 
         Connection connection = DatabaseConnection.getConnection();
@@ -75,32 +76,6 @@ public class ProjectRepository {
         return projectList;
     }
 
-    public static int getProjectId(String project_name) {
-
-
-        Connection connection = DatabaseConnection.getConnection();
-        int project_id = 0;
-
-
-        try {
-            String command = String.format("SELECT project_id FROM project WHERE name = '%s'", project_name);
-            PreparedStatement statement = connection.prepareStatement(command);
-            ResultSet resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                project_id = resultSet.getInt(1);
-
-            }
-
-        } catch (SQLException e) {
-
-            System.out.println("Something went wrong getting project_id");
-        }
-
-        return project_id;
-    }
-
-
     public static Project getProject(int projectId) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
 
@@ -121,30 +96,6 @@ public class ProjectRepository {
 
     }
 
-    public static Project getCurrentProjectById(Integer projectId) throws SQLException {
-
-
-        Connection connection = DatabaseConnection.getConnection();
-        Project project = null;
-
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM project WHERE project_id = ?");
-        statement.setInt(1, projectId);
-        ResultSet resultSet = statement.executeQuery();
-
-        while (resultSet.next()) {
-            int id = resultSet.getInt("project_id");
-            String name = resultSet.getString("name");
-            String start_time = resultSet.getString("start_time");
-            String end_time = resultSet.getString("end_time");
-
-            project = new Project(id, name, start_time, end_time);
-        }
-
-
-        return project;
-
-
-    }
 }
 
 

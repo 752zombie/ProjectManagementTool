@@ -57,7 +57,7 @@ public class ProjectController {
 
         try {
             // Add current project to session
-            Project project = ProjectRepository.getCurrentProjectById(projectId);
+            Project project = ProjectRepository.getProject(projectId);
             session.setAttribute("project", project);
 
 
