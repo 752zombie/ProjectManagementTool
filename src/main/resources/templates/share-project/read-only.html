@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h3 th:text="${project.name}"></h3>
+<h4> Read only </h4>
+<table border="1" style="width:300px">
+  <tr>
+    <th></th>
+    <th>Priority</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Start time</th>
+    <th>End time</th>
+  </tr>
+
+  <tr  th:each="task : ${projectTasks}">
+    <td>
+    <td th:text="${task.priority}"></td>
+    <td th:text="${task.name}"></td>
+    <td th:text="${task.description}"></td>
+    <td th:text="${task.start_time}"></td>
+    <td th:text="${task.end_time}"></td>
+  </tr>
+
+</table>
+
+
+</body>
+</html>

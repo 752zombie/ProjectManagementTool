@@ -26,10 +26,12 @@ public class ShareProjectController {
     }
 
     @PostMapping("share-project-with")
-    public String shareProject(@RequestParam("receiverMail") String receiverMail, HttpSession session) {
+    public String shareProject(@RequestParam("receiverMail") String receiverMail, @RequestParam("edit") String editOrRead, HttpSession session) {
         try {
             Project project = (Project) session.getAttribute("project");
-            ShareProjectRepository.shareProject(receiverMail, project.getProjectId());
+
+
+            ShareProjectRepository.shareProject(receiverMail, editOrRead, project.getProjectId());
 
 
         } catch (SQLException s) {
