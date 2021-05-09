@@ -4,6 +4,7 @@ import com.example.projecttool.models.User;
 import com.example.projecttool.models.project.Project;
 import com.example.projecttool.models.project.Task;
 import com.example.projecttool.repositories.ProjectRepository;
+import com.example.projecttool.repositories.ShareProjectRepository;
 import com.example.projecttool.repositories.TaskRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,6 +58,7 @@ public class ProjectController {
     public String editProject(@RequestParam("id") Integer projectId, Model model, HttpSession session) {
 
         try {
+            User user = (User) session.getAttribute("user");
             // Add current project to session
             Project project = ProjectRepository.getProject(projectId);
             session.setAttribute("project", project);
@@ -67,9 +69,15 @@ public class ProjectController {
 
             // Add projects list to View
             ArrayList<Task> projectTasks = TaskRepository.getTasks(projectId);
+
             model.addAttribute("projectTasks", projectTasks);
 
-            return "project/old-project";
+
+         if (ShareProjectRepository.isReadOnly(projectId, user.getId())) {
+             return "share-project/read-only";
+
+         }
+         else return "project/old-project";
 
         } catch (SQLException s) {
             System.out.println("something went wrong editing the project");

@@ -1,14 +1,12 @@
 package com.example.projecttool.repositories;
 
 
-import com.example.projecttool.models.User;
 import com.example.projecttool.models.project.Project;
-import com.example.projecttool.models.project.Subtask;
 import com.example.projecttool.services.DatabaseConnection;
 
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 
 public class ShareProjectRepository {
 
@@ -37,17 +35,31 @@ public class ShareProjectRepository {
         return sharedProjects;
     }
 
-    public static void shareProject(String receiverMail, int projectId) throws SQLException {
+    public static void shareProject(String receiverMail, String editOrRead, int projectId) throws SQLException {
 
         Connection connection = DatabaseConnection.getConnection();
 
         int receiverId = getReceiverId(receiverMail);
+
+        editOrReadAccess(editOrRead, receiverId, projectId);
 
         PreparedStatement statement = connection.prepareStatement("INSERT INTO collaborators (project_id, collaborator_id) VALUES (?, ?)");
         statement.setInt(1, projectId);
         statement.setInt(2, receiverId);
 
         statement.execute();
+    }
+
+    private static void editOrReadAccess(String editOrRead, int receiverId, int projectId) throws SQLException {
+
+        Connection connection = DatabaseConnection.getConnection();
+
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO edit_read (access_level, collaborator_id, project_id) VALUES (?, ?, ?)");
+        statement.setString(1, editOrRead);
+        statement.setInt(2, receiverId);
+        statement.setInt(3, projectId);
+        statement.execute();
+
     }
 
 
@@ -71,7 +83,25 @@ public class ShareProjectRepository {
     }
 
 
+    public static boolean isReadOnly(int projectId, int userId) throws SQLException {
+
+        Connection connection = DatabaseConnection.getConnection();
+        String isReadOnly = "";
+
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM edit_read WHERE project_id = ?");
+        statement.setInt(1, projectId);
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            isReadOnly = resultSet.getString("access_level");
+            return isReadOnly.equals("read-only");
+        }
+        return false;
+
+    }
+
 }
+
 
 
 
