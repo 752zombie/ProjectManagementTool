@@ -79,7 +79,7 @@ public class ProjectController {
 
 
     @PostMapping("/edit-task")
-    public String editTask(@RequestParam("id") int taskId, @RequestParam("name") String name, @RequestParam("description") String description,
+    public String editTask(@RequestParam("id") int taskId, @RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("priority") String priority,
                            @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, HttpSession session, Model model,
                            @RequestParam(value = "action") String action) {
 
@@ -90,7 +90,7 @@ public class ProjectController {
 
             // Adds row to project
             if (action.equals("Save")) {
-                TaskRepository.editTask(taskId, name, description, start_time, end_time);
+                TaskRepository.editTask(taskId, name, description, priority, start_time, end_time);
 
             }
             // Deletes row from project
@@ -111,15 +111,16 @@ public class ProjectController {
 
 
     @PostMapping("add-row-to-tasks")
-    public String addRowToTask(@RequestParam("name") String name, @RequestParam("description") String description,
+    public String addRowToTask(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("priority") String priority,
                                @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, HttpSession session, Model model) {
 
         try {
+
             // We need project id to edit Task
             Project project = (Project) session.getAttribute("project");
 
             // Adds rows to DB
-            TaskRepository.addRowToTask(project.getProjectId(), name, description, start_time, end_time);
+            TaskRepository.addRowToTask(project.getProjectId(), name, description, priority, start_time, end_time);
 
 
             // Directs tasks to View

@@ -27,33 +27,35 @@ public class TaskRepository {
             int id = resultSet.getInt("id");
             String project_name = resultSet.getString("task_name");
             String project_description = resultSet.getString("task_description");
+            String priority = resultSet.getString("priority");
             String start_time = resultSet.getString("start_time");
             String end_time = resultSet.getString("end_time");
 
-            taskList.add(new Task(id, project_name, project_description, start_time, end_time));
+
+            taskList.add(new Task(id, project_name, project_description, priority, start_time, end_time));
         }
 
         return taskList;
     }
 
 
-    public static void editTask(int taskId, String name, String description, String start_time, String end_time) throws SQLException {
+    public static void editTask(int taskId, String name, String description, String priority, String start_time, String end_time) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
 
 
-        String command = String.format("UPDATE tasks SET task_name = '%s', task_description = '%s', start_time = '%s', end_time = '%s' WHERE id = '%d'", name, description, start_time, end_time, taskId);
+        String command = String.format("UPDATE tasks SET task_name = '%s', task_description = '%s', priority = '%s', start_time = '%s', end_time = '%s'  WHERE id = '%d'", name, description, priority, start_time, end_time, taskId);
         PreparedStatement statement = connection.prepareStatement(command);
         statement.execute();
 
     }
 
 
-    public static void addRowToTask(int project_id, String task_name, String task_description, String start_time, String end_time) throws SQLException {
+    public static void addRowToTask(int project_id, String task_name, String task_description, String priority, String start_time, String end_time) throws SQLException {
 
 
         Connection connection = DatabaseConnection.getConnection();
 
-        String command = String.format("INSERT INTO tasks (project_id, task_name, task_description, start_time, end_time) values ('%d', '%s', '%s', '%s', '%s')", project_id, task_name, task_description, start_time, end_time);
+        String command = String.format("INSERT INTO tasks (project_id, task_name, task_description, start_time, end_time, priority) values ('%d', '%s', '%s', '%s', '%s', '%s')", project_id, task_name, task_description, start_time, end_time, priority);
         PreparedStatement statement = connection.prepareStatement(command);
         statement.execute();
 
