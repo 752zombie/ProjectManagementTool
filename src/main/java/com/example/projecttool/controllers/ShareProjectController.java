@@ -5,6 +5,7 @@ import com.example.projecttool.models.project.Project;
 import com.example.projecttool.repositories.ProjectRepository;
 import com.example.projecttool.repositories.ShareProjectRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,11 +38,12 @@ public class ShareProjectController {
     }
 
     @GetMapping("shared-with-me")
-    public String sharedWithMe(HttpSession session) {
+    public String sharedWithMe(HttpSession session, Model model) {
 
         User user = (User) session.getAttribute("user");
 
-     //   ShareProjectRepository.getSharedProjects(user.getId());
+        ArrayList<Project> sharedProjects = ShareProjectRepository.getSharedProjects(user.getId());
+        model.addAttribute("projectList", sharedProjects);
 
         return "share-project/shared-with-me";
     }

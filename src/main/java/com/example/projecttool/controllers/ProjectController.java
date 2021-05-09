@@ -56,23 +56,8 @@ public class ProjectController {
         return "project/all-projects";
     }
 
-/*
-   @PostMapping("choose-project-to-edit")
-   public String editProject(@RequestParam("project-name") String project_name, Model model, HttpSession session){
 
-        // Add current project to session
-        Project project = ProjectRepository.getCurrentProjectObject(project_name);
-        session.setAttribute("project", project);
 
-        // Directs Tasks to view
-        int project_id = ProjectRepository.getProjectId(project_name);
-        ArrayList<Task> projectTasks = TaskRepository.getTasks(project_id);
-        model.addAttribute("projectTasks", projectTasks);
-
-       return "project/old-project";
-   }*/
-
-   // @ResponseBody
     @PostMapping("choose-project-to-edit")
     public String editProject(@RequestParam("id") Integer projectId, Model model, HttpSession session){
 
