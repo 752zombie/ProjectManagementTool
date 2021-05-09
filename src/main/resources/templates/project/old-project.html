@@ -33,12 +33,12 @@
           <option value="medium">Medium</option>
           <option value="low">Low</option>
       </select></td>
-      <td><input type="text" name="name" th:value="${task.name}" /></td>
-      <td><input type="text" name="description" th:value="${task.description}" /></td>
+      <td><input type="text" name="name" th:value="${task.name}"></td>
+      <td><input type="text" name="description" th:value="${task.description}"></td>
 
-      <td><input type="date" name="start_time" th:value="${task.start_time}" /></td>
-      <td><input type="date" name="end_time" th:value="${task.end_time}" /></td>
-    <td><input type="submit" value="Save" name="action"/></td>
+      <td><input type="date" name="start_time" th:value="${task.start_time}"></td>
+      <td><input type="date" name="end_time" th:value="${task.end_time}"></td>
+    <td><input type="submit" value="Save" name="action"></td>
      <td> <input type="submit" value="Delete" name="action" /> </td>
     </form>
   </tr>
@@ -60,10 +60,39 @@
         </form>
     </tr>
 
-
-
-
 </table>
+
+<ul th:each="task : ${projectTasks}">
+    <li>
+        <div>
+            <form action="/edit-task" method="post">
+                <label for="task-name">Task name</label><br>
+                <input type="text" id="task-name" name="name" th:value="${task.name}"><br>
+
+                <label for="task-description">Task description</label><br>
+                <input type="text" id="task-description" name="description" th:value="${task.description}"><br>
+
+                <label for="task-start">Task start</label><br>
+                <input type="date" id="task-start" name="start_time" th:value="${task.start_time}"><br>
+
+                <label for="task-end">Task deadline</label><br>
+                <input type="date" id="task-end" name="end_time" th:value="${task.end_time}"><br>
+
+                <label for="task-priority">Task priority</label>
+                <select id="task-priority" name="priority" required>
+                    <option value="high" th:selected="${task.priority=='high'}">High</option>
+                    <option value="medium" th:selected="${task.priority=='medium'}">Medium</option>
+                    <option value="low" th:selected="${task.priority=='low'}">Low</option>
+                </select>
+
+                <input type="hidden" th:value="${task.id}" name="id">
+
+                <input type="submit" value="Save" name="action">
+                <input type="submit" value="Delete" name="action">
+            </form>
+        </div>
+    </li>
+</ul>
 
 
 
