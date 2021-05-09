@@ -42,9 +42,6 @@ public class ProjectController {
        Project project = new Project(project_id, project_name, project_start, project_end);
        session.setAttribute("project", project);
 
-       // Creates an empty Task in the project
-       TaskRepository.createTask(project_id, user.getId());
-
        return "project/old-project";
    }
 
@@ -75,11 +72,22 @@ public class ProjectController {
        return "project/old-project";
    }*/
 
-    @ResponseBody
+   // @ResponseBody
     @PostMapping("choose-project-to-edit")
     public String editProject(@RequestParam("id") Integer projectId, Model model, HttpSession session){
 
-        return projectId.toString();
+        // Add current project to session
+        Project project = ProjectRepository.getCurrentProjectById(projectId);
+        session.setAttribute("project", project);
+
+
+        ArrayList<Task> projectTasks = TaskRepository.getTasks(projectId);
+        model.addAttribute("projectTasks", projectTasks);
+
+        return "project/old-project";
+
+
+     //   return projectId.toString();
     }
 
     @PostMapping("/edit-task")

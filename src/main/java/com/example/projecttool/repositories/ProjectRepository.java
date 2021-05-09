@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
 public class ProjectRepository {
 
 
-    public static int createProject(int id, String project_name, String project_start, String project_end){
+    public static int createProject(int id, String project_name, String project_start, String project_end) {
         Connection connection = DatabaseConnection.getConnection();
 
         try {
@@ -22,9 +22,7 @@ public class ProjectRepository {
             PreparedStatement statement = connection.prepareStatement(command);
             statement.execute();
 
-        }
-
-        catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println("Error creating new project to DB");
         }
         return getNewProjectId();
@@ -52,14 +50,14 @@ public class ProjectRepository {
         return project_id;
     }
 
-    public static ArrayList<Project> getProjects(int userId){
+    public static ArrayList<Project> getProjects(int userId) {
 
         Connection connection = DatabaseConnection.getConnection();
         ArrayList<Project> projectList = new ArrayList<>();
 
         try {
 
-            String command = String.format("SELECT * FROM project WHERE owner_id = '%d'", userId );
+            String command = String.format("SELECT * FROM project WHERE owner_id = '%d'", userId);
             PreparedStatement statement = connection.prepareStatement(command);
             ResultSet resultSet = statement.executeQuery();
 
@@ -71,9 +69,7 @@ public class ProjectRepository {
 
                 projectList.add(new Project(project_id, project_name, start_time, end_time));
             }
-        }
-
-        catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println("Error getting project");
         }
 
@@ -105,14 +101,39 @@ public class ProjectRepository {
         return project_id;
     }
 
-    public static Project getCurrentProjectObject(String project_name) {
+
+    public static Project getProject(int projectId) {
+        Connection connection = DatabaseConnection.getConnection();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM project WHERE project_id = ?");
+            statement.setInt(1, projectId);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                int id = resultSet.getInt("project_id");
+                String name = resultSet.getString("name");
+                String start_time = resultSet.getString("start_time");
+                String end_time = resultSet.getString("end_time");
+
+                return new Project(id, name, start_time, end_time);
+            } else {
+                throw new NoSuchElementException();
+            }
+        } catch (SQLException e) {
+            throw new NoSuchElementException();
+        }
+    }
+
+    public static Project getCurrentProjectById(Integer projectId) {
+
 
         Connection connection = DatabaseConnection.getConnection();
         Project project = null;
 
         try {
-            // currently only getting the oldest project with that name
-            String command = String.format("SELECT * FROM project WHERE name = '%s' LIMIT 1", project_name);
+
+            String command = String.format("SELECT * FROM project WHERE project_id = '%d'", projectId);
             PreparedStatement statement = connection.prepareStatement(command);
             ResultSet resultSet = statement.executeQuery();
 
@@ -133,33 +154,7 @@ public class ProjectRepository {
 
     }
 
-    public static Project getProject(int projectId) {
-        Connection connection = DatabaseConnection.getConnection();
-
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM project WHERE project_id = ?");
-            statement.setInt(1, projectId);
-            ResultSet resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                int id = resultSet.getInt("project_id");
-                String name = resultSet.getString("name");
-                String start_time = resultSet.getString("start_time");
-                String end_time = resultSet.getString("end_time");
-
-                return new Project(id, name, start_time, end_time);
-            }
-
-            else {
-                throw new NoSuchElementException();
-            }
-        }
-
-        catch (SQLException e) {
-            throw new NoSuchElementException();
-        }
-    }
-
 }
+
 
 

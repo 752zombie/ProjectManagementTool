@@ -44,30 +44,6 @@ public class TaskRepository {
     }
 
 
-    public static int createTask(int project_id, int userId) {
-
-        Connection connection = DatabaseConnection.getConnection();
-        int taskId = 0;
-
-        try {
-
-            // THE REMAINING 'TASKS' VALUES ARE CREATED AS NULL VALUES
-            String command = String.format("INSERT INTO tasks (project_id, owner_id) values ('%d', '%d')", project_id, userId);
-            PreparedStatement statement = connection.prepareStatement(command);
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                taskId = resultSet.getInt("id");
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Error creating new task to DB");
-
-        }
-        return taskId;
-    }
-
-
     public static void editTask(int taskId, String name, String description, String start_time, String end_time) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
 
