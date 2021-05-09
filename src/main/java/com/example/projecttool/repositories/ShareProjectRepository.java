@@ -13,13 +13,10 @@ import java.util.NoSuchElementException;
 public class ShareProjectRepository {
 
 
-
-    public static ArrayList<Project> getSharedProjects(int userId) {
+    public static ArrayList<Project> getSharedProjects(int userId) throws SQLException {
 
         Connection connection = DatabaseConnection.getConnection();
         ArrayList<Project> sharedProjects = new ArrayList<>();
-
-        try {
 
             PreparedStatement statement = connection.prepareStatement("SELECT * \n" +
                     "FROM project\n" +
@@ -37,56 +34,42 @@ public class ShareProjectRepository {
 
                 sharedProjects.add(new Project(project_id, project_name, start_time, end_time));
             }
-        } catch (SQLException e) {
-            System.out.println("Error getting project");
+        return sharedProjects;
         }
 
-        return sharedProjects;
-    }
-
-
-    public static void shareProject(String receiverMail, int projectId) {
+        public static void shareProject(String receiverMail, int projectId) throws SQLException {
 
         Connection connection = DatabaseConnection.getConnection();
 
         int receiverId = getReceiverId(receiverMail);
 
-        try {
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO collaborators (project_id, collaborator_id) VALUES (?, ?)");
+        statement.setInt(1, projectId);
+        statement.setInt(2, receiverId);
 
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO collaborators (project_id, collaborator_id) VALUES (?, ?)");
-            statement.setInt(1, projectId);
-            statement.setInt(2, receiverId);
+        statement.execute();
+    }
 
-            statement.execute();
-        }catch (SQLException s){
 
-            System.out.println("something went adding collaborator");
+    private static int getReceiverId(String receiverMail) throws SQLException {
+
+        Connection connection = DatabaseConnection.getConnection();
+
+        int receiverId = 0;
+
+
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE email = ?");
+        statement.setString(1, receiverMail);
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            return resultSet.getInt("user_id");
         }
+
+        return receiverId;
 
     }
 
-    private static int getReceiverId(String receiverMail) {
-
-       Connection connection = DatabaseConnection.getConnection();
-
-        try {
-
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE email = ?");
-            statement.setString(1, receiverMail);
-            ResultSet resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                return resultSet.getInt("user_id");
-            }
-
-        } catch (SQLException e) {
-
-            System.out.println("Something went wrong getting receiver id");
-        }
-
-        throw new NoSuchElementException();
-
-    }
 
 }
 

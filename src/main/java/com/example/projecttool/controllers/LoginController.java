@@ -58,7 +58,7 @@ public class LoginController {
         }
 
         //incorrect email or password
-        catch (NoSuchElementException e) {
+        catch (SQLException s) {
             return "login/login-failed";
         }
     }

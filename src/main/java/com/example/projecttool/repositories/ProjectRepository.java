@@ -102,10 +102,9 @@ public class ProjectRepository {
     }
 
 
-    public static Project getProject(int projectId) {
+    public static Project getProject(int projectId) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
 
-        try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM project WHERE project_id = ?");
             statement.setInt(1, projectId);
             ResultSet resultSet = statement.executeQuery();
@@ -120,18 +119,14 @@ public class ProjectRepository {
             } else {
                 throw new NoSuchElementException();
             }
-        } catch (SQLException e) {
-            throw new NoSuchElementException();
-        }
+
     }
 
-    public static Project getCurrentProjectById(Integer projectId) {
+    public static Project getCurrentProjectById(Integer projectId) throws SQLException {
 
 
         Connection connection = DatabaseConnection.getConnection();
         Project project = null;
-
-        try {
 
             String command = String.format("SELECT * FROM project WHERE project_id = '%d'", projectId);
             PreparedStatement statement = connection.prepareStatement(command);
@@ -145,9 +140,7 @@ public class ProjectRepository {
 
                 project = new Project(id, name, start_time, end_time);
             }
-        } catch (SQLException e) {
-            System.out.println("Error getting project");
-        }
+
 
         return project;
 

@@ -3,6 +3,7 @@ package com.example.projecttool.models.project;
 import com.example.projecttool.models.User;
 import com.example.projecttool.repositories.TaskRepository;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +24,7 @@ public class Project {
         this.projectId = projectId;
     }
 
-    public List<Task> getTasks() {
+    public List<Task> getTasks() throws SQLException {
         return TaskRepository.getTasks(projectId);
     }
 

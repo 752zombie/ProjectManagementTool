@@ -14,12 +14,10 @@ import java.util.List;
 public class TaskRepository {
 
 
-    public static ArrayList<Task> getTasks(int project_id) {
+    public static ArrayList<Task> getTasks(int project_id) throws SQLException {
 
         Connection connection = DatabaseConnection.getConnection();
         ArrayList<Task> taskList = new ArrayList<>();
-
-        try {
 
             String command = String.format("SELECT * FROM tasks WHERE project_id = '%d'", project_id);
             PreparedStatement statement = connection.prepareStatement(command);
@@ -34,11 +32,6 @@ public class TaskRepository {
 
                 taskList.add(new Task(id, project_name, project_description, start_time, end_time));
             }
-        }
-
-        catch (SQLException e) {
-            System.out.println("Error getting project");
-        }
 
         return taskList;
     }
@@ -55,12 +48,10 @@ public class TaskRepository {
     }
 
 
-    public static void addRowToTask(int project_id, String task_name, String task_description, String start_time, String end_time) {
+    public static void addRowToTask(int project_id, String task_name, String task_description, String start_time, String end_time) throws SQLException {
 
 
         Connection connection = DatabaseConnection.getConnection();
-
-        try {
 
             String command = String.format("INSERT INTO tasks (project_id, task_name, task_description, start_time, end_time) values ('%d', '%s', '%s', '%s', '%s')", project_id, task_name, task_description, start_time, end_time);
             PreparedStatement statement = connection.prepareStatement(command);
@@ -68,10 +59,6 @@ public class TaskRepository {
 
         }
 
-        catch (SQLException e) {
-            System.out.println("Error adding row to database");
-        }
-    }
 
 
 
@@ -106,21 +93,16 @@ public class TaskRepository {
     }
 
 
-    public static void deleteTask(int taskId) {
+    public static void deleteTask(int taskId) throws SQLException {
 
         Connection connection = DatabaseConnection.getConnection();
-
-        try {
 
             PreparedStatement statement = connection.prepareStatement("DELETE FROM tasks WHERE id = ?");
             statement.setInt(1, taskId);
             statement.execute();
         }
 
-        catch (SQLException e) {
-            System.out.println("Error removing task from project");
-        }
     }
 
-}
+
 
