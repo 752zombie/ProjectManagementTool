@@ -3,6 +3,7 @@ package com.example.projecttool.controllers;
 
 import com.example.projecttool.models.User;
 import com.example.projecttool.repositories.UserRepository;
+import com.example.projecttool.services.LoginService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,9 @@ import java.util.NoSuchElementException;
 
 @Controller
 public class LoginController {
+
+    LoginService loginService = new LoginService();
+
 
     @GetMapping("/sign-out")
     public String signOut(HttpSession session) {
@@ -34,10 +38,8 @@ public class LoginController {
 
         try {
             //User created successfully and should now be logged in
-            UserRepository.addUser(name, eMail, password);
-            User user = UserRepository.attemptLogin(eMail, password);
+            User user = loginService.attemptLogin(name, eMail, password);
             session.setAttribute("user", user);
-
 
         } catch (SQLException e) {
             System.out.println("Error log in");
@@ -51,14 +53,14 @@ public class LoginController {
     public String signIn(@RequestParam("email") String email, @RequestParam("password") String password, HttpSession session) {
 
         try {
-            User user = UserRepository.attemptLogin(email, password);
+            User user = loginService.attemptLogin(email, password);
             session.setAttribute("user", user);
 
             return "redirect:/";
         }
 
-        //incorrect email or password
         catch (SQLException s) {
+            System.out.println("incorrect email or password");
             return "login/login-failed";
         }
     }

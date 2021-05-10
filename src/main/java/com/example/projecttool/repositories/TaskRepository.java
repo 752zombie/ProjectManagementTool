@@ -28,31 +28,32 @@ public class TaskRepository {
             String start_time = resultSet.getString("start_time");
             String end_time = resultSet.getString("end_time");
             int estimatedHours = resultSet.getInt("estimated_hours");
+            int estimatedHoursPrDay = resultSet.getInt("estimated_hours_day");
 
-           taskList.add(new Task(id, project_name, project_description, start_time, end_time, priority, estimatedHours));
+           taskList.add(new Task(id, project_name, project_description, start_time, end_time, priority, estimatedHours, estimatedHoursPrDay));
         }
 
         return taskList;
     }
 
 
-    public static void editTask(int taskId, String name, String description, String priority, String start_time, String end_time, int estimatedHours) throws SQLException {
+    public static void editTask(int taskId, String name, String description, String priority, String start_time, String end_time, int estimatedHoursTotal, int estimatedHoursPrDay) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
 
 
-        String command = String.format("UPDATE tasks SET task_name = '%s', task_description = '%s', start_time = '%s', end_time = '%s', priority = '%s', estimated_hours = '%d'  WHERE id = '%d'", name, description, start_time, end_time, priority, estimatedHours, taskId);
+        String command = String.format("UPDATE tasks SET task_name = '%s', task_description = '%s', start_time = '%s', end_time = '%s', priority = '%s', estimated_hours = '%d', estimated_hours_day  WHERE id = '%d'", name, description, start_time, end_time, priority, estimatedHoursTotal, estimatedHoursPrDay, taskId);
         PreparedStatement statement = connection.prepareStatement(command);
         statement.execute();
 
     }
 
 
-    public static void addRowToTask(int project_id, String task_name, String task_description, String priority, String start_time, String end_time, int estimatedHours) throws SQLException {
+    public static void addRowToTask(int project_id, String task_name, String task_description, String priority, String start_time, String end_time, int estimatedHoursTotal, int estimatedHoursPrDay) throws SQLException {
 
 
         Connection connection = DatabaseConnection.getConnection();
 
-        String command = String.format("INSERT INTO tasks (project_id, task_name, task_description, start_time, end_time, priority, estimated_hours) values ('%d', '%s', '%s', '%s', '%s', '%s', '%d')", project_id, task_name, task_description, start_time, end_time, priority, estimatedHours);
+        String command = String.format("INSERT INTO tasks (project_id, task_name, task_description, start_time, end_time, priority, estimated_hours, estimated_hours_day) values ('%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d')", project_id, task_name, task_description, start_time, end_time, priority, estimatedHoursTotal, estimatedHoursPrDay);
         PreparedStatement statement = connection.prepareStatement(command);
         statement.execute();
 

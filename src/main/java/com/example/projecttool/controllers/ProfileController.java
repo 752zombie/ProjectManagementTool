@@ -3,6 +3,8 @@ package com.example.projecttool.controllers;
 import com.example.projecttool.models.User;
 import com.example.projecttool.models.UserAttribute;
 import com.example.projecttool.repositories.UserRepository;
+import com.example.projecttool.services.LoginService;
+import com.example.projecttool.services.ProfileService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +17,8 @@ import java.util.NoSuchElementException;
 @Controller
 public class ProfileController {
 
+    ProfileService profileService = new ProfileService();
+    LoginService loginService = new LoginService();
 
     @GetMapping("/change-user-info")
     public String changeSettings() {
@@ -36,7 +40,8 @@ public class ProfileController {
 
         try {
             User user = (User) session.getAttribute("user");
-            UserRepository.updateUserInfo(user.getId(), UserAttribute.name, username);
+            profileService.updateUserInfo(user.getId(), UserAttribute.name, username);
+
             return "profile/success";
 
         } catch (SQLException e) {
@@ -55,7 +60,7 @@ public class ProfileController {
 
         try {
             User user = (User) session.getAttribute("user");
-            UserRepository.updateUserInfo(user.getId(), UserAttribute.email, email);
+            profileService.updateUserInfo(user.getId(), UserAttribute.email, email);
             return "profile/success";
 
         } catch (SQLException e) {
@@ -77,13 +82,13 @@ public class ProfileController {
             User user = (User) session.getAttribute("user");
 
             try {
-                UserRepository.attemptLogin(user.getEmail(), currentPassword);
+                loginService.attemptLogin(user.getEmail(), currentPassword);
             } catch (NoSuchElementException e) {
                 return "profile/password-form";
             }
 
-            UserRepository.updateUserInfo(user.getId(), UserAttribute.password, newPassword);
-            return "success";
+            profileService.updateUserInfo(user.getId(), UserAttribute.password, newPassword);
+            return "profile/success";
 
         } catch (SQLException e) {
             System.out.println("Error updating user info");

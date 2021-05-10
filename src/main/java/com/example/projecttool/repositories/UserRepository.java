@@ -74,6 +74,8 @@ public class UserRepository {
     }
 
 
+
+
     private static String userAttributeToColumn(UserAttribute attribute) {
         switch (attribute) {
             case name:

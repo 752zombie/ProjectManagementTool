@@ -4,6 +4,7 @@ import com.example.projecttool.models.User;
 import com.example.projecttool.models.project.Project;
 import com.example.projecttool.repositories.ProjectRepository;
 import com.example.projecttool.repositories.ShareProjectRepository;
+import com.example.projecttool.services.ShareProjectService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 @Controller
 public class ShareProjectController {
 
+ShareProjectService shareProjectService = new ShareProjectService();
 
     @GetMapping("share-project")
     public String shareProject() {
@@ -31,7 +33,7 @@ public class ShareProjectController {
             Project project = (Project) session.getAttribute("project");
 
 
-            ShareProjectRepository.shareProject(receiverMail, editOrRead, project.getProjectId());
+            shareProjectService.shareProject(receiverMail, editOrRead, project.getProjectId());
 
 
         } catch (SQLException s) {
@@ -48,7 +50,7 @@ public class ShareProjectController {
             User user = (User) session.getAttribute("user");
 
             // Add project to View
-            ArrayList<Project> sharedProjects = ShareProjectRepository.getSharedProjects(user.getId());
+            ArrayList<Project> sharedProjects = shareProjectService.getSharedProjects(user.getId());
             model.addAttribute("projectList", sharedProjects);
 
 
