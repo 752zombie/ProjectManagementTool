@@ -8,9 +8,10 @@ public class PrioritySorterService {
 
   public static void sortTasks(ArrayList<Task> taskList){
 
-      taskList.sort((m1, m2) -> {
-        String p1 = m1.getPriority();
-        String p2 = m2.getPriority();
+      // Sorts tasks after priority: High, medium, low
+      taskList.sort((task1, task2) -> {
+        String p1 = task1.getPriority();
+        String p2 = task2.getPriority();
 
         if(p1 == null) return 1;
         if(p2 == null) return -1;
@@ -21,6 +22,5 @@ public class PrioritySorterService {
             return -1;
         return 1;
       });
-
   }
 }
