@@ -71,8 +71,11 @@ public class ProjectController {
             // Add project name to View
             model.addAttribute("project", project);
 
-            // Add projects list to View
+            // Add task list to View
             ArrayList<Task> projectTasks = taskService.getTasks(projectId);
+
+
+
             model.addAttribute("projectTasks", projectTasks);
 
 
@@ -134,7 +137,6 @@ public class ProjectController {
 
             // Adds rows to DB
             taskService.addRowToTask(project.getProjectId(), name, description, priority, start_time, end_time, estimatedHoursTotal, estimatedHoursDay);
-
 
             // Directs tasks to View
             ArrayList<Task> projectTasks = taskService.getTasks(project.getProjectId());

@@ -1,8 +1,10 @@
 package com.example.projecttool.models.project;
 
 import com.example.projecttool.repositories.TaskRepository;
+import org.springframework.ui.Model;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -67,6 +69,7 @@ public class Task {
     public String getPriority() {
         return priority;
     }
+
 }
 
 
