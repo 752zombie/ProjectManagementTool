@@ -3,10 +3,7 @@ package com.example.projecttool.repositories;
 import com.example.projecttool.models.project.Project;
 import com.example.projecttool.services.DatabaseConnection;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
@@ -17,9 +14,11 @@ public class ProjectRepository {
         Connection connection = DatabaseConnection.getConnection();
 
         try {
-
-            String command = String.format("INSERT INTO project (name, owner_id, start_time, end_time) values ('%s', '%d', '%s', '%s')", project_name, userId, project_start, project_end);
-            PreparedStatement statement = connection.prepareStatement(command);
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO project (name, owner_id, start_time, end_time) values (?, ?, ?, ?)");
+            statement.setString(1, project_name);
+            statement.setInt(2, userId);
+            statement.setDate(3, java.sql.Date.valueOf(project_start));
+            statement.setDate(4, java.sql.Date.valueOf(project_end));
             statement.execute();
 
         } catch (SQLException e) {

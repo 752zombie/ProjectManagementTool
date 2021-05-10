@@ -11,13 +11,13 @@ import java.util.HashMap;
 public class TaskRepository {
 
 
-    public static ArrayList<Task> getTasks(int project_id) throws SQLException {
+    public static ArrayList<Task> getTasks(int projectId) throws SQLException {
 
         Connection connection = DatabaseConnection.getConnection();
         ArrayList<Task> taskList = new ArrayList<>();
 
-        String command = String.format("SELECT * FROM tasks WHERE project_id = '%d'", project_id);
-        PreparedStatement statement = connection.prepareStatement(command);
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM tasks WHERE project_id = ?");
+        statement.setInt(1, projectId);
         ResultSet resultSet = statement.executeQuery();
 
         while (resultSet.next()) {
@@ -37,12 +37,22 @@ public class TaskRepository {
     }
 
 
-    public static void editTask(int taskId, String name, String description, String priority, String start_time, String end_time, int estimatedHoursTotal, int estimatedHoursPrDay) throws SQLException {
+    public static void editTask(int taskId, String taskName, String description, String priority, String start_time, String end_time, int estimatedHoursTotal, int estimatedHoursPrDay) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
 
+        PreparedStatement statement = connection.prepareStatement("UPDATE tasks SET task_name = ?, " +
+                "task_description = ?, start_time = ?, end_time = ?, priority = ?, " +
+                "estimated_hours = ?, estimated_hours_day = ? WHERE id = ?");
 
-        String command = String.format("UPDATE tasks SET task_name = '%s', task_description = '%s', start_time = '%s', end_time = '%s', priority = '%s', estimated_hours = '%d', estimated_hours_day  WHERE id = '%d'", name, description, start_time, end_time, priority, estimatedHoursTotal, estimatedHoursPrDay, taskId);
-        PreparedStatement statement = connection.prepareStatement(command);
+        statement.setString(1, taskName);
+        statement.setString(2, description);
+        statement.setDate(3, java.sql.Date.valueOf(start_time));
+        statement.setDate(4, java.sql.Date.valueOf(end_time));
+        statement.setString(5, priority);
+        statement.setInt(6, estimatedHoursTotal);
+        statement.setInt(7, estimatedHoursPrDay);
+        statement.setInt(8, taskId);
+
         statement.execute();
 
     }
@@ -54,7 +64,19 @@ public class TaskRepository {
         Connection connection = DatabaseConnection.getConnection();
 
         String command = String.format("INSERT INTO tasks (project_id, task_name, task_description, start_time, end_time, priority, estimated_hours, estimated_hours_day) values ('%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d')", project_id, task_name, task_description, start_time, end_time, priority, estimatedHoursTotal, estimatedHoursPrDay);
-        PreparedStatement statement = connection.prepareStatement(command);
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO tasks (project_id, " +
+                "task_name, task_description, start_time, end_time, priority, estimated_hours, " +
+                "estimated_hours_day) values (?, ?, ?, ?, ?, ?, ?, ?)");
+
+        statement.setInt(1, project_id);
+        statement.setString(2, task_name);
+        statement.setString(3, task_description);
+        statement.setDate(4, java.sql.Date.valueOf(start_time));
+        statement.setDate(5, java.sql.Date.valueOf(end_time));
+        statement.setString(6, priority);
+        statement.setInt(7, estimatedHoursTotal);
+        statement.setInt(8, estimatedHoursPrDay);
+
         statement.execute();
 
     }

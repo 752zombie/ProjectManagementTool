@@ -39,16 +39,19 @@ public class UserRepository {
         Connection connection = DatabaseConnection.getConnection();
 
 
-        String command;
         String column = userAttributeToColumn(attributeToUpdate);
 
         if (column.equals("user_password")) {
-            command = String.format("UPDATE users SET user_password = MD5('%s') WHERE user_id = %d", newValueOfAttribute, userId);
+            PreparedStatement statement = connection.prepareStatement("UPDATE users SET user_password = MD5(?) WHERE user_id = ?");
+            statement.setString(1, newValueOfAttribute);
+            statement.setInt(2, userId);
         } else {
-            command = String.format("UPDATE users SET %s = '%s' WHERE user_id = %d", column, newValueOfAttribute, userId);
+            // This does not allow sql injection even though it might look like it at a glance
+            String command = String.format("UPDATE users SET %s = ? WHERE user_id = ?", column);
+            PreparedStatement statement = connection.prepareStatement(command);
+            statement.setString(1, newValueOfAttribute);
+            statement.setInt(2, userId);
         }
-        PreparedStatement statement = connection.prepareStatement(command);
-        statement.execute();
 
     }
 
@@ -57,7 +60,10 @@ public class UserRepository {
 
 
         String command = String.format("SELECT * FROM users WHERE email = '%s' AND user_password = MD5('%s')", email, password);
-        PreparedStatement statement = connection.prepareStatement(command);
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM users " +
+                "WHERE email = ? AND user_password = MD5(?)");
+        statement.setString(1, email);
+        statement.setString(2, password);
         ResultSet resultSet = statement.executeQuery();
 
         if (resultSet.next()) {
