@@ -15,8 +15,7 @@ public class TaskService {
 
         ArrayList<Task> allTasks = TaskRepository.getTasks(projectId);
 
-        PrioritySorterService prioritySorterService = new PrioritySorterService();
-        prioritySorterService.sortTasks(allTasks);
+        PrioritySorterService.sortTasks(allTasks);
 
         return allTasks;
 

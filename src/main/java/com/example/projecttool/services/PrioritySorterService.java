@@ -6,12 +6,7 @@ import java.util.ArrayList;
 
 public class PrioritySorterService {
 
-  public ArrayList<Task> sortTasks(ArrayList<Task> taskList){
-
-      for (Task task : taskList) {
-          System.out.println(task.getPriority());
-      }
-
+  public static void sortTasks(ArrayList<Task> taskList){
 
       taskList.sort((m1, m2) -> {
         String p1 = m1.getPriority();
@@ -26,14 +21,6 @@ public class PrioritySorterService {
             return -1;
         return 1;
       });
-      for (Task task : taskList) {
-          System.out.println("edited:" + task.getPriority() + " Name " + task.getName());
-      }
 
-    return taskList;
   }
-
-
-
-
 }
