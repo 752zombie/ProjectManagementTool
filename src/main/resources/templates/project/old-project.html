@@ -28,7 +28,13 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 
-<a href="/share-project" class="pnav" methods="get"> Share project </a> <a href="#"></a><br>
+<div>
+<a id="shareLink" href="/share-project" class="pnav" methods="get"> Share </a> <a href="#"></a><br>
+    <div class="popup" id="popup" style="display: none; padding: 15px; font-family:Arial,serif; color: darkblue">Invite others to collaborate</div>
+</div>
+
+
+
 <h1 th:text="${project.name}"></h1>
 
 <div class="table">
@@ -96,6 +102,16 @@
     <p> Sorted by priority </p>
 </div>
 
+
+<script>
+    let e = document.getElementById('shareLink');
+    e.onmouseover = function() {
+        document.getElementById('popup').style.display = 'block';
+    }
+    e.onmouseout = function() {
+        document.getElementById('popup').style.display = 'none';
+    }
+</script>
 
 </body>
 </html>
