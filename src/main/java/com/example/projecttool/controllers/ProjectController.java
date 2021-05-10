@@ -57,9 +57,9 @@ public class ProjectController {
         return "project/all-projects";
     }
 
-    //Why do we need to both add the project to the session and the model? One of them should be enough.
+
     @PostMapping("choose-project-to-edit")
-    public String editProject(@RequestParam("id") Integer projectId, Model model, HttpSession session) {
+    public String editProject(@RequestParam("id") Integer projectId, HttpSession session) {
 
         try {
             User user = (User) session.getAttribute("user");
@@ -67,16 +67,10 @@ public class ProjectController {
             Project project = projectService.getProject(projectId);
             session.setAttribute("project", project);
 
-
-            // Add project name to View
-            model.addAttribute("project", project);
-
             // Add task list to View
             ArrayList<Task> projectTasks = taskService.getTasks(projectId);
+            session.setAttribute("projectTasks", projectTasks);
 
-
-
-            model.addAttribute("projectTasks", projectTasks);
 
 
          if (projectService.isReadOnly(projectId, user.getId())) {
