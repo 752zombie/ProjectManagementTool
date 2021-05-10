@@ -82,9 +82,9 @@ public class TaskRepository {
     }
 
 
-    public static HashMap<Integer, Subtask> getRelatedSubtasks(int taskId) {
+    public static ArrayList<Subtask> getRelatedSubtasks(int taskId) {
         Connection connection = DatabaseConnection.getConnection();
-        HashMap<Integer, Subtask> subtasks = new HashMap<>();
+        ArrayList<Subtask> subtasks = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM subtasks WHERE task = ? ORDER BY id");
             statement.setInt(1, taskId);
@@ -100,7 +100,7 @@ public class TaskRepository {
 
                 Subtask subtask = new Subtask(id, name, description, startTime, endTime,
                         SubtaskRepository.getAssignedEmployees(id), SubtaskRepository.getRequiredSkills(id));
-                subtasks.put(id, subtask);
+                subtasks.add(subtask);
             }
 
         } catch (SQLException e) {
@@ -119,6 +119,7 @@ public class TaskRepository {
         statement.setInt(1, taskId);
         statement.execute();
     }
+
 
 }
 

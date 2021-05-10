@@ -36,7 +36,7 @@ public class Task {
         return estimatedHoursPrDay;
     }
 
-    public HashMap<Integer, Subtask> getSubtasks() {
+    public ArrayList<Subtask> getSubtasks() {
         return TaskRepository.getRelatedSubtasks(id);
     }
 

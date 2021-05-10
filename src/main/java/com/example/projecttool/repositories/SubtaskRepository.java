@@ -176,5 +176,22 @@ public class SubtaskRepository {
         return skills;
     }
 
+    public static void addSubtaskToTask(int taskId, int subtaskId) throws SQLException{
+        Connection connection = DatabaseConnection.getConnection();
+
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO task_subtask(task_id, subtask_id) VALUES (?, ?)");
+        statement.setInt(1, taskId);
+        statement.setInt(2, subtaskId);
+        statement.execute();
+    }
+
+    public static void deleteSubtask(int subtaskId) throws SQLException{
+        Connection connection = DatabaseConnection.getConnection();
+
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM subtasks WHERE id = ?");
+        statement.setInt(1, subtaskId);
+        statement.execute();
+    }
+
 
 }

@@ -4,12 +4,8 @@ import com.example.projecttool.models.User;
 import com.example.projecttool.repositories.UserRepository;
 
 import java.sql.SQLException;
-import java.util.NoSuchElementException;
 
 public class LoginService {
-
-
-    private Object NoSuchElementException;
 
     public User attemptLogin(String name, String eMail, String password) throws SQLException {
 

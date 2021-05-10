@@ -112,6 +112,10 @@ public class ProjectController {
                 taskService.deleteTask(taskId);
 
             }
+
+            else if (action.equals("View subtasks")) {
+                return "project/edit-task";
+            }
             // Directs edited tasks to View
             ArrayList<Task> projectTasks = taskService.getTasks(project.getProjectId());
 
