@@ -36,7 +36,7 @@
 
 
 
-<h1 th:text="${project.name}"></h1>
+<h1 th:text="${session.project.name}"></h1>
 
 <div class="table">
     <div class="header-group">
@@ -52,7 +52,7 @@
     </div>
 
     <div class="row-group">
-        <form method="post" action="/edit-task" class="tr" th:each="task : ${projectTasks}">
+        <form method="post" action="/edit-task" class="tr" th:each="task : ${session.projectTasks}">
             <input type="hidden" th:value="${task.id}" name="id">
 
             <span class="td"><input type="text" id="task-name" name="name" th:value="${task.name}"></span>
