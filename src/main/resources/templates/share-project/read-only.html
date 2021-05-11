@@ -6,28 +6,41 @@
 </head>
 <body>
 
-<h3 th:text="${project.name}"></h3>
-<h4> Read only </h4>
-<table border="1" style="width:300px">
-  <tr>
-    <th></th>
-    <th>Priority</th>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Start time</th>
-    <th>End time</th>
-  </tr>
+<div th:replace="fragments/header :: header"></div>
 
-  <tr  th:each="task : ${projectTasks}">
-    <td>
+ <h1 th:text="${session.project.name}"></h1>
+
+<table border="1" style="width:300px">
+
+  <div class="table">
+
+      <tr>
+      <td class="td">Priority</td>
+      <td class="td">Task </td>
+      <td class="td">Notes</td>
+      <td class="td">Estimated hours per day </td>
+      <td class="td">Estimated hours total</td>
+      <td class="td">Start date</td>
+      <td class="td">Due date</td>
+      <td class="td"> </td>
+      </tr>
+
+
+  <tr  th:each="task : ${session.projectTasks}">
     <td th:text="${task.priority}"></td>
     <td th:text="${task.name}"></td>
     <td th:text="${task.description}"></td>
+    <td th:text="${task.estimatedHoursPrDay}"></td>
+    <td th:text="${task.estimatedHoursTotal}"></td>
     <td th:text="${task.start_time}"></td>
     <td th:text="${task.end_time}"></td>
   </tr>
 
 </table>
+
+</div>
+
+<h4> Read only </h4>
 
 
 </body>

@@ -31,10 +31,14 @@ ShareProjectService shareProjectService = new ShareProjectService();
     public String shareProject(@RequestParam("receiverMail") String receiverMail, @RequestParam("edit") String editOrRead, HttpSession session) {
         try {
             Project project = (Project) session.getAttribute("project");
+            User user = (User) session.getAttribute("user");
 
+            // Checks if user is about to make himself read-only
+            boolean shareSecurity = shareProjectService.shareProject(user.getEmail(), receiverMail, editOrRead, project.getProjectId());
 
-            shareProjectService.shareProject(receiverMail, editOrRead, project.getProjectId());
-
+            if (shareSecurity){
+                return "share-project/danger-read-only";
+            }
 
         } catch (SQLException s) {
 
