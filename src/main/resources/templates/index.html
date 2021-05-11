@@ -1,16 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Project Management Tool| Frontpage</title>
+    <link rel="stylesheet" href="frontpage css/frontpagestyle.css">
+    <link rel="stylesheet" href="generel css/headerstyle.css">
+    <link rel="stylesheet" href="generel css/footerstyle.css">
+
 </head>
 <body>
-
-<!--header.html  that's here  -->
+<!--header.html  -->
 <div th:replace="fragments/header :: header"></div>
 
+<div class="intro-container">
+    <div class="wrapper">
 
-    <h1> Frontpage </h1>
+        <h2>The easiest way to manage team projects and tasks </h2>
+        <p>  Project Management Tool gives teams everything they need to stay in sync,
+            hit deadlines, and reach their goals..
+        </p>
+        <p>Start planning now!</p>
 
+        <!-- redirect to sign up page -->
+        <a href="signUp" class="signUp-fp" method="get"></a>
+    </div>
+</div>
+</div>
+
+
+</div>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

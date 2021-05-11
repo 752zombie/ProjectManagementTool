@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Sign up</title>
+    <link rel="stylesheet" href="frontpage css/frontpagestyle.css">
+    <link rel="stylesheet" href="generel css/headerstyle.css">
+    <link rel="stylesheet" href="generel css/footerstyle.css">
 
 </head>
 <body>
@@ -10,24 +13,23 @@
 <div th:replace="fragments/header :: header"></div>
 <div class="content-area">
     <h1> Sign up </h1>
-<form action="sign-up" method="post">
-    <div>
-        <input type="name" class="form-control" name="name" id="name" placeholder="Name" autofocus required>
-    </div>
+    <form action="/sign-up" method="post">
 
-    <div>
-        <input type="email" class="form-control" name="email" id="email" placeholder="Email address" required>
-    </div>
+        <div>
+              <input type="name" class="form-control" name="name" id="name" placeholder="Name" autofocus required>
+        </div>
 
-    <div>
-        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
-    </div>
+         <div>
+           <input type="email" class="form-control" name="email" id="email" placeholder="Email address" required>
+         </div>
+
+         <div>
+            <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+         </div>
 
 
         <button class="signup" type="submit">Create account</button>
-
-
-
-</form>
+    </form>
+</div>
 </body>
 </html>
