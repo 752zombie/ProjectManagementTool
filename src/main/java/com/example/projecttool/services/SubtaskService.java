@@ -19,4 +19,8 @@ public class SubtaskService {
     public static void updateSubtask(int subtaskId, String name, String description, String startDate, String endDate) throws SQLException{
         SubtaskRepository.updateSubtask(subtaskId, name, description, startDate, endDate);
     }
+
+    public static void deleteSubtask(int subtaskId) throws SQLException {
+        SubtaskRepository.deleteSubtask(subtaskId);
+    }
 }

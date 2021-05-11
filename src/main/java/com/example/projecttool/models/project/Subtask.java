@@ -67,4 +67,12 @@ public class Subtask {
     public String getName() {
         return name;
     }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
 }
