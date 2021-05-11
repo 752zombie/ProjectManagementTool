@@ -4,7 +4,6 @@ import com.example.projecttool.models.Employee;
 import com.example.projecttool.models.Skill;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Subtask {

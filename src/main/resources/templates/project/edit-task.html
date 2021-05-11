@@ -3,20 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit task</title>
+    <style>
+        DIV.table
+        {
+            display:table;
+        }
+        FORM.tr, DIV.tr
+        {
+            display:table-row;
+        }
+        SPAN.td
+        {
+            display:table-cell;
+        }
+        DIV.row-group {
+            display: table-row-group;
+        }
+
+        DIV.header-group {
+            display: table-header-group;
+        }
+    </style>
 </head>
 <body>
     <ul th:each="subtask : ${session.subtasks}">
         <li>
-            <h1 th:text="${subtask.name}"></h1>
+            <div class="table">
+                <div class="header-group">
+                    <span class="td">Subtask name</span>
+                    <span class="td">Notes</span>
+                    <span class="td">Start date</span>
+                    <span class="td">Due date</span>
+                    <span class="td"> </span>
+                </div>
+
+                <div class="row-group">
+                    <form method="post" action="/edit-task" class="tr">
+                        <input type="hidden" name="task-id" th:value="${session.taskId}">
+
+
+                        <span class="td"><input type="text" id="subtask-name" name="subtask-name"></span>
+                        <span class="td"><input type="text" id="subtask-description" name="subtask-description"></span>
+                        <span class="td"><input type="date" id="start-time" name="start-time"></span>
+                        <span class="td"><input type="date" id="end-time" name="end-time"></span>
+
+                        <span class="td">
+                            <input type="submit" value="Save" name="action" formaction="/save-subtask">
+                            <input type="submit" value="Delete" name="action" formaction="/delete-subtask">
+                        </span>
+                    </form>
+
+
+                    <form action="/add-row-to-tasks" method="post" class="tr">
+
+            <span class="td">
+                <select name="priority" required>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </span>
+
+                        <span class="td"><input type="text" name="name"></span>
+                        <span class="td"><input type="text" name="description"></span>
+                        <span class="td"><input type="number" name="estimated-hours-total"></span>
+                        <span class="td"><input type="number" name="estimated-hours-day"></span>
+                        <span class="td"><input type="number" name="work-days-until-finish" value="" readonly></span>
+                        <span class="td"><input type="date" name="start_time"></span>
+                        <span class="td"><input type="date" name="end_time"></span>
+
+
+                        <span class="td">
+                <input type="submit" value="Save" name="action" formaction="add-row-to-tasks">
+            </span>
+                    </form>
+                </div>
+
+                <p> Sorted by priority </p>
+            </div>
         </li>
-        
     </ul>
+
     <form action="/add-subtask-to-task" method="post">
-        <input type="text" id="subtask-name" name="subtask-name">
-        <input type="text" id="subtask-description" name="subtask-description">
-        <input type="date" id="start-time" name="start-time">
-        <input type="date" id="end-time" name="end-time">
-        <input type="hidden" name="task-id" th:value="${session.taskId}">
+
+
+
+
         <button type="submit">Save</button>
     </form>
 

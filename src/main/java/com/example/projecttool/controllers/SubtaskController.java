@@ -49,4 +49,21 @@ public class SubtaskController {
 
         return "redirect:/view-subtasks";
     }
+
+    @PostMapping("save-subtask")
+    public String saveSubtask(@RequestParam("subtask-name") String name, @RequestParam("subtask-description") String description,
+                              @RequestParam("start-time") String startTime, @RequestParam("end-time") String endTime,
+                              @RequestParam("subtask-id") Integer subtaskId, HttpSession session) {
+
+        try {
+            SubtaskService.updateSubtask(subtaskId, name, description, startTime, endTime);
+        }
+
+        catch (SQLException e) {
+            return "project/failed-getting-tasks";
+        }
+
+        return "redirect:view-subtasks";
+
+    }
 }
