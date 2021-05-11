@@ -5,6 +5,20 @@
     <title>Edit task</title>
 </head>
 <body>
+    <ul th:each="subtask : ${session.subtasks}">
+        <li>
+            <h1 th:text="${subtask.name}"></h1>
+        </li>
+        
+    </ul>
+    <form action="/add-subtask-to-task" method="post">
+        <input type="text" id="subtask-name" name="subtask-name">
+        <input type="text" id="subtask-description" name="subtask-description">
+        <input type="date" id="start-time" name="start-time">
+        <input type="date" id="end-time" name="end-time">
+        <input type="hidden" name="task-id" th:value="${session.taskId}">
+        <button type="submit">Save</button>
+    </form>
 
 </body>
 </html>

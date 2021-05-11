@@ -176,14 +176,19 @@ public class SubtaskRepository {
         return skills;
     }
 
-    public static void addSubtaskToTask(int taskId, int subtaskId) throws SQLException{
+    public static void addNewSubtaskToTask(int taskId, String subtaskName, String subtaskDescription, String startTime, String endTime) throws SQLException{
         Connection connection = DatabaseConnection.getConnection();
 
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO task_subtask(task_id, subtask_id) VALUES (?, ?)");
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO subtasks(task, subtask_name, subtask_description, start_time, end_time) VALUES (?, ?, ?, ?, ?)");
         statement.setInt(1, taskId);
-        statement.setInt(2, subtaskId);
+        statement.setString(2, subtaskName);
+        statement.setString(3, subtaskDescription);
+        statement.setDate(4, java.sql.Date.valueOf(startTime));
+        statement.setDate(5, java.sql.Date.valueOf(endTime));
+
         statement.execute();
     }
+
 
     public static void deleteSubtask(int subtaskId) throws SQLException{
         Connection connection = DatabaseConnection.getConnection();

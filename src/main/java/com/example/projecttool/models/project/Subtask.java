@@ -52,4 +52,20 @@ public class Subtask {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public List<Employee> getAssignedEmployees() {
+        return assignedEmployees;
+    }
+
+    public List<Skill> getRequiredSkills() {
+        return requiredSkills;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

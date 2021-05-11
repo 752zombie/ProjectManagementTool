@@ -1,12 +1,18 @@
 package com.example.projecttool.services;
 
 import com.example.projecttool.models.project.Subtask;
+import com.example.projecttool.repositories.SubtaskRepository;
 import com.example.projecttool.repositories.TaskRepository;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class SubtaskService {
-    public ArrayList<Subtask> getSubtasks(int taskId) {
+    public static ArrayList<Subtask> getSubtasks(int taskId) {
         return TaskRepository.getRelatedSubtasks(taskId);
+    }
+
+    public static void addNewSubtaskToTask(int taskId, String subtaskName, String subtaskDescription, String startTime, String endTime) throws SQLException {
+        SubtaskRepository.addNewSubtaskToTask(taskId, subtaskName, subtaskDescription, startTime, endTime);
     }
 }
