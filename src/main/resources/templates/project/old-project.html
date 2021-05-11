@@ -40,6 +40,7 @@
 
 <div class="table">
     <div class="header-group">
+        <span class="td">Priority</span>
         <span class="td">Task name</span>
         <span class="td">Notes</span>
         <span class="td">Estimated hours per day</span>
@@ -47,21 +48,13 @@
         <span class="td">Days until finished</span>
         <span class="td">Start date</span>
         <span class="td">Due date</span>
-        <span class="td">Priority</span>
+
         <span class="td"> </span>
     </div>
 
     <div class="row-group">
         <form method="post" action="/edit-task" class="tr" th:each="task : ${session.projectTasks}">
             <input type="hidden" th:value="${task.id}" name="id">
-
-            <span class="td"><input type="text" id="task-name" name="name" th:value="${task.name}"></span>
-            <span class="td"><input type="text" id="task-description" name="description" th:value="${task.description}"></span>
-            <span class="td"><input type="number" id="hours-day" name="estimated-hours-day" th:value="${task.estimatedHoursPrDay}"></span>
-            <span class="td"><input type="number" id="hours-total"name="estimated-hours-total" th:value="${task.estimatedHoursTotal}"></span>
-            <span class="td"><input type="number" id="work-days-until-finish" name="work-days-until-finish" value=""></span>
-            <span class="td"><input type="date" id="task-start" name="start_time" th:value="${task.start_time}"></span>
-            <span class="td"><input type="date" id="task-end" name="end_time" th:value="${task.end_time}"></span>
 
             <span class="td">
                 <select id="task-priority" name="priority" required>
@@ -71,6 +64,14 @@
                 </select>
             </span>
 
+            <span class="td"><input type="text" id="task-name" name="name" th:value="${task.name}"></span>
+            <span class="td"><input type="text" id="task-description" name="description" th:value="${task.description}"></span>
+            <span class="td"><input type="number" id="hours-day" name="estimated-hours-day" th:value="${task.estimatedHoursPrDay}"></span>
+            <span class="td"><input type="number" id="hours-total" name="estimated-hours-total" th:value="${task.estimatedHoursTotal}"></span>
+            <span class="td"><input type="number" id="work-days-until-finish" name="work-days-until-finish" value="" readonly></span>
+            <span class="td"><input type="date" id="task-start" name="start_time" th:value="${task.start_time}"></span>
+            <span class="td"><input type="date" id="task-end" name="end_time" th:value="${task.end_time}"></span>
+
             <span class="td">
                 <input type="submit" value="Save" name="action">
                 <input type="submit" value="Delete" name="action">
@@ -78,14 +79,8 @@
             </span>
         </form>
 
+
         <form action="/add-row-to-tasks" method="post" class="tr">
-            <span class="td"><input type="text" name="name"></span>
-            <span class="td"><input type="text" name="description"></span>
-            <span class="td"><input type="number" name="estimated-hours-total"></span>
-            <span class="td"><input type="number" name="estimated-hours-day"></span>
-            <span class="td"><input type="number" name="work-days-until-finish" value=""></span>
-            <span class="td"><input type="date" name="start_time"></span>
-            <span class="td"><input type="date" name="end_time"></span>
 
             <span class="td">
                 <select name="priority" required>
@@ -94,6 +89,15 @@
                     <option value="low">Low</option>
                 </select>
             </span>
+
+            <span class="td"><input type="text" name="name"></span>
+            <span class="td"><input type="text" name="description"></span>
+            <span class="td"><input type="number" name="estimated-hours-total"></span>
+            <span class="td"><input type="number" name="estimated-hours-day"></span>
+            <span class="td"><input type="number" name="work-days-until-finish" value="" readonly></span>
+            <span class="td"><input type="date" name="start_time"></span>
+            <span class="td"><input type="date" name="end_time"></span>
+
 
             <span class="td">
                 <input type="submit" value="Save" name="action">
@@ -113,6 +117,7 @@
     e.onmouseout = function() {
         document.getElementById('popup').style.display = 'none';
     }
+
 </script>
 
 </body>
