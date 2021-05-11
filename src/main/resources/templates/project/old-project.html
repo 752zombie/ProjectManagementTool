@@ -63,6 +63,7 @@
                 </select>
             </span>
 
+
             <span class="td"><input type="text" id="task-name" name="name" th:value="${task.name}"></span>
             <span class="td"><input type="text" id="task-description" name="description" th:value="${task.description}"></span>
             <span class="td"><input type="number" id="hours-day" name="estimated-hours-day" th:value="${task.estimatedHoursPrDay}"></span>
@@ -90,7 +91,7 @@
             </span>
 
             <span class="td"><input type="text" name="name" required></span>
-            <span class="td"><input type="text" name="description" required></span>
+            <span class="td"><input type="text" id="new-task-description" name="description" required></span>
             <span class="td"><input type="number" name="estimated-hours-total" required></span>
             <span class="td"><input type="number" name="estimated-hours-day" required></span>
             <span class="td"><input type="number" name="work-days-until-finish" value="" readonly></span>

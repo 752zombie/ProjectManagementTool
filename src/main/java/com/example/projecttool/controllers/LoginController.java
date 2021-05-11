@@ -52,6 +52,8 @@ public class LoginController {
     @PostMapping("sign-in")
     public String signIn(@RequestParam("email") String email, @RequestParam("password") String password, HttpSession session) {
 
+
+
         try {
             User user = loginService.attemptLogin(email, password);
             session.setAttribute("user", user);

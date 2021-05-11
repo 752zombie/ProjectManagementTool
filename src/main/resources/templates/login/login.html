@@ -13,11 +13,10 @@
 <!--header.html -->
 <div th:replace="fragments/header :: header"></div>
 
-    <form action="sign-in" method="post">
+<div>
+    <form action="/sign-in" method="post">
 
-        <div img src="image/loginIcon.png" alt="PmtLogin" class="loginform">
-
-        </div>
+        <div img src="image/loginIcon.png" alt="PmtLogin" class="loginform"> </div>
 
         <div class="container">
             <label for="email" ><b>Username</b></label>
@@ -29,14 +28,17 @@
             <label>
                  <input type="checkbox" checked="checked" name="remember"> Remember me
             </label>
-        </div>
+
+    </div>
+    </form>
+ </div>
 
         <div class="container" style="background-color:#f1f1f1">
             <button type="button" class="cancelbtn">Cancel</button>
             <span class="psw">Forgot <a href="#">password?</a></span>
         </div>
         <a href="sign-up" class="sign-up" methods="get">Not a user yet? Click here to sign up</a>
-    </form>
+
 
 <!--footer.html  -->
 <div th:replace="fragments/footer :: footer"></div>

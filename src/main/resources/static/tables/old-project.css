@@ -17,3 +17,17 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 
 }
+
+#task-description, #new-task-description {
+    width:170px;
+    transition: 0.5s;
+    display: inline-block;
+}
+
+#task-description:focus, #new-task-description:focus {
+    position: absolute;
+    width:170px;
+    height: 60px;
+    transition: 0.5s;
+    display: inline-block;
+}
