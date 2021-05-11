@@ -48,7 +48,6 @@
         <span class="td">Days until finished</span>
         <span class="td">Start date</span>
         <span class="td">Due date</span>
-
         <span class="td"> </span>
     </div>
 
@@ -73,8 +72,8 @@
             <span class="td"><input type="date" id="task-end" name="end_time" th:value="${task.end_time}"></span>
 
             <span class="td">
-                <input type="submit" value="Save" name="action">
-                <input type="submit" value="Delete" name="action">
+                <input type="submit" value="Save" name="action" formaction="/edit-task">
+                <input type="submit" value="Delete" name="action" formaction="/edit-task">
                 <input type="submit" value="View subtasks" name="action" formaction="/view-subtasks">
             </span>
         </form>
@@ -100,7 +99,7 @@
 
 
             <span class="td">
-                <input type="submit" value="Save" name="action">
+                <input type="submit" value="Save" name="action" formaction="add-row-to-tasks">
             </span>
         </form>
     </div>

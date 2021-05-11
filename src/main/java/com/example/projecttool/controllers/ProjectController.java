@@ -33,15 +33,15 @@ public class ProjectController {
 
     @PostMapping("start-new-project")
     public String nameYourProject(@RequestParam("project_name") String projectName, @RequestParam("project_start") String projectStart,
-                                  @RequestParam("project_end") String projectEnd, HttpSession session, Model model) {
+                                  @RequestParam("project_end") String projectEnd, HttpSession session) {
 
         User user = (User) session.getAttribute("user");
 
         // Creates a project
         Project project = projectService.nameYourProject(user.getId(), projectName, projectStart, projectEnd);
 
-        session.setAttribute("project", project);
-        model.addAttribute("project", project);
+       session.setAttribute("project", project);
+
 
         return "project/old-project";
     }
@@ -88,9 +88,12 @@ public class ProjectController {
 
 
     @PostMapping("/edit-task")
-    public String editTask(@RequestParam("id") int taskId, @RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("priority") String priority,
-                           @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, @RequestParam("estimated-hours-total") int estimatedHoursTotal, @RequestParam("estimated-hours-day") int estimatedHoursDay, HttpSession session, Model model,
+    public String editTask(@RequestParam("id") int taskId, @RequestParam("name") String name, @RequestParam("description") String description,
+                           @RequestParam("priority") String priority, @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time,
+                           @RequestParam("estimated-hours-total") int estimatedHoursTotal,
+                           @RequestParam("estimated-hours-day") int estimatedHoursDay, HttpSession session,
                            @RequestParam("action") String action) {
+
 
         try {
             // Needs current project to get Tasks
@@ -107,11 +110,15 @@ public class ProjectController {
 
             }
 
-            // Directs edited tasks to View
+            // Sorts and directs edited tasks to View
             ArrayList<Task> projectTasks = taskService.getTasks(project.getProjectId());
 
-            model.addAttribute("project", project);
-            model.addAttribute("projectTasks", projectTasks);
+            for (Task task : projectTasks)
+                System.out.println(task.getName() + " " + task.getPriority());
+
+            session.setAttribute("project", project);
+            session.setAttribute("projectTasks", projectTasks);
+
 
         } catch (SQLException s) {
             System.out.println("project editing failed from DB");
@@ -123,7 +130,9 @@ public class ProjectController {
 
     @PostMapping("add-row-to-tasks")
     public String addRowToTask(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("priority") String priority,
-                               @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time, @RequestParam("estimated-hours-total") int estimatedHoursTotal, @RequestParam("estimated-hours-day") int estimatedHoursDay, HttpSession session, Model model) {
+                               @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time,
+                               @RequestParam("estimated-hours-total") int estimatedHoursTotal, @RequestParam("estimated-hours-day") int estimatedHoursDay,
+                               HttpSession session) {
 
         try {
 
@@ -135,8 +144,8 @@ public class ProjectController {
 
             // Directs tasks to View
             ArrayList<Task> projectTasks = taskService.getTasks(project.getProjectId());
-            model.addAttribute("projectTasks", projectTasks);
-            model.addAttribute("project", project);
+            session.setAttribute("projectTasks", projectTasks);
+            session.setAttribute("project", project);
 
 
             return "project/old-project";
