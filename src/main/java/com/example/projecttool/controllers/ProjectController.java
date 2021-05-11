@@ -59,25 +59,26 @@ public class ProjectController {
 
 
     @PostMapping("choose-project-to-edit")
-    public String editProject(@RequestParam("id") Integer projectId, HttpSession session) {
+    public String editProject(@RequestParam("id") Integer projectId, HttpSession session, Model model) {
 
         try {
             User user = (User) session.getAttribute("user");
             // Add current project to session
             Project project = projectService.getProject(projectId);
-            session.setAttribute("project", project);
 
             // Add task list to View
             ArrayList<Task> projectTasks = taskService.getTasks(projectId);
             session.setAttribute("projectTasks", projectTasks);
+            session.setAttribute("project", project);
+
 
 
 
          if (projectService.isReadOnly(projectId, user.getId())) {
+
              return "share-project/read-only";
 
-         }
-         else return "project/old-project";
+         } else {return "project/old-project";}
 
         } catch (SQLException s) {
             System.out.println("something went wrong editing the project");

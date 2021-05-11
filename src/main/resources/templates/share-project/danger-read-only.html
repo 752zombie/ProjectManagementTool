@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+
+
+<form action="/share-project-with" method="post">
+  <label for="receiverMail"> Who do you want to share your project with?</label>
+  <input type="text" name="receiverMail" id="receiverMail" placeholder="Mail of user"><br>
+  <input type="radio" id="readonly" name="edit" value="read-only">
+  <label for="view-and-edit">Read only</label>
+  <input type="radio" id="view-and-edit" name="edit" value="read-and-edit">
+  <label for="view-and-edit">Read and edit</label><br>
+  <button class="share" type="submit"> Share </button>
+
+</form>
+<h3> You cant make yourself read only.</h3>
+
+</body>
+</html>
