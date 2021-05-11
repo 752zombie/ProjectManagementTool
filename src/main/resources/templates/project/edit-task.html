@@ -55,6 +55,16 @@
                     </form>
                 </div>
             </div>
+
+
+
+        </li>
+        <li>
+            <ul>
+                <li th:each="emp : ${subtask.getAssignedEmployees()}">
+                    <span th:text="emp.name"></span>
+                </li>
+            </ul>
         </li>
     </ul>
 

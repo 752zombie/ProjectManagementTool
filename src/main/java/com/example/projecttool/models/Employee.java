@@ -21,4 +21,12 @@ public class Employee {
     public int getId() {
         return id;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<Skill> getSkills() {
+        return skills;
+    }
 }
