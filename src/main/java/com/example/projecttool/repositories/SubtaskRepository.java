@@ -198,5 +198,19 @@ public class SubtaskRepository {
         statement.execute();
     }
 
+    public static void updateSubtask(int subtaskId, String name, String description, String startDate, String endDate) throws SQLException {
+        Connection connection = DatabaseConnection.getConnection();
+
+        PreparedStatement statement = connection.prepareStatement("UPDATE subtasks SET subtask_name = ?, subtask_description = ?, " +
+                "start_time = ?, end_time = ? WHERE id = ?");
+
+        statement.setString(1, name);
+        statement.setString(2, description);
+        statement.setDate(3, java.sql.Date.valueOf(startDate));
+        statement.setDate(4, java.sql.Date.valueOf(endDate));
+        statement.setInt(5, subtaskId);
+        statement.execute();
+    }
+
 
 }
