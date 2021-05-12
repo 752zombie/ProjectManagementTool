@@ -1,6 +1,9 @@
 package com.example.projecttool.controllers;
 
+import com.example.projecttool.models.Employee;
+import com.example.projecttool.models.User;
 import com.example.projecttool.models.project.Subtask;
+import com.example.projecttool.repositories.SubtaskRepository;
 import com.example.projecttool.services.SubtaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +29,21 @@ public class SubtaskController {
     }
 
     @GetMapping("/view-subtasks")
-    public String viewSubtask2() {
+    public String viewSubtask2(HttpSession session)
+    {
+        try {
+            User user = (User) session.getAttribute("user");
+            ArrayList<Employee> employees = SubtaskRepository.getAllEmployees(user.getId());
+            session.setAttribute("allEmployees", employees);
+            Integer taskId = (Integer) session.getAttribute("taskId");
+            ArrayList<Subtask> subtasks = SubtaskService.getSubtasks(taskId);
+            session.setAttribute("subtasks", subtasks);
+        }
+
+        catch (SQLException e) {
+            return "project/failed-getting-tasks";
+        }
+
         return "project/edit-task";
     }
 
@@ -103,5 +120,18 @@ public class SubtaskController {
         }
 
         return "redirect:view-subtasks";
+    }
+
+    @PostMapping("add-employee-to-subtask")
+    public String addEmployeeToSubtask(@RequestParam("employee-id") Integer employeeId, @RequestParam("subtask-id") Integer subtaskId) {
+        try {
+            SubtaskRepository.addEmployeeToSubtask(employeeId, subtaskId);
+        }
+
+        catch (SQLException e) {
+            return "project/failed-getting-tasks";
+        }
+
+        return  "redirect:/view-subtasks";
     }
 }

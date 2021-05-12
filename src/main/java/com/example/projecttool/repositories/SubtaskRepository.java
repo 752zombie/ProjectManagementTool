@@ -12,18 +12,13 @@ import java.util.ArrayList;
 
 public class SubtaskRepository {
 
-    public static void addEmployeeToSubtask(int subtaskId, int employeeId) {
+    public static void addEmployeeToSubtask(int subtaskId, int employeeId) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
 
-        try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO emp_subtask(emp_id, subtask_id) values (?, ?)");
-            statement.setInt(1, employeeId);
-            statement.setInt(2, subtaskId);
-        }
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO emp_subtask(emp_id, subtask_id) values (?, ?)");
+        statement.setInt(1, employeeId);
+        statement.setInt(2, subtaskId);
 
-        catch (SQLException e) {
-            System.out.println("Error adding employee to subtask");
-        }
     }
 
     public static void removeEmployeeFromSubtask(int subtaskId, int employeeId) {
@@ -131,7 +126,7 @@ public class SubtaskRepository {
         ArrayList<Skill> skills = new ArrayList<>();
 
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM emp_skills " +
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM emp_skill " +
                     "INNER JOIN skills " +
                     "ON emp_skill.skill_id = skills.skill_id " +
                     "WHERE emp_id = ?");
@@ -210,6 +205,24 @@ public class SubtaskRepository {
         statement.setDate(4, java.sql.Date.valueOf(endDate));
         statement.setInt(5, subtaskId);
         statement.execute();
+    }
+
+    public static ArrayList<Employee> getAllEmployees(int userId) throws SQLException{
+        Connection connection = DatabaseConnection.getConnection();
+        ArrayList<Employee> employees = new ArrayList<>();
+
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM employees WHERE user_id = ?");
+        statement.setInt(1, userId);
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            int empId = resultSet.getInt("emp_id");
+            String empName = resultSet.getString("emp_name");
+            ArrayList<Skill> skills = getEmployeeSkills(empId);
+            employees.add(new Employee(empId, empName, skills));
+        }
+
+        return employees;
     }
 
 

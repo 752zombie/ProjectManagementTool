@@ -59,8 +59,17 @@
                 </div>
             </div>
 
+            <form action="/add-employee-to-subtask" method="post">
+                <input type="hidden" name="subtask-id" th:value="${subtask.id}">
+                <label for="employee-adder">Choose employee to add</label>
+                <select name="employee-id" id="employee-adder">
+                    <option th:each="emp : ${session.allEmployees}" th:value="${emp.id}" th:text="${emp.name}"></option>
+                </select>
+                <button type="submit">Add</button>
+            </form>
 
 
+            
         </li>
         <li>
             <ul>
@@ -68,12 +77,16 @@
                     <span th:text="emp.name"></span>
                 </li>
             </ul>
+
         </li>
     </ul>
 
+
+
+
     <ul>
         <li>
-            <h1>New subtask:</h1>
+            <h3 style="text-align: left">New subtask:</h3>
             <div class="table">
                 <div class="header-group">
                     <span class="td">Subtask name</span>
@@ -100,14 +113,6 @@
             </div>
         </li>
     </ul>
-
-    <form action="/add-subtask-to-task" method="post">
-
-
-
-
-        <button type="submit">Save</button>
-    </form>
 
 </body>
 </html>
