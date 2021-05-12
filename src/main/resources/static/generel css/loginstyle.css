@@ -79,4 +79,29 @@ input[type=submit]:hover {
     padding-bottom: 0.4vw;
 }
 
+.content-area h5 {
+    color: #ad0c1a;
+    letter-spacing: 0px;
+    font-size: 1.5vw;
+    padding-bottom: 10px;
+}
+
+.signup{
+    background-color: #5b83ad;
+    color: white;
+    width: 30%;
+    border: 1px solid #5b83ad;
+    border-radius: 10px;
+    padding: 5px 15px 5px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.signup:hover{
+    color: #2159e8;
+}
+
 
