@@ -7,10 +7,31 @@
 
 }
 
-.table {
 
+DIV.table
+{
+    display:table;
+
+}
+FORM.tr, DIV.tr
+{
+    display:table-row;
+}
+SPAN.td
+{
+    display:table-cell;
+}
+DIV.row-group {
+    display: table-row-group;
+}
+
+DIV.header-group {
+    display: table-header-group;
+}
+
+.table {
+    margin-left: 100px;
     border-collapse: collapse;
-    margin: 25px 0;
     font-size: 0.9em;
     font-family: sans-serif;
     min-width: 400px;
@@ -25,10 +46,25 @@
 }
 
 #task-description:focus, #new-task-description:focus {
-    position: absolute;
+
     width:170px;
     height: 60px;
     transition: 0.5s;
 
 }
+
+.project-name-top {
+
+    padding-bottom: 150px;
+
+}
+
+textarea  {
+    transform: translateY(6px);
+    Z-index: 1000;
+}
+
+
+
+
 
