@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Login page</title>
-    <link rel="stylesheet" href="frontpage css/frontpagestyle.css">
     <link rel="stylesheet" href="generel css/headerstyle.css">
     <link rel="stylesheet" href="generel css/footerstyle.css">
     <link rel="stylesheet" href="generel css/loginstyle.css">
@@ -13,33 +12,29 @@
 <!--header.html -->
 <div th:replace="fragments/header :: header"></div>
 
-<div>
+<div class="content-area">
     <form action="/sign-in" method="post">
 
-        <div img src="image/loginIcon.png" alt="PmtLogin" class="loginform"> </div>
-
-        <div class="container">
-            <label for="email" ><b>Username</b></label>
-            <input type="email" placeholder="Enter Email" id="email" name="email" required>
-            <label for="password"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" id="password" name="password" required>
-
-            <button type="submit">Login</button>
-            <label>
-                 <input type="checkbox" checked="checked" name="remember"> Remember me
-            </label>
-
-    </div>
-    </form>
- </div>
-
-        <div class="container" style="background-color:#f1f1f1">
-            <button type="button" class="cancelbtn">Cancel</button>
-            <span class="psw">Forgot <a href="#">password?</a></span>
+        <div>
+            <input type="email" class="form-control" name="email" id="email" placeholder="Email address" required>
         </div>
-        <a href="sign-up" class="sign-up" methods="get">Not a user yet? Click here to sign up</a>
 
+        <div>
+            <input type="password" class="form-control" name="password" id="password" placeholder="Password"
+                   required>
+        </div>
 
+        <div class="checkbox">
+            <input type="checkbox" value="remember-me"> Remember me
+        </div>
+
+        <button class="login" type="submit">Login</button>
+
+    </form>
+
+    <a href="sign-up" class="sign-up" methods="get">Not a user yet? Click here to sign up</a>
+
+</div>
 <!--footer.html  -->
 <div th:replace="fragments/footer :: footer"></div>
 </body>
