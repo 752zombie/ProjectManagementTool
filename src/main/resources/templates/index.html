@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Project Management Tool| Frontpage</title>
-    <link rel="stylesheet" href="frontpage css/frontpagestyle.css">
+    <link rel="stylesheet" href="generel css/frontpagestyle.css">
     <link rel="stylesheet" href="generel css/headerstyle.css">
     <link rel="stylesheet" href="generel css/footerstyle.css">
 
@@ -12,23 +12,23 @@
 <!--header.html  -->
 <div th:replace="fragments/header :: header"></div>
 
-<div class="intro-container">
-    <div class="wrapper">
 
-        <h2>The easiest way to manage team projects and tasks </h2>
-        <p>  Project Management Tool gives teams everything they need to stay in sync,
-            hit deadlines, and reach their goals..
-        </p>
-        <p>Start planning now!</p>
 
-        <!-- redirect to sign up page -->
-        <a href="signUp" class="signUp-fp" method="get"></a>
+
+          <!-- thumbnail and text overlay on hover -->
+    <div class="thmb-content2"><a href="/sign-up" th:if="${session.user == null}">
+          <img class="thmb-image" src="https://www.pngkey.com/png/detail/367-3670351_access-login-icon.png" alt="pmt-signup"/>
+          <div class="normal">
+            <div class="thmb-text">Not a user yet ?</div>
+         </div>
+         <div class="hover">
+            <div class="thmb-text">Sign up now!</div>
+         </div></a>
     </div>
-</div>
-</div>
 
 
-</div>
-<div th:replace="fragments/footer :: footer"></div>
+    <div th:replace="fragments/footer :: footer"></div>
+
+
 </body>
 </html>
