@@ -40,9 +40,11 @@ public class ProjectController {
             User user = (User) session.getAttribute("user");
 
             // Creates a project
-            Project project = projectService.nameYourProject(user.getId(), projectName, projectStart, projectEnd);
+           Project project = projectService.nameYourProject(user.getId(), projectName, projectStart, projectEnd);
+           ArrayList<Task> taskList = taskService.getTasks(project.getProjectId());
 
-            session.setAttribute("project", project);
+           session.setAttribute("project", project);
+           session.setAttribute("taskList", taskList);
 
 
             return "project/old-project";
@@ -106,6 +108,7 @@ public class ProjectController {
                            @RequestParam("estimated-hours-total") int estimatedHoursTotal,
                            @RequestParam("estimated-hours-day") int estimatedHoursDay, HttpSession session,
                            @RequestParam("action") String action) {
+
 
 
         try {

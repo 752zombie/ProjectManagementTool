@@ -21,10 +21,10 @@ public class ProjectService {
         int project_id = ProjectRepository.createProject(userId, projectName, projectStart, projectEnd);
 
         // Saves project in session and adds to view
-        Project project = new Project(project_id, projectName, projectStart, projectEnd);
+       Project project = new Project(project_id, projectName, projectStart, projectEnd);
 
 
-        return project;
+       return project;
     }
 
     public ArrayList<Project> seeProjectList(int userId) throws SQLException {
