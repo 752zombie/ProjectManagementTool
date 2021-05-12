@@ -28,6 +28,7 @@
     </style>
 </head>
 <body>
+<div th:replace="fragments/header :: header"></div>
     <ul th:each="subtask : ${session.subtasks}">
         <li>
             <div class="table">
