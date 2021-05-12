@@ -63,7 +63,7 @@
                 <input type="hidden" name="subtask-id" th:value="${subtask.id}">
                 <label for="employee-adder">Choose employee to add</label>
                 <select name="employee-id" id="employee-adder">
-                    <option th:each="emp : ${session.allEmployees}" th:value="${emp.id}" th:text="${emp.name}"></option>
+                    <option th:each="emp : ${session.allEmployees}" th:value="${emp.id}" th:text="${emp.name}" th:if="${!subtask.isAssigned(emp.id)}"></option>
                 </select>
                 <button type="submit">Add</button>
             </form>

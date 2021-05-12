@@ -75,4 +75,14 @@ public class Subtask {
     public Date getEndTime() {
         return endTime;
     }
+
+    public boolean isAssigned(int employeeId) {
+        for (Employee employee : assignedEmployees) {
+            if (employee.getId() == employeeId) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
