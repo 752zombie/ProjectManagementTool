@@ -25,7 +25,7 @@
     <div class="header-group">
         <span class="td">Priority</span>
         <span class="td">Task name</span>
-        <span class="td">Notes</span>
+        <span class="td" id="notes">Notes</span>
         <span class="td">Estimated hours per day</span>
         <span class="td">Estimated hours total</span>
         <span class="td">Days until finished</span>
@@ -48,8 +48,8 @@
 
 
             <span class="td"><input type="text" id="task-name" name="name" th:value="${task.name}"></span>
-      <!--      <span class="td"><textarea name="description" id="task-description" cols="30" rows="1" th:value="${task.description}" required></textarea></span> -->
-           <span class="td"><input type="text" id="task-description" name="description" th:value="${task.description}"></span>
+       <span class="td"><textarea name="description" id="task-description" cols="30" rows="1" th:text="${task.description}" required></textarea></span>
+        <!--   <span class="td"><input type="text" id="task-description" name="description" th:value="${task.description}"></span>  -->
             <span class="td"><input type="number" id="hours-day" name="estimated-hours-day" th:value="${task.estimatedHoursPrDay}"></span>
             <span class="td"><input type="number" id="hours-total" name="estimated-hours-total" th:value="${task.estimatedHoursTotal}"></span>
             <span class="td"><input type="number" id="work-days-until-finish" name="work-days-until-finish" value="" readonly></span>
@@ -75,8 +75,8 @@
             </span>
 
             <span class="td"><input type="text" name="name" required></span>
-      <!--      <span class="td"><textarea name="description" id="new-task-description" cols="30" rows="1" required></textarea></span> -->
-            <span class="td"><input type="text" id="new-task-description" name="description" required></span>
+       <span class="td"><textarea name="description" id="new-task-description" cols="30" rows="1" required></textarea></span>
+         <!--   <span class="td"><input type="text" id="new-task-description" name="description" required></span> -->
             <span class="td"><input type="number" name="estimated-hours-total" required></span>
             <span class="td"><input type="number" name="estimated-hours-day" required></span>
             <span class="td"><input type="number" name="work-days-until-finish" value="" readonly></span>
