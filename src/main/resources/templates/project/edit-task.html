@@ -72,11 +72,10 @@
             
         </li>
         <li>
-            <ul>
-                <li th:each="emp : ${subtask.getAssignedEmployees()}">
-                    <span th:text="${emp.name}"></span>
-                </li>
-            </ul>
+            <span th:each="emp, iter : ${subtask.getAssignedEmployees()}" >
+                <span th:if="${!iter.last}" th:text="${emp.name} + ', '"></span>
+                <span th:if="${iter.last}" th:text="${emp.name}"></span>
+            </span>
 
         </li>
     </ul>
