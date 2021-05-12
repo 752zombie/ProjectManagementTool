@@ -125,7 +125,9 @@ public class SubtaskController {
     @PostMapping("add-employee-to-subtask")
     public String addEmployeeToSubtask(@RequestParam("employee-id") Integer employeeId, @RequestParam("subtask-id") Integer subtaskId) {
         try {
-            SubtaskRepository.addEmployeeToSubtask(employeeId, subtaskId);
+            System.out.println(employeeId);
+            System.out.println(subtaskId);
+            SubtaskRepository.addEmployeeToSubtask(subtaskId, employeeId);
         }
 
         catch (SQLException e) {

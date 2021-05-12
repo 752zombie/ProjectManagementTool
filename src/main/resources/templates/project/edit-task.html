@@ -74,7 +74,7 @@
         <li>
             <ul>
                 <li th:each="emp : ${subtask.getAssignedEmployees()}">
-                    <span th:text="emp.name"></span>
+                    <span th:text="${emp.name}"></span>
                 </li>
             </ul>
 

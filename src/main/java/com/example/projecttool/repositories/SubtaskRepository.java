@@ -18,6 +18,7 @@ public class SubtaskRepository {
         PreparedStatement statement = connection.prepareStatement("INSERT INTO emp_subtask(emp_id, subtask_id) values (?, ?)");
         statement.setInt(1, employeeId);
         statement.setInt(2, subtaskId);
+        statement.execute();
 
     }
 
