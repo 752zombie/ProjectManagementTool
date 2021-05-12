@@ -32,20 +32,19 @@ header {
 }
 
 .logo{
-    width: 25%;
-    height: 70px;
-    display: block;
-
-
+    position: relative;
+    float: left;
+    width:  100px;
+    height: 100px;
+    background-position: 50% 50%;
+    background-repeat:   no-repeat;
+    background-size:     cover;
 }
 
 .dividers {
     color: #fff;
     font-size: 20px;
 }
-
-
-
 
 header {
     height: 100px;
@@ -54,11 +53,7 @@ header {
     position: relative;
 }
 
-.logo{
-    width: 25%;
-    height: 70px;
-    position: relative;
-}
+
 
 .content-area {
     color: #ad101a;
