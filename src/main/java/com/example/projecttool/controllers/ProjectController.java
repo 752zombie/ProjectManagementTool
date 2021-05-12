@@ -35,27 +35,39 @@ public class ProjectController {
     public String nameYourProject(@RequestParam("project_name") String projectName, @RequestParam("project_start") String projectStart,
                                   @RequestParam("project_end") String projectEnd, HttpSession session) {
 
-        User user = (User) session.getAttribute("user");
 
-        // Creates a project
-        Project project = projectService.nameYourProject(user.getId(), projectName, projectStart, projectEnd);
+        try {
+            User user = (User) session.getAttribute("user");
 
-       session.setAttribute("project", project);
+            // Creates a project
+            Project project = projectService.nameYourProject(user.getId(), projectName, projectStart, projectEnd);
+
+            session.setAttribute("project", project);
 
 
-        return "project/old-project";
+            return "project/old-project";
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return "project/edit-failed";
+        }
     }
 
-    @GetMapping("/see-all-projects")
+        @GetMapping("/see-all-projects")
     public String seeProjectList(HttpSession session, Model model) {
 
-        User user = (User) session.getAttribute("user");
-        ArrayList<Project> allProjects = projectService.seeProjectList(user.getId());
+            try {
+                User user = (User) session.getAttribute("user");
+                ArrayList<Project> allProjects = projectService.seeProjectList(user.getId());
 
-        model.addAttribute("projectList", allProjects);
+                model.addAttribute("projectList", allProjects);
 
-        return "project/all-projects";
-    }
+                return "project/all-projects";
+
+            } catch (SQLException e) {
+                System.out.println("Error getting project");
+            }
+            return "project/failed-getting-tasks";
+        }
 
 
     @PostMapping("choose-project-to-edit")
@@ -113,9 +125,6 @@ public class ProjectController {
 
             // Sorts and directs edited tasks to View
             ArrayList<Task> projectTasks = taskService.getTasks(project.getProjectId());
-
-            for (Task task : projectTasks)
-                System.out.println(task.getName() + " " + task.getPriority());
 
             session.setAttribute("project", project);
             session.setAttribute("projectTasks", projectTasks);

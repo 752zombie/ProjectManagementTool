@@ -10,10 +10,9 @@ import java.util.NoSuchElementException;
 public class ProjectRepository {
 
 
-    public static int createProject(int userId, String project_name, String project_start, String project_end) {
+    public static int createProject(int userId, String project_name, String project_start, String project_end) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
 
-        try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO project (name, owner_id, start_time, end_time) values (?, ?, ?, ?)");
             statement.setString(1, project_name);
             statement.setInt(2, userId);
@@ -21,17 +20,14 @@ public class ProjectRepository {
             statement.setDate(4, java.sql.Date.valueOf(project_end));
             statement.execute();
 
-        } catch (SQLException e) {
-            System.out.println("Error creating new project to DB");
-        }
+
         return getNewProjectId(userId);
     }
 
-    private static int getNewProjectId(int userId) {
+    private static int getNewProjectId(int userId) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
         int project_id = 0;
 
-        try {
             PreparedStatement statement = connection.prepareStatement("SELECT MAX(project_id) FROM project WHERE owner_id = ?");
             statement.setInt(1, userId);
             ResultSet resultSet = statement.executeQuery();
@@ -41,21 +37,17 @@ public class ProjectRepository {
 
             }
 
-        } catch (SQLException e) {
-
-            System.out.println("Something went wrong getting project_id");
-        }
 
         return project_id;
     }
 
     //gets all projects for a specific user but without attaching any tasks or subtasks.
-    public static ArrayList<Project> getProjects(int userId) {
+    public static ArrayList<Project> getProjects(int userId) throws SQLException {
 
         Connection connection = DatabaseConnection.getConnection();
         ArrayList<Project> projectList = new ArrayList<>();
 
-        try {
+
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM project WHERE owner_id = ?");
             statement.setInt(1, userId);
             ResultSet resultSet = statement.executeQuery();
@@ -68,10 +60,6 @@ public class ProjectRepository {
 
                 projectList.add(new Project(project_id, project_name, start_time, end_time));
             }
-        } catch (SQLException e) {
-            System.out.println("Error getting project");
-        }
-
         return projectList;
     }
 

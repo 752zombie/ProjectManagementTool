@@ -14,8 +14,7 @@ import java.util.ArrayList;
 public class ProjectService {
 
 
-    public Project nameYourProject(int userId, String projectName, String projectStart,
-                                   String projectEnd) {
+    public Project nameYourProject(int userId, String projectName, String projectStart, String projectEnd) throws SQLException {
 
 
         // Creates a project
@@ -28,7 +27,7 @@ public class ProjectService {
         return project;
     }
 
-    public ArrayList<Project> seeProjectList(int userId) {
+    public ArrayList<Project> seeProjectList(int userId) throws SQLException {
 
         ArrayList<Project> allProjects = ProjectRepository.getProjects(userId);
 
