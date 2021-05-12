@@ -15,13 +15,14 @@
 .thmb-content2 .image {
     display: block;
     width: 50%;
-    height: auto;
+    height: 70%;
 }
 .thmb-image{
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 1px;
     width: 200px;
+
 }
 
 /* Original text overlay */
