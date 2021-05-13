@@ -107,7 +107,7 @@ public class ProjectController {
                            @RequestParam("priority") String priority, @RequestParam("start_time") String start_time,
                            @RequestParam("end_time") String end_time, @RequestParam("estimated-hours-day") int estimatedHoursDay,
                            @RequestParam("estimated-hours-total") int estimatedHoursTotal,
-                            @RequestParam("action") String action, HttpSession session) {
+                            @RequestParam("action") String action,  @RequestParam("count-weekends") String countWeekends, HttpSession session) {
 
 
 
@@ -117,7 +117,7 @@ public class ProjectController {
 
             // Adds row to project
             if (action.equals("Save")) {
-                taskService.editTask(taskId, name, description, priority, start_time, end_time, estimatedHoursTotal, estimatedHoursDay);
+                taskService.editTask(taskId, name, description, priority, start_time, end_time, estimatedHoursTotal, estimatedHoursDay, countWeekends);
 
             }
             // Deletes row from project
@@ -145,7 +145,7 @@ public class ProjectController {
     public String addRowToTask(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("priority") String priority,
                                @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time,
                                @RequestParam("estimated-hours-day") int estimatedHoursDay, @RequestParam("estimated-hours-total") int estimatedHoursTotal,
-                               HttpSession session) {
+                               @RequestParam("count-weekends") String countWeekends, HttpSession session) {
 
         try {
 
@@ -156,7 +156,7 @@ public class ProjectController {
 
 
             // Adds rows to DB
-            taskService.addRowToTask(project.getProjectId(), name, description, priority, start_time, end_time, estimatedHoursDay, estimatedHoursTotal);
+            taskService.addRowToTask(project.getProjectId(), name, description, priority, start_time, end_time, estimatedHoursDay, estimatedHoursTotal, countWeekends);
 
             // Directs tasks to View
             ArrayList<Task> projectTasks = taskService.getTasks(project.getProjectId());

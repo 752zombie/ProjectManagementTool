@@ -1,31 +1,31 @@
 package com.example.projecttool.services;
 
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 
 public class DueDateCalculator {
 
-    public String dueDate(int hoursDay, int hoursTotal, String startDate) {
+    public String[] dueDate(int hoursDay, int hoursTotal, String startDate, String countWeekends) {
 
-        boolean weekends = true;
+        String[] endTimeCalcAndWeekChoice = new String[2];
+
+
         int daysToFinish = (hoursTotal / hoursDay);
 
         // IMPROVED VERSION WITH AMOUNT OF EMPLOYEES //
                //  int totalWorkHoursDay = hoursDay * employees;
                // int daysToFinish = hoursTotal / totalWorkHoursDay;
 
-    if (weekends) {
+    if (countWeekends.equals("weekend-true")) {
 
         String dueDate = dateAdderWithWeekends(daysToFinish, startDate);
 
+        endTimeCalcAndWeekChoice[0] = dueDate;
 
-        return dueDate;
     }
     else {
         LocalDate str = LocalDate.parse(startDate);
@@ -34,11 +34,12 @@ public class DueDateCalculator {
 
         String dateWithoutWeekends = withoutWeekends.toString();
 
-
-        return dateWithoutWeekends;
+        endTimeCalcAndWeekChoice[0] = dateWithoutWeekends;
 
 
     }
+        endTimeCalcAndWeekChoice[1] = countWeekends;
+        return endTimeCalcAndWeekChoice;
 
     }
 

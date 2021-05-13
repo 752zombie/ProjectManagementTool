@@ -37,6 +37,7 @@
         <span class="td">Priority</span>
         <span class="td">Task name</span>
         <span class="td">Estimated hours/day/employee</span>
+        <span class="td">Count weekend as workdays</span>
         <span class="td">Estimated hours total</span>
         <span class="td">Start date</span>
         <span class="td">Due date</span>
@@ -62,16 +63,27 @@
 
             <span class="td"><input type="number" id="hours-day" name="estimated-hours-day"
                                     th:value="${task.estimatedHoursPrDay}"></span>
+
+            <!-- Count weekends or only weekdays -->
+            <select class="select" name="count-weekends">
+                <option value="weekend-false">NO</option>
+                <option value="weekend-true">YES</option>
+            </select>
+
             <span class="td"><input type="number" id="hours-total" name="estimated-hours-total"
                                     th:value="${task.estimatedHoursTotal}"></span>
             <span class="td"><input type="date" id="task-start" name="start_time" th:value="${task.start_time}"></span>
-
-
             <span class="td"><input type="date" id="task-end" name="end_time" th:value="${task.end_time}"></span>
             <span class="td"><input type="date" id="task-end-calculated" name="end_time_calculated" th:value="${task.end_time_calculated}"
                                     readonly></span>
+
+
+
             <span class="td"><textarea name="description" id="task-description" cols="30" rows="1"
                                        th:text="${task.description}" required></textarea></span>
+
+
+
             <span class="td">
             <input type="submit" class="btn btn-success" value="Save" name="action" formaction="/edit-task">
                <input type="submit" class="btn btn-danger" value="Delete" name="action" formaction="/edit-task">
@@ -93,6 +105,14 @@
             <span class="td"><input type="text" name="name" required></span>
 
             <span class="td"><input type="number" name="estimated-hours-day" required></span>
+
+
+            <!-- Count weekends or only weekdays -->
+            <select class="select" name="count-weekends">
+                <option value="weekend-false">NO</option>
+                <option value="weekend-true">YES</option>
+            </select>
+
             <span class="td"><input type="number" name="estimated-hours-total" required></span>
 
             <span class="td"><input type="date" name="start_time" required></span>

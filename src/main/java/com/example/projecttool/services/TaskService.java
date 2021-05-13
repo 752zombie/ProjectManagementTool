@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class TaskService {
 
+
     public ArrayList<Task> getTasks(Integer projectId) throws SQLException {
 
 
@@ -21,12 +22,16 @@ public class TaskService {
 
 
     public void editTask(int taskId, String taskName, String description, String priority, String start_time, String end_time,
-                         int estimatedHoursTotal, int estimatedHoursDay) throws SQLException {
+                         int estimatedHoursTotal, int estimatedHoursDay, String countWeekends) throws SQLException {
 
         DueDateCalculator dueDate = new DueDateCalculator();
-        String end_time_calculated = dueDate.dueDate(estimatedHoursDay, estimatedHoursTotal, start_time);
+        String[] endTimeCalcAndWeekChoice = dueDate.dueDate(estimatedHoursDay, estimatedHoursTotal, start_time, countWeekends);
 
-       TaskRepository.editTask(taskId, taskName, description, priority, start_time, end_time_calculated, end_time, estimatedHoursTotal, estimatedHoursDay);
+
+
+       TaskRepository.editTask(taskId, taskName, description, priority, start_time, endTimeCalcAndWeekChoice[0], end_time, estimatedHoursTotal, estimatedHoursDay);
+
+       // SHOULD week CHOICE BE ADDED TO TASK OR A NEW TABLE
     }
 
     public void deleteTask(int taskId) throws SQLException {
@@ -35,13 +40,16 @@ public class TaskService {
     }
 
     public void addRowToTask(int projectId, String name, String description, String priority, String start_time, String end_time,
-                             int estimatedHoursDay, int estimatedHoursTotal) throws SQLException {
+                             int estimatedHoursDay, int estimatedHoursTotal, String countWeekends) throws SQLException {
 
 
+        System.out.println(countWeekends);
 
         DueDateCalculator dueDate = new DueDateCalculator();
-        String end_time_calculated = dueDate.dueDate(estimatedHoursDay, estimatedHoursTotal, start_time);
+        String[] endTimeCalcAndWeekChoice = dueDate.dueDate(estimatedHoursDay, estimatedHoursTotal, start_time, countWeekends);
 
-        TaskRepository.addRowToTask(projectId, name, description, priority, start_time, end_time_calculated, end_time, estimatedHoursTotal, estimatedHoursDay);
+        TaskRepository.addRowToTask(projectId, name, description, priority, start_time, endTimeCalcAndWeekChoice[0], end_time, estimatedHoursTotal, estimatedHoursDay);
+
+        // SHOULD week CHOICE BE ADDED TO TASK OR A NEW TABLE
     }
 }
