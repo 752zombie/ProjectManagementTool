@@ -22,18 +22,14 @@ public class SubtaskRepository {
 
     }
 
-    public static void removeEmployeeFromSubtask(int subtaskId, int employeeId) {
+    public static void removeEmployeeFromSubtask(int subtaskId, int employeeId) throws SQLException{
         Connection connection = DatabaseConnection.getConnection();
 
-        try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM emp_subtask WHERE emp_id = ? AND subtask_id = ?");
-            statement.setInt(1, employeeId);
-            statement.setInt(2, subtaskId);
-        }
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM emp_subtask WHERE emp_id = ? AND subtask_id = ?");
+        statement.setInt(1, employeeId);
+        statement.setInt(2, subtaskId);
+        statement.execute();
 
-        catch (SQLException e) {
-            System.out.println("Error removing employee from subtask");
-        }
     }
 
     public static void addSkillToSubtask(int subtaskId, int skillId) {

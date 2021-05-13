@@ -71,10 +71,21 @@
                 <button type="submit">Add</button>
             </form>
 
+            <form action="/remove-employee-from-subtask" method="post">
+                <input type="hidden" name="subtask-id" th:value="${subtask.id}">
+                <label for="employee-remover">Choose employee to remove</label>
+                <select name="employee-id" id="employee-remover">
+                    <option th:each="emp : ${subtask.assignedEmployees}" th:value="${emp.id}" th:text="${emp.name}"></option>
+                </select>
+                <button type="submit">Remove</button>
+            </form>
+
+
 
             
         </li>
         <li>
+            <span>Assigned employees: </span>
             <span th:each="emp, iter : ${subtask.getAssignedEmployees()}" >
                 <span th:if="${!iter.last}" th:text="${emp.name} + ', '"></span>
                 <span th:if="${iter.last}" th:text="${emp.name}"></span>
