@@ -143,7 +143,7 @@ public class ProjectController {
 
     @PostMapping("add-row-to-tasks")
     public String addRowToTask(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("priority") String priority,
-                               @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time,
+                               @RequestParam("start_time") String start_time,
                                @RequestParam("estimated-hours-total") int estimatedHoursTotal, @RequestParam("estimated-hours-day") int estimatedHoursDay,
                                HttpSession session) {
 
@@ -152,8 +152,10 @@ public class ProjectController {
             // We need project id to edit Task
             Project project = (Project) session.getAttribute("project");
 
+
+
             // Adds rows to DB
-            taskService.addRowToTask(project.getProjectId(), name, description, priority, start_time, end_time, estimatedHoursTotal, estimatedHoursDay);
+            taskService.addRowToTask(project.getProjectId(), name, description, priority, start_time, estimatedHoursTotal, estimatedHoursDay);
 
             // Directs tasks to View
             ArrayList<Task> projectTasks = taskService.getTasks(project.getProjectId());

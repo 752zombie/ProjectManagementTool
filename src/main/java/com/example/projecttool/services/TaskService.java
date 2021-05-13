@@ -31,8 +31,15 @@ public class TaskService {
         TaskRepository.deleteTask(taskId);
     }
 
-    public void addRowToTask(int projectId, String name, String description, String priority, String start_time, String end_time,
+    public void addRowToTask(int projectId, String name, String description, String priority, String start_time,
                              int estimatedHoursTotal, int estimatedHoursDay) throws SQLException {
+
+
+
+        DueDateCalculator dueDate = new DueDateCalculator();
+        String end_time = dueDate.dueDate(estimatedHoursDay, estimatedHoursTotal, start_time);
+
+        System.out.println(start_time + " calculated end time:" + end_time);
 
         TaskRepository.addRowToTask(projectId, name, description, priority, start_time, end_time, estimatedHoursTotal, estimatedHoursDay);
     }
