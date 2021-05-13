@@ -104,9 +104,9 @@ public class ProjectController {
 
     @PostMapping("/edit-task")
     public String editTask(@RequestParam("id") int taskId, @RequestParam("name") String name, @RequestParam("description") String description,
-                           @RequestParam("priority") String priority, @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time,
-                           @RequestParam("estimated-hours-total") int estimatedHoursTotal,
-                           @RequestParam("estimated-hours-day") int estimatedHoursDay, HttpSession session,
+                           @RequestParam("priority") String priority, @RequestParam("start_time") String start_time,
+                           @RequestParam("estimated-hours-day") int estimatedHoursDay, @RequestParam("estimated-hours-total") int estimatedHoursTotal,
+                           HttpSession session,
                            @RequestParam("action") String action) {
 
 
@@ -117,7 +117,7 @@ public class ProjectController {
 
             // Adds row to project
             if (action.equals("Save")) {
-                taskService.editTask(taskId, name, description, priority, start_time, end_time, estimatedHoursTotal, estimatedHoursDay);
+                taskService.editTask(taskId, name, description, priority, start_time, estimatedHoursTotal, estimatedHoursDay);
 
             }
             // Deletes row from project
@@ -144,18 +144,19 @@ public class ProjectController {
     @PostMapping("add-row-to-tasks")
     public String addRowToTask(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("priority") String priority,
                                @RequestParam("start_time") String start_time,
-                               @RequestParam("estimated-hours-total") int estimatedHoursTotal, @RequestParam("estimated-hours-day") int estimatedHoursDay,
+                               @RequestParam("estimated-hours-day") int estimatedHoursDay, @RequestParam("estimated-hours-total") int estimatedHoursTotal,
                                HttpSession session) {
 
         try {
+
+
 
             // We need project id to edit Task
             Project project = (Project) session.getAttribute("project");
 
 
-
             // Adds rows to DB
-            taskService.addRowToTask(project.getProjectId(), name, description, priority, start_time, estimatedHoursTotal, estimatedHoursDay);
+            taskService.addRowToTask(project.getProjectId(), name, description, priority, start_time, estimatedHoursDay, estimatedHoursTotal);
 
             // Directs tasks to View
             ArrayList<Task> projectTasks = taskService.getTasks(project.getProjectId());

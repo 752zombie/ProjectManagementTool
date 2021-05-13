@@ -7,14 +7,17 @@ import java.util.Calendar;
 
 public class DueDateCalculator {
 
-    public String dueDate(int hoursTotal, int hoursDay, String startDate) {
+    public String dueDate(int hoursDay, int hoursTotal, String startDate) {
 
         String dueDate;
-        int daysToFinish = 0;
+        int daysToFinish;
 
         // IMPROVED VERSION WITH AMOUNT OF EMPLOYEES //
                //  int totalWorkHoursDay = hoursDay * employees;
                // int daysToFinish = hoursTotal / totalWorkHoursDay;
+
+
+        System.out.println("hoursday: " + hoursDay + "\n hoursTotal " + hoursTotal);
 
 
         daysToFinish = (hoursTotal/hoursDay);
