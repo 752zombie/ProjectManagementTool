@@ -32,7 +32,7 @@ public class SubtaskController {
     {
         try {
             User user = (User) session.getAttribute("user");
-            ArrayList<Employee> employees = SubtaskRepository.getAllEmployees(user.getId());
+            ArrayList<Employee> employees = SubtaskService.getAllEmployees(user.getId());
             session.setAttribute("allEmployees", employees);
             Integer taskId = (Integer) session.getAttribute("taskId");
             ArrayList<Subtask> subtasks = SubtaskService.getSubtasks(taskId);
@@ -111,7 +111,7 @@ public class SubtaskController {
     @PostMapping("/add-employee-to-subtask")
     public String addEmployeeToSubtask(@RequestParam("employee-id") Integer employeeId, @RequestParam("subtask-id") Integer subtaskId, HttpSession session) {
         try {
-            SubtaskRepository.addEmployeeToSubtask(subtaskId, employeeId);
+            SubtaskService.addEmployeeToSubtask(subtaskId, employeeId);
         }
 
         catch (SQLException e) {
@@ -124,7 +124,7 @@ public class SubtaskController {
     @PostMapping("/remove-employee-from-subtask")
     public String removeEmployeeFromSubtask(@RequestParam("employee-id") Integer employeeId, @RequestParam("subtask-id") Integer subtaskId, HttpSession session) {
         try {
-            SubtaskRepository.removeEmployeeFromSubtask(subtaskId, employeeId);
+            SubtaskService.removeEmployeeFromSubtask(subtaskId, employeeId);
         }
 
         catch (SQLException e) {

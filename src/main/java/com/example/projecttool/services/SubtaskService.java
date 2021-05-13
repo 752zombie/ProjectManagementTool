@@ -1,5 +1,6 @@
 package com.example.projecttool.services;
 
+import com.example.projecttool.models.Employee;
 import com.example.projecttool.models.project.Subtask;
 import com.example.projecttool.repositories.SubtaskRepository;
 import com.example.projecttool.repositories.TaskRepository;
@@ -22,5 +23,17 @@ public class SubtaskService {
 
     public static void deleteSubtask(int subtaskId) throws SQLException {
         SubtaskRepository.deleteSubtask(subtaskId);
+    }
+
+    public static ArrayList<Employee> getAllEmployees(int userId) throws SQLException {
+        return SubtaskRepository.getAllEmployees(userId);
+    }
+
+    public static void addEmployeeToSubtask(int subtaskId, int employeeId) throws SQLException{
+        SubtaskRepository.addEmployeeToSubtask(subtaskId, employeeId);
+    }
+
+    public static void removeEmployeeFromSubtask(int subtaskId, int employeeId) throws SQLException{
+        SubtaskRepository.removeEmployeeFromSubtask(subtaskId, employeeId);
     }
 }
