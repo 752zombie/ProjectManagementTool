@@ -4,6 +4,7 @@ import com.example.projecttool.models.Employee;
 import com.example.projecttool.models.User;
 import com.example.projecttool.models.project.Subtask;
 import com.example.projecttool.repositories.SubtaskRepository;
+import com.example.projecttool.services.ErrorHandler;
 import com.example.projecttool.services.SubtaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +40,7 @@ public class SubtaskController {
         }
 
         catch (SQLException e) {
-            return "project/failed-getting-tasks";
+            return ErrorHandler.setCurrentError("Something went wrong loading the subtask page", session);
         }
 
         return "project/edit-task";
@@ -64,14 +65,14 @@ public class SubtaskController {
     @PostMapping("save-subtask")
     public String saveSubtask(@RequestParam("subtask-name") String name, @RequestParam("subtask-description") String description,
                               @RequestParam("start-time") String startTime, @RequestParam("end-time") String endTime,
-                              @RequestParam("subtask-id") Integer subtaskId) {
+                              @RequestParam("subtask-id") Integer subtaskId, HttpSession session) {
 
         try {
             SubtaskService.updateSubtask(subtaskId, name, description, startTime, endTime);
         }
 
         catch (SQLException e) {
-            return "project/failed-getting-tasks";
+            return ErrorHandler.setCurrentError("Something went wrong saving changes", session);
         }
 
         return "redirect:view-subtasks";
@@ -88,7 +89,7 @@ public class SubtaskController {
         }
 
         catch (SQLException e) {
-            return "project/failed-getting-tasks";
+            return ErrorHandler.setCurrentError("Something went wrong adding new subtask to task", session);
         }
 
         return "redirect:view-subtasks";
@@ -101,33 +102,33 @@ public class SubtaskController {
         }
 
         catch (SQLException e) {
-            return "project/failed-getting-tasks";
+            return ErrorHandler.setCurrentError("Something went deleting subtask", session);
         }
 
         return "redirect:view-subtasks";
     }
 
     @PostMapping("/add-employee-to-subtask")
-    public String addEmployeeToSubtask(@RequestParam("employee-id") Integer employeeId, @RequestParam("subtask-id") Integer subtaskId) {
+    public String addEmployeeToSubtask(@RequestParam("employee-id") Integer employeeId, @RequestParam("subtask-id") Integer subtaskId, HttpSession session) {
         try {
             SubtaskRepository.addEmployeeToSubtask(subtaskId, employeeId);
         }
 
         catch (SQLException e) {
-            return "project/failed-getting-tasks";
+            return ErrorHandler.setCurrentError("Something went wrong adding employee to subtask", session);
         }
 
         return  "redirect:/view-subtasks";
     }
 
     @PostMapping("/remove-employee-from-subtask")
-    public String removeEmployeeFromSubtask(@RequestParam("employee-id") Integer employeeId, @RequestParam("subtask-id") Integer subtaskId) {
+    public String removeEmployeeFromSubtask(@RequestParam("employee-id") Integer employeeId, @RequestParam("subtask-id") Integer subtaskId, HttpSession session) {
         try {
             SubtaskRepository.removeEmployeeFromSubtask(subtaskId, employeeId);
         }
 
         catch (SQLException e) {
-            return "project/failed-getting-tasks";
+            return ErrorHandler.setCurrentError("Something went wrong removing employee from subtask", session);
         }
 
         return  "redirect:/view-subtasks";
