@@ -4,7 +4,7 @@
     padding: 18px;
     font-family: Arial, serif;
     color: white;
-    margin-bottom: -40px;
+    margin-bottom: -41px;
     background: #0e1ca8;
     margin-left: 5px;
     margin-top: 5px;
@@ -30,6 +30,7 @@ FORM.tr, DIV.tr
 }
 SPAN.td
 {
+
     display:table-cell;
 }
 DIV.row-group {
@@ -41,7 +42,7 @@ DIV.header-group {
 }
 
 .table {
-    margin-left: 100px;
+
     border-collapse: collapse;
     font-size: 0.9em;
     font-family: sans-serif;
@@ -62,7 +63,7 @@ DIV.header-group {
     width:170px;
     height: 60px;
     transition: 0.5s;
-    position: absolute;
+
 
 }
 
@@ -82,9 +83,40 @@ DIV.header-group {
 }
 
 textarea  {
-    transform: translateY(6px);
+    transform: translateY(8px);
     Z-index: 1000;
+    height: 24px;
+
 }
+
+.td {
+    height: 5px;
+    padding: -5px;
+}
+
+
+input {
+
+    height: 24px;
+}
+
+.btn {
+    line-height: 1;
+}
+
+.btn-success {
+    height: 33px;
+    margin-left: -5px;
+}
+
+.btn-danger {
+    height: 33px;
+}
+
+.btn-primary {
+    height: 33px;
+}
+
 
 
 

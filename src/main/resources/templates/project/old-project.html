@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+
     <link rel="stylesheet" href="generel css/headerstyle.css">
     <link rel="stylesheet" href="generel css/footerstyle.css">
     <link rel="stylesheet" href="tables/old-project.css">
@@ -32,12 +36,12 @@
     <div class="header-group">
         <span class="td">Priority</span>
         <span class="td">Task name</span>
-        <span class="td" id="notes">Notes</span>
         <span class="td">Estimated hours/day/employee</span>
         <span class="td">Estimated hours total</span>
         <span class="td">Start date</span>
         <span class="td">Due date</span>
         <span class="td">Calculated end date</span>
+        <span class="td" id="notes">Notes</span>
         <span class="td"> </span>
     </div>
 
@@ -47,16 +51,15 @@
 
             <span class="td">
                 <select id="task-priority" name="priority" required>
-                    <option value="high" th:selected="${task.priority=='high'}">High</option>
-                    <option value="medium" th:selected="${task.priority=='medium'}">Medium</option>
-                    <option value="low" th:selected="${task.priority=='low'}">Low</option>
+                    <option class="high-prior" value="high" th:selected="${task.priority=='high'}">High</option>
+                    <option class="medium-prior" value="medium" th:selected="${task.priority=='medium'}">Medium</option>
+                    <option class="low-prior" value="low" th:selected="${task.priority=='low'}">Low</option>
                 </select>
             </span>
 
 
             <span class="td"><input type="text" id="task-name" name="name" th:value="${task.name}"></span>
-            <span class="td"><textarea name="description" id="task-description" cols="30" rows="1"
-                                       th:text="${task.description}" required></textarea></span>
+
             <span class="td"><input type="number" id="hours-day" name="estimated-hours-day"
                                     th:value="${task.estimatedHoursPrDay}"></span>
             <span class="td"><input type="number" id="hours-total" name="estimated-hours-total"
@@ -67,10 +70,12 @@
             <span class="td"><input type="date" id="task-end" name="end_time" th:value="${task.end_time}"></span>
             <span class="td"><input type="date" id="task-end-calculated" name="end_time_calculated" th:value="${task.end_time_calculated}"
                                     readonly></span>
+            <span class="td"><textarea name="description" id="task-description" cols="30" rows="1"
+                                       th:text="${task.description}" required></textarea></span>
             <span class="td">
-                <input type="submit" value="Save" name="action" formaction="/edit-task">
-                <input type="submit" value="Delete" name="action" formaction="/edit-task">
-                <input type="submit" value="View subtasks" name="action" formaction="/edit-task-with-subtasks">
+            <input type="submit" class="btn btn-success" value="Save" name="action" formaction="/edit-task">
+               <input type="submit" class="btn btn-danger" value="Delete" name="action" formaction="/edit-task">
+                <input type="submit" class="btn btn-primary" value="View subtasks" name="action" formaction="/edit-task-with-subtasks">
             </span>
         </form>
 
@@ -79,24 +84,26 @@
 
             <span class="td">
                 <select name="priority" required>
-                    <option value="high">High</option>
-                    <option value="medium">Medium</option>
-                    <option value="low">Low</option>
+                    <option class="high-prior" value="high">High</option>
+                    <option class="medium-prior" value="medium">Medium</option>
+                    <option class="low-prior" value="low">Low</option>
                 </select>
             </span>
 
             <span class="td"><input type="text" name="name" required></span>
-            <span class="td"><textarea name="description" id="new-task-description" cols="30" rows="1"
-                                       required></textarea></span>
+
             <span class="td"><input type="number" name="estimated-hours-day" required></span>
             <span class="td"><input type="number" name="estimated-hours-total" required></span>
 
             <span class="td"><input type="date" name="start_time" required></span>
             <span class="td"><input type="date" name="end_time"></span>
+            <span class="td"><input type="hidden" name="fill-for-table-order"></span>
+            <span class="td"><textarea name="description" id="new-task-description" cols="30" rows="1"
+                                       required></textarea></span>
 
 
             <span class="td">
-                <input type="submit" value="Save" name="action" formaction="add-row-to-tasks">
+               <input type="submit" class="btn btn-success" value="Save" name="action" formaction="add-row-to-tasks">
             </span>
         </form>
     </div>
