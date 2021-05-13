@@ -41,10 +41,10 @@ public class ProjectController {
 
             // Creates a project
            Project project = projectService.nameYourProject(user.getId(), projectName, projectStart, projectEnd);
-           ArrayList<Task> taskList = taskService.getTasks(project.getProjectId());
+           ArrayList<Task> projectTasks = taskService.getTasks(project.getProjectId());
 
            session.setAttribute("project", project);
-           session.setAttribute("taskList", taskList);
+           session.setAttribute("projectTasks", projectTasks);
 
 
             return "project/old-project";

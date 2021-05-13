@@ -27,8 +27,6 @@ public class TaskService {
         DueDateCalculator dueDate = new DueDateCalculator();
         String[] endTimeCalcAndWeekChoice = dueDate.dueDate(estimatedHoursDay, estimatedHoursTotal, start_time, countWeekends);
 
-
-
        TaskRepository.editTask(taskId, taskName, description, priority, start_time, endTimeCalcAndWeekChoice[0], end_time, estimatedHoursTotal, estimatedHoursDay);
 
        // SHOULD week CHOICE BE ADDED TO TASK OR A NEW TABLE
