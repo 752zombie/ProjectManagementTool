@@ -168,4 +168,9 @@ public class ProjectController {
 
         return "project/failed-getting-tasks";
     }
+    @GetMapping("return-current-project")
+    public String returnToProject(){
+
+        return "project/old-project";
+    }
 }
