@@ -12,14 +12,21 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 
-<div>
-<span><a id="shareLink" href="/share-project" class="pnav" methods="get"> Share </a> <a href="#"></a></span>
-    <span class="popup" id="popup">Invite others to collaborate</span>
+
+<div class="container-1">
+    <div>
+        <span><a id="shareLink" href="/share-project" class="pnav" methods="get"> Share project</a> <a href="#"></a></span>
+    </div>
+    <div>
+        <span class="popup" id="popup">Invite others to collaborate</span>
+    </div>
 </div>
 
 
+<div class="project-name">
+    <h1 class="project-name-top" th:text="${session.project.name}"></h1>
+</div>
 
-<h1 class="project-name-top" th:text="${session.project.name}"></h1>
 
 <div class="table">
     <div class="header-group">
@@ -48,12 +55,17 @@
 
 
             <span class="td"><input type="text" id="task-name" name="name" th:value="${task.name}"></span>
-       <span class="td"><textarea name="description" id="task-description" cols="30" rows="1" th:text="${task.description}" required></textarea></span>
-            <span class="td"><input type="number" id="hours-day" name="estimated-hours-day" th:value="${task.estimatedHoursPrDay}"></span>
-            <span class="td"><input type="number" id="hours-total" name="estimated-hours-total" th:value="${task.estimatedHoursTotal}"></span>
-            <span class="td"><input type="number" id="work-days-until-finish" name="work-days-until-finish" value="" readonly></span>
+            <span class="td"><textarea name="description" id="task-description" cols="30" rows="1"
+                                       th:text="${task.description}" required></textarea></span>
+            <span class="td"><input type="number" id="hours-day" name="estimated-hours-day"
+                                    th:value="${task.estimatedHoursPrDay}"></span>
+            <span class="td"><input type="number" id="hours-total" name="estimated-hours-total"
+                                    th:value="${task.estimatedHoursTotal}"></span>
+            <span class="td"><input type="number" id="work-days-until-finish" name="work-days-until-finish" value=""
+                                    readonly></span>
             <span class="td"><input type="date" id="task-start" name="start_time" th:value="${task.start_time}"></span>
-            <span class="td"><input type="date" id="task-end" name="end_time" th:value="${task.end_time}" readonly></span>
+            <span class="td"><input type="date" id="task-end" name="end_time" th:value="${task.end_time}"
+                                    readonly></span>
 
             <span class="td">
                 <input type="submit" value="Save" name="action" formaction="/edit-task">
@@ -74,7 +86,8 @@
             </span>
 
             <span class="td"><input type="text" name="name" required></span>
-       <span class="td"><textarea name="description" id="new-task-description" cols="30" rows="1" required></textarea></span>
+            <span class="td"><textarea name="description" id="new-task-description" cols="30" rows="1"
+                                       required></textarea></span>
             <span class="td"><input type="number" name="estimated-hours-day" required></span>
             <span class="td"><input type="number" name="estimated-hours-total" required></span>
             <span class="td"><input type="number" name="work-days-until-finish" value="" readonly></span>
@@ -94,10 +107,10 @@
 
 <script>
     let e = document.getElementById('shareLink');
-    e.onmouseover = function() {
+    e.onmouseover = function () {
         document.getElementById('popup').style.display = 'block';
     }
-    e.onmouseout = function() {
+    e.onmouseout = function () {
         document.getElementById('popup').style.display = 'none';
     }
 

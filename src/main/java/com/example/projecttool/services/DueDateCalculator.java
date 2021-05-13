@@ -17,10 +17,7 @@ public class DueDateCalculator {
                // int daysToFinish = hoursTotal / totalWorkHoursDay;
 
 
-        System.out.println("hoursday: " + hoursDay + "\n hoursTotal " + hoursTotal);
-
-
-        daysToFinish = (hoursTotal/hoursDay);
+         daysToFinish = (hoursTotal/hoursDay);
 
 
         dueDate = dateAdder(daysToFinish, startDate);

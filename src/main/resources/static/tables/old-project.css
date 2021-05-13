@@ -3,10 +3,20 @@
     display: none;
     padding: 18px;
     font-family: Arial, serif;
-    color: darkblue
+    color: white;
+    margin-bottom: -40px;
+    background: #0e1ca8;
+    margin-left: 5px;
+    margin-top: 5px;
 
 }
 
+
+#shareLink {
+
+    margin-left: 260px;
+
+}
 
 DIV.table
 {
@@ -53,9 +63,18 @@ DIV.header-group {
 
 }
 
+.container-1 {
+
+    display: flex;
+    flex-direction: row;
+
+
+}
+
 .project-name-top {
 
-    padding-bottom: 150px;
+    padding-bottom: 50px;
+    padding-top: 40px;
 
 }
 
@@ -63,6 +82,8 @@ textarea  {
     transform: translateY(6px);
     Z-index: 1000;
 }
+
+
 
 
 
