@@ -66,7 +66,6 @@ public class TaskRepository {
 
         Connection connection = DatabaseConnection.getConnection();
 
-       // String command = String.format("INSERT INTO tasks (project_id, task_name, task_description, start_time, end_time, priority, estimated_hours, estimated_hours_day) values ('%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d')", project_id, task_name, task_description, start_time, end_time, priority, estimatedHoursTotal, estimatedHoursPrDay);
         PreparedStatement statement = connection.prepareStatement("INSERT INTO tasks (project_id, " +
                 "task_name, task_description, start_time, end_time, priority, estimated_hours, " +
                 "estimated_hours_day, end_time_calculated) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
