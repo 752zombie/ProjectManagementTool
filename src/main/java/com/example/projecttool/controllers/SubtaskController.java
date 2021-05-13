@@ -122,12 +122,23 @@ public class SubtaskController {
         return "redirect:view-subtasks";
     }
 
-    @PostMapping("add-employee-to-subtask")
+    @PostMapping("/add-employee-to-subtask")
     public String addEmployeeToSubtask(@RequestParam("employee-id") Integer employeeId, @RequestParam("subtask-id") Integer subtaskId) {
         try {
-            System.out.println(employeeId);
-            System.out.println(subtaskId);
             SubtaskRepository.addEmployeeToSubtask(subtaskId, employeeId);
+        }
+
+        catch (SQLException e) {
+            return "project/failed-getting-tasks";
+        }
+
+        return  "redirect:/view-subtasks";
+    }
+
+    @PostMapping("/remove-employee-from-subtask")
+    public String removeEmployeeFromSubtask(@RequestParam("employee-id") Integer employeeId, @RequestParam("subtask-id") Integer subtaskId) {
+        try {
+            SubtaskRepository.removeEmployeeFromSubtask(subtaskId, employeeId);
         }
 
         catch (SQLException e) {
