@@ -21,8 +21,6 @@ public class SubtaskController {
     @PostMapping("edit-task-with-subtasks")
     public String viewSubtasks(@RequestParam("id") Integer taskId, HttpSession session)
     {
-        ArrayList<Subtask> subtasks = SubtaskService.getSubtasks(taskId);
-        session.setAttribute("subtasks", subtasks);
         session.setAttribute("taskId", taskId);
 
         return "redirect:view-subtasks";
@@ -50,14 +48,10 @@ public class SubtaskController {
     @PostMapping("add-subtask-to-task")
     public String addSubtaskToTask(@RequestParam("subtask-name") String name, @RequestParam("subtask-description") String description,
                                    @RequestParam("start-time") String startTime, @RequestParam("end-time") String endTime,
-                                   @RequestParam("task-id") Integer taskId, HttpSession session) {
+                                   @RequestParam("task-id") Integer taskId) {
 
         try {
             SubtaskService.addNewSubtaskToTask(taskId, name, description, startTime, endTime);
-            ArrayList<Subtask> subtasks = SubtaskService.getSubtasks(taskId);
-            session.setAttribute("subtasks", subtasks);
-            session.setAttribute("taskId", taskId);
-
         }
 
         catch (SQLException e) {
@@ -70,14 +64,10 @@ public class SubtaskController {
     @PostMapping("save-subtask")
     public String saveSubtask(@RequestParam("subtask-name") String name, @RequestParam("subtask-description") String description,
                               @RequestParam("start-time") String startTime, @RequestParam("end-time") String endTime,
-                              @RequestParam("subtask-id") Integer subtaskId, HttpSession session) {
+                              @RequestParam("subtask-id") Integer subtaskId) {
 
         try {
             SubtaskService.updateSubtask(subtaskId, name, description, startTime, endTime);
-            Integer taskId =  (Integer) session.getAttribute("taskId");
-            ArrayList<Subtask> subtasks = SubtaskService.getSubtasks(taskId);
-            session.setAttribute("subtasks", subtasks);
-
         }
 
         catch (SQLException e) {
@@ -95,8 +85,6 @@ public class SubtaskController {
         try {
             Integer taskId = (Integer) session.getAttribute("taskId");
             SubtaskService.addNewSubtaskToTask(taskId, name, description, startTime, endTime);
-            ArrayList<Subtask> subtasks = SubtaskService.getSubtasks(taskId);
-            session.setAttribute("subtasks", subtasks);
         }
 
         catch (SQLException e) {
@@ -110,9 +98,6 @@ public class SubtaskController {
     public String deleteSubtask(@RequestParam("subtask-id") Integer subtaskId, HttpSession session) {
         try {
             SubtaskService.deleteSubtask(subtaskId);
-            Integer taskId = (Integer) session.getAttribute("taskId");
-            ArrayList<Subtask> subtasks = SubtaskService.getSubtasks(taskId);
-            session.setAttribute("subtasks", subtasks);
         }
 
         catch (SQLException e) {
