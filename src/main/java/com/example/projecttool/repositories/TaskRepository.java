@@ -29,20 +29,21 @@ public class TaskRepository {
             String end_time = resultSet.getString("end_time");
             int estimatedHours = resultSet.getInt("estimated_hours");
             int estimatedHoursPrDay = resultSet.getInt("estimated_hours_day");
+            String end_time_calculated = resultSet.getString("end_time_calculated");
 
-           taskList.add(new Task(id, project_name, project_description, start_time, end_time, priority, estimatedHours, estimatedHoursPrDay));
+           taskList.add(new Task(id, project_name, project_description, start_time, end_time_calculated, end_time, priority, estimatedHours, estimatedHoursPrDay));
         }
 
         return taskList;
     }
 
 
-    public static void editTask(int taskId, String taskName, String description, String priority, String start_time, String end_time, int estimatedHoursTotal, int estimatedHoursPrDay) throws SQLException {
+    public static void editTask(int taskId, String taskName, String description, String priority, String start_time, String end_time_calculated, String end_time, int estimatedHoursTotal, int estimatedHoursPrDay) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
 
         PreparedStatement statement = connection.prepareStatement("UPDATE tasks SET task_name = ?, " +
                 "task_description = ?, start_time = ?, end_time = ?, priority = ?, " +
-                "estimated_hours = ?, estimated_hours_day = ? WHERE id = ?");
+                "estimated_hours = ?, estimated_hours_day = ?, end_time_calculated = ? WHERE id = ?");
 
         statement.setString(1, taskName);
         statement.setString(2, description);
@@ -51,22 +52,24 @@ public class TaskRepository {
         statement.setString(5, priority);
         statement.setInt(6, estimatedHoursTotal);
         statement.setInt(7, estimatedHoursPrDay);
-        statement.setInt(8, taskId);
+        statement.setDate(8, java.sql.Date.valueOf(end_time_calculated));
+        statement.setInt(9, taskId);
 
         statement.execute();
 
     }
 
 
-    public static void addRowToTask(int project_id, String task_name, String task_description, String priority, String start_time, String end_time, int estimatedHoursTotal, int estimatedHoursPrDay) throws SQLException {
+    public static void addRowToTask(int project_id, String task_name, String task_description, String priority, String start_time,
+                                    String end_time_calculated, String end_time, int estimatedHoursTotal, int estimatedHoursPrDay) throws SQLException {
 
 
         Connection connection = DatabaseConnection.getConnection();
 
-        String command = String.format("INSERT INTO tasks (project_id, task_name, task_description, start_time, end_time, priority, estimated_hours, estimated_hours_day) values ('%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d')", project_id, task_name, task_description, start_time, end_time, priority, estimatedHoursTotal, estimatedHoursPrDay);
+       // String command = String.format("INSERT INTO tasks (project_id, task_name, task_description, start_time, end_time, priority, estimated_hours, estimated_hours_day) values ('%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d')", project_id, task_name, task_description, start_time, end_time, priority, estimatedHoursTotal, estimatedHoursPrDay);
         PreparedStatement statement = connection.prepareStatement("INSERT INTO tasks (project_id, " +
                 "task_name, task_description, start_time, end_time, priority, estimated_hours, " +
-                "estimated_hours_day) values (?, ?, ?, ?, ?, ?, ?, ?)");
+                "estimated_hours_day, end_time_calculated) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
         statement.setInt(1, project_id);
         statement.setString(2, task_name);
@@ -76,6 +79,7 @@ public class TaskRepository {
         statement.setString(6, priority);
         statement.setInt(7, estimatedHoursTotal);
         statement.setInt(8, estimatedHoursPrDay);
+        statement.setDate(9, java.sql.Date.valueOf(end_time_calculated));
 
         statement.execute();
 

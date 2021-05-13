@@ -35,8 +35,8 @@
         <span class="td" id="notes">Notes</span>
         <span class="td">Estimated hours/day/employee</span>
         <span class="td">Estimated hours total</span>
-        <span class="td">Days until finished</span>
         <span class="td">Start date</span>
+        <span class="td">Due date</span>
         <span class="td">Calculated end date</span>
         <span class="td"> </span>
     </div>
@@ -61,12 +61,12 @@
                                     th:value="${task.estimatedHoursPrDay}"></span>
             <span class="td"><input type="number" id="hours-total" name="estimated-hours-total"
                                     th:value="${task.estimatedHoursTotal}"></span>
-            <span class="td"><input type="number" id="work-days-until-finish" name="work-days-until-finish" value=""
-                                    readonly></span>
             <span class="td"><input type="date" id="task-start" name="start_time" th:value="${task.start_time}"></span>
-            <span class="td"><input type="date" id="task-end" name="end_time" th:value="${task.end_time}"
-                                    readonly></span>
 
+
+            <span class="td"><input type="date" id="task-end" name="end_time" th:value="${task.end_time}"></span>
+            <span class="td"><input type="date" id="task-end-calculated" name="end_time_calculated" th:value="${task.end_time_calculated}"
+                                    readonly></span>
             <span class="td">
                 <input type="submit" value="Save" name="action" formaction="/edit-task">
                 <input type="submit" value="Delete" name="action" formaction="/edit-task">
@@ -90,9 +90,9 @@
                                        required></textarea></span>
             <span class="td"><input type="number" name="estimated-hours-day" required></span>
             <span class="td"><input type="number" name="estimated-hours-total" required></span>
-            <span class="td"><input type="number" name="work-days-until-finish" value="" readonly></span>
+
             <span class="td"><input type="date" name="start_time" required></span>
-            <span class="td"><input type="date" name="end_time" readonly></span>
+            <span class="td"><input type="date" name="end_time"></span>
 
 
             <span class="td">

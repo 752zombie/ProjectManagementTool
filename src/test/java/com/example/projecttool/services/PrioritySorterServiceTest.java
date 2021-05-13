@@ -18,11 +18,11 @@ class PrioritySorterServiceTest {
 
         // Arrange
         ArrayList<Task> taskList = new ArrayList<>();
-        Task task = new Task(1, "Test", "Test1", "2014-05-05", "2014-06-06", "low", 1, 1);
-        Task task1 = new Task(1, "Test", "Test1", "2014-05-05", "2014-06-06", "medium", 1, 1);
-        Task task2 = new Task(1, "Test", "Test1", "2014-05-05", "2014-06-06", "high", 1, 1);
-        Task task3 = new Task(1, "Test", "Test1", "2014-05-05", "2014-06-06", "high", 1, 1);
-        Task task4 = new Task(1, "Test", "Test1", "2014-05-05", "2014-06-06", "high", 1, 1);
+        Task task = new Task(1, "Test", "Test1", "2014-05-05", "2014-06-06", "2014-06-06", "low", 1, 1);
+        Task task1 = new Task(1, "Test", "Test1", "2014-05-05", "2014-06-06", "2014-06-06", "medium", 1, 1);
+        Task task2 = new Task(1, "Test", "Test1", "2014-05-05", "2014-06-06", "2014-06-06", "high", 1, 1);
+        Task task3 = new Task(1, "Test", "Test1", "2014-05-05", "2014-06-06", "2014-06-06", "high", 1, 1);
+        Task task4 = new Task(1, "Test", "Test1", "2014-05-05", "2014-06-06", "2014-06-06", "high", 1, 1);
         taskList.add(task);
         taskList.add(task1);
         taskList.add(task2);

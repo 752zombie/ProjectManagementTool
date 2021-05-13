@@ -20,6 +20,7 @@
 
 DIV.table
 {
+
     display:table;
 
 }
@@ -47,6 +48,7 @@ DIV.header-group {
     min-width: 400px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 
+
 }
 
 #task-description, #new-task-description {
@@ -60,6 +62,7 @@ DIV.header-group {
     width:170px;
     height: 60px;
     transition: 0.5s;
+    position: absolute;
 
 }
 

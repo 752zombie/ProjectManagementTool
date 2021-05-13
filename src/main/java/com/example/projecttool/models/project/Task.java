@@ -17,15 +17,17 @@ public class Task {
     private int estimatedHoursPrDay;
     private int estimatedHoursTotal;
     private String start_time;
+    private String end_time_calculated;
     private String end_time;
 
 
-    public Task(int id, String name, String description, String start_time, String end_time, String priority, int estimatedHours, int estimatedHoursPrDay) {
+    public Task(int id, String name, String description, String start_time, String end_time_calculated, String end_time, String priority, int estimatedHours, int estimatedHoursPrDay) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.start_time = start_time;
         this.end_time = end_time;
+        this.end_time_calculated = end_time_calculated;
         this.priority = priority;
         this.estimatedHoursTotal = estimatedHours;
         this.estimatedHoursPrDay = estimatedHoursPrDay;
@@ -70,6 +72,9 @@ public class Task {
         return priority;
     }
 
+    public String getEnd_time_calculated() {
+        return end_time_calculated;
+    }
 }
 
 
