@@ -129,6 +129,7 @@ public class ProjectController {
             // Sorts and directs edited tasks to View
             ArrayList<Task> projectTasks = taskService.getTasks(project.getProjectId());
 
+
             session.setAttribute("project", project);
             session.setAttribute("projectTasks", projectTasks);
 

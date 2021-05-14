@@ -19,9 +19,12 @@ public class Task {
     private String start_time;
     private String end_time_calculated;
     private String end_time;
+    private String countWeekends;
 
 
-    public Task(int id, String name, String description, String start_time, String end_time_calculated, String end_time, String priority, int estimatedHours, int estimatedHoursPrDay) {
+
+
+    public Task(int id, String name, String description, String start_time, String end_time_calculated, String end_time, String priority, int estimatedHours, int estimatedHoursPrDay, String countWeekends) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -31,7 +34,12 @@ public class Task {
         this.priority = priority;
         this.estimatedHoursTotal = estimatedHours;
         this.estimatedHoursPrDay = estimatedHoursPrDay;
+        this.countWeekends = countWeekends;
 
+    }
+
+    public String getCountWeekends() {
+        return countWeekends;
     }
 
     public int getEstimatedHoursPrDay() {

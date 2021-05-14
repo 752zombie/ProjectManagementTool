@@ -27,7 +27,7 @@ public class TaskService {
         DueDateCalculator dueDate = new DueDateCalculator();
         String[] endTimeCalcAndWeekChoice = dueDate.dueDate(estimatedHoursDay, estimatedHoursTotal, start_time, countWeekends);
 
-       TaskRepository.editTask(taskId, taskName, description, priority, start_time, endTimeCalcAndWeekChoice[0], end_time, estimatedHoursTotal, estimatedHoursDay);
+       TaskRepository.editTask(taskId, taskName, description, priority, start_time, endTimeCalcAndWeekChoice[0], end_time, estimatedHoursTotal, estimatedHoursDay, endTimeCalcAndWeekChoice[1]);
 
        // SHOULD week CHOICE BE ADDED TO TASK OR A NEW TABLE
     }
@@ -41,12 +41,10 @@ public class TaskService {
                              int estimatedHoursDay, int estimatedHoursTotal, String countWeekends) throws SQLException {
 
 
-        System.out.println(countWeekends);
-
         DueDateCalculator dueDate = new DueDateCalculator();
         String[] endTimeCalcAndWeekChoice = dueDate.dueDate(estimatedHoursDay, estimatedHoursTotal, start_time, countWeekends);
 
-        TaskRepository.addRowToTask(projectId, name, description, priority, start_time, endTimeCalcAndWeekChoice[0], end_time, estimatedHoursTotal, estimatedHoursDay);
+        TaskRepository.addRowToTask(projectId, name, description, priority, start_time, endTimeCalcAndWeekChoice[0], end_time, estimatedHoursTotal, estimatedHoursDay, endTimeCalcAndWeekChoice[1]);
 
         // SHOULD week CHOICE BE ADDED TO TASK OR A NEW TABLE
     }

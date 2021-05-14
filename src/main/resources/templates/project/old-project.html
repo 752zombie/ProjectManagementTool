@@ -50,13 +50,13 @@
         <form method="post" action="/edit-task" class="tr" th:each="task : ${session.projectTasks}">
             <input type="hidden" th:value="${task.id}" name="id">
 
-            <span class="td">
+
                 <select id="task-priority" name="priority" required>
                     <option class="high-prior" value="high" th:selected="${task.priority=='high'}">High</option>
                     <option class="medium-prior" value="medium" th:selected="${task.priority=='medium'}">Medium</option>
                     <option class="low-prior" value="low" th:selected="${task.priority=='low'}">Low</option>
                 </select>
-            </span>
+
 
 
             <span class="td"><input type="text" id="task-name" name="name" th:value="${task.name}"></span>
@@ -64,11 +64,14 @@
             <span class="td"><input type="number" id="hours-day" name="estimated-hours-day"
                                     th:value="${task.estimatedHoursPrDay}"></span>
 
+
             <!-- Count weekends or only weekdays -->
-            <select class="select" name="count-weekends">
-                <option value="weekend-false">NO</option>
-                <option value="weekend-true">YES</option>
+
+            <select id="task-count-weekends" name="count-weekends">
+                <option value="weekend-false" th:selected="${task.countWeekends=='weekend-false'}">NO</option>
+                <option value="weekend-true" th:selected="${task.countWeekends=='weekend-true'}">YES</option>
             </select>
+
 
             <span class="td"><input type="number" id="hours-total" name="estimated-hours-total"
                                     th:value="${task.estimatedHoursTotal}"></span>
@@ -94,13 +97,13 @@
 
         <form action="/add-row-to-tasks" method="post" class="tr">
 
-            <span class="td">
+
                 <select name="priority" required>
                     <option class="high-prior" value="high">High</option>
                     <option class="medium-prior" value="medium">Medium</option>
                     <option class="low-prior" value="low">Low</option>
                 </select>
-            </span>
+
 
             <span class="td"><input type="text" name="name" required></span>
 
