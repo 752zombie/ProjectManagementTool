@@ -30,7 +30,6 @@ FORM.tr, DIV.tr
 }
 SPAN.td
 {
-
     display:table-cell;
 }
 DIV.row-group {
@@ -39,7 +38,10 @@ DIV.row-group {
 
 DIV.header-group {
     display: table-header-group;
+    border-bottom: 1px solid black;
+
 }
+
 
 .table {
 

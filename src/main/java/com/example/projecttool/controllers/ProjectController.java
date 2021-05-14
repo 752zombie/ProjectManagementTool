@@ -7,6 +7,7 @@ import com.example.projecttool.repositories.ProjectRepository;
 import com.example.projecttool.repositories.ShareProjectRepository;
 import com.example.projecttool.repositories.TaskRepository;
 import com.example.projecttool.services.ProjectService;
+import com.example.projecttool.services.ShareProjectService;
 import com.example.projecttool.services.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,7 @@ public class ProjectController {
 
     ProjectService projectService = new ProjectService();
     TaskService taskService = new TaskService();
+    ShareProjectService shareProjectService = new ShareProjectService();
 
 
     @GetMapping("/create-project")
@@ -86,7 +88,6 @@ public class ProjectController {
             session.setAttribute("projectTasks", projectTasks);
             session.setAttribute("project", project);
 
-
             // Deletes row from project
             if (action.equals("Delete")) {
                 projectService.deleteProject(projectId);
@@ -96,6 +97,16 @@ public class ProjectController {
 
 
                 return "project/all-projects";
+
+            }
+            // Ignores shared project
+            else if (action.equals("Ignore")){
+                shareProjectService.ignoreProject(projectId, user.getId());
+                // WHY DOES THIS ONLY WORK WITH Model
+                ArrayList<Project> sharedProjects = shareProjectService.getSharedProjects(user.getId());
+                model.addAttribute("projectList", sharedProjects);
+
+                return "share-project/shared-with-me";
 
             }
 

@@ -100,6 +100,15 @@ public class ShareProjectRepository {
 
     }
 
+    public static void ignoreProject(Integer projectId, int userId) throws SQLException {
+        Connection connection = DatabaseConnection.getConnection();
+
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM collaborators WHERE collaborator_id = ? AND project_id = ?");
+        statement.setInt(1, userId);
+        statement.setInt(2, projectId);
+        statement.execute();
+
+    }
 }
 
 

@@ -5,6 +5,8 @@
     <title>Title</title>
   <link rel="stylesheet" href="generel css/headerstyle.css">
   <link rel="stylesheet" href="generel css/footerstyle.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 
 </head>
 <body>
@@ -23,7 +25,8 @@
       <span class="project-end" id="project-end" th:text="${project.endTime}"></span><br>
       <form action="/choose-project-to-edit" method="post">
         <input type="hidden" name="id" th:value="${project.projectId}">
-        <button type="submit">Edit project</button>
+        <button type="submit" class="btn btn-primary" value="Open" name="action">Edit project</button>
+        <button type="submit" class="btn btn-warning" value="Ignore" name="action">Ignore project</button>
       </form>
     </div>
   </li>
