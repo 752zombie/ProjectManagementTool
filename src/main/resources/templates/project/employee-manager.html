@@ -30,12 +30,32 @@
             <span th:if="${iter.last}" th:text="${skill.name}"></span>
         </span>
     </li>
-    
-    <form action="/create-new-employee" method="post">
-        <label for="new-emp-name">Create new employee: </label>
-        <input type="text" name="emp-name" id="new-emp-name" placeholder="Employee name">
-        <button type="submit">Save</button>
-    </form>
+
+    <li>
+         <form action="/create-new-employee" method="post">
+             <label for="new-emp-name">Create new employee: </label>
+             <input type="text" name="emp-name" id="new-emp-name" placeholder="Employee name">
+             <button type="submit">Save</button>
+         </form>
+     </li>
+
+    <li>
+        <form action="/create-new-skill" method="post">
+            <label for="skill-name">Create a new skill: </label>
+            <input type="text" name="skill-name" id="skill-name" placeholder="skill name">
+            <button type="submit">Save</button>
+        </form>
+        <form action="/delete-skill" method="post" th:if="${!session.allSkills.isEmpty()}">
+            <label for="skill-deleter">Delete a skill: </label>
+            <select name="skill-to-delete" id="skill-deleter">
+                <option th:each="skill : ${session.allSkills}" th:value="${skill.id}" th:text="${skill.name}"></option>
+            </select>
+            <button type="submit">Delete skill</button>
+        </form>
+    </li>
+
+
+
 </ul>
 </body>
 </html>

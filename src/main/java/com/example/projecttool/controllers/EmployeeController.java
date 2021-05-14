@@ -1,6 +1,7 @@
 package com.example.projecttool.controllers;
 
 import com.example.projecttool.models.Employee;
+import com.example.projecttool.models.Skill;
 import com.example.projecttool.models.User;
 import com.example.projecttool.repositories.EmployeeRepository;
 import com.example.projecttool.repositories.SubtaskRepository;
@@ -27,6 +28,8 @@ public class EmployeeController {
         try {
             ArrayList<Employee> employees = SubtaskRepository.getAllEmployees(user.getId());
             session.setAttribute("allEmployees", employees);
+            ArrayList<Skill> skills = EmployeeRepository.getAllSkills(user.getId());
+            session.setAttribute("allSkills", skills);
         }
 
         catch (SQLException e) {
@@ -71,6 +74,34 @@ public class EmployeeController {
 
         catch (SQLException e) {
             return ErrorHandler.setCurrentError("Error creating employee", session);
+        }
+
+        return "redirect:/employee-manager";
+    }
+
+    @PostMapping("/create-new-skill")
+    public String createNewSkill(@RequestParam("skill-name") String skillName, HttpSession session) {
+        try {
+            User user = (User) session.getAttribute("user");
+            EmployeeRepository.createNewSkill(user.getId(), skillName);
+        }
+
+        catch (SQLException e) {
+            e.printStackTrace();
+            return ErrorHandler.setCurrentError("Error creating new skill", session);
+        }
+
+        return "redirect:/employee-manager";
+    }
+
+    @PostMapping("/delete-skill")
+    public String deleteSkill(@RequestParam("skill-to-delete") Integer skillId, HttpSession session) {
+        try {
+            EmployeeRepository.deleteSkill(skillId);
+        }
+
+        catch (SQLException e) {
+            return ErrorHandler.setCurrentError("Error deleting skill", session);
         }
 
         return "redirect:/employee-manager";
