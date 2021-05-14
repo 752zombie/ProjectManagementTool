@@ -23,4 +23,12 @@ public class ShareProjectService {
 
         return ShareProjectRepository.getSharedProjects(userId);
     }
-}
+
+    public void ignoreProject(Integer projectId, int userId) throws SQLException {
+
+        ShareProjectRepository.ignoreProject(projectId, userId);
+    }
+
+
+    }
+

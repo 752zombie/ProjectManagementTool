@@ -59,7 +59,7 @@ ShareProjectService shareProjectService = new ShareProjectService();
 
 
         } catch (SQLException s) {
-            System.out.println("couldnt get shared projects");
+            System.out.println("could not get shared projects");
         }
         return "share-project/shared-with-me";
     }
