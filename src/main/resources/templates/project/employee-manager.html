@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Employee manager</title>
+    <style>
+        li {
+            margin-bottom: 50px;
+        }
+    </style>
 </head>
 <body>
+<ul>
+    <li th:each="emp : ${session.allEmployees}">
+        <form action="/change-employee-name" method="post">
+            <input type="hidden" name="emp-id" th:value="${emp.id}">
+            <label for="emp-name">Employee name: </label>
+            <input type="text" name="emp-name" th:value="${emp.name}" id="emp-name" onchange="this.form.submit()">
+        </form>
+        <form action="/delete-employee" method="post">
+            <input type="hidden" name="emp-id" th:value="${emp.id}">
+            <button type="submit">Delete</button>
+        </form>
+        <span>Skills: </span>
+        <span th:each="skill, iter : ${emp.skills}">
+            <span th:if="${!iter.last}" th:text="${skill.name} + ', '"></span>
+            <span th:if="${iter.last}" th:text="${skill.name}"></span>
+        </span>
+    </li>
     
+    <form action="/create-new-employee" method="post">
+        <label for="new-emp-name">Create new employee: </label>
+        <input type="text" name="emp-name" id="new-emp-name" placeholder="Employee name">
+        <button type="submit">Save</button>
+    </form>
+</ul>
 </body>
 </html>

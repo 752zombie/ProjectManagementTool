@@ -1,7 +1,7 @@
 package com.example.projecttool.models;
 
 public class Skill {
-    String name;
+    private String name;
 
     public Skill(String name) {
         this.name = name;
