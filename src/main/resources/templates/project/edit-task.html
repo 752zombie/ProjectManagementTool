@@ -89,7 +89,7 @@
             <span th:each="emp, iter : ${subtask.getAssignedEmployees()}" >
                 <span th:if="${!iter.last}" th:text="${emp.name} + ', '" th:id="emp.id"></span>
                 <span th:if="${iter.last}" th:text="${emp.name}"></span>
-            </span>
+            </span><br>
             <span>Required skills: </span>
             <span th:each="skill, iter : ${subtask.requiredSkills}" >
                 <span th:if="${!iter.last}" th:text="${skill.name} + ', '" th:id="skill.id"></span>
