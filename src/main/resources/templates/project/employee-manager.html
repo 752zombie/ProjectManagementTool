@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Employee manager</title>
+    <link rel="stylesheet" href="generel css/headerstyle.css">
+    <link rel="stylesheet" href="generel css/footerstyle.css">
     <style>
         li {
             margin-bottom: 50px;
@@ -10,6 +12,7 @@
     </style>
 </head>
 <body>
+<div th:replace="fragments/header :: header"></div>
 <ul>
     <li th:each="emp : ${session.allEmployees}">
         <form action="/change-employee-name" method="post">
