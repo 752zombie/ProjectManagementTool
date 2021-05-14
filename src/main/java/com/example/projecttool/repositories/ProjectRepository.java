@@ -82,6 +82,28 @@ public class ProjectRepository {
 
     }
 
+    public static void deleteProject(int projectId) throws SQLException {
+
+        Connection connection = DatabaseConnection.getConnection();
+
+        // Tasks from the project needs to be DELETED before we can DELETE the project
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM tasks WHERE project_id = ?");
+        statement.setInt(1, projectId);
+        statement.execute();
+
+        // Collaborators also needs to be deleted
+        statement = connection.prepareStatement("DELETE FROM collaborators WHERE project_id = ?");
+        statement.setInt(1, projectId);
+        statement.execute();
+
+
+        // DELETES from project
+        statement = connection.prepareStatement("DELETE FROM project WHERE project_id = ?");
+        statement.setInt(1, projectId);
+        statement.execute();
+    }
+
+
 }
 
 

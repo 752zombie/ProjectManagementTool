@@ -4,6 +4,7 @@ import com.example.projecttool.models.User;
 import com.example.projecttool.models.project.Project;
 import com.example.projecttool.repositories.ProjectRepository;
 import com.example.projecttool.repositories.ShareProjectRepository;
+import com.example.projecttool.repositories.TaskRepository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -45,4 +46,11 @@ public class ProjectService {
 
         return ShareProjectRepository.isReadOnly(projectId, userId);
     }
-}
+
+    public void deleteProject(Integer projectId) throws SQLException {
+
+            ProjectRepository.deleteProject(projectId);
+        }
+
+    }
+
