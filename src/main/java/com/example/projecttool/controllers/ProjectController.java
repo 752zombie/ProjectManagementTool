@@ -59,9 +59,9 @@ public class ProjectController {
 
             try {
                 User user = (User) session.getAttribute("user");
-                ArrayList<Project> allProjects = projectService.seeProjectList(user.getId());
-
-                model.addAttribute("projectList", allProjects);
+                ArrayList<Project> projectList = projectService.seeProjectList(user.getId());
+                // WHY DOES THIS ONLY WORK WITH Model
+                model.addAttribute("projectList", projectList);
 
                 return "project/all-projects";
 
@@ -73,10 +73,11 @@ public class ProjectController {
 
 
     @PostMapping("choose-project-to-edit")
-    public String editProject(@RequestParam("id") Integer projectId, HttpSession session, Model model) {
+    public String editProject(@RequestParam("id") Integer projectId, @RequestParam("action") String action, HttpSession session, Model model) {
 
         try {
             User user = (User) session.getAttribute("user");
+
             // Add current project to session
             Project project = projectService.getProject(projectId);
 
@@ -86,6 +87,17 @@ public class ProjectController {
             session.setAttribute("project", project);
 
 
+            // Deletes row from project
+            if (action.equals("Delete")) {
+                projectService.deleteProject(projectId);
+                // WHY DOES THIS ONLY WORK WITH Model
+                ArrayList<Project> projectList = projectService.seeProjectList(user.getId());
+                model.addAttribute("projectList", projectList);
+
+
+                return "project/all-projects";
+
+            }
 
 
          if (projectService.isReadOnly(projectId, user.getId())) {
