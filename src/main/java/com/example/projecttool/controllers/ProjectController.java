@@ -60,7 +60,7 @@ public class ProjectController {
             try {
                 User user = (User) session.getAttribute("user");
                 ArrayList<Project> projectList = projectService.seeProjectList(user.getId());
-
+                // WHY DOES THIS ONLY WORK WITH Model
                 model.addAttribute("projectList", projectList);
 
                 return "project/all-projects";
@@ -90,9 +90,8 @@ public class ProjectController {
             // Deletes row from project
             if (action.equals("Delete")) {
                 projectService.deleteProject(projectId);
-
+                // WHY DOES THIS ONLY WORK WITH Model
                 ArrayList<Project> projectList = projectService.seeProjectList(user.getId());
-
                 model.addAttribute("projectList", projectList);
 
 
