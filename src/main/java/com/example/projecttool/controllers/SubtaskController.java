@@ -137,4 +137,32 @@ public class SubtaskController {
 
         return  "redirect:/view-subtasks";
     }
+
+    @PostMapping("add-skill-to-subtask")
+    public String addSkillToSubtask(@RequestParam("subtask-id") Integer subtaskId, @RequestParam("skill-id") Integer skillId, HttpSession session) {
+        try {
+            SubtaskRepository.addSkillToSubtask(subtaskId, skillId);
+        }
+
+        catch (SQLException e) {
+            return ErrorHandler.setCurrentError("Something went wrong adding skill to subtask", session);
+        }
+
+        return  "redirect:/view-subtasks";
+    }
+
+    @PostMapping("/remove-skill-from-subtask")
+    public String removeSkillFromSubtask(@RequestParam("subtask-id") Integer subtaskId, @RequestParam("skill-id") Integer skillId, HttpSession session) {
+        try {
+            System.out.println(subtaskId);
+            System.out.println(skillId);
+            SubtaskRepository.removeSkillFromSubtask(subtaskId, skillId);
+        }
+
+        catch (SQLException e) {
+            return ErrorHandler.setCurrentError("Something went wrong removing skill from subtask", session);
+        }
+
+        return  "redirect:/view-subtasks";
+    }
 }

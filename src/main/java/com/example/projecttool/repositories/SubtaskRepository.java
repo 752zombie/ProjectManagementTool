@@ -32,32 +32,24 @@ public class SubtaskRepository {
 
     }
 
-    public static void addSkillToSubtask(int subtaskId, int skillId) {
+    public static void addSkillToSubtask(int subtaskId, int skillId) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
 
-        try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO subtask_skill(subtask_id, skill_id) values (?, ?)");
-            statement.setInt(1, subtaskId);
-            statement.setInt(2, skillId);
-        }
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO subtask_skill(subtask_id, skill_id) values (?, ?)");
+        statement.setInt(1, subtaskId);
+        statement.setInt(2, skillId);
+        statement.execute();
 
-        catch (SQLException e) {
-            System.out.println("Error adding skill to subtask");
-        }
     }
 
-    public static void removeSkillFromSubtask(int subtaskId, int skillId) {
+    public static void removeSkillFromSubtask(int subtaskId, int skillId) throws SQLException{
         Connection connection = DatabaseConnection.getConnection();
 
-        try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM subtask_skill WHERE subtask_id = ? AND skill_id = ?");
-            statement.setInt(1, subtaskId);
-            statement.setInt(2, skillId);
-        }
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM subtask_skill WHERE subtask_id = ? AND skill_id = ?");
+        statement.setInt(1, subtaskId);
+        statement.setInt(2, skillId);
+        statement.execute();
 
-        catch (SQLException e) {
-            System.out.println("Error removing skill from subtask");
-        }
     }
 
 
@@ -131,8 +123,9 @@ public class SubtaskRepository {
             ResultSet resultSet = statement.executeQuery();
 
             while(resultSet.next()) {
+                int skillId = resultSet.getInt("skill_id");
                 String skillName = resultSet.getString("skill_name");
-                skills.add(new Skill(skillName));
+                skills.add(new Skill(skillName, skillId));
             }
         }
 

@@ -83,10 +83,18 @@ public class Subtask {
                 return true;
             }
 
-
         }
 
 
+        return false;
+    }
+
+    public boolean hasSkill(int skillId) {
+        for (Skill skill : requiredSkills) {
+            if (skill.getId() == skillId) {
+                return true;
+            }
+        }
         return false;
     }
 }

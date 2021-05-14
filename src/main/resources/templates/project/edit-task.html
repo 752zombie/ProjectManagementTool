@@ -31,7 +31,6 @@
 <div th:replace="fragments/header :: header"></div>
 <div><a href="return-current-project" class="signup">Return to project</a></div>
 
-
     <ul th:each="subtask : ${session.subtasks}">
         <li>
             <div class="table">
@@ -80,6 +79,24 @@
                 <button type="submit">Remove</button>
             </form>
 
+            <form action="/add-skill-to-subtask" method="post">
+                <input type="hidden" name="subtask-id" th:value="${subtask.id}">
+                <label for="skill-adder">Choose skill to add: </label>
+                <select name="skill-id" id="skill-adder">
+                    <option th:each="skill : ${session.allSkills}" th:value="${skill.id}" th:text="${skill.name}" th:if="${!subtask.hasSkill(skill.id)}"></option>
+                </select>
+                <button type="submit">Add</button>
+            </form>
+
+            <form action="/remove-skill-from-subtask" method="post">
+                <input type="hidden" name="subtask-id" th:value="${subtask.id}">
+                <label for="skill-remover">Choose skill to remove</label>
+                <select name="skill-id" id="skill-remover">
+                    <option th:each="skill : ${subtask.requiredSkills}" th:value="${skill.id}" th:text="${skill.name}"></option>
+                </select>
+                <button type="submit">Remove</button>
+            </form>
+
 
 
             
@@ -87,8 +104,14 @@
         <li>
             <span>Assigned employees: </span>
             <span th:each="emp, iter : ${subtask.getAssignedEmployees()}" >
-                <span th:if="${!iter.last}" th:text="${emp.name} + ', '" th:id="emp.id"></span>
-                <span th:if="${iter.last}" th:text="${emp.name}"></span>
+                <span th:onmouseover="'javascript:showDetails(\''+ ${emp.id} +'\');'" th:onmouseout="'javascript:hideDetails(\''+ ${emp.id} +'\');'">
+                    <span th:if="${!iter.last}" th:text="${emp.name} + ', '" th:id="emp.id"></span>
+                    <span th:if="${iter.last}" th:text="${emp.name}"></span>
+                </span>
+
+                <span style="display: none" th:id="${emp.id + 'popup'}">
+                    <h1 th:text="${emp.name}"></h1><br>
+                </span>
             </span><br>
             <span>Required skills: </span>
             <span th:each="skill, iter : ${subtask.requiredSkills}" >
@@ -135,4 +158,16 @@
     <a href="/employee-manager">Create and edit employees here</a>
 
 </body>
+
+<script>
+    function showDetails(empId) {
+        let e = document.getElementById(empId + "popup");
+        e.style.display = "block";
+    }
+
+    function hideDetails(empId) {
+        let e = document.getElementById(empId + "popup");
+        e.style.display = "none";
+    }
+</script>
 </html>
