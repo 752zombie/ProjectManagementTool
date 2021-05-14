@@ -61,7 +61,7 @@
                 </div>
             </div>
 
-            <form action="/add-employee-to-subtask" method="post">
+            <form action="/add-employee-to-subtask" method="post" th:if="${!session.allEmployees.isEmpty()}">
                 <input type="hidden" name="subtask-id" th:value="${subtask.id}">
                 <label for="employee-adder">Choose employee to add</label>
                 <select name="employee-id" id="employee-adder">
@@ -70,7 +70,7 @@
                 <button type="submit">Add</button>
             </form>
 
-            <form action="/remove-employee-from-subtask" method="post">
+            <form action="/remove-employee-from-subtask" method="post" th:if="${!subtask.assignedEmployees.isEmpty()}">
                 <input type="hidden" name="subtask-id" th:value="${subtask.id}">
                 <label for="employee-remover">Choose employee to remove</label>
                 <select name="employee-id" id="employee-remover">
@@ -79,7 +79,7 @@
                 <button type="submit">Remove</button>
             </form>
 
-            <form action="/add-skill-to-subtask" method="post">
+            <form action="/add-skill-to-subtask" method="post" th:if="${!session.allSkills.isEmpty()}">
                 <input type="hidden" name="subtask-id" th:value="${subtask.id}">
                 <label for="skill-adder">Choose skill to add: </label>
                 <select name="skill-id" id="skill-adder">
@@ -88,7 +88,7 @@
                 <button type="submit">Add</button>
             </form>
 
-            <form action="/remove-skill-from-subtask" method="post">
+            <form action="/remove-skill-from-subtask" method="post" th:if="${!subtask.requiredSkills.isEmpty()}">
                 <input type="hidden" name="subtask-id" th:value="${subtask.id}">
                 <label for="skill-remover">Choose skill to remove</label>
                 <select name="skill-id" id="skill-remover">
