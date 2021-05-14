@@ -76,6 +76,7 @@ public class Subtask {
         return endTime;
     }
 
+    // do not delete
     public boolean isAssigned(int employeeId) {
         for (Employee employee : assignedEmployees) {
             if (employee.getId() == employeeId) {

@@ -1,8 +1,10 @@
 package com.example.projecttool.controllers;
 
 import com.example.projecttool.models.Employee;
+import com.example.projecttool.models.Skill;
 import com.example.projecttool.models.User;
 import com.example.projecttool.models.project.Subtask;
+import com.example.projecttool.repositories.EmployeeRepository;
 import com.example.projecttool.repositories.SubtaskRepository;
 import com.example.projecttool.services.ErrorHandler;
 import com.example.projecttool.services.SubtaskService;
@@ -37,6 +39,8 @@ public class SubtaskController {
             Integer taskId = (Integer) session.getAttribute("taskId");
             ArrayList<Subtask> subtasks = SubtaskService.getSubtasks(taskId);
             session.setAttribute("subtasks", subtasks);
+            ArrayList<Skill> skills = EmployeeRepository.getAllSkills(user.getId());
+            session.setAttribute("allSkills", skills);
         }
 
         catch (SQLException e) {

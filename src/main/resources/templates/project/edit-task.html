@@ -90,6 +90,11 @@
                 <span th:if="${!iter.last}" th:text="${emp.name} + ', '" th:id="emp.id"></span>
                 <span th:if="${iter.last}" th:text="${emp.name}"></span>
             </span>
+            <span>Required skills: </span>
+            <span th:each="skill, iter : ${subtask.requiredSkills}" >
+                <span th:if="${!iter.last}" th:text="${skill.name} + ', '" th:id="skill.id"></span>
+                <span th:if="${iter.last}" th:text="${skill.name}"></span>
+            </span>
 
         </li>
     </ul>

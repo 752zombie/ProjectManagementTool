@@ -70,4 +70,24 @@ public class EmployeeRepository {
         return skills;
 
     }
+
+    public static void addSkillToEmployee(int employeeId, int skillId) throws SQLException {
+        Connection connection = DatabaseConnection.getConnection();
+
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO emp_skill(emp_id, skill_id) VALUES (?, ?)");
+        statement.setInt(1,employeeId);
+        statement.setInt(2, skillId);
+        statement.execute();
+
+    }
+
+    public static void removeSkillFromEmployee(int employeeId, int skillId) throws SQLException {
+        Connection connection = DatabaseConnection.getConnection();
+
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM emp_skill WHERE emp_id = ? AND skill_id = ?");
+        statement.setInt(1, employeeId);
+        statement.setInt(2, skillId);
+        statement.execute();
+
+    }
 }

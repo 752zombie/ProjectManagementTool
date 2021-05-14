@@ -106,4 +106,30 @@ public class EmployeeController {
 
         return "redirect:/employee-manager";
     }
+
+    @PostMapping("/add-skill-to-employee")
+    public String addSkillToEmployee(@RequestParam("emp-id") Integer employeeId, @RequestParam("skill-id") Integer skillId, HttpSession session) {
+        try {
+            EmployeeRepository.addSkillToEmployee(employeeId, skillId);
+        }
+
+        catch (SQLException e) {
+            return ErrorHandler.setCurrentError("Error adding skill to employee", session);
+        }
+
+        return "redirect:/employee-manager";
+    }
+
+    @PostMapping("remove-skill-from-employee")
+    public String removeSkillFromEmployee(@RequestParam("emp-id") Integer employeeId, @RequestParam("skill-id") Integer skillId, HttpSession session) {
+        try {
+            EmployeeRepository.removeSkillFromEmployee(employeeId, skillId);
+        }
+
+        catch (SQLException e) {
+            return ErrorHandler.setCurrentError("Error removing skill from employee", session);
+        }
+
+        return "redirect:/employee-manager";
+    }
 }

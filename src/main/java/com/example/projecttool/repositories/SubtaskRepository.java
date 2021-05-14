@@ -60,33 +60,7 @@ public class SubtaskRepository {
         }
     }
 
-    public static void addSkillToEmployee(int employeeId, int skillId) {
-        Connection connection = DatabaseConnection.getConnection();
 
-        try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO emp_skill(emp_id, skill_id) values (?, ?)");
-            statement.setInt(1,employeeId);
-            statement.setInt(2, skillId);
-        }
-
-        catch (SQLException e) {
-            System.out.println("Error adding skill to employee");
-        }
-    }
-
-    public static void removeSkillFromEmployee(int employeeId, int skillId) {
-        Connection connection = DatabaseConnection.getConnection();
-
-        try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM emp_skill WHERE emp_id = ? AND skill_id = ?");
-            statement.setInt(1, employeeId);
-            statement.setInt(2, skillId);
-        }
-
-        catch (SQLException e) {
-            System.out.println("Error removing skill from employee");
-        }
-    }
 
     public static ArrayList<Employee> getAssignedEmployees(int subtaskId) {
         Connection connection = DatabaseConnection.getConnection();
@@ -131,8 +105,9 @@ public class SubtaskRepository {
             ResultSet resultSet = statement.executeQuery();
 
             while(resultSet.next()) {
+                int skillId = resultSet.getInt("skill_id");
                 String skillName = resultSet.getString("skill_name");
-                skills.add(new Skill(skillName));
+                skills.add(new Skill(skillName, skillId));
             }
         }
 

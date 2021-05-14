@@ -29,4 +29,14 @@ public class Employee {
     public List<Skill> getSkills() {
         return skills;
     }
+
+    public boolean hasSkill(int skillId) {
+        for (Skill skill : skills) {
+            if (skill.getId() == skillId) {
+                return true;
+            }
+
+        }
+        return false;
+    }
 }
