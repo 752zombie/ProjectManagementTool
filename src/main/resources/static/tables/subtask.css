@@ -38,13 +38,33 @@ li {
 
 }
 
-#subtask-description {
+#container-employee-manager {
+    margin-left: 1250px;
+}
+
+#assigned-employee {
+    margin-top: -55px;
+}
+
+#create-new-subtask {
+    margin-top: 70px;
+}
+
+#show-employee-details {
+    margin-bottom: -50px;
+}
+#show-employee-details2 {
+    margin-bottom: -50px;
+}
+
+
+#subtask-description, #new-subtask-description {
     width:170px;
     transition: 0.5s;
 
 }
 
-#subtask-description:focus {
+#subtask-description:focus, #new-subtask-description:focus {
 
     width:170px;
     height: 60px;
@@ -55,13 +75,13 @@ li {
 
 #skill-adder-btn {
 
-    margin-left: 58px;
+    margin-left: 73px;
     line-height: 0.5;
 }
 
 #skill-remover-btn {
     line-height: 0.5;
-    margin-left: 81px;
+    margin-left: 63px;
 
 }
 
@@ -132,6 +152,7 @@ input {
 
 #add-employee-btn {
     line-height: 0.5;
+    margin-left: 40px;
 }
 
 #remove-employee-btn {
