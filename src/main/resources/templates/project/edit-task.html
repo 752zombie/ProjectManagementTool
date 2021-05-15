@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit task</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
     <link rel="stylesheet" href="generel css/headerstyle.css">
     <link rel="stylesheet" href="generel css/footerstyle.css">
-    <link rel="stylesheet" href="tables/old-project.css">
+    <link rel="stylesheet" href="tables/subtask.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
     <style>
@@ -62,8 +64,8 @@
                         <span class="td"><input type="date" id="end-time" name="end-time" th:value="${subtask.endTime}"></span>
 
                         <span class="td">
-                            <input class="btn btn-success" type="submit" value="Save" name="action" formaction="/save-subtask">
-                            <input class="btn btn-danger" type="submit" value="Delete" name="action" formaction="/delete-subtask">
+                            <input class="btn btn-success" id="save-subtask-btn" type="submit" value="Save" name="action" formaction="/save-subtask">
+                            <input class="btn btn-danger" id="delete-subtask-btn" type="submit" value="Delete" name="action" formaction="/delete-subtask">
                         </span>
                     </form>
                 </div>
@@ -75,7 +77,7 @@
                 <select name="employee-id" id="employee-adder">
                     <option th:each="emp : ${session.allEmployees}" th:value="${emp.id}" th:text="${emp.name}" th:if="${!subtask.isAssigned(emp.id)}"></option>
                 </select>
-                <button class="btn btn-primary" type="submit">Add</button>
+                <button class="btn btn-primary" id="add-employee-btn" type="submit">Add</button>
             </form>
 
             <form action="/remove-employee-from-subtask" method="post" th:if="${!subtask.assignedEmployees.isEmpty()}">
@@ -84,7 +86,7 @@
                 <select name="employee-id" id="employee-remover">
                     <option th:each="emp : ${subtask.assignedEmployees}" th:value="${emp.id}" th:text="${emp.name}"></option>
                 </select>
-                <button class="btn btn-warning" type="submit">Remove</button>
+                <button class="btn btn-warning" id="remove-employee-btn" type="submit">Remove</button>
             </form>
 
             <form action="/add-skill-to-subtask" method="post" th:if="${!session.allSkills.isEmpty()}">
@@ -93,7 +95,7 @@
                 <select name="skill-id" id="skill-adder">
                     <option th:each="skill : ${session.allSkills}" th:value="${skill.id}" th:text="${skill.name}" th:if="${!subtask.hasSkill(skill.id)}"></option>
                 </select>
-                <button class="btn btn-primary" type="submit">Add</button>
+                <button class="btn btn-primary" id="skill-adder-btn" type="submit">Add</button>
             </form>
 
             <form action="/remove-skill-from-subtask" method="post" th:if="${!subtask.requiredSkills.isEmpty()}">
@@ -102,7 +104,7 @@
                 <select name="skill-id" id="skill-remover">
                     <option th:each="skill : ${subtask.requiredSkills}" th:value="${skill.id}" th:text="${skill.name}"></option>
                 </select>
-                <button class="btn btn-warning" type="submit">Remove</button>
+                <button class="btn btn-warning" id="skill-remover-btn" type="submit">Remove</button>
             </form>
 
 
