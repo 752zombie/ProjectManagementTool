@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Project Management Tool| Frontpage</title>
-    <link rel="stylesheet" href="generel css/frontpagestyle.css">
-    <link rel="stylesheet" href="generel css/headerstyle.css">
+
     <link rel="stylesheet" href="generel css/footerstyle.css">
+    <link rel="stylesheet" href="cssstylesheet.css">
 
 </head>
 <body>
@@ -13,18 +13,15 @@
 <div th:replace="fragments/header :: header"></div>
 
 
-
-
-          <!-- thumbnail and text overlay on hover -->
-    <div class="thmb-content2"><a href="/sign-up" th:if="${session.user == null}">
-          <img class="thmb-image" src="https://www.pngkey.com/png/detail/367-3670351_access-login-icon.png" alt="pmt-signup"/>
-          <div class="normal">
-            <div class="thmb-text">Not a user yet ?</div>
-         </div>
-         <div class="hover">
-            <div class="thmb-text">Sign up now!</div>
-         </div></a>
+<div class="sektion1">
+    <div class="sektion1-1">
+        <div class="overskrift">The easiest way to manage team projects and tasks</div>
+        <div class="under-overskrift">Project Management Tool gives teams everything they need to stay in sync,
+            hit deadlines, and reach their goals.. Start planning now!</div>
+        <div class="under-overskrift">Not a member yet ?</div>
+        <div class="btn"> Sign up</div>
     </div>
+</div>
 
 
     <div th:replace="fragments/footer :: footer"></div>

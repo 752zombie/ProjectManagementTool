@@ -5,18 +5,13 @@
 
     <div class="wrapper">
 
-      <div class="logo">
-        <a href="/">
-          <img src="image/logo.png" alt="Frontpage" width="205">
-        </a>
-      </div>
+      <div class="header">
+        <div class="logo"> LOGO</div>
 
-      <nav>
-        <div class="dividers">
-          <div class="options" th:if="${session.user == null}">
-            <a href="sign-in" methods="get">Sign in</a>
-            <a th:text="${session.user}"></a>
-          </div>
+        <div class="signin"><div class="options" th:if="${session.user == null}">
+          <a href="signin" methods="get">Sign in</a>
+          <a th:text="${session.user}"></a></div>
+      </div>
 
 
           <div class="options" th:if="${session.user != null}">
