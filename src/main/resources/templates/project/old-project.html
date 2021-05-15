@@ -80,12 +80,8 @@
             <span class="td"><input type="date" id="task-end-calculated" name="end_time_calculated" th:value="${task.end_time_calculated}"
                                     readonly></span>
 
-
-
             <span class="td"><textarea name="description" id="task-description" cols="30" rows="1"
                                        th:text="${task.description}"></textarea></span>
-
-
 
             <span class="td">
             <input type="submit" class="btn btn-success" value="Save" name="action" formaction="/edit-task">
@@ -104,9 +100,7 @@
                     <option class="low-prior" value="low">Low</option>
                 </select>
 
-
             <span class="td"><input type="text" name="name" required></span>
-
             <span class="td"><input type="number" name="estimated-hours-day" required></span>
 
 

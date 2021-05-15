@@ -1,13 +1,15 @@
 .popup {
 
+    color: #fff;
+    background-color: #0d6efd;
+
     display: none;
     padding: 18px;
     font-family: Arial, serif;
-    color: white;
     margin-bottom: -41px;
-    background: #0e1ca8;
     margin-left: 5px;
     margin-top: 5px;
+    border: 1px solid transparent;
 
 }
 
@@ -42,6 +44,10 @@ DIV.header-group {
 
 }
 
+li {
+    list-style-type: none;
+}
+
 
 .table {
 
@@ -54,13 +60,13 @@ DIV.header-group {
 
 }
 
-#task-description, #new-task-description {
+#task-description, #new-task-description, #subtask-description {
     width:170px;
     transition: 0.5s;
 
 }
 
-#task-description:focus, #new-task-description:focus {
+#task-description:focus, #new-task-description:focus, #subtask-description:focus {
 
     width:170px;
     height: 60px;
