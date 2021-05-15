@@ -75,6 +75,11 @@ li {
 
 }
 
+#save-button-new-subtask {
+    margin-right: 70px;
+
+}
+
 .container-1 {
 
     display: flex;
