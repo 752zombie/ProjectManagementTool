@@ -49,7 +49,7 @@ public class ProjectController {
            session.setAttribute("projectTasks", projectTasks);
 
 
-            return "project/old-project";
+            return "project/current-project";
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return "project/edit-failed";
@@ -115,7 +115,7 @@ public class ProjectController {
 
              return "share-project/read-only";
 
-         } else {return "project/old-project";}
+         } else {return "project/current-project";}
 
         } catch (SQLException s) {
             System.out.println("something went wrong editing the project");
@@ -161,7 +161,7 @@ public class ProjectController {
             System.out.println("project editing failed from DB");
             return "project/edit-failed";
         }
-        return "project/old-project";
+        return "project/current-project";
     }
 
 
@@ -188,7 +188,7 @@ public class ProjectController {
             session.setAttribute("project", project);
 
 
-            return "project/old-project";
+            return "project/current-project";
         } catch (SQLException s) {
             System.out.println("something went wrong adding row to task");
         }
@@ -198,6 +198,6 @@ public class ProjectController {
     @GetMapping("return-current-project")
     public String returnToProject(){
 
-        return "project/old-project";
+        return "project/current-project";
     }
 }
