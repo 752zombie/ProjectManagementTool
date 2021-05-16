@@ -33,7 +33,7 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
-<div><a href="return-current-project" class="signup">Return to project</a></div>
+<div><a href="/task-list" class="signup">Return to project</a></div>
 
     <ul th:each="subtask : ${session.subtasks}">
         <li>

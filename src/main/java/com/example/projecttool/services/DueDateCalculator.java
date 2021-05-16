@@ -11,7 +11,7 @@ public class DueDateCalculator {
 
     public String[] dueDate(int hoursDay, int hoursTotal, String startDate, String countWeekends, int numberOfEmployees) {
         //You are not allowed to divide by zero
-        if (hoursDay == 0) {
+        if (hoursDay == 0 || numberOfEmployees == 0) {
             throw new ArithmeticException();
         }
 

@@ -75,9 +75,8 @@
                                     th:value="${task.estimatedHoursTotal}" readonly></span>
             <span class="td"><input type="date" id="task-start" name="start_time" th:value="${task.start_time}"></span>
             <span class="td"><input type="date" id="task-end" name="end_time" th:value="${task.end_time}"></span>
-            <span class="td"><input type="date" id="task-end-calculated" name="end_time_calculated" th:value="${task.end_time_calculated}"
-                                    readonly></span>
-
+            <span class="td" th:if="${task.endTimeCanBeCalculated()}"><input type="date" name="end_time_calculated" th:value="${task.end_time_calculated}" readonly></span>
+            <span class="td" th:if="${!task.endTimeCanBeCalculated()}"><input type="text" name="end_time_calculated" th:value="'N/A'" readonly></span>
             <span class="td"><textarea name="description" id="task-description" cols="30" rows="1"
                                        th:text="${task.description}"></textarea></span>
 
@@ -108,7 +107,7 @@
                 <option value="weekend-true">YES</option>
             </select>
 
-            <span class="td"><input type="number" name="estimated-hours-total" required></span>
+            <span class="td"><input type="hidden" name="estimated-hours-total"></span>
 
             <span class="td"><input type="date" name="start_time" required></span>
             <span class="td"><input type="date" name="end_time"></span>
