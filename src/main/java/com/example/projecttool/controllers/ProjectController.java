@@ -129,7 +129,6 @@ public class ProjectController {
     public String editTask(@RequestParam("id") int taskId, @RequestParam("name") String name, @RequestParam("description") String description,
                            @RequestParam("priority") String priority, @RequestParam("start_time") String start_time,
                            @RequestParam("end_time") String end_time, @RequestParam("estimated-hours-day") int estimatedHoursDay,
-                           @RequestParam("estimated-hours-total") int estimatedHoursTotal,
                             @RequestParam("action") String action,  @RequestParam("count-weekends") String countWeekends, HttpSession session) {
 
 
@@ -141,7 +140,8 @@ public class ProjectController {
             // Save changes to row
             if (action.equals("Save")) {
                 int numberOfEmployees = taskService.getAmountOfEmployeesAssigned(taskId);
-                taskService.editTask(taskId, name, description, priority, start_time, end_time, estimatedHoursTotal, estimatedHoursDay, countWeekends, numberOfEmployees);
+                int hoursTotal = taskService.getEstimatedTimeToComplete(taskId);
+                taskService.editTask(taskId, name, description, priority, start_time, end_time, hoursTotal, estimatedHoursDay, countWeekends, numberOfEmployees);
 
             }
             // Deletes row from project
@@ -169,7 +169,7 @@ public class ProjectController {
     @PostMapping("add-row-to-tasks")
     public String addRowToTask(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("priority") String priority,
                                @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time,
-                               @RequestParam("estimated-hours-day") int estimatedHoursDay, @RequestParam("estimated-hours-total") int estimatedHoursTotal,
+                               @RequestParam("estimated-hours-day") int estimatedHoursDay,
                                @RequestParam("count-weekends") String countWeekends, HttpSession session) {
 
         try {
@@ -180,7 +180,7 @@ public class ProjectController {
             Project project = (Project) session.getAttribute("project");
 
             // Adds rows to DB
-            taskService.addRowToTask(project.getProjectId(), name, description, priority, start_time, end_time, estimatedHoursDay, estimatedHoursTotal, countWeekends, 0);
+            taskService.addRowToTask(project.getProjectId(), name, description, priority, start_time, end_time, estimatedHoursDay, 0, countWeekends, 0);
 
             // Directs tasks to View
             ArrayList<Task> projectTasks = taskService.getTasks(project.getProjectId());

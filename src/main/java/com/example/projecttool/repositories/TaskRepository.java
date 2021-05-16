@@ -3,6 +3,7 @@ package com.example.projecttool.repositories;
 import com.example.projecttool.models.project.Subtask;
 import com.example.projecttool.models.project.Task;
 import com.example.projecttool.services.DatabaseConnection;
+import com.example.projecttool.services.TaskService;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class TaskRepository {
             String priority = resultSet.getString("priority");
             String start_time = resultSet.getString("start_time");
             String end_time = resultSet.getString("end_time");
-            int estimatedHours = resultSet.getInt("estimated_hours");
+            int estimatedHours = TaskRepository.getTotalHoursToComplete(id);
             int estimatedHoursPrDay = resultSet.getInt("estimated_hours_day");
             String end_time_calculated = resultSet.getString("end_time_calculated");
             String countWeekends = resultSet.getString("count_weekends");
