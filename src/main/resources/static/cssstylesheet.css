@@ -46,9 +46,9 @@ body {
 
 /*image section*/
 .sektion1 {
-    height: 700px;
+    height: 100vh;
     background-image: url("image/sektion1-img.jpeg");
-    background-size: 100%;
+    background-size: cover;
     object-fit: cover;
     position: relative;
 }
