@@ -20,10 +20,10 @@ public class ProfileController {
     ProfileService profileService = new ProfileService();
     LoginService loginService = new LoginService();
 
-    @GetMapping("/change-user-info")
+  /*  @GetMapping("/change-user-info")
     public String changeSettings() {
         return "profile/user";
-    }
+    }*/
 
     @GetMapping("/profile")
     public String profilePage() {

@@ -11,9 +11,11 @@
 <div th:replace="fragments/header :: header"></div>
 
 <div class="content-area">
-    <div class="content-area-leftside">
-    <form action="/sign-in" method="post">
+    <div class="content-area1-1">
         <div>Please Login</div>
+        <div><br></div>
+        <form action="/sign-in" method="post">
+
         <div>
             <input type="email" class="form-control" name="email" id="email" placeholder="Email address" required>
         </div>
@@ -29,10 +31,10 @@
 
         <button class="login" type="submit">Login</button>
      </form>
-     <a href="sign-up" class="sign-up" methods="get">Not a user yet? Click here to sign up</a>
+     <div>
+         <a href="sign-up" class="sign-up" methods="get">Not a user yet? Click here to sign up</a>
+     </div>
     </div>
-
-
 </div>
 <!--footer.html  -->
 <div th:replace="fragments/footer :: footer"></div>

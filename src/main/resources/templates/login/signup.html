@@ -10,8 +10,10 @@
 <!--header.html  that's here  -->
 <div th:replace="fragments/header :: header"></div>
 <div class="content-area">
-    <h1> Sign up </h1>
-    <form action="/sign-up" method="post">
+    <div class="content-area1-1">
+        <div>Get started using a simplified managment system that brings your team together <br>sign up now</div>
+        <div><br></div>
+      <form action="/sign-up" method="post">
 
         <div>
               <input type="name" class="form-control" name="name" id="name" placeholder="Name" autofocus required>
@@ -26,8 +28,9 @@
          </div>
 
 
-        <button class="signup" type="submit">Create account</button>
-    </form>
+             <button class="signup" type="submit">Create account</button>
+      </form>
+    </div>
 </div>
 </body>
 </html>

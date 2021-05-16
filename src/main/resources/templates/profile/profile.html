@@ -6,14 +6,32 @@
     <link rel="stylesheet" href="cssstylesheet.css">
 </head>
 <body>
-        <div th:replace="fragments/header :: header"></div>
 
-        <div class="content-area">
+    <div th:replace="fragments/header :: header"></div>
+    <div class="content-area">
+        <div class="content-area1-1">
+
+            <div><h2> What do you want to change? </h2></div>
             <div>
-
-            <a href="change-user-info" class="signup-fp" methods="get">Change name, email or password</a>
+                <form action="change-user-name" method="get">
+                    <button class="login" type="submit"> Username </button>
+                </form>
             </div>
+
+            <div>
+                 <form action="change-password" method="get">
+                    <button class="login" type="submit"> Password </button>
+                 </form>
+            </div>
+
+             <div>
+                  <form action="change-email" method="get">
+                    <button class="login" type="submit"> Email </button>
+                  </form>
+             </div>
         </div>
+    </div>
+
 
 </body>
 </html>

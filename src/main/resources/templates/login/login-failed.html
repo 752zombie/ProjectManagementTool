@@ -8,30 +8,27 @@
 </head>
 <body>
 <!--header.html  that's here  -->
-<div th:replace="fragments/header :: header"></div>
-<div class="content-area">
-    <h5> Sorry, we couldn't recognize your account.<br> Please sign up here</h5>
-    <form action="sign-up" method="post">
-        <div>
-            <input type="name" class="form-control" name="name" id="name" placeholder="Name" autofocus required>
-        </div>
+    <div th:replace="fragments/header :: header"></div>
+    <div class="content-area">
+      <div class="content-area1-1">
+         <h3> Sorry, we couldn't recognize your account.<br> Please  <a href="sign-in" class="sign-up"> try again</a> or sign up here</h3>
+         <form action="sign-up" method="post">
+            <div>
+                 <input type="name" class="form-control" name="name" id="name" placeholder="Name" autofocus required>
+            </div>
+            <div>
+                <input type="email" class="form-control" name="email" id="email" placeholder="Email address" required>
+            </div>
 
-        <div>
-            <input type="email" class="form-control" name="email" id="email" placeholder="Email address" required>
-        </div>
-
-        <div>
-            <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
-        </div>
-
-    <div>
-        <button class="signup" type="submit">Create account</button>
+            <div>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+            </div>
+            <div>
+                <button class="signup" type="submit">Create account</button>
+            </div>
+         </form>
+      </div>
     </div>
-    </form>
-
-    <a href="sign-in"> Try again</a>
-
-</div>
 
 </body>
 </html>

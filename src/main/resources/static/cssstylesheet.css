@@ -8,13 +8,17 @@ body {
     overflow-y: scroll;
 }
 
-.wrapper {
+.wrapper.scroll {
     width: 100%;
+    height: 300%;
     margin-right: auto;
     margin-left: 0%;
 }
 
-/*___header___ */
+
+
+
+/*______HEADER______ */
 .header {
     height: 100px;
     width: 100%;
@@ -22,20 +26,18 @@ body {
     position: relative;
 }
 
-
 .logo {
     width: 300px;
     float: left;
     margin-left: -50px;
     margin-top: 10px;
     margin-bottom: 10px;
-
 }
 
 
 /*Signin button*/
-.signin {
-    color: #d49423;
+.signin-btn {
+    color: #d49423; text-decoration: none;
     float: right;
     font-size: 20px;
     position: absolute;
@@ -43,17 +45,40 @@ body {
     right: 70px;
     cursor: pointer;
 }
+.signin-btn:hover{
+    color: #170eff;
+}
+
+.navbar{
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-size: 20px;
+    color: #d49423;
+    float: right;
+}
+
+.nav-bar{
+    color: #5b83ad;
+    font-size: 20px;
+}
+
+
+
+
+
+/*_____FRONTPAGE_____*/
 
 /*image section*/
-.sektion1 {
+.section1 {
     height: 100vh;
     background-image: url("image/sektion1-img.jpeg");
     background-size: cover;
     object-fit: cover;
     position: relative;
+
 }
 
-.sektion1-1 {
+.section1-1 {
     position: absolute;
     color: white;
     background: rgba(30, 53, 82, 0.548);
@@ -62,39 +87,44 @@ body {
     text-align: center;
 }
 
-.sektion1-1 .overskrift {
+.section1-1 .heading {
     font-size: 40px;
     font-weight: bold;
     padding-top: 20%;
 }
 
-.sektion1-1 .under-overskrift{
-    font-size: 20px;
+.section1-1 .subheading{
+    font-size: 15px;
     font-weight: bold;
     padding-top: 20px;
 }
 
-.signup {
-    background-color: #5b83ad;
-    color: #ffffff;
-    display: inline-block;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 40px;
-    margin-top: 20px;
-    padding-right: 40px;
-    border-radius: 7px;
-    text-transform: uppercase;
-    font-weight: bold;
+.signup-fp{
+    color: #170eff;
+    width: 30%;
+    border-radius: 10px;
+    padding: 5px 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    margin: 10px;
     cursor: pointer;
 }
-.signup:hover{
-    color: #1124d7;
+
+.signup-fp:hover{
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: bold;
+    padding-top: 20px;
+    margin-bottom: 10%;
 }
 
 
 
-/*_____Footer_______*/
+
+
+
+/*______Footer_______*/
 .footer {
     position: fixed;
     height: 30px;
@@ -116,24 +146,34 @@ body {
 }
 
 
-/*_____Login_______*/
+
+
+
+
+/*_____LOGIN_______*/
 
 .content-area{
-    background: linear-gradient(to right, #507398,white);
-    height: 700px;
+    background: linear-gradient(to left, #507398,white);
+    height: 100vh;
     background-size: cover;
     object-fit: cover;
     position: relative;
-}
-.content-area1-1 {
-    background: linear-gradient(to right, #507398,white);
-    position: absolute;
-    color: white;
-    height: 100%;
-    width: 100%;
-    text-align: center;
-    margin-top: 100px;
+    font-size: 20px;
 
+}
+
+.content-area1-1 {
+    background: linear-gradient(to left, #507398,white);
+    position: absolute; color: #525252;
+    text-align: center;
+    margin-top: 10%;
+    width: 100%;
+
+}
+.content-area h3{
+    color: red;
+    text-align: center;
+    font-size: 16px;
 }
 
 .login{
@@ -151,7 +191,6 @@ body {
     color: #2159e8;
 }
 
-
 .form-control{
     width: 30%;
     padding: 12px;
@@ -161,51 +200,78 @@ body {
     resize: vertical;
 }
 
-.signup:hover {
-    background-color: #0e1ca8;
-}
-
 .checkbox{
-    margin-right: 21%;
+    margin-right: 25%;
     padding-top: 1vw;
+    color: #d49423;
+    font-size: 15px;
 }
 
-.contact-info {
-    float: right;
-    width: 25%;
+.sign-up{
+    text-decoration: none;
+    color: #2159e8;
+    font-size: 16px;
 }
-
-.contact-info h2 {
-    font-size: 1.2vw;
-    padding-top: 0;
-    text-transform: uppercase;
-    color: #5b83ad;
-}
-
-.contact-info p{
-    font-size: 1vw;
-    padding-top: 0;
-    text-align: center;
-    text-transform: uppercase;
-    padding-bottom: 0.4vw;
+.sign-up:hover{
+    color:#d49423;
 }
 
 .signup{
     background-color: #5b83ad;
     color: white;
     width: 30%;
+    padding: 5px;
     border: 1px solid #5b83ad;
     border-radius: 10px;
-    padding: 5px 15px 5px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 14px;
-    margin: 10px;
-    cursor: pointer;
+    margin: 15px;
+    resize: vertical;
+    cursor: pointer
 }
 
 .signup:hover{
     color: #2159e8;
 }
+
+
+
+
+
+/*___Dropdown menu____*/
+.show-username{
+    background-color: #ffffff;
+    color: #d49423;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin-top: 60px;
+    margin-right: 70px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(239, 239, 239, 0.44);
+    min-width: 120px;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: #ffffff;
+    padding: 8px 10px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: rgba(76, 110, 145, 0.58);}
+
+.dropdown:hover .dropdown-content {display: block;}
 
 

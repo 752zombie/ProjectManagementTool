@@ -8,34 +8,28 @@
       <div class="header">
         <div class="logo"> <a href="/">
           <img src="image/logo.png" alt="Frontpage" style="max-width: 60%; min-height: 150%">
-        </a>
-
+          </a>
         </div>
+        <nav>
+           <div class="nav-bar">
+              <div class="options" th:if="${session.user == null}">
+                 <a href="sign-in" class="signin-btn" methods="get">Login</a>
+                 <a th:text="${session.user}"></a>
+              </div>
 
-        <div class="signin">
-          <div class="options" th:if="${session.user == null}">
-            <a href="sign-in" class="signin" methods="get">Login</a>
-            <a th:text="${session.user}"></a>
-          </div>
+             <div class="options" th:if="${session.user != null}">
 
-
-
-          <div class="options" th:if="${session.user != null}">
-            <a href="profile" class="pnav" th:text="${session.user.getName()}"></a>
-            |
-            <a href="sign-out"class="pnav" methods="get"> Sign out </a> <a href="#"></a>
-            |
-            <a href="/create-project"class="pnav" methods="get"> Create project </a> <a href="#"></a>
-            |
-            <a href="/see-all-projects"class="pnav" methods="get"> My projects </a> <a href="#"></a>
-            |
-            <a href="/shared-with-me"class="pnav" methods="get"> Shared projects </a> <a href="#"></a>
-            |
-            <a href="/employee-manager"class="pnav" methods="get"> Employee manager </a> <a href="#"></a>
-          </div>
-        </div>
+                <div class="dropdown">
+                  <button class="show-username" th:text="${session.user.getName()}"></button>
+                  <div class="dropdown-content">
+                    <a href="/profile">Edit profile</a>
+                    <a href="sign-out">Sign out</a>
+                  </div>
+                </div>
+             </div>
+           </div>
+        </nav>
       </div>
     </div>
   </div>
-
 </header>

@@ -6,10 +6,11 @@
     <link rel="stylesheet" href="cssstylesheet.css">
 </head>
 <body>
-        <!--header.html  that's here  -->
+        <!--header.html  that's here-->
         <div th:replace="fragments/header :: header"></div>
-        <div class="content-area">
-             <h2> What do you want to change? </h2>
+    <div class="content-area">
+
+            <h2> What do you want to change? </h2></div>
             <div>
                 <form action="change-user-name" method="get">
                     <button class="login" type="submit"> Username </button>
@@ -27,6 +28,7 @@
                     <button class="login" type="submit"> Email </button>
                 </form>
             </div>
-        </div>
+
+    </div>
 </body>
 </html>
