@@ -129,6 +129,30 @@ public class TaskRepository {
         statement.execute();
     }
 
+    public static int getTotalNumberOfEmployeesAssigned(int taskId) throws SQLException{
+        Connection connection = DatabaseConnection.getConnection();
+
+        PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) FROM subtasks " +
+                "INNER JOIN emp_subtask " +
+                "ON subtasks.id = emp_subtask.subtask_id " +
+                "WHERE task = ?");
+        statement.setInt(1, taskId);
+        ResultSet resultSet = statement.executeQuery();
+        resultSet.next();
+        return resultSet.getInt(1);
+
+    }
+
+    public static int getTotalHoursToComplete(int taskId) throws SQLException{
+        Connection connection = DatabaseConnection.getConnection();
+
+        PreparedStatement statement = connection.prepareStatement("SELECT SUM(hours_to_complete) FROM subtasks WHERE task = ?");
+        statement.setInt(1, taskId);
+        ResultSet resultSet = statement.executeQuery();
+        resultSet.next();
+
+        return resultSet.getInt(1);
+    }
 
 }
 
