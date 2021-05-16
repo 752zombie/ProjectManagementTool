@@ -14,26 +14,28 @@ body {
     margin-left: 0%;
 }
 
-/* header */
+/*___header___ */
 .header {
     height: 100px;
     width: 100%;
     background-color: #ffffff;
-    color: white;
     position: relative;
 }
 
+
 .logo {
-    color: #507398;
-    font-weight: bold;
-    font-size: 35px;
-    line-height: 100px;
+    width: 300px;
     float: left;
-    margin-left: 10px;
+    margin-left: -50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
 }
+
+
 /*Signin button*/
 .signin {
-    text: #ad101a;
+    color: #d49423;
     float: right;
     font-size: 20px;
     position: absolute;
@@ -41,9 +43,10 @@ body {
     right: 70px;
     cursor: pointer;
 }
+
 /*image section*/
 .sektion1 {
-    height: 600px;
+    height: 700px;
     background-image: url("image/sektion1-img.jpeg");
     background-size: cover;
     object-fit: cover;
@@ -70,8 +73,10 @@ body {
     font-weight: bold;
     padding-top: 20px;
 }
-.btn {
-    background-color: #507398;
+
+.signup {
+    background-color: #5b83ad;
+    color: #ffffff;
     display: inline-block;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -83,6 +88,151 @@ body {
     font-weight: bold;
     cursor: pointer;
 }
-.btn hover{
+.signup:hover{
+    color: #1124d7;
+}
+
+
+
+/*_____Footer_______*/
+.footer {
+    position: fixed;
+    height: 30px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    line-height: 30px;
+    background-color: #5b83ad;
+}
+
+.footer p{
+    margin-top: 0.2vw;
+    font-size: 1vw;
+    text-align: center;
+    letter-spacing: 0.2vw;
+    color: #ffffff;
+}
+
+
+/*_____Login_______*/
+
+.content-area1{
+    background: linear-gradient(to right, #507398,white);
+    height: 700px;
+    background-size: cover;
+    object-fit: cover;
+    position: relative;
+}
+.content-area1-1 {
+    background: linear-gradient(to right, #507398,white);
+    position: absolute;
+    color: white;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    margin-top: 100px;
+    float: left;
+}
+
+
+.login{
+    background-color: #5b83ad;
+    color: white;
+    width: 30%;
+    padding: 5px;
+    border: 1px solid #5b83ad;
+    border-radius: 10px;
+    margin: 15px;
+    resize: vertical;
+    cursor: pointer;
+}
+.login:hover{
+    color: #2159e8;
+}
+
+input[type=text], select, textarea, input[type=name]{
+    width: 30%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-top: 15px;
+    resize: vertical;
+}
+
+input[type=text], select, textarea, input[type=email] {
+    width: 30%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-top: 15px;
+    resize: vertical;
+}
+
+input[type=text], select, textarea, input[type=password] {
+    width: 30%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-top: 15px;
+    resize: vertical;
+}
+
+input[type=number], select, textarea, input[type=name]{
+    width: 30%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-top: 15px;
+    resize: vertical;
+}
+
+input[type=submit]:hover {
+    background-color: #0e1ca8;
+}
+
+.checkbox{
+    margin-right: 21%;
+    padding-top: 1vw;
+}
+
+.contact-info {
+    float: right;
+    width: 25%;
+}
+
+.contact-info h2 {
+    font-size: 1.2vw;
+    padding-top: 0;
+    text-transform: uppercase;
     color: #5b83ad;
 }
+
+.contact-info p{
+    font-size: 1vw;
+    padding-top: 0;
+    text-align: center;
+    text-transform: uppercase;
+    padding-bottom: 0.4vw;
+}
+
+.signup{
+    background-color: #5b83ad;
+    color: white;
+    width: 30%;
+    border: 1px solid #5b83ad;
+    border-radius: 10px;
+    padding: 5px 15px 5px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.signup:hover{
+    color: #2159e8;
+}
+
+

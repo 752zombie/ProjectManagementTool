@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Login page</title>
-    <link rel="stylesheet" href="generel css/headerstyle.css">
-    <link rel="stylesheet" href="generel css/footerstyle.css">
     <link rel="stylesheet" href="generel css/loginstyle.css">
+    <link rel="stylesheet" href="cssstylesheet.css">
 
 </head>
 <body>
 <!--header.html -->
 <div th:replace="fragments/header :: header"></div>
 
-<div class="content-area">
+<div class="content-area1">
+    <div class="content-area1-1">
     <form action="/sign-in" method="post">
-
+        <div>Please Login</div>
         <div>
             <input type="email" class="form-control" name="email" id="email" placeholder="Email address" required>
         </div>
@@ -29,11 +29,9 @@
         </div>
 
         <button class="login" type="submit">Login</button>
-
-    </form>
-
-    <a href="sign-up" class="sign-up" methods="get">Not a user yet? Click here to sign up</a>
-
+     </form>
+     <a href="sign-up" class="sign-up" methods="get">Not a user yet? Click here to sign up</a>
+    </div>
 </div>
 <!--footer.html  -->
 <div th:replace="fragments/footer :: footer"></div>
