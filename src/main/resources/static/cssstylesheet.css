@@ -48,7 +48,7 @@ body {
 .sektion1 {
     height: 700px;
     background-image: url("image/sektion1-img.jpeg");
-    background-size: cover;
+    background-size: 100%;
     object-fit: cover;
     position: relative;
 }
@@ -118,7 +118,7 @@ body {
 
 /*_____Login_______*/
 
-.content-area1{
+.content-area{
     background: linear-gradient(to right, #507398,white);
     height: 700px;
     background-size: cover;
@@ -133,9 +133,8 @@ body {
     width: 100%;
     text-align: center;
     margin-top: 100px;
-    float: left;
-}
 
+}
 
 .login{
     background-color: #5b83ad;

@@ -14,7 +14,7 @@
 
         <div class="signin">
           <div class="options" th:if="${session.user == null}">
-            <a href="sign-in" methods="get">Login</a>
+            <a href="sign-in" class="signin" methods="get">Login</a>
             <a th:text="${session.user}"></a>
           </div>
 
