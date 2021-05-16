@@ -9,16 +9,18 @@ import java.util.Calendar;
 
 public class DueDateCalculator {
 
-    public String[] dueDate(int hoursDay, int hoursTotal, String startDate, String countWeekends) {
+    public String[] dueDate(int hoursDay, int hoursTotal, String startDate, String countWeekends, int numberOfEmployees) {
+        //You are not allowed to divide by zero
+        if (hoursDay == 0) {
+            throw new ArithmeticException();
+        }
 
         String[] endTimeCalcAndWeekChoice = new String[2];
 
-
-        int daysToFinish = (hoursTotal / hoursDay);
-
         // IMPROVED VERSION WITH AMOUNT OF EMPLOYEES //
-               //  int totalWorkHoursDay = hoursDay * employees;
-               // int daysToFinish = hoursTotal / totalWorkHoursDay;
+        int totalWorkHoursDay = hoursDay * numberOfEmployees;
+        int daysToFinish = hoursTotal / totalWorkHoursDay;
+
 
     if (countWeekends.equals("weekend-true")) {
 

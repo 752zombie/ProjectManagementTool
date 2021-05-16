@@ -138,9 +138,10 @@ public class ProjectController {
             // Needs current project to get Tasks
             Project project = (Project) session.getAttribute("project");
 
-            // Adds row to project
+            // Save changes to row
             if (action.equals("Save")) {
-                taskService.editTask(taskId, name, description, priority, start_time, end_time, estimatedHoursTotal, estimatedHoursDay, countWeekends);
+                int numberOfEmployees = taskService.getAmountOfEmployeesAssigned(taskId);
+                taskService.editTask(taskId, name, description, priority, start_time, end_time, estimatedHoursTotal, estimatedHoursDay, countWeekends, numberOfEmployees);
 
             }
             // Deletes row from project
@@ -178,9 +179,8 @@ public class ProjectController {
             // We need project id to edit Task
             Project project = (Project) session.getAttribute("project");
 
-
             // Adds rows to DB
-            taskService.addRowToTask(project.getProjectId(), name, description, priority, start_time, end_time, estimatedHoursDay, estimatedHoursTotal, countWeekends);
+            taskService.addRowToTask(project.getProjectId(), name, description, priority, start_time, end_time, estimatedHoursDay, estimatedHoursTotal, countWeekends, 0);
 
             // Directs tasks to View
             ArrayList<Task> projectTasks = taskService.getTasks(project.getProjectId());

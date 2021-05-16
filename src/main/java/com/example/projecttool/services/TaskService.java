@@ -21,11 +21,12 @@ public class TaskService {
     }
 
 
+    //TODO: should also account for ArithmeticException
     public void editTask(int taskId, String taskName, String description, String priority, String start_time, String end_time,
-                         int estimatedHoursTotal, int estimatedHoursDay, String countWeekends) throws SQLException {
+                         int estimatedHoursTotal, int estimatedHoursDay, String countWeekends, int numberOfEmployees) throws SQLException {
 
         DueDateCalculator dueDate = new DueDateCalculator();
-        String[] endTimeCalcAndWeekChoice = dueDate.dueDate(estimatedHoursDay, estimatedHoursTotal, start_time, countWeekends);
+        String[] endTimeCalcAndWeekChoice = dueDate.dueDate(estimatedHoursDay, estimatedHoursTotal, start_time, countWeekends, numberOfEmployees);
 
        TaskRepository.editTask(taskId, taskName, description, priority, start_time, endTimeCalcAndWeekChoice[0], end_time, estimatedHoursTotal, estimatedHoursDay, endTimeCalcAndWeekChoice[1]);
 
@@ -38,14 +39,22 @@ public class TaskService {
     }
 
     public void addRowToTask(int projectId, String name, String description, String priority, String start_time, String end_time,
-                             int estimatedHoursDay, int estimatedHoursTotal, String countWeekends) throws SQLException {
+                             int estimatedHoursDay, int estimatedHoursTotal, String countWeekends, int numberOfEmployees) throws SQLException {
 
 
         DueDateCalculator dueDate = new DueDateCalculator();
-        String[] endTimeCalcAndWeekChoice = dueDate.dueDate(estimatedHoursDay, estimatedHoursTotal, start_time, countWeekends);
+        String[] endTimeCalcAndWeekChoice = dueDate.dueDate(estimatedHoursDay, estimatedHoursTotal, start_time, countWeekends, numberOfEmployees);
 
         TaskRepository.addRowToTask(projectId, name, description, priority, start_time, endTimeCalcAndWeekChoice[0], end_time, estimatedHoursTotal, estimatedHoursDay, endTimeCalcAndWeekChoice[1]);
 
         // SHOULD week CHOICE BE ADDED TO TASK OR A NEW TABLE
+    }
+
+    public int getAmountOfEmployeesAssigned(int taskId) throws SQLException{
+        return TaskRepository.getTotalNumberOfEmployeesAssigned(taskId);
+    }
+
+    public int getEstimatedTimeToComplete(int taskId) throws SQLException{
+        return TaskRepository.getTotalHoursToComplete(taskId);
     }
 }
