@@ -19,14 +19,26 @@
 
              <div class="options" th:if="${session.user != null}">
 
-                <div class="dropdown">
-                  <button class="show-username" th:text="${session.user.getName()}"></button>
-                  <div class="dropdown-content">
-                    <a href="/profile">Edit profile</a>
-                    <a href="sign-out">Sign out</a>
-                  </div>
+                 <ul>
+                     <li><a href="/">Home</a></li>
+                     <li class="dropdown">
+                         <a href="/create-project">Manage projects</a>
+                         <div class="dropdown-content">
+                             <a href="/create-project">Create project</a>
+                             <a href="/see-all-projects">My project</a>
+                             <a href="/shared-with-me">Shared projects</a>
+                             <a href="/employee-manager">Employee manager</a>
+                         </div>
+                     </li>
+                     <li class="dropdown">
+                                <a href="/profile" th:text="${session.user.getName()}" class="dropbtn"></a>
+                         <div class="dropdown-content">
+                             <a href="/profile">Edit profile</a>
+                             <a href="sign-out">Sign out</a>
+                         </div>
+                     </li>
+                 </ul>
                 </div>
-             </div>
            </div>
         </nav>
       </div>

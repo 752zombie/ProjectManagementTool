@@ -236,22 +236,34 @@ body {
 
 
 
-/*___Dropdown menu____*/
-.show-username{
+/*_____DROPDOWN MENU_______*/
+ul{list-style-type: none;
+    margin: 0;
+    flow: hidden;
     background-color: #ffffff;
-    color: #d49423;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
 }
 
-.dropdown {
-    position: relative;
-    display: inline-block;
+li {
     float: right;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    padding: 16px 12px;
     margin-top: 60px;
-    margin-right: 70px;
+}
+
+li a, .dropbtn {
+    display: inline-block;
+    color: #d49423;
+    text-align: center;
+    padding: 0px 12px;
+    text-decoration: none;
+}
+
+
+li.dropdown {
+    display: inline-block;
+
 }
 
 .dropdown-content {
@@ -265,13 +277,15 @@ body {
 
 .dropdown-content a {
     color: #ffffff;
-    padding: 8px 10px;
+    padding: 10px 12px;
     text-decoration: none;
     display: block;
+    margin-top: 10px;
 }
 
-.dropdown-content a:hover {background-color: rgba(76, 110, 145, 0.58);}
+.dropdown-content a:hover {
+    background-color: rgba(76, 110, 145, 0.58);}
 
-.dropdown:hover .dropdown-content {display: block;}
-
+.dropdown:hover .dropdown-content {
+    display: block;}
 
