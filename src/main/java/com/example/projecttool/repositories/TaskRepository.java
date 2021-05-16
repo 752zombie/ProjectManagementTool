@@ -105,9 +105,10 @@ public class TaskRepository {
                 String description = resultSet.getString("subtask_description");
                 Date startTime = resultSet.getDate("start_time");
                 Date endTime = resultSet.getDate("end_time");
+                int hoursToComplete = resultSet.getInt("hours_to_complete");
 
                 Subtask subtask = new Subtask(id, name, description, startTime, endTime,
-                        SubtaskRepository.getAssignedEmployees(id), SubtaskRepository.getRequiredSkills(id));
+                        SubtaskRepository.getAssignedEmployees(id), SubtaskRepository.getRequiredSkills(id), hoursToComplete);
                 subtasks.add(subtask);
             }
 

@@ -13,12 +13,12 @@ public class SubtaskService {
         return TaskRepository.getRelatedSubtasks(taskId);
     }
 
-    public static void addNewSubtaskToTask(int taskId, String subtaskName, String subtaskDescription, String startTime, String endTime) throws SQLException {
-        SubtaskRepository.addNewSubtaskToTask(taskId, subtaskName, subtaskDescription, startTime, endTime);
+    public static void addNewSubtaskToTask(int taskId, String subtaskName, String subtaskDescription, String startTime, String endTime, int hoursToComplete) throws SQLException {
+        SubtaskRepository.addNewSubtaskToTask(taskId, subtaskName, subtaskDescription, startTime, endTime, hoursToComplete);
     }
 
-    public static void updateSubtask(int subtaskId, String name, String description, String startDate, String endDate) throws SQLException{
-        SubtaskRepository.updateSubtask(subtaskId, name, description, startDate, endDate);
+    public static void updateSubtask(int subtaskId, String name, String description, String startDate, String endDate, int hoursToComplete) throws SQLException{
+        SubtaskRepository.updateSubtask(subtaskId, name, description, startDate, endDate, hoursToComplete);
     }
 
     public static void deleteSubtask(int subtaskId) throws SQLException {

@@ -15,8 +15,9 @@ public class Subtask {
     private String name;
     private Date startTime;
     private Date endTime;
+    private int hoursToComplete;
 
-    public Subtask(int id, String name, String description, Date startTime, Date endTime, List<Employee> employees, List<Skill> skills) {
+    public Subtask(int id, String name, String description, Date startTime, Date endTime, List<Employee> employees, List<Skill> skills, int hoursToComplete) {
         this.id = id;
         this.name = name;
         this.startTime = startTime;
@@ -24,6 +25,7 @@ public class Subtask {
         this.description = description;
         assignedEmployees = employees;
         requiredSkills = skills;
+        this.hoursToComplete = hoursToComplete;
     }
 
     public void addEmployee(Employee employee) {
@@ -74,6 +76,10 @@ public class Subtask {
 
     public Date getEndTime() {
         return endTime;
+    }
+
+    public int getHoursToComplete() {
+        return hoursToComplete;
     }
 
     // do not delete

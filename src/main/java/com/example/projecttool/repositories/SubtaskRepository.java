@@ -136,16 +136,17 @@ public class SubtaskRepository {
         return skills;
     }
 
-    public static void addNewSubtaskToTask(int taskId, String subtaskName, String subtaskDescription, String startTime, String endTime) throws SQLException{
+    public static void addNewSubtaskToTask(int taskId, String subtaskName, String subtaskDescription, String startTime, String endTime, int hoursToComplete) throws SQLException{
         Connection connection = DatabaseConnection.getConnection();
 
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO subtasks(task, subtask_name, subtask_description, start_time, end_time) VALUES (?, ?, ?, ?, ?)");
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO subtasks(task, subtask_name, subtask_description, start_time, " +
+                "end_time, hours_to_complete) VALUES (?, ?, ?, ?, ?, ?)");
         statement.setInt(1, taskId);
         statement.setString(2, subtaskName);
         statement.setString(3, subtaskDescription);
         statement.setDate(4, java.sql.Date.valueOf(startTime));
         statement.setDate(5, java.sql.Date.valueOf(endTime));
-
+        statement.setInt(6, hoursToComplete);
         statement.execute();
     }
 
@@ -158,17 +159,18 @@ public class SubtaskRepository {
         statement.execute();
     }
 
-    public static void updateSubtask(int subtaskId, String name, String description, String startDate, String endDate) throws SQLException {
+    public static void updateSubtask(int subtaskId, String name, String description, String startDate, String endDate, int hoursToComplete) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
 
         PreparedStatement statement = connection.prepareStatement("UPDATE subtasks SET subtask_name = ?, subtask_description = ?, " +
-                "start_time = ?, end_time = ? WHERE id = ?");
+                "start_time = ?, end_time = ?, hours_to_complete = ? WHERE id = ?");
 
         statement.setString(1, name);
         statement.setString(2, description);
         statement.setDate(3, java.sql.Date.valueOf(startDate));
         statement.setDate(4, java.sql.Date.valueOf(endDate));
-        statement.setInt(5, subtaskId);
+        statement.setInt(5, hoursToComplete);
+        statement.setInt(6, subtaskId);
         statement.execute();
     }
 

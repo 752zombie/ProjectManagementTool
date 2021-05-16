@@ -43,6 +43,7 @@
                     <span class="td">Notes</span>
                     <span class="td">Start date</span>
                     <span class="td">Due date</span>
+                    <span class="td">Estimated hours to complete</span>
                     <span class="td"> </span>
                 </div>
 
@@ -61,6 +62,7 @@
                    <!--     <span class="td"><input type="text" id="subtask-description" name="subtask-description" th:value="${subtask.description}"></span> -->
                         <span class="td"><input type="date" id="start-time" name="start-time" th:value="${subtask.startTime}"></span>
                         <span class="td"><input type="date" id="end-time" name="end-time" th:value="${subtask.endTime}"></span>
+                        <span class="td"><input type="number" id="hours-to-complete" name="hours-to-complete" th:value="${subtask.hoursToComplete}"></span>
 
                         <span class="td">
                             <input class="btn btn-success" id="save-subtask-btn" type="submit" value="Save" name="action" formaction="/save-subtask">
@@ -142,11 +144,12 @@
                     <span class="td">Notes</span>
                     <span class="td">Start date</span>
                     <span class="td">Due date</span>
+                    <span class="td">Estimated hours to complete</span>
                     <span class="td"> </span>
                 </div>
 
                 <div class="row-group">
-                    <form method="post" action="/edit-task" class="tr">
+                    <form method="post" action="/add-new-subtask" class="tr">
                         <input type="hidden" name="task-id" th:value="${session.taskId}">
 
                         <span class="td"><input type="text" name="subtask-name"></span>
@@ -154,6 +157,7 @@
                                                    required></textarea></span>
                         <span class="td"><input type="date" name="start-time"></span>
                         <span class="td"><input type="date" name="end-time"></span>
+                        <span class="td"><input type="number" name="hours-to-complete"></span>
 
                         <span class="td">
                             <input class="btn btn-success" id="save-button-new-subtask" type="submit" value="Save" name="action" formaction="/add-new-subtask">
