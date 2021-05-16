@@ -3,9 +3,7 @@ package com.example.projecttool.controllers;
 import com.example.projecttool.models.User;
 import com.example.projecttool.models.project.Project;
 import com.example.projecttool.models.project.Task;
-import com.example.projecttool.repositories.ProjectRepository;
-import com.example.projecttool.repositories.ShareProjectRepository;
-import com.example.projecttool.repositories.TaskRepository;
+import com.example.projecttool.services.ErrorHandler;
 import com.example.projecttool.services.ProjectService;
 import com.example.projecttool.services.ShareProjectService;
 import com.example.projecttool.services.TaskService;
@@ -26,6 +24,28 @@ public class ProjectController {
     TaskService taskService = new TaskService();
     ShareProjectService shareProjectService = new ShareProjectService();
 
+
+    @GetMapping("/task-list")
+    public String taskList(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        Project project = (Project) session.getAttribute("project");
+        if (user == null || project == null) {
+            return ErrorHandler.setCurrentError("You must be logged in and have selected a project to access this page", session);
+        }
+
+        try {
+            ArrayList<Task> projectTasks = taskService.getTasks(project.getProjectId());
+            session.setAttribute("projectTasks", projectTasks);
+        }
+
+        catch (SQLException e) {
+            e.printStackTrace();
+            return ErrorHandler.setCurrentError("Something went wrong", session);
+        }
+
+        return "project/current-project";
+
+    }
 
     @GetMapping("/create-project")
     public String createProject() {
@@ -82,10 +102,6 @@ public class ProjectController {
 
             // Add current project to session
             Project project = projectService.getProject(projectId);
-
-            // Add task list to View
-            ArrayList<Task> projectTasks = taskService.getTasks(projectId);
-            session.setAttribute("projectTasks", projectTasks);
             session.setAttribute("project", project);
 
             // Deletes row from project
@@ -115,7 +131,7 @@ public class ProjectController {
 
              return "share-project/read-only";
 
-         } else {return "project/current-project";}
+         } else {return "redirect:/task-list";}
 
         } catch (SQLException s) {
             System.out.println("something went wrong editing the project");
@@ -139,10 +155,7 @@ public class ProjectController {
 
             // Save changes to row
             if (action.equals("Save")) {
-                int numberOfEmployees = taskService.getAmountOfEmployeesAssigned(taskId);
-                int hoursTotal = taskService.getEstimatedTimeToComplete(taskId);
-                taskService.editTask(taskId, name, description, priority, start_time, end_time, hoursTotal, estimatedHoursDay, countWeekends, numberOfEmployees);
-
+                taskService.editTask(taskId, name, description, priority, start_time, end_time, estimatedHoursDay, countWeekends);
             }
             // Deletes row from project
             else if (action.equals("Delete")) {
@@ -153,8 +166,6 @@ public class ProjectController {
             // Sorts and directs edited tasks to View
             ArrayList<Task> projectTasks = taskService.getTasks(project.getProjectId());
 
-
-            session.setAttribute("project", project);
             session.setAttribute("projectTasks", projectTasks);
 
 
@@ -162,15 +173,15 @@ public class ProjectController {
             System.out.println("project editing failed from DB");
             return "project/edit-failed";
         }
-        return "project/current-project";
+        return "redirect:/task-list";
     }
 
 
     @PostMapping("add-row-to-tasks")
     public String addRowToTask(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("priority") String priority,
                                @RequestParam("start_time") String start_time, @RequestParam("end_time") String end_time,
-                               @RequestParam("estimated-hours-day") int estimatedHoursDay,
-                               @RequestParam("count-weekends") String countWeekends, HttpSession session) {
+                               @RequestParam("count-weekends") String countWeekends, @RequestParam("estimated-hours-day") int estimatedHoursDay,
+                               HttpSession session) {
 
         try {
 
@@ -180,24 +191,19 @@ public class ProjectController {
             Project project = (Project) session.getAttribute("project");
 
             // Adds rows to DB
-            taskService.addRowToTask(project.getProjectId(), name, description, priority, start_time, end_time, estimatedHoursDay, 0, countWeekends, 0);
+            taskService.addRowToTask(project.getProjectId(), name, description, priority, start_time, end_time, estimatedHoursDay, countWeekends);
 
             // Directs tasks to View
             ArrayList<Task> projectTasks = taskService.getTasks(project.getProjectId());
             session.setAttribute("projectTasks", projectTasks);
-            session.setAttribute("project", project);
 
 
             return "project/current-project";
         } catch (SQLException s) {
+            s.printStackTrace();
             System.out.println("something went wrong adding row to task");
         }
 
         return "project/failed-getting-tasks";
-    }
-    @GetMapping("return-current-project")
-    public String returnToProject(){
-
-        return "project/current-project";
     }
 }

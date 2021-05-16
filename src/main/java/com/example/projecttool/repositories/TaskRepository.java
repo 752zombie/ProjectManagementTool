@@ -30,34 +30,31 @@ public class TaskRepository {
             String end_time = resultSet.getString("end_time");
             int estimatedHours = TaskRepository.getTotalHoursToComplete(id);
             int estimatedHoursPrDay = resultSet.getInt("estimated_hours_day");
-            String end_time_calculated = resultSet.getString("end_time_calculated");
             String countWeekends = resultSet.getString("count_weekends");
 
-           taskList.add(new Task(id, project_name, project_description, start_time, end_time_calculated, end_time, priority, estimatedHours, estimatedHoursPrDay, countWeekends));
+           taskList.add(new Task(id, project_name, project_description, start_time, end_time, priority, estimatedHours, estimatedHoursPrDay, countWeekends));
         }
 
         return taskList;
     }
 
 
-    public static void editTask(int taskId, String taskName, String description, String priority, String start_time, String end_time_calculated, String end_time,
-                                int estimatedHoursTotal, int estimatedHoursPrDay, String countWeekends) throws SQLException {
+    public static void editTask(int taskId, String taskName, String description, String priority, String start_time, String end_time,
+                                int estimatedHoursPrDay, String countWeekends) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
 
         PreparedStatement statement = connection.prepareStatement("UPDATE tasks SET task_name = ?, " +
                 "task_description = ?, start_time = ?, end_time = ?, priority = ?, " +
-                "estimated_hours = ?, estimated_hours_day = ?, end_time_calculated = ?, count_weekends = ? WHERE id = ?");
+                "estimated_hours_day = ?, count_weekends = ? WHERE id = ?");
 
         statement.setString(1, taskName);
         statement.setString(2, description);
         statement.setDate(3, java.sql.Date.valueOf(start_time));
         statement.setDate(4, java.sql.Date.valueOf(end_time));
         statement.setString(5, priority);
-        statement.setInt(6, estimatedHoursTotal);
-        statement.setInt(7, estimatedHoursPrDay);
-        statement.setDate(8, java.sql.Date.valueOf(end_time_calculated));
-        statement.setString(9, countWeekends);
-        statement.setInt(10, taskId);
+        statement.setInt(6, estimatedHoursPrDay);
+        statement.setString(7, countWeekends);
+        statement.setInt(8, taskId);
 
         statement.execute();
 
@@ -65,15 +62,15 @@ public class TaskRepository {
 
 
     public static void addRowToTask(int project_id, String task_name, String task_description, String priority, String start_time,
-                                    String end_time_calculated, String end_time, int estimatedHoursTotal, int estimatedHoursPrDay, String countWeekends) throws SQLException {
+             String end_time, int estimatedHoursPrDay, String countWeekends) throws SQLException {
 
 
         Connection connection = DatabaseConnection.getConnection();
 
 
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO tasks (project_id, " +
-                "task_name, task_description, start_time, end_time, priority, estimated_hours, " +
-                "estimated_hours_day, end_time_calculated, count_weekends) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO tasks(project_id, " +
+                "task_name, task_description, start_time, end_time, priority, " +
+                "estimated_hours_day, count_weekends) values (?, ?, ?, ?, ?, ?, ?, ?)");
 
         statement.setInt(1, project_id);
         statement.setString(2, task_name);
@@ -81,10 +78,8 @@ public class TaskRepository {
         statement.setDate(4, java.sql.Date.valueOf(start_time));
         statement.setDate(5, java.sql.Date.valueOf(end_time));
         statement.setString(6, priority);
-        statement.setInt(7, estimatedHoursTotal);
-        statement.setInt(8, estimatedHoursPrDay);
-        statement.setDate(9, java.sql.Date.valueOf(end_time_calculated));
-        statement.setString(10, countWeekends);
+        statement.setInt(7, estimatedHoursPrDay);
+        statement.setString(8, countWeekends);
 
         statement.execute();
 
