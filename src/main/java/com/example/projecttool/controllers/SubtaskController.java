@@ -50,22 +50,6 @@ public class SubtaskController {
         return "project/edit-task";
     }
 
-    @PostMapping("add-subtask-to-task")
-    public String addSubtaskToTask(@RequestParam("subtask-name") String name, @RequestParam("subtask-description") String description,
-                                   @RequestParam("start-time") String startTime, @RequestParam("end-time") String endTime,
-                                   @RequestParam("task-id") Integer taskId, @RequestParam("hours-to-complete") int hoursToComplete) {
-
-        try {
-            SubtaskService.addNewSubtaskToTask(taskId, name, description, startTime, endTime, hoursToComplete);
-        }
-
-        catch (SQLException e) {
-            return "project/failed-getting-tasks";
-        }
-
-        return "redirect:/view-subtasks";
-    }
-
     @PostMapping("save-subtask")
     public String saveSubtask(@RequestParam("subtask-name") String name, @RequestParam("subtask-description") String description,
                               @RequestParam("start-time") String startTime, @RequestParam("end-time") String endTime,
