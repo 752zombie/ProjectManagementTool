@@ -151,7 +151,8 @@ body {
     color: #2159e8;
 }
 
-input[type=text], select, textarea, input[type=name]{
+
+.form-control{
     width: 30%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -160,34 +161,7 @@ input[type=text], select, textarea, input[type=name]{
     resize: vertical;
 }
 
-input[type=text], select, textarea, input[type=email] {
-    width: 30%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    margin-top: 15px;
-    resize: vertical;
-}
-
-input[type=text], select, textarea, input[type=password] {
-    width: 30%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    margin-top: 15px;
-    resize: vertical;
-}
-
-input[type=number], select, textarea, input[type=name]{
-    width: 30%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    margin-top: 15px;
-    resize: vertical;
-}
-
-input[type=submit]:hover {
+.signup:hover {
     background-color: #0e1ca8;
 }
 
