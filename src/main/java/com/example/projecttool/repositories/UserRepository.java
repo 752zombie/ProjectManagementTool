@@ -45,13 +45,17 @@ public class UserRepository {
             PreparedStatement statement = connection.prepareStatement("UPDATE users SET user_password = MD5(?) WHERE user_id = ?");
             statement.setString(1, newValueOfAttribute);
             statement.setInt(2, userId);
+            statement.execute();
         } else {
             // This does not allow sql injection even though it might look like it at a glance
             String command = String.format("UPDATE users SET %s = ? WHERE user_id = ?", column);
             PreparedStatement statement = connection.prepareStatement(command);
             statement.setString(1, newValueOfAttribute);
             statement.setInt(2, userId);
+            statement.execute();
         }
+
+
 
     }
 
