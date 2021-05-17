@@ -17,7 +17,7 @@ public class TaskService {
         for (Task task : allTasks) {
             try {
                 DueDateCalculator dueDateCalculator = new DueDateCalculator();
-                String dueDate = dueDateCalculator.dueDate(task.getEstimatedHoursPrDay(),
+                String dueDate = dueDateCalculator.calculateDueDate(task.getEstimatedHoursPrDay(),
                         task.getEstimatedHoursTotal(), task.getStart_time(), task.getCountWeekends(),
                         getAmountOfEmployeesAssigned(task.getId()));
                 task.setEnd_time_calculated(dueDate);
