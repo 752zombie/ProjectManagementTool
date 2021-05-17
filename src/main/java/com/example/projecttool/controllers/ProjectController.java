@@ -39,8 +39,7 @@ public class ProjectController {
         }
 
         catch (SQLException e) {
-            e.printStackTrace();
-            return ErrorHandler.setCurrentError("Something went wrong", session);
+            return ErrorHandler.setCurrentError("Something went wrong retrieving tasks", session);
         }
 
         return "project/current-project";
@@ -70,9 +69,8 @@ public class ProjectController {
 
 
             return "project/current-project";
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return "project/edit-failed";
+        } catch (SQLException e) { ;
+            return ErrorHandler.setCurrentError("Something went wrong editing project", session);
         }
     }
 
@@ -88,9 +86,8 @@ public class ProjectController {
                 return "project/all-projects";
 
             } catch (SQLException e) {
-                System.out.println("Error getting project");
+                return ErrorHandler.setCurrentError("Something went wrong retrieving project list", session);
             }
-            return "project/failed-getting-tasks";
         }
 
 
@@ -134,10 +131,9 @@ public class ProjectController {
          } else {return "redirect:/task-list";}
 
         } catch (SQLException s) {
-            System.out.println("something went wrong editing the project");
+            return ErrorHandler.setCurrentError("Something went wrong editing project", session);
         }
 
-        return "project/failed-getting-tasks";
     }
 
 
@@ -170,8 +166,7 @@ public class ProjectController {
 
 
         } catch (SQLException s) {
-            System.out.println("project editing failed from DB");
-            return "project/edit-failed";
+            return ErrorHandler.setCurrentError("Something went wrong editing project", session);
         }
         return "redirect:/task-list";
     }
@@ -198,12 +193,10 @@ public class ProjectController {
             session.setAttribute("projectTasks", projectTasks);
 
 
-            return "project/current-project";
+            return "redirect:/task-list";
         } catch (SQLException s) {
-            s.printStackTrace();
-            System.out.println("something went wrong adding row to task");
+            return ErrorHandler.setCurrentError("Something went wrong editing project", session);
         }
 
-        return "project/failed-getting-tasks";
     }
 }
