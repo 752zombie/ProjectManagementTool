@@ -9,13 +9,13 @@ import java.util.Calendar;
 
 public class DueDateCalculator {
 
-    public String[] dueDate(int hoursDay, int hoursTotal, String startDate, String countWeekends, int numberOfEmployees) {
+    public String dueDate(int hoursDay, int hoursTotal, String startDate, String countWeekends, int numberOfEmployees) {
         //You are not allowed to divide by zero
         if (hoursDay == 0 || numberOfEmployees == 0) {
             throw new ArithmeticException();
         }
 
-        String[] endTimeCalcAndWeekChoice = new String[2];
+        String finalDate = "";
 
         // IMPROVED VERSION WITH AMOUNT OF EMPLOYEES //
         int totalWorkHoursDay = hoursDay * numberOfEmployees;
@@ -26,7 +26,7 @@ public class DueDateCalculator {
 
         String dueDate = dateAdderWithWeekends(daysToFinish, startDate);
 
-        endTimeCalcAndWeekChoice[0] = dueDate;
+        finalDate = dueDate;
 
     }
     else {
@@ -36,16 +36,15 @@ public class DueDateCalculator {
 
         String dateWithoutWeekends = withoutWeekends.toString();
 
-        endTimeCalcAndWeekChoice[0] = dateWithoutWeekends;
+        finalDate = dateWithoutWeekends;
 
 
     }
-        endTimeCalcAndWeekChoice[1] = countWeekends;
-        return endTimeCalcAndWeekChoice;
+        return finalDate;
 
     }
 
-    public String dateAdderWithWeekends(int daysToFinish, String startDate) {
+    private String dateAdderWithWeekends(int daysToFinish, String startDate) {
 
         //Specifying date format that matches the given date
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -69,7 +68,7 @@ public class DueDateCalculator {
     }
 
 
-    public static LocalDate addDaysSkippingWeekends(LocalDate date, int days) {
+    private static LocalDate addDaysSkippingWeekends(LocalDate date, int days) {
         LocalDate result = date;
         int addedDays = 0;
         while (addedDays < days) {
