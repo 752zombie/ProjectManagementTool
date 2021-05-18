@@ -2,6 +2,8 @@ package com.example.projecttool.services;
 
 import com.example.projecttool.models.project.Task;
 import com.example.projecttool.repositories.TaskRepository;
+import com.example.projecttool.util.DueDateCalculator;
+import com.example.projecttool.util.PrioritySorterService;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

@@ -5,7 +5,7 @@ import com.example.projecttool.models.Skill;
 import com.example.projecttool.models.User;
 import com.example.projecttool.repositories.EmployeeRepository;
 import com.example.projecttool.repositories.SubtaskRepository;
-import com.example.projecttool.services.ErrorHandler;
+import com.example.projecttool.util.ErrorHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

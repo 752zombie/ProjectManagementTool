@@ -1,4 +1,4 @@
-package com.example.projecttool.services;
+package com.example.projecttool.util;
 
 import com.example.projecttool.models.project.Task;
 

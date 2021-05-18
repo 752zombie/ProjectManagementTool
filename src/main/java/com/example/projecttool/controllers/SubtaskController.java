@@ -6,7 +6,7 @@ import com.example.projecttool.models.User;
 import com.example.projecttool.models.project.Subtask;
 import com.example.projecttool.repositories.EmployeeRepository;
 import com.example.projecttool.repositories.SubtaskRepository;
-import com.example.projecttool.services.ErrorHandler;
+import com.example.projecttool.util.ErrorHandler;
 import com.example.projecttool.services.SubtaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
