@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class ShareProjectService {
 
-    public boolean shareProject(String userEmail, String receiverMail, String editOrRead, int projectId) throws SQLException {
+    public static boolean shareProject(String userEmail, String receiverMail, String editOrRead, int projectId) throws SQLException {
 
 
         if (userEmail.equals(receiverMail) && editOrRead.equals("read-only")){
@@ -19,12 +19,12 @@ public class ShareProjectService {
 
     }
 
-    public ArrayList<Project> getSharedProjects(int userId) throws SQLException {
+    public static ArrayList<Project> getSharedProjects(int userId) throws SQLException {
 
         return ShareProjectRepository.getSharedProjects(userId);
     }
 
-    public void ignoreProject(Integer projectId, int userId) throws SQLException {
+    public static void ignoreProject(Integer projectId, int userId) throws SQLException {
 
         ShareProjectRepository.ignoreProject(projectId, userId);
     }

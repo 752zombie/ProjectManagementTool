@@ -16,9 +16,6 @@ import java.util.NoSuchElementException;
 @Controller
 public class LoginController {
 
-    LoginService loginService = new LoginService();
-
-
     @GetMapping("/sign-out")
     public String signOut(HttpSession session) {
 
@@ -38,7 +35,7 @@ public class LoginController {
 
         try {
             //User created successfully and should now be logged in
-            User user = loginService.attemptLogin(name, eMail, password);
+            User user = LoginService.attemptLogin(name, eMail, password);
             session.setAttribute("user", user);
 
         } catch (SQLException e) {
@@ -55,7 +52,7 @@ public class LoginController {
 
 
         try {
-            User user = loginService.attemptLogin(email, password);
+            User user = LoginService.attemptLogin(email, password);
             session.setAttribute("user", user);
 
             return "redirect:/";

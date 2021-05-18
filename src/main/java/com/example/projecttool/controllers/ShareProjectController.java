@@ -2,8 +2,6 @@ package com.example.projecttool.controllers;
 
 import com.example.projecttool.models.User;
 import com.example.projecttool.models.project.Project;
-import com.example.projecttool.repositories.ProjectRepository;
-import com.example.projecttool.repositories.ShareProjectRepository;
 import com.example.projecttool.services.ErrorHandler;
 import com.example.projecttool.services.ShareProjectService;
 import org.springframework.stereotype.Controller;
@@ -19,8 +17,6 @@ import java.util.ArrayList;
 @Controller
 public class ShareProjectController {
 
-ShareProjectService shareProjectService = new ShareProjectService();
-
     @GetMapping("share-project")
     public String shareProject() {
 
@@ -35,7 +31,7 @@ ShareProjectService shareProjectService = new ShareProjectService();
             User user = (User) session.getAttribute("user");
 
             // Checks if user is about to make himself read-only
-            boolean shareSecurity = shareProjectService.shareProject(user.getEmail(), receiverMail, editOrRead, project.getProjectId());
+            boolean shareSecurity = ShareProjectService.shareProject(user.getEmail(), receiverMail, editOrRead, project.getProjectId());
 
             if (shareSecurity){
                 return "share-project/danger-read-only";
@@ -54,7 +50,7 @@ ShareProjectService shareProjectService = new ShareProjectService();
             User user = (User) session.getAttribute("user");
 
             // Add project to View
-            ArrayList<Project> sharedProjects = shareProjectService.getSharedProjects(user.getId());
+            ArrayList<Project> sharedProjects = ShareProjectService.getSharedProjects(user.getId());
             model.addAttribute("projectList", sharedProjects);
 
 

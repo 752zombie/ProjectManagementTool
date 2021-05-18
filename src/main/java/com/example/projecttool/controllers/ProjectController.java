@@ -20,10 +20,6 @@ import java.util.ArrayList;
 @Controller
 public class ProjectController {
 
-    ProjectService projectService = new ProjectService();
-    TaskService taskService = new TaskService();
-    ShareProjectService shareProjectService = new ShareProjectService();
-
 
     @GetMapping("/task-list")
     public String taskList(HttpSession session) {
@@ -34,7 +30,7 @@ public class ProjectController {
         }
 
         try {
-            ArrayList<Task> projectTasks = taskService.getTasks(project.getProjectId());
+            ArrayList<Task> projectTasks = TaskService.getTasks(project.getProjectId());
             session.setAttribute("projectTasks", projectTasks);
         }
 
@@ -61,8 +57,8 @@ public class ProjectController {
             User user = (User) session.getAttribute("user");
 
             // Creates a project
-           Project project = projectService.nameYourProject(user.getId(), projectName, projectStart, projectEnd);
-           ArrayList<Task> projectTasks = taskService.getTasks(project.getProjectId());
+           Project project = ProjectService.nameYourProject(user.getId(), projectName, projectStart, projectEnd);
+           ArrayList<Task> projectTasks = TaskService.getTasks(project.getProjectId());
 
            session.setAttribute("project", project);
            session.setAttribute("projectTasks", projectTasks);
@@ -79,7 +75,7 @@ public class ProjectController {
 
             try {
                 User user = (User) session.getAttribute("user");
-                ArrayList<Project> projectList = projectService.seeProjectList(user.getId());
+                ArrayList<Project> projectList = ProjectService.seeProjectList(user.getId());
                 // WHY DOES THIS ONLY WORK WITH Model
                 model.addAttribute("projectList", projectList);
 
@@ -98,14 +94,14 @@ public class ProjectController {
             User user = (User) session.getAttribute("user");
 
             // Add current project to session
-            Project project = projectService.getProject(projectId);
+            Project project = ProjectService.getProject(projectId);
             session.setAttribute("project", project);
 
             // Deletes row from project
             if (action.equals("Delete")) {
-                projectService.deleteProject(projectId);
+                ProjectService.deleteProject(projectId);
                 // WHY DOES THIS ONLY WORK WITH Model
-                ArrayList<Project> projectList = projectService.seeProjectList(user.getId());
+                ArrayList<Project> projectList = ProjectService.seeProjectList(user.getId());
                 model.addAttribute("projectList", projectList);
 
 
@@ -114,9 +110,9 @@ public class ProjectController {
             }
             // Ignores shared project
             else if (action.equals("Ignore")){
-                shareProjectService.ignoreProject(projectId, user.getId());
+                ShareProjectService.ignoreProject(projectId, user.getId());
                 // WHY DOES THIS ONLY WORK WITH Model
-                ArrayList<Project> sharedProjects = shareProjectService.getSharedProjects(user.getId());
+                ArrayList<Project> sharedProjects = ShareProjectService.getSharedProjects(user.getId());
                 model.addAttribute("projectList", sharedProjects);
 
                 return "share-project/shared-with-me";
@@ -124,7 +120,7 @@ public class ProjectController {
             }
 
 
-         if (projectService.isReadOnly(projectId, user.getId())) {
+         if (ProjectService.isReadOnly(projectId, user.getId())) {
 
              return "share-project/read-only";
 
@@ -151,16 +147,16 @@ public class ProjectController {
 
             // Save changes to row
             if (action.equals("Save")) {
-                taskService.editTask(taskId, name, description, priority, start_time, end_time, estimatedHoursDay, countWeekends);
+                TaskService.editTask(taskId, name, description, priority, start_time, end_time, estimatedHoursDay, countWeekends);
             }
             // Deletes row from project
             else if (action.equals("Delete")) {
-                taskService.deleteTask(taskId);
+                TaskService.deleteTask(taskId);
 
             }
 
             // Sorts and directs edited tasks to View
-            ArrayList<Task> projectTasks = taskService.getTasks(project.getProjectId());
+            ArrayList<Task> projectTasks = TaskService.getTasks(project.getProjectId());
 
             session.setAttribute("projectTasks", projectTasks);
 
@@ -186,10 +182,10 @@ public class ProjectController {
             Project project = (Project) session.getAttribute("project");
 
             // Adds rows to DB
-            taskService.addRowToTask(project.getProjectId(), name, description, priority, start_time, end_time, estimatedHoursDay, countWeekends);
+            TaskService.addRowToTask(project.getProjectId(), name, description, priority, start_time, end_time, estimatedHoursDay, countWeekends);
 
             // Directs tasks to View
-            ArrayList<Task> projectTasks = taskService.getTasks(project.getProjectId());
+            ArrayList<Task> projectTasks = TaskService.getTasks(project.getProjectId());
             session.setAttribute("projectTasks", projectTasks);
 
 

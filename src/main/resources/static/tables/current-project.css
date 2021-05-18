@@ -2,7 +2,6 @@
 
     color: #fff;
     background-color: #0d6efd;
-
     display: none;
     padding: 18px;
     font-family: Arial, serif;
@@ -10,15 +9,17 @@
     margin-left: 5px;
     margin-top: 5px;
     border: 1px solid transparent;
-
 }
-
-
 #shareLink {
 
     margin-left: 260px;
 
 }
+
+#helper {
+    margin-left: 160px;
+}
+
 
 DIV.table
 {
@@ -48,6 +49,9 @@ li {
     list-style-type: none;
 }
 
+#help {
+    margin-left: 330px;
+}
 
 .table {
 

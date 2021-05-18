@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class ProfileService {
 
-    public void updateUserInfo(int userId, UserAttribute attributeToUpdate, String newValue) throws SQLException {
+    public static void updateUserInfo(int userId, UserAttribute attributeToUpdate, String newValue) throws SQLException {
 
         UserRepository.updateUserInfo(userId, attributeToUpdate, newValue);
 

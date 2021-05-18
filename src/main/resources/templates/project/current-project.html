@@ -16,12 +16,25 @@
 
 
 <div class="container-1">
+
     <div>
-        <span><a id="shareLink" href="/share-project" class="pnav" methods="get"> Share project</a> <a href="#"></a></span>
+    <div>
+        <span><a id="shareLink" href="/share-project" class="pnav" methods="get"> Share project</a> <a
+                href="#"></a></span>
     </div>
     <div>
         <span class="popup" id="popup">Invite others to collaborate</span>
     </div>
+  </div>
+
+  <div>
+    <div >
+        <span><a id="helper" href="/help-page" class="pnav" methods="get"> Help page</a> <a href="#"></a></span>
+    </div>
+    <div>
+        <span class="popup" id="popup2">This guide will help you working with projects</span>
+    </div>
+  </div>
 </div>
 
 
@@ -49,12 +62,11 @@
             <input type="hidden" th:value="${task.id}" name="id">
 
 
-                <select id="task-priority" name="priority" required>
-                    <option class="high-prior" value="high" th:selected="${task.priority=='high'}">High</option>
-                    <option class="medium-prior" value="medium" th:selected="${task.priority=='medium'}">Medium</option>
-                    <option class="low-prior" value="low" th:selected="${task.priority=='low'}">Low</option>
-                </select>
-
+            <select id="task-priority" name="priority" required>
+                <option class="high-prior" value="high" th:selected="${task.priority=='high'}">High</option>
+                <option class="medium-prior" value="medium" th:selected="${task.priority=='medium'}">Medium</option>
+                <option class="low-prior" value="low" th:selected="${task.priority=='low'}">Low</option>
+            </select>
 
 
             <span class="td"><input type="text" id="task-name" name="name" th:value="${task.name}"></span>
@@ -75,15 +87,19 @@
                                     th:value="${task.estimatedHoursTotal}" readonly></span>
             <span class="td"><input type="date" id="task-start" name="start_time" th:value="${task.start_time}"></span>
             <span class="td"><input type="date" id="task-end" name="end_time" th:value="${task.end_time}"></span>
-            <span class="td" th:if="${task.endTimeCanBeCalculated()}"><input type="date" name="end_time_calculated" th:value="${task.end_time_calculated}" readonly></span>
-            <span class="td" th:if="${!task.endTimeCanBeCalculated()}"><input type="text" name="end_time_calculated" th:value="'N/A'" readonly></span>
+            <span class="td" th:if="${task.endTimeCanBeCalculated()}"><input type="date" name="end_time_calculated"
+                                                                             th:value="${task.end_time_calculated}"
+                                                                             readonly></span>
+            <span class="td" th:if="${!task.endTimeCanBeCalculated()}"><input type="text" name="end_time_calculated"
+                                                                              th:value="'N/A'" readonly></span>
             <span class="td"><textarea name="description" id="task-description" cols="30" rows="1"
                                        th:text="${task.description}"></textarea></span>
 
             <span class="td">
             <input type="submit" class="btn btn-success" value="Save" name="action" formaction="/edit-task">
                <input type="submit" class="btn btn-danger" value="Delete" name="action" formaction="/edit-task">
-                <input type="submit" class="btn btn-primary" value="View subtasks" name="action" formaction="/edit-task-with-subtasks">
+                <input type="submit" class="btn btn-primary" value="View subtasks" name="action"
+                       formaction="/edit-task-with-subtasks">
             </span>
         </form>
 
@@ -91,11 +107,11 @@
         <form action="/add-row-to-tasks" method="post" class="tr">
 
 
-                <select name="priority" required>
-                    <option class="high-prior" value="high">High</option>
-                    <option class="medium-prior" value="medium">Medium</option>
-                    <option class="low-prior" value="low">Low</option>
-                </select>
+            <select name="priority" required>
+                <option class="high-prior" value="high">High</option>
+                <option class="medium-prior" value="medium">Medium</option>
+                <option class="low-prior" value="low">Low</option>
+            </select>
 
             <span class="td"><input type="text" name="name" required></span>
             <span class="td"><input type="number" name="estimated-hours-day" required></span>

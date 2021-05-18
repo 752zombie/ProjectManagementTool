@@ -15,39 +15,36 @@ import java.util.ArrayList;
 public class ProjectService {
 
 
-    public Project nameYourProject(int userId, String projectName, String projectStart, String projectEnd) throws SQLException {
+    public static Project nameYourProject(int userId, String projectName, String projectStart, String projectEnd) throws SQLException {
 
 
         // Creates a project
         int project_id = ProjectRepository.createProject(userId, projectName, projectStart, projectEnd);
 
         // Saves project in session and adds to view
-       Project project = new Project(project_id, projectName, projectStart, projectEnd);
 
 
-       return project;
+        return new Project(project_id, projectName, projectStart, projectEnd);
     }
 
-    public ArrayList<Project> seeProjectList(int userId) throws SQLException {
-
-        ArrayList<Project> allProjects = ProjectRepository.getProjects(userId);
+    public static ArrayList<Project> seeProjectList(int userId) throws SQLException {
 
 
-        return allProjects;
+        return ProjectRepository.getProjects(userId);
     }
 
 
-    public Project getProject(int projectId) throws SQLException {
+    public static Project getProject(int projectId) throws SQLException {
 
         return ProjectRepository.getProject(projectId);
     }
 
-    public boolean isReadOnly(int projectId, int userId) throws SQLException {
+    public static boolean isReadOnly(int projectId, int userId) throws SQLException {
 
         return ShareProjectRepository.isReadOnly(projectId, userId);
     }
 
-    public void deleteProject(Integer projectId) throws SQLException {
+    public static void deleteProject(Integer projectId) throws SQLException {
 
             ProjectRepository.deleteProject(projectId);
         }

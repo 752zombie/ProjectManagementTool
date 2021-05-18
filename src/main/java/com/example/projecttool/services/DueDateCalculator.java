@@ -1,6 +1,5 @@
 package com.example.projecttool.services;
 
-import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
@@ -22,11 +21,6 @@ public class DueDateCalculator {
         int daysToFinish = hoursTotal / totalWorkHoursDay;
 
 
-
-
-
-
-
     if (countWeekends.equals("weekend-true")) {
 
         String dueDate = dateAdderWithWeekends(daysToFinish, startDate);
@@ -37,7 +31,7 @@ public class DueDateCalculator {
     else {
         LocalDate str = LocalDate.parse(startDate);
 
-        LocalDate withoutWeekends = addDaysSkippingWeekends(str, daysToFinish);
+        LocalDate withoutWeekends = dateAdderWithoutWeekend(str, daysToFinish);
 
         String dateWithoutWeekends = withoutWeekends.toString();
 
@@ -73,7 +67,7 @@ public class DueDateCalculator {
     }
 
 
-    private static LocalDate addDaysSkippingWeekends(LocalDate date, int days) {
+    private static LocalDate dateAdderWithoutWeekend(LocalDate date, int days) {
         LocalDate result = date;
         int addedDays = 0;
         while (addedDays < days) {

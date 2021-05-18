@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class TaskService {
 
 
-    public ArrayList<Task> getTasks(Integer projectId) throws SQLException {
+    public static ArrayList<Task> getTasks(Integer projectId) throws SQLException {
 
 
         ArrayList<Task> allTasks = TaskRepository.getTasks(projectId);
@@ -35,7 +35,7 @@ public class TaskService {
 
     }
 
-    public void editTask(int taskId, String taskName, String description, String priority, String start_time, String end_time,
+    public static void editTask(int taskId, String taskName, String description, String priority, String start_time, String end_time,
                          int estimatedHoursDay, String countWeekends) throws SQLException {
 
 
@@ -44,23 +44,23 @@ public class TaskService {
        // SHOULD week CHOICE BE ADDED TO TASK OR A NEW TABLE
     }
 
-    public void deleteTask(int taskId) throws SQLException {
+    public static void deleteTask(int taskId) throws SQLException {
 
         TaskRepository.deleteTask(taskId);
     }
 
-    public void addRowToTask(int projectId, String name, String description, String priority, String start_time, String end_time,
+    public static  void addRowToTask(int projectId, String name, String description, String priority, String start_time, String end_time,
                              int estimatedHoursDay, String countWeekends) throws SQLException {
 
         TaskRepository.addRowToTask(projectId, name, description, priority, start_time, end_time, estimatedHoursDay, countWeekends);
 
     }
 
-    public int getAmountOfEmployeesAssigned(int taskId) throws SQLException{
+    public static int getAmountOfEmployeesAssigned(int taskId) throws SQLException{
         return TaskRepository.getTotalNumberOfEmployeesAssigned(taskId);
     }
 
-    public int getEstimatedTimeToComplete(int taskId) throws SQLException{
+    public static int getEstimatedTimeToComplete(int taskId) throws SQLException{
         return TaskRepository.getTotalHoursToComplete(taskId);
     }
 }

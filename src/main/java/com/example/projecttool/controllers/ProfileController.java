@@ -17,14 +17,6 @@ import java.util.NoSuchElementException;
 @Controller
 public class ProfileController {
 
-    ProfileService profileService = new ProfileService();
-    LoginService loginService = new LoginService();
-
-  /*  @GetMapping("/change-user-info")
-    public String changeSettings() {
-        return "profile/user";
-    }*/
-
     @GetMapping("/profile")
     public String profilePage() {
         return "profile/profile";
@@ -40,7 +32,7 @@ public class ProfileController {
 
         try {
             User user = (User) session.getAttribute("user");
-            profileService.updateUserInfo(user.getId(), UserAttribute.name, username);
+            ProfileService.updateUserInfo(user.getId(), UserAttribute.name, username);
 
             return "profile/success";
 
@@ -60,7 +52,7 @@ public class ProfileController {
 
         try {
             User user = (User) session.getAttribute("user");
-            profileService.updateUserInfo(user.getId(), UserAttribute.email, email);
+            ProfileService.updateUserInfo(user.getId(), UserAttribute.email, email);
             return "profile/success";
 
         } catch (SQLException e) {
@@ -82,12 +74,12 @@ public class ProfileController {
             User user = (User) session.getAttribute("user");
 
             try {
-                loginService.attemptLogin(user.getEmail(), currentPassword);
+                LoginService.attemptLogin(user.getEmail(), currentPassword);
             } catch (NoSuchElementException e) {
                 return "profile/password-form";
             }
 
-            profileService.updateUserInfo(user.getId(), UserAttribute.password, newPassword);
+            ProfileService.updateUserInfo(user.getId(), UserAttribute.password, newPassword);
             return "profile/success";
 
         } catch (SQLException e) {
