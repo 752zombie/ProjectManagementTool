@@ -88,6 +88,8 @@ li {
 
     display: flex;
     flex-direction: row;
+    margin-right: 150px;
+    margin-bottom: 150px;
 
 
 }
