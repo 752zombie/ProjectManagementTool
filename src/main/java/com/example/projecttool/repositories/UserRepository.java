@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.NoSuchElementException;
 
 public class UserRepository {
 
@@ -25,7 +24,7 @@ public class UserRepository {
     }
 
 
-    public static void removeUser(int userid) throws SQLException {
+    public static void deleteUser(int userid) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
 
         PreparedStatement statement = connection.prepareStatement("DELETE FROM users WHERE user_id = ?");

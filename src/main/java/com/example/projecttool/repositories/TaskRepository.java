@@ -3,11 +3,8 @@ package com.example.projecttool.repositories;
 import com.example.projecttool.models.project.Subtask;
 import com.example.projecttool.models.project.Task;
 import com.example.projecttool.services.DatabaseConnection;
-import com.example.projecttool.services.TaskService;
-
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class TaskRepository {
 

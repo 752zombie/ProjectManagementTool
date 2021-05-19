@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
-    <link rel="stylesheet" href="tables/current-project.css">
-    <link rel="stylesheet" href="css/general.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link rel="stylesheet" href="tables/current-project.css">
+    <link rel="stylesheet" href="css/general.css">
+
 
 </head>
 <body>
@@ -43,7 +43,7 @@
         <span class="td">Task name</span>
         <span class="td">Estimated hours/day/employee</span>
         <span class="td">Weekend is workdays</span>
-        <span class="td">Estimated hours total</span>
+        <span class="td">All subtask hours combined</span>
         <span class="td">Start date</span>
         <span class="td">Due date</span>
         <span class="td">Calculated end date</span>
@@ -55,36 +55,49 @@
         <form method="post" action="/edit-task" class="tr" th:each="task : ${session.projectTasks}">
             <input type="hidden" th:value="${task.id}" name="id">
 
+                       <!-- SELECT priority -->
                         <select id="task-priority" name="priority" required>
                             <option class="high-prior" value="high" th:selected="${task.priority=='high'}">High</option>
                             <option class="medium-prior" value="medium" th:selected="${task.priority=='medium'}">Medium
                             </option>
                             <option class="low-prior" value="low" th:selected="${task.priority=='low'}">Low</option>
                         </select>
+
+                        <!-- TASK NAME AND DESCRIPTION -->
                         <span class="td"><input type="text" id="task-name" name="name" th:value="${task.name}"></span>
                         <span class="td"><input type="number" id="hours-day" name="estimated-hours-day"
                                                 th:value="${task.estimatedHoursPrDay}"></span>
 
                         <!-- Count weekends or only weekdays -->
-
                         <select id="task-count-weekends" name="count-weekends">
                             <option value="weekend-false" th:selected="${task.countWeekends=='weekend-false'}">NO</option>
                             <option value="weekend-true" th:selected="${task.countWeekends=='weekend-true'}">YES</option>
                         </select>
+
+
+                      <!-- Work hours and calendar -->
                       <span class="td"><input type="number" id="hours-total" name="estimated-hours-total"
                                     th:value="${task.estimatedHoursTotal}" readonly></span>
                         <span class="td"><input type="date" id="task-start" name="start_time" th:value="${task.start_time}"></span>
                         <span class="td"><input type="date" id="task-end" name="end_time" th:value="${task.end_time}"></span>
-                        <span class="td" th:if="${task.endTimeCanBeCalculated()}"><input type="date" name="end_time_calculated" th:value="${task.end_time_calculated}" readonly></span>
-                        <span class="td" th:if="${!task.endTimeCanBeCalculated()}"><input type="text" name="end_time_calculated" th:value="'N/A'" readonly></span>
+                        <span class="td" th:if="${task.endTimeCanBeCalculated()}"><input type="date" name="end_time_calculated" id="end_time_calculated" th:value="${task.end_time_calculated}" readonly></span>
+                        <span class="td" th:if="${!task.endTimeCanBeCalculated()}"><input type="text" name="end_time_calculated" id="end_time_calculatedNA" th:value="'N/A'" readonly></span>
                         <span class="td"><textarea name="description" id="task-description" cols="30" rows="1"
                                        th:text="${task.description}"></textarea></span>
                         <span class="td">
+
+
+                        <!-- Buttons -->
                         <input type="submit" class="btn btn-success" value="Save" name="action" formaction="/edit-task">
                         <input type="submit" class="btn btn-danger" value="Delete" name="action" formaction="/edit-task">
                         <input type="submit" class="btn btn-primary" value="View subtasks" name="action" formaction="/edit-task-with-subtasks">
                       </span>
                     </form>
+
+
+                    <!-- ADD NEW ROW TO TASK -->
+
+                    <!-- Priority -->
                     <form action="/add-row-to-tasks" method="post" class="tr">
                         <select name="priority" required>
                             <option class="high-prior" value="high">High</option>
@@ -93,19 +106,24 @@
                         </select>
 
                         <span class="td"><input type="text" name="name" required></span>
-                        <span class="td"><input type="number" name="estimated-hours-day" required></span>
+                        <span class="td"><input type="number" name="estimated-hours-day" id="estimated-hours-day-new-row"  required></span>
+
                          <!-- Count weekends or only weekdays -->
                         <select class="select" name="count-weekends">
                             <option value="weekend-false">NO</option>
                             <option value="weekend-true">YES</option>
                         </select>
+
+                        <!-- Work hours and calendar -->
                         <span class="td"><input type="hidden" name="estimated-hours-total"></span>
-                        <span class="td"><input type="date" name="start_time" required></span>
-                        <span class="td"><input type="date" name="end_time"></span>
+                        <span class="td"><input type="date" name="start_time" id="start-time" required></span>
+                        <span class="td"><input type="date" name="end_time" id="end_time"></span>
                         <span class="td"><input type="hidden" name="fill-for-table-order"></span>
                         <span class="td"><textarea name="description" id="new-task-description" cols="30" rows="1"
                                        required></textarea></span>
                         <span class="td">
+
+                        <!-- Buttons -->
                             <input type="submit" class="btn btn-success" value="Save" name="action" formaction="add-row-to-tasks">
                         </span>
                     </form>

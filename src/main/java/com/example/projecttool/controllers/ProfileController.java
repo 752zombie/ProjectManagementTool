@@ -2,7 +2,6 @@ package com.example.projecttool.controllers;
 
 import com.example.projecttool.models.User;
 import com.example.projecttool.models.UserAttribute;
-import com.example.projecttool.repositories.UserRepository;
 import com.example.projecttool.services.LoginService;
 import com.example.projecttool.services.ProfileService;
 import org.springframework.stereotype.Controller;

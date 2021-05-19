@@ -195,4 +195,9 @@ public class ProjectController {
         }
 
     }
+    @GetMapping("help-page")
+    public String projectHelp(){
+
+        return "project/help-page";
+    }
 }
