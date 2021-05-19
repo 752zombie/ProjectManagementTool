@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <title>Employee manager</title>
     <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="tables/create-project-style.css">
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="tables/employee-manager-style.css">
     <style>
 
     </style>
@@ -16,69 +15,70 @@
 
     <div class="content-area">
         <div class="content-area1-1">
-            <ul>
-                 <li th:each="emp : ${session.allEmployees}">
-                     <form action="/change-employee-name" method="post">
-                          <input type="hidden" name="emp-id" th:value="${emp.id}">
-                          <label for="emp-name">Employee name: </label>
-                          <input type="text" name="emp-name" th:value="${emp.name}" id="emp-name" onchange="this.form.submit()">
-                     </form>
-                     <form action="/delete-employee" method="post">
-                            <input type="hidden"   name="emp-id" th:value="${emp.id}">
-                            <button  type="submit">Delete</button>
-                     </form>
-                     <span>Skills: </span>
-                     <span th:each="skill, iter : ${emp.skills}">
+            <div class="ul-1">Employee and skill overview
+            <ul id="ul-1">
+                <li>
+                    <form  action="/create-new-employee" method="post">
+                        <label for="new-emp-name">Create new employee: </label>
+                       <input type="text" name="emp-name" id="new-emp-name" placeholder="Employee name">
+                      <button type="submit">Save</button>
+                    </form>
+                </li>
+                <li>
+                    <form action="/create-new-skill" method="post">
+                        <label for="skill-name">Create a new skill: </label>
+                        <input type="text" name="skill-name" id="skill-name" placeholder="skill name">
+                        <button type="submit">Save</button>
+                    </form>
+                    <form action="/delete-skill" method="post" th:if="${!session.allSkills.isEmpty()}">
+                        <label for="skill-deleter">Delete a skill: </label>
+                        <select name="skill-to-delete" id="skill-deleter">
+                            <option th:each="skill : ${session.allSkills}" th:value="${skill.id}" th:text="${skill.name}"></option>
+                        </select>
+                        <button type="submit">Delete skill</button>
+                    </form>
+                </li>
+            </ul>
+            </div>
+
+            <div class="ul-2">
+            <ul id="ul-2">
+             <li th:each="emp : ${session.allEmployees}">
+                <form action="/change-employee-name" method="post">
+                <input class="emp-name"  type="hidden" name="emp-id" th:value="${emp.id}">
+                <label for="emp-name">Employee name: </label><input type="text" name="emp-name" th:value="${emp.name}" id="emp-name" onchange="this.form.submit()">
+                </form>
+                <form action="/delete-employee" method="post">
+                <input type="hidden"   name="emp-id" th:value="${emp.id}">
+                <button  type="submit">Delete</button>
+                </form>
+
+             <span>Skills: </span>
+             <span th:each="skill, iter : ${emp.skills}">
                         <span th:if="${!iter.last}" th:text="${skill.name} + ', '"></span>
                         <span th:if="${iter.last}" th:text="${skill.name}"></span>
                      </span>
-                     <form action="/add-skill-to-employee" method="post">
-                           <input type="hidden" th:value="${emp.id}" name="emp-id">
-                           <label for="skill-adder">Add skill to employee: </label>
-                         <select name="skill-id" id="skill-adder">
-                              <option th:each="skill : ${session.allSkills}" th:if="${!emp.hasSkill(skill.id)}" th:value="${skill.id}" th:text="${skill.name}"></option>
-                         </select>
-                        <button type="submit" >Add skill</button>
-                     </form>
-                     <form action="/remove-skill-from-employee" method="post">
-                            <input type="hidden" th:value="${emp.id}" name="emp-id">
-                            <label for="skill-remover">Remove skill from employee: </label>
-                         <select name="skill-id" id="skill-remover">
-                             <option th:each="skill : ${emp.skills}"  th:value="${skill.id}" th:text="${skill.name}"></option>
-                         </select>
-                         <button type="submit">Remove skill</button>
-                     </form>
-                     <form action="/delete-employee" method="post">
-                         <input type="hidden" name="emp-id" th:value="${emp.id}">
-                         <button type="submit">Delete</button>
-                     </form>
-                </li>
+             <form action="/add-skill-to-employee" method="post">
+                <input type="hidden" th:value="${emp.id}" name="emp-id">
+                <label for="skill-adder">Add skill to employee: </label>
+                <select name="skill-id" id="skill-adder">
+                    <option th:each="skill : ${session.allSkills}" th:if="${!emp.hasSkill(skill.id)}" th:value="${skill.id}" th:text="${skill.name}"></option>
+                </select>
+                <button type="submit" >Add skill</button>
+             </form>
+             <form action="/remove-skill-from-employee" method="post">
+                <input type="hidden" th:value="${emp.id}" name="emp-id">
+                <label for="skill-remover">Remove skill from employee: </label>
+                <select name="skill-id" id="skill-remover">
+                    <option th:each="skill : ${emp.skills}"  th:value="${skill.id}" th:text="${skill.name}"></option>
+                </select>
+                <button type="submit">Remove skill</button>
+             </form>
+            </li>
+          </ul>
+        </div>
 
-                <li>
-                   <form action="/create-new-employee" method="post">
-                         <label for="new-emp-name">Create new employee: </label>
-                         <input type="text" name="emp-name" id="new-emp-name" placeholder="Employee name">
-                         <button type="submit">Save</button>
-                   </form>
-                </li>
-
-                 <li>
-                    <form action="/create-new-skill" method="post">
-                         <label for="skill-name">Create a new skill: </label>
-                         <input type="text" name="skill-name" id="skill-name" placeholder="skill name">
-                         <button type="submit">Save</button>
-                    </form>
-                    <form action="/delete-skill" method="post" th:if="${!session.allSkills.isEmpty()}">
-                         <label for="skill-deleter">Delete a skill: </label>
-                     <select name="skill-to-delete" id="skill-deleter">
-                       <option th:each="skill : ${session.allSkills}" th:value="${skill.id}" th:text="${skill.name}"></option>
-                     </select>
-                         <button type="submit">Delete skill</button>
-                    </form>
-                 </li>
-            </ul>
         </div>
     </div>
-
 </body>
 </html>
