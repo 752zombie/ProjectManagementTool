@@ -6,23 +6,11 @@
     cursor: pointer;
     float: left;
 }
-.sharelink {
-    position: relative;
-    display: inline-block;
-}
-.sharelink-content{
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    border-radius: 4px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.15);
-    z-index: 1;
-}
+
 
 .popup {
     color: #fff;
-    background-color: #0d6efd;
+    background-color: #dadada;
     display: none;
     padding: 18px;
     font-family: Arial, serif;
@@ -30,19 +18,6 @@
     margin-left: 5px;
     margin-top: 5px;
     border: 1px solid transparent;
-}
-
-.sharelink-content p {
-    color: #525252;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.sharelink p:hover {background-color: #f1f1f1}
-
-.sharelink:hover .sharelink-content {
-    display: block;
 }
 
 
@@ -90,6 +65,7 @@ li {
     font-family: sans-serif;
     min-width: 400px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    background-color: white;
 
 
 }
