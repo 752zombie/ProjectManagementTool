@@ -28,22 +28,6 @@ public class Subtask {
         this.hoursToComplete = hoursToComplete;
     }
 
-    public void addEmployee(Employee employee) {
-        assignedEmployees.add(employee);
-
-    }
-
-    public void removeEmployee(int employeeId) {
-        assignedEmployees.removeIf(employee -> employee.getId() == employeeId);
-    }
-
-    public void addSkill(Skill skill) {
-        requiredSkills.add(skill);
-    }
-
-    public void removeSkill(String skillName) {
-        requiredSkills.removeIf(skill -> skill.getName().equals(skillName));
-    }
 
 
     public String getDescription() {
@@ -95,6 +79,7 @@ public class Subtask {
         return false;
     }
 
+    // do not delete
     public boolean hasSkill(int skillId) {
         for (Skill skill : requiredSkills) {
             if (skill.getId() == skillId) {
