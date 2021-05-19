@@ -4,8 +4,7 @@ import com.example.projecttool.models.Employee;
 import com.example.projecttool.models.Skill;
 import com.example.projecttool.models.User;
 import com.example.projecttool.models.project.Subtask;
-import com.example.projecttool.repositories.EmployeeRepository;
-import com.example.projecttool.repositories.SubtaskRepository;
+import com.example.projecttool.services.EmployeeService;
 import com.example.projecttool.util.ErrorHandler;
 import com.example.projecttool.services.SubtaskService;
 import org.springframework.stereotype.Controller;
@@ -39,7 +38,7 @@ public class SubtaskController {
             Integer taskId = (Integer) session.getAttribute("taskId");
             ArrayList<Subtask> subtasks = SubtaskService.getSubtasks(taskId);
             session.setAttribute("subtasks", subtasks);
-            ArrayList<Skill> skills = EmployeeRepository.getAllSkills(user.getId());
+            ArrayList<Skill> skills = EmployeeService.getAllSkills(user.getId());
             session.setAttribute("allSkills", skills);
         }
 
@@ -126,7 +125,7 @@ public class SubtaskController {
     @PostMapping("add-skill-to-subtask")
     public String addSkillToSubtask(@RequestParam("subtask-id") Integer subtaskId, @RequestParam("skill-id") Integer skillId, HttpSession session) {
         try {
-            SubtaskRepository.addSkillToSubtask(subtaskId, skillId);
+            SubtaskService.addSkillToSubtask(subtaskId, skillId);
         }
 
         catch (SQLException e) {
@@ -141,7 +140,7 @@ public class SubtaskController {
         try {
             System.out.println(subtaskId);
             System.out.println(skillId);
-            SubtaskRepository.removeSkillFromSubtask(subtaskId, skillId);
+            SubtaskService.removeSkillFromSubtask(subtaskId, skillId);
         }
 
         catch (SQLException e) {

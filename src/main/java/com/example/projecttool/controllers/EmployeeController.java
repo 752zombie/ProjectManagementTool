@@ -3,8 +3,7 @@ package com.example.projecttool.controllers;
 import com.example.projecttool.models.Employee;
 import com.example.projecttool.models.Skill;
 import com.example.projecttool.models.User;
-import com.example.projecttool.repositories.EmployeeRepository;
-import com.example.projecttool.repositories.SubtaskRepository;
+import com.example.projecttool.services.EmployeeService;
 import com.example.projecttool.util.ErrorHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +25,9 @@ public class EmployeeController {
         }
 
         try {
-            ArrayList<Employee> employees = SubtaskRepository.getAllEmployees(user.getId());
+            ArrayList<Employee> employees = EmployeeService.getAllEmployees(user.getId());
             session.setAttribute("allEmployees", employees);
-            ArrayList<Skill> skills = EmployeeRepository.getAllSkills(user.getId());
+            ArrayList<Skill> skills = EmployeeService.getAllSkills(user.getId());
             session.setAttribute("allSkills", skills);
         }
 
@@ -42,7 +41,7 @@ public class EmployeeController {
     @PostMapping("change-employee-name")
     public String changeEmployeeName(@RequestParam("emp-id") Integer employeeId, @RequestParam("emp-name") String name, HttpSession session) {
         try {
-            EmployeeRepository.changeEmployeeName(employeeId, name);
+            EmployeeService.changeEmployeeName(employeeId, name);
         }
 
         catch (SQLException e) {
@@ -55,7 +54,7 @@ public class EmployeeController {
     @PostMapping("/delete-employee")
     public String deleteEmployee(@RequestParam("emp-id") Integer employeeId, HttpSession session) {
         try {
-            EmployeeRepository.deleteEmployee(employeeId);
+            EmployeeService.deleteEmployee(employeeId);
         }
 
         catch (SQLException e) {
@@ -69,7 +68,7 @@ public class EmployeeController {
     public String createNewEmployee(@RequestParam("emp-name") String employeeName, HttpSession session) {
         try {
             User user = (User) session.getAttribute("user");
-            EmployeeRepository.createNewEmployee(employeeName, user.getId());
+            EmployeeService.createNewEmployee(employeeName, user.getId());
         }
 
         catch (SQLException e) {
@@ -83,7 +82,7 @@ public class EmployeeController {
     public String createNewSkill(@RequestParam("skill-name") String skillName, HttpSession session) {
         try {
             User user = (User) session.getAttribute("user");
-            EmployeeRepository.createNewSkill(user.getId(), skillName);
+            EmployeeService.createNewSkill(user.getId(), skillName);
         }
 
         catch (SQLException e) {
@@ -97,7 +96,7 @@ public class EmployeeController {
     @PostMapping("/delete-skill")
     public String deleteSkill(@RequestParam("skill-to-delete") Integer skillId, HttpSession session) {
         try {
-            EmployeeRepository.deleteSkill(skillId);
+            EmployeeService.deleteSkill(skillId);
         }
 
         catch (SQLException e) {
@@ -110,7 +109,7 @@ public class EmployeeController {
     @PostMapping("/add-skill-to-employee")
     public String addSkillToEmployee(@RequestParam("emp-id") Integer employeeId, @RequestParam("skill-id") Integer skillId, HttpSession session) {
         try {
-            EmployeeRepository.addSkillToEmployee(employeeId, skillId);
+            EmployeeService.addSkillToEmployee(employeeId, skillId);
         }
 
         catch (SQLException e) {
@@ -123,7 +122,7 @@ public class EmployeeController {
     @PostMapping("remove-skill-from-employee")
     public String removeSkillFromEmployee(@RequestParam("emp-id") Integer employeeId, @RequestParam("skill-id") Integer skillId, HttpSession session) {
         try {
-            EmployeeRepository.removeSkillFromEmployee(employeeId, skillId);
+            EmployeeService.removeSkillFromEmployee(employeeId, skillId);
         }
 
         catch (SQLException e) {
