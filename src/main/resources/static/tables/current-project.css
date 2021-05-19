@@ -12,12 +12,10 @@
 
 
 #helper {
-    float: left;
-    margin-left: 10px;
 
 }
 #share-with{
-    float: left;
+
 }
 
 
@@ -92,6 +90,7 @@ li {
     padding-bottom: 20px;
     padding-top: 5px;
     color: #2159e8;
+    margin-bottom: 20px;
 
 }
 
