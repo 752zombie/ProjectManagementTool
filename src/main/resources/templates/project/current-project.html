@@ -8,7 +8,13 @@
     <link rel="stylesheet" href="tables/current-project.css">
     <link rel="stylesheet" href="css/general.css">
 
-
+    <style>
+        .look-like-text {
+            border: none;
+            background: transparent;
+            color: #000;
+        }
+    </style>
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
@@ -80,11 +86,11 @@
 
                       <!-- Work hours and calendar -->
                       <span class="td"><input type="number" id="hours-total" name="estimated-hours-total"
-                                    th:value="${task.estimatedHoursTotal}" readonly></span>
+                                    th:value="${task.estimatedHoursTotal}" class="look-like-text" readonly></span>
                         <span class="td"><input type="date" id="task-start" name="start_time" th:value="${task.start_time}"></span>
                         <span class="td"><input type="date" id="task-end" name="end_time" th:value="${task.end_time}"></span>
-                        <span class="td" th:if="${task.endTimeCanBeCalculated()}"><input type="date" name="end_time_calculated" id="end_time_calculated" th:value="${task.end_time_calculated}" readonly></span>
-                        <span class="td" th:if="${!task.endTimeCanBeCalculated()}"><input type="text" name="end_time_calculated" id="end_time_calculatedNA" th:value="'N/A'" readonly></span>
+                        <span class="td" th:if="${task.endTimeCanBeCalculated()}"><input type="date" name="end_time_calculated" id="end_time_calculated" class="look-like-text" th:value="${task.end_time_calculated}" readonly></span>
+                        <span class="td" th:if="${!task.endTimeCanBeCalculated()}"><input type="text" name="end_time_calculated" id="end_time_calculatedNA" class="look-like-text" th:value="'N/A'" readonly></span>
                         <span class="td"><textarea name="description" id="task-description" cols="30" rows="1"
                                        th:text="${task.description}"></textarea></span>
                         <span class="td">
