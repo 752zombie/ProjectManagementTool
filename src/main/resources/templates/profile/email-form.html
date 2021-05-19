@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="cssstylesheet.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-<!--header.html  that's here  -->
-<div th:replace="fragments/header :: header">
-</div>
+<!--header.html  -->
+<div th:replace="fragments/header :: header"></div>
 <div class="content-area">
+    <div class="content-area1-1">
     <form action="change-email" method="post">
         <div>
-            <input type="text" class="input" name="email" id="name" placeholder="Enter new email here" autofocus required>
+            <input type="text" class="form-control" name="email" id="name" placeholder="Enter new email here" autofocus required>
         </div>
         <div>
             <button class=signup type="submit">Confirm email change</button>
         </div>
     </form>
+    </div>
 </div>
 </body>
 </html>

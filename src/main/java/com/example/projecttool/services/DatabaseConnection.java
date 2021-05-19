@@ -46,6 +46,7 @@ public class DatabaseConnection {
             if (connection != null && connection.isValid(10)) {
                 return connection;
             }
+            userStatic="remote";
             connection = DriverManager.getConnection(urlStatic, userStatic, passwordStatic);
         }
 

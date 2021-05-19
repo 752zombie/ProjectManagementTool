@@ -1,5 +1,26 @@
-.popup {
+.dropbtn{
+    color: #525252;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    float: left;
+}
+.sharelink {
+    position: relative;
+    display: inline-block;
+}
+.sharelink-content{
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    border-radius: 4px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+}
 
+.popup {
     color: #fff;
     background-color: #0d6efd;
     display: none;
@@ -10,11 +31,20 @@
     margin-top: 5px;
     border: 1px solid transparent;
 }
-#shareLink {
 
-    margin-left: 260px;
-
+.sharelink-content p {
+    color: #525252;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
 }
+
+.sharelink p:hover {background-color: #f1f1f1}
+
+.sharelink:hover .sharelink-content {
+    display: block;
+}
+
 
 #helper {
     margin-left: 160px;
@@ -88,8 +118,9 @@ li {
 
 .project-name-top {
 
-    padding-bottom: 50px;
-    padding-top: 40px;
+    padding-bottom: 20px;
+    padding-top: 5px;
+    color: #2159e8;
 
 }
 

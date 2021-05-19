@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Login page</title>
-    <link rel="stylesheet" href="cssstylesheet.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/login.css">
 
 </head>
 <body>
@@ -16,27 +17,27 @@
         <div><br></div>
         <form action="/sign-in" method="post">
 
+            <div>
+                <input type="email" class="form-control" name="email" id="email" placeholder="Email address" required>
+            </div>
+
+            <div>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Password"
+                       required>
+            </div>
+
+            <div class="checkbox">
+                <input type="checkbox" value="remember-me"> Remember me
+            </div>
+
+            <button class="login" type="submit">Login</button>
+        </form>
         <div>
-            <input type="email" class="form-control" name="email" id="email" placeholder="Email address" required>
+            <a href="sign-up" class="sign-up" methods="get">Not a user yet? Click here to sign up</a>
         </div>
-
-        <div>
-            <input type="password" class="form-control" name="password" id="password" placeholder="Password"
-                   required>
-        </div>
-
-        <div class="checkbox">
-            <input type="checkbox" value="remember-me"> Remember me
-        </div>
-
-        <button class="login" type="submit">Login</button>
-     </form>
-     <div>
-         <a href="sign-up" class="sign-up" methods="get">Not a user yet? Click here to sign up</a>
-     </div>
     </div>
 </div>
 <!--footer.html  -->
 <div th:replace="fragments/footer :: footer"></div>
 </body>
-</html>
+</html>ml>

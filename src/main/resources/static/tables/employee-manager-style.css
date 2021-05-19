@@ -1,0 +1,31 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+body {
+    text-align: center;
+    height: auto;
+    overflow-y: scroll;
+}
+
+.wrapper.scroll {
+    width: 100%;
+    height: 300%;
+    margin-right: auto;
+    margin-left: 0%;
+}
+
+.label{
+    border-color: #d49423;
+    border-radius: 8px;
+}
+
+.ul .submit-btn{
+    background-color: #d49423;
+}
+
+ul{list-style-type: none;
+    margin: 0;
+    flow: hidden;
+    background-color: #ffffff;
+}

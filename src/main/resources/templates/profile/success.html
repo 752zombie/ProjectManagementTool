@@ -3,16 +3,19 @@
     <head>
        <meta charset="UTF-8">
        <title>Title</title>
-        <link rel="stylesheet" href="cssstylesheet.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/login.css">
     </head>
         <body>
-            <!--header.html  that's here  -->
-            <div th:replace="fragments/header :: header">  </div>
+        <!--header.html-->
+        <div th:replace="fragments/header :: header">  </div>
             <div class="content-area">
                 <div class="content-area1-1">
-                    <h1>User info successfully changed</h1>
-                    <a href="/" class="signup">Click here to return to the homepage</a>
+                    <div>User info successfully changed</div>
+                    <a href="/" class="sign-up">Click here to return to the homepage</a>
                 </div>
             </div>
+            </div>
+        </div>
         </body>
 </html>

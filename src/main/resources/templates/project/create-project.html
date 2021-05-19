@@ -3,26 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
-    <link rel="stylesheet" href="cssstylesheet.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="tables/create-project-style.css">
 
 </head>
 <body>
 
-<div th:replace="fragments/header :: header"></div>
+    <div th:replace="fragments/header :: header"></div>
+    <div class="content-area">
+       <div class="content-area1-1">
+           <div> Create your project </div>
+           <div><br></div>
 
-<h2> Welcome to the create project page </h2>
-
-    <form action="/start-new-project" method="post">
-        <input type="text" class=""name="project_name" id="project_name" placeholder="Name of project" required>
-        <input type="date" name="project_start" id="project_start" placeholder="Start" required>
-        <input type="date" name="project_end" id="project-end" placeholder="Deadline" required>
-        <button type="submit"> Create </button>
-    </form>
-
-
-
-</div>
+           <form action="/start-new-project" method="post">
+               <input type="text" class="label1"name="project_name" id="project_name" placeholder="Name of project" required>
+               <input type="date" class="label2" name="project_start" id="project_start" placeholder="Start" required>
+               <input type="date" class="label2" name="project_end" id="project-end" placeholder="Deadline" required>
+               <button class="submit-btn" type="submit"> Create </button>
+           </form>
+       </div>
+    </div>
 </body>
 </html>
 
