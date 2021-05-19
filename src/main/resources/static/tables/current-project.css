@@ -38,7 +38,9 @@ FORM.tr, DIV.tr
 }
 SPAN.td
 {
+    padding: 6px;
     display:table-cell;
+
 }
 DIV.row-group {
     display: table-row-group;
@@ -88,9 +90,6 @@ li {
 
     display: flex;
     flex-direction: row;
-    margin-right: 150px;
-    margin-bottom: 150px;
-
 
 }
 
@@ -125,16 +124,51 @@ input {
 }
 
 .btn-success {
+    padding: 1px;
     height: 33px;
     margin-left: -5px;
 }
 
 .btn-danger {
+    padding: 1px;
     height: 33px;
 }
 
 .btn-primary {
+    padding: 1px;
     height: 33px;
+}
+
+/* Calendar inputs */
+#task-start {
+    width: 162px;
+}
+#task-end {
+    width: 162px;
+}
+#end_time_calculated {
+    width: 162px;
+}
+#end_time_calculatedNA {
+    width: 162px;
+}
+
+#start-time {
+    width: 162px;
+}
+#end_time {
+    width: 162px;
+}
+
+/* employee hours */
+#hours-day {
+    width: 40px;
+}
+#estimated-hours-day-new-row {
+    width: 40px;
+}
+#hours-total {
+    width: 60px;
 }
 
 

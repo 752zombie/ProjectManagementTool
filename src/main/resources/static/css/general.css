@@ -117,18 +117,6 @@ body {
 
 }
 
-.content-area1-1 {
-    background: linear-gradient(to left, #507398,white);
-    position: absolute;
-    color: #525252;
-    text-align: center;
-    margin-top: 10%;
-    width: 100%;
-
-}
-
-
-
 /*______Footer_______*/
 .footer {
     position: fixed;
