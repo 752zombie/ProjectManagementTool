@@ -36,4 +36,12 @@ public class SubtaskService {
     public static void removeEmployeeFromSubtask(int subtaskId, int employeeId) throws SQLException{
         SubtaskRepository.removeEmployeeFromSubtask(subtaskId, employeeId);
     }
+
+    public static void addSkillToSubtask(int subtaskId, int skillId) throws SQLException{
+        SubtaskRepository.addSkillToSubtask(subtaskId, skillId);
+    }
+
+    public static void removeSkillFromSubtask(int subtaskId, int skillId) throws SQLException{
+        SubtaskRepository.removeSkillFromSubtask(subtaskId, skillId);
+    }
 }

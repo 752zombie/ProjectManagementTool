@@ -2,7 +2,6 @@ package com.example.projecttool.controllers;
 
 
 import com.example.projecttool.models.User;
-import com.example.projecttool.repositories.UserRepository;
 import com.example.projecttool.services.LoginService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
-import java.util.NoSuchElementException;
 
 @Controller
 public class LoginController {
