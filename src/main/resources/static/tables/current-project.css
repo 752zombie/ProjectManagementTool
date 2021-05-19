@@ -1,13 +1,3 @@
-.dropbtn{
-    color: #525252;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    float: left;
-}
-
-
 .popup {
     color: #fff;
     background-color: #dadada;
@@ -22,7 +12,12 @@
 
 
 #helper {
-    margin-left: 160px;
+    float: left;
+    margin-left: 10px;
+
+}
+#share-with{
+    float: left;
 }
 
 
@@ -52,10 +47,6 @@ DIV.header-group {
 
 li {
     list-style-type: none;
-}
-
-#help {
-    margin-left: 330px;
 }
 
 .table {
@@ -88,9 +79,11 @@ li {
 
     display: flex;
     flex-direction: row;
-    margin-right: 150px;
-    margin-bottom: 150px;
-
+    color: #525252;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
 
 }
 
