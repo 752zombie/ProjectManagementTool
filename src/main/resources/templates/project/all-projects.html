@@ -13,12 +13,12 @@
     <div th:replace="fragments/header :: header"></div>
     <div class="content-area">
         <div class="content-area1-1">
-            <h1>My projects</h1>
+            <div id="myproject">My projects</div>
 
             <ul th:each="project : ${projectList}">
-              <li>
+              <li id="myprojectlist">
                   <div class="project-list">
-                       <h1 class="project-name" th:text="${project.name}"></h1>
+                       <div class="project-name" th:text="${project.name}"></div>
                        <label for="project-start"> Start date</label>
                         <span class="project-start" id="project-start" th:text="${project.startTime}"></span><br>
                         <label for="project-end"> Deadline </label>
