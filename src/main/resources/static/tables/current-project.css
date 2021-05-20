@@ -1,13 +1,3 @@
-.dropbtn{
-    color: #525252;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    float: left;
-}
-
-
 .popup {
     color: #fff;
     background-color: #dadada;
@@ -26,10 +16,10 @@
 }
 
 
-DIV.table
+DIV.project-table
 {
-
     display:table;
+    width: 100%;
 
 }
 FORM.tr, DIV.tr
@@ -48,19 +38,17 @@ DIV.row-group {
 
 DIV.header-group {
     display: table-header-group;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #525252;
 
 }
 
-li {
-    list-style-type: none;
-}
+
 
 #help {
     margin-left: 330px;
 }
 
-.table {
+.project-table {
 
     border-collapse: collapse;
     font-size: 0.9em;
@@ -69,8 +57,27 @@ li {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     background-color: white;
 
-
 }
+
+#container-employee-manager {
+    margin-left: 1250px;
+}
+
+#assigned-employee {
+    margin-top: -55px;
+}
+
+#create-new-subtask {
+    margin-top: 70px;
+}
+
+#show-employee-details {
+    margin-bottom: -50px;
+}
+#show-employee-details2 {
+    margin-bottom: -50px;
+}
+
 #task-description, #new-task-description {
     width:170px;
     transition: 0.5s;
@@ -134,14 +141,18 @@ input {
     margin-left: -5px;
 }
 
-.btn-danger {
-    padding: 1px;
-    height: 33px;
+.project-list .btn-danger {
+    padding: 10px;
+    background: #bf363a;
+    border-radius: 4px;
+    color: #525252;
 }
 
-.btn-primary {
-    padding: 1px;
-    height: 33px;
+.project-list .btn-primary {
+    padding: 10px;
+    background: #e6e6e6;
+    border-radius: 4px;
+    color: #525252;
 }
 
 /* Calendar inputs */
@@ -181,5 +192,106 @@ input {
 
 
 
+
+#subtask-description, #new-subtask-description {
+    width:170px;
+    transition: 0.5s;
+
+}
+
+#subtask-description:focus, #new-subtask-description:focus {
+
+    width:170px;
+    height: 60px;
+    transition: 0.5s;
+
+
+}
+
+#skill-adder-btn {
+
+    margin-left: 73px;
+    line-height: 0.5;
+}
+
+#skill-remover-btn {
+    line-height: 0.5;
+    margin-left: 63px;
+
+}
+
+#save-button-new-subtask {
+    margin-right: 70px;
+    line-height: 0.5;
+
+}
+
+#save-subtask-btn {
+    line-height: 0.5;
+}
+
+#delete-subtask-btn {
+    line-height: 0.5;
+}
+
+.container-1 {
+
+    display: flex;
+    flex-direction: row;
+
+
+}
+
+.project-name-top {
+
+    padding-bottom: 50px;
+    padding-top: 40px;
+
+}
+
+textarea  {
+    transform: translateY(8px);
+    Z-index: 1000;
+    height: 24px;
+
+}
+
+.td {
+    height: 5px;
+    padding: -5px;
+}
+
+
+input {
+
+    height: 24px;
+}
+
+.btn {
+    line-height: 0.5;
+    height: 20px;
+}
+
+.btn-success {
+    line-height: 0.5;
+    margin-left: -5px;
+}
+
+.btn-danger {
+    line-height: 0.5;
+}
+
+.btn-primary {
+    line-height: 0.5;
+}
+
+#add-employee-btn {
+    line-height: 0.5;
+    margin-left: 40px;
+}
+
+#remove-employee-btn {
+    line-height: 0.5;
+}
 
 

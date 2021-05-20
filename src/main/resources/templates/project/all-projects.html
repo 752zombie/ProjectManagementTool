@@ -5,35 +5,33 @@
     <title>Title</title>
 
     <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="tables/current-project.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 </head>
 <body>
-<div th:replace="fragments/header :: header"></div>
-<div class="content-area">
-    <div class="content-area-left">
-    <h1>My projects</h1>
+    <div th:replace="fragments/header :: header"></div>
+    <div class="content-area">
+        <div class="content-area1-1">
+            <h1>My projects</h1>
 
-    <ul th:each="project : ${projectList}">
-        <li>
-            <div class="project-list">
-                <h1 class="project-name" th:text="${project.name}"></h1>
-                <label for="project-start"> Start date</label>
-                <span class="project-start" id="project-start" th:text="${project.startTime}"></span><br>
-                <label for="project-end"> Deadline </label>
-                <span class="project-end" id="project-end" th:text="${project.endTime}"></span><br>
-                <form action="/choose-project-to-edit" method="post">
-                    <input type="hidden" name="id" th:value="${project.projectId}">
-                    <button type="submit" class="btn btn-primary" value="Open" name="action">Edit project</button>
-                    <button type="submit" class="btn btn-danger" value="Delete" name="action">Delete project</button>
-
-                </form>
-            </div>
-        </li>
-    </ul>
+            <ul th:each="project : ${projectList}">
+              <li>
+                  <div class="project-list">
+                       <h1 class="project-name" th:text="${project.name}"></h1>
+                       <label for="project-start"> Start date</label>
+                        <span class="project-start" id="project-start" th:text="${project.startTime}"></span><br>
+                        <label for="project-end"> Deadline </label>
+                        <span class="project-end" id="project-end" th:text="${project.endTime}"></span><br>
+                    <form action="/choose-project-to-edit" method="post">
+                       <input type="hidden" name="id" th:value="${project.projectId}">
+                       <button type="submit" class="btn-primary" value="Open" name="action">Edit project</button>
+                       <button type="submit" class="btn-danger" value="Delete" name="action">Delete project</button>
+                    </form>
+                  </div>
+              </li>
+            </ul>
+        </div>
     </div>
-</div>
-
-
 </body>
 </html>
