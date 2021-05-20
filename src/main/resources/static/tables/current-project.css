@@ -1,3 +1,8 @@
+.content-area1-1 #subtask-ul{
+    padding-left: 0;
+    width: 100%;
+    margin-top: 15px;
+}
 
 .container-1 #help {
     padding: 10px;
@@ -48,6 +53,8 @@ DIV.header-group {
 
 .project-table {
     display: table;
+    margin-top: 40px;
+    margin-bottom: 40px;
     border-collapse: collapse;
     font-size: 0.9em;
     min-width: 100%;
@@ -60,6 +67,7 @@ DIV.header-group {
 .create-new-subtask ul{
     padding-left: 0;
     width: 100%;
+    margin-top: 15px;
 }
 
 .create-new-subtask{
