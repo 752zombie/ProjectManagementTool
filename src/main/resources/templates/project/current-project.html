@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
     <link rel="stylesheet" href="tables/current-project.css">
     <link rel="stylesheet" href="css/general.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+
 
 
 </head>
@@ -15,26 +16,18 @@
 <div class="content-area">
     <div class="content-area1-1">
         <div class="container-1">
-            <div>
-                <span><a id="helper" href="/help-page" class="dropbtn" methods="get"> Help page</a> <a
-                        href="#"></a></span>
+            <div >
+                <span><a href="/help-page" class="dropbtn" id="help" methods="get"> Help page</a></span>
             </div>
             <div>
-                <span class="popup" id="popup1">This guide will help you working with projects</span>
-            </div>
-            <div>
-                <span><a id="share-with" href="/share-project" class="dropbtn" methods="get"> Share project</a> <a
-                        href="#"></a></span>
-            </div>
-            <div>
-                <span class="popup" id="popup2">Invite others to collaborate</span>
+                <span><a href="/share-project" class="dropbtn" id="share-with" methods="get"> Share project</a></span>
             </div>
         </div>
 
 
 
         <div class="project-name">
-            <div id="your-projects">Your projects</div>
+            <div id="your-projects">Your projects:</div>
             <div class="project-name-top" th:text="${session.project.name}"></div>
         </div>
         <div class="project-table">
@@ -82,27 +75,20 @@
                     <span class="td"><input type="date" id="task-start" name="start_time" th:value="${task.start_time}"></span>
                     <span class="td"><input type="date" id="task-end" name="end_time"
                                             th:value="${task.end_time}"></span>
-                    <span class="td" th:if="${task.endTimeCanBeCalculated()}"><input type="date"
-                                                                                     name="end_time_calculated"
-                                                                                     id="end_time_calculated"
-                                                                                     class="look-like-text"
-                                                                                     th:value="${task.end_time_calculated}"
-                                                                                     readonly></span>
-                    <span class="td" th:if="${!task.endTimeCanBeCalculated()}"><input type="text"
-                                                                                      name="end_time_calculated"
-                                                                                      id="end_time_calculatedNA"
-                                                                                      class="look-like-text"
-                                                                                      th:value="'N/A'" readonly></span>
+                    <span class="td" th:if="${task.endTimeCanBeCalculated()}"><input type="date" name="end_time_calculated"
+                          id="end_time_calculated" class="look-like-text" th:value="${task.end_time_calculated}" readonly></span>
+                    <span class="td" th:if="${!task.endTimeCanBeCalculated()}"><input type="text" name="end_time_calculated"
+                          id="end_time_calculatedNA" class="look-like-text" th:value="'N/A'" readonly></span>
                     <span class="td"><textarea name="description" id="task-description" cols="30" rows="1"
                                                th:text="${task.description}"></textarea></span>
                     <span class="td">
 
 
                         <!-- Buttons -->
-                        <input type="submit" class="btn btn-success" value="Save" name="action" formaction="/edit-task">
-                        <input type="submit" class="btn btn-danger" value="Delete" name="action"
+                        <input type="submit" class="btn-success" value="Save" name="action" formaction="/edit-task">
+                        <input type="submit" class="btn-danger" value="Delete" name="action"
                                formaction="/edit-task">
-                        <input type="submit" class="btn btn-primary" value="View subtasks" name="action"
+                        <input type="submit" class="btn-primary" value="View subtasks" name="action"
                                formaction="/edit-task-with-subtasks">
                       </span>
                 </form>

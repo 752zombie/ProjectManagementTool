@@ -1,33 +1,36 @@
-.popup {
-    color: #fff;
-    background-color: #dadada;
-    display: none;
-    padding: 18px;
-    font-family: Arial, serif;
-    margin-bottom: -41px;
+
+.container-1 #help {
+    padding: 10px;
     margin-left: 5px;
-    margin-top: 5px;
-    border: 1px solid transparent;
+    text-decoration: none;
+    color: #525252;
+    display:inline ;
+}
+
+.container-1 #help:hover {
+    color: #2159e8;
+}
+
+.container-1 #share-with{
+    padding: 10px;
+    margin-left: 5px;
+    text-decoration: none;
+    color: #525252;
+    display:inline ;
+}
+
+.container-1 #share-with:hover {
+    color: #2159e8;
 }
 
 
-#helper {
-    margin-left: 160px;
-}
-
-DIV.project-table
-{
-    display:table;
-    width: 100%;
-
-}
 FORM.tr, DIV.tr
 {
     display:table-row;
 }
 SPAN.td
 {
-    padding: 2px;
+    padding: 8px;
     display:table-cell;
 
 }
@@ -41,19 +44,26 @@ DIV.header-group {
     border-bottom: 1px solid #525252;
 }
 
-#help {
-    margin-left: 330px;
-}
+
 
 .project-table {
-
+    display: table;
     border-collapse: collapse;
     font-size: 0.9em;
-    font-family: sans-serif;
     min-width: 100%;
     border-color: #525252;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.33);
     background-color: #e8eaec;
+
+}
+
+.create-new-subtask ul{
+    padding-left: 0;
+    width: 100%;
+}
+
+.create-new-subtask{
+    margin-top: 100px;
 }
 
 #container-employee-manager {
@@ -66,6 +76,7 @@ DIV.header-group {
 
 #create-new-subtask {
     margin-top: 70px;
+
 }
 
 #show-employee-details {
@@ -88,16 +99,6 @@ DIV.header-group {
     transition: 0.5s;
 }
 
-.container-1 {
-
-    display: flex;
-    flex-direction: row;
-    color: #525252;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
 
 .project-name #your-projects{
     padding-bottom: 10px;
@@ -131,16 +132,11 @@ li#myprojectlist{
 
 }
 
-
 .td {
     height: 5px;
     padding: -5px;
 }
 
-/*input {
-
-    height: 24px;
-}*/
 
 .btn {
     line-height: 0.5;
