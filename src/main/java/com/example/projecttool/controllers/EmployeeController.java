@@ -86,7 +86,6 @@ public class EmployeeController {
         }
 
         catch (SQLException e) {
-            e.printStackTrace();
             return ErrorHandler.setCurrentError("Error creating new skill", session);
         }
 

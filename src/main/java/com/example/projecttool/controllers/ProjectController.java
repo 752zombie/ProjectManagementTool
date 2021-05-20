@@ -58,16 +58,16 @@ public class ProjectController {
 
             // Creates a project
            Project project = ProjectService.nameYourProject(user.getId(), projectName, projectStart, projectEnd);
-           ArrayList<Task> projectTasks = TaskService.getTasks(project.getProjectId());
 
            session.setAttribute("project", project);
-           session.setAttribute("projectTasks", projectTasks);
 
+        }
 
-            return "project/current-project";
-        } catch (SQLException e) { ;
+        catch (SQLException e) { ;
             return ErrorHandler.setCurrentError("Something went wrong editing project", session);
         }
+
+        return "redirect:task-list";
     }
 
         @GetMapping("/see-all-projects")
@@ -120,7 +120,7 @@ public class ProjectController {
             }
 
 
-         if (ProjectService.isReadOnly(projectId, user.getId())) {
+         if (ProjectService.isReadOnly(projectId)) {
 
              return "share-project/read-only";
 

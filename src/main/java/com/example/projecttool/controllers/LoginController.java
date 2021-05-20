@@ -37,7 +37,6 @@ public class LoginController {
             session.setAttribute("user", user);
 
         } catch (SQLException e) {
-            System.out.println("Error log in");
             return "login/signup-failed";
         }
 
@@ -57,7 +56,6 @@ public class LoginController {
         }
 
         catch (SQLException s) {
-            System.out.println("incorrect email or password");
             return "login/login-failed";
         }
     }

@@ -82,8 +82,10 @@ public class ShareProjectRepository {
 
     }
 
-
-    public static boolean isReadOnly(int projectId, int userId) throws SQLException {
+    //flawed logic. What if the project was shared with multiple users with different access right. In that case the order
+    //that elements of the ResultSet came back would determine whether or not a user could edit a shared project
+    //TODO: improve (see above)
+    public static boolean isReadOnly(int projectId) throws SQLException {
 
         Connection connection = DatabaseConnection.getConnection();
         String isReadOnly = "";

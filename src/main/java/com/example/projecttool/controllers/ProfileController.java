@@ -36,7 +36,6 @@ public class ProfileController {
             return "profile/success";
 
         } catch (SQLException e) {
-            System.out.println("Error updating user info");
             return "profile/failed-changing-user-info";
         }
     }
@@ -55,7 +54,6 @@ public class ProfileController {
             return "profile/success";
 
         } catch (SQLException e) {
-            System.out.println("Error updating user info");
             return "profile/failed-changing-user-info";
         }
     }
@@ -71,20 +69,19 @@ public class ProfileController {
 
         try {
             User user = (User) session.getAttribute("user");
-
-            try {
-                LoginService.attemptLogin(user.getEmail(), currentPassword);
-            } catch (NoSuchElementException e) {
-                return "profile/password-form";
-            }
-
+            LoginService.attemptLogin(user.getEmail(), currentPassword);
             ProfileService.updateUserInfo(user.getId(), UserAttribute.password, newPassword);
-            return "profile/success";
+        }
 
-        } catch (SQLException e) {
-            System.out.println("Error updating user info");
+        catch (NoSuchElementException e) {
+            return "profile/password-form";
+        }
+
+        catch (SQLException e) {
             return "profile/failed-changing-user-info";
         }
+
+        return "profile/success";
 
     }
 }

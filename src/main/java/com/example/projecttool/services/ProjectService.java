@@ -1,14 +1,8 @@
 package com.example.projecttool.services;
 
-import com.example.projecttool.models.User;
 import com.example.projecttool.models.project.Project;
 import com.example.projecttool.repositories.ProjectRepository;
 import com.example.projecttool.repositories.ShareProjectRepository;
-import com.example.projecttool.repositories.TaskRepository;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -39,9 +33,9 @@ public class ProjectService {
         return ProjectRepository.getProject(projectId);
     }
 
-    public static boolean isReadOnly(int projectId, int userId) throws SQLException {
+    public static boolean isReadOnly(int projectId) throws SQLException {
 
-        return ShareProjectRepository.isReadOnly(projectId, userId);
+        return ShareProjectRepository.isReadOnly(projectId);
     }
 
     public static void deleteProject(Integer projectId) throws SQLException {
