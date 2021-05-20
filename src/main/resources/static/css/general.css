@@ -4,6 +4,14 @@
     font-family: "Tahoma";
 
 }
+
+ul {
+
+    padding: 0px;
+}
+li {
+    padding: 0px;
+}
 body {
     text-align: center;
     height: auto;
@@ -88,6 +96,8 @@ body {
     padding-top: 20px;
 }
 
+
+
 .signup-fp{
     color: #2159e8;
     width: 30%;
@@ -117,6 +127,14 @@ body {
     position: relative;
     font-size: 20px;
 
+}
+
+.content-area1-1 {
+    background: linear-gradient(to left, #507398, white);
+    position: absolute;
+    color: #525252;
+    text-align: center;
+    width: 100%;
 }
 
 /*______Footer_______*/
@@ -153,7 +171,7 @@ ul{list-style-type: none;
     background-color: #ffffff;
 }
 
-li {
+.nav-bar li {
      float: right;
      display: inline-block;
      text-align: center;
@@ -162,7 +180,7 @@ li {
      margin-top: 55px;
  }
 
-li a, .dropbtn {
+.nav-bar li a, .dropbtn {
     display: inline-block;
     color: #525252;
     text-align: center;
@@ -172,12 +190,12 @@ li a, .dropbtn {
 
 
 
-li.dropdown {
+.nav-bar li.dropdown {
     display: inline-block;
 
 }
 
-li a:hover{
+.nav-bar li a:hover{
     color:#2159e8;
 }
 

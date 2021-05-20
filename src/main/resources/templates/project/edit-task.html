@@ -11,92 +11,119 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
+
+
 <div class="content-area">
+
+
     <div class="content-area1-1">
+
         <div><a href="/task-list" class="signup">Return to project</a></div>
 
-    <ul th:each="subtask : ${session.subtasks}">
-        <li>
-            <div class="project-table">
-                <div class="header-group">
-                    <span class="td">Subtask name</span>
-                    <span class="td">Notes</span>
-                    <span class="td">Start date</span>
-                    <span class="td">Due date</span>
-                    <span class="td">Estimated hours to complete</span>
-                    <span class="td"> </span>
+
+       <div> <a href="/employee-manager">Create and edit employees here</a></div>
+
+
+        <ul th:each="subtask : ${session.subtasks}">
+            <li>
+                <div class="project-table">
+                    <div class="header-group">
+                        <span class="td">Subtask name</span>
+                        <span class="td">Notes</span>
+                        <span class="td">Start date</span>
+                        <span class="td">Due date</span>
+                        <span class="td">Estimated hours to complete</span>
+                        <span class="td"> </span>
+                    </div>
+
+                    <div class="row-group">
+                        <form method="post" action="/edit-task" class="tr">
+                            <input type="hidden" name="task-id" th:value="${session.taskId}">
+                            <input type="hidden" name="subtask-id" th:value="${subtask.id}">
+
+
+                            <span class="td"><input type="text" id="subtask-name" name="subtask-name"
+                                                    th:value="${subtask.name}"></span>
+
+
+                            <span class="td"><textarea name="subtask-description" id="subtask-description" cols="30"
+                                                       rows="1"
+                                                       th:text="${subtask.description}"
+                                                       required></textarea></span>
+
+                            <!--     <span class="td"><input type="text" id="subtask-description" name="subtask-description" th:value="${subtask.description}"></span> -->
+                            <span class="td"><input type="date" id="start-time" name="start-time"
+                                                    th:value="${subtask.startTime}"></span>
+                            <span class="td"><input type="date" id="end-time" name="end-time"
+                                                    th:value="${subtask.endTime}"></span>
+                            <span class="td"><input type="number" id="hours-to-complete" name="hours-to-complete"
+                                                    th:value="${subtask.hoursToComplete}"></span>
+
+                            <span class="td">
+                            <input class="btn btn-success" id="save-subtask-btn" type="submit" value="Save"
+                                   name="action" formaction="/save-subtask">
+                            <input class="btn btn-danger" id="delete-subtask-btn" type="submit" value="Delete"
+                                   name="action" formaction="/delete-subtask">
+                        </span>
+                        </form>
+                    </div>
                 </div>
 
-                <div class="row-group">
-                    <form method="post" action="/edit-task" class="tr">
-                        <input type="hidden" name="task-id" th:value="${session.taskId}">
+                <div class="container-employee-manager" id="container-employee-manager">
+                    <form action="/add-employee-to-subtask" method="post" th:if="${!session.allEmployees.isEmpty()}">
                         <input type="hidden" name="subtask-id" th:value="${subtask.id}">
+                        <label for="employee-adder">Add employee</label>
+                        <select name="employee-id" id="employee-adder">
+                            <option th:each="emp : ${session.allEmployees}" th:value="${emp.id}" th:text="${emp.name}"
+                                    th:if="${!subtask.isAssigned(emp.id)}"></option>
+                        </select>
+                        <button class="btn btn-primary" id="add-employee-btn" type="submit">Add</button>
+                    </form>
 
+                    <form action="/remove-employee-from-subtask" method="post"
+                          th:if="${!subtask.assignedEmployees.isEmpty()}">
+                        <input type="hidden" name="subtask-id" th:value="${subtask.id}">
+                        <label for="employee-remover">Remove employee</label>
+                        <select name="employee-id" id="employee-remover">
+                            <option th:each="emp : ${subtask.assignedEmployees}" th:value="${emp.id}"
+                                    th:text="${emp.name}"></option>
+                        </select>
+                        <button class="btn btn-warning" id="remove-employee-btn" type="submit">Remove</button>
+                    </form>
 
-                        <span class="td"><input type="text" id="subtask-name" name="subtask-name" th:value="${subtask.name}"></span>
+                    <form action="/add-skill-to-subtask" method="post" th:if="${!session.allSkills.isEmpty()}">
+                        <input type="hidden" name="subtask-id" th:value="${subtask.id}">
+                        <label for="skill-adder">Add skill: </label>
+                        <select name="skill-id" id="skill-adder">
+                            <option th:each="skill : ${session.allSkills}" th:value="${skill.id}"
+                                    th:text="${skill.name}"
+                                    th:if="${!subtask.hasSkill(skill.id)}"></option>
+                        </select>
+                        <button class="btn btn-primary" id="skill-adder-btn" type="submit">Add</button>
+                    </form>
 
-
-                        <span class="td"><textarea name="subtask-description" id="subtask-description" cols="30" rows="1" th:text="${subtask.description}"
-                                                   required></textarea></span>
-
-                   <!--     <span class="td"><input type="text" id="subtask-description" name="subtask-description" th:value="${subtask.description}"></span> -->
-                        <span class="td"><input type="date" id="start-time" name="start-time" th:value="${subtask.startTime}"></span>
-                        <span class="td"><input type="date" id="end-time" name="end-time" th:value="${subtask.endTime}"></span>
-                        <span class="td"><input type="number" id="hours-to-complete" name="hours-to-complete" th:value="${subtask.hoursToComplete}"></span>
-
-                        <span class="td">
-                            <input class="btn btn-success" id="save-subtask-btn" type="submit" value="Save" name="action" formaction="/save-subtask">
-                            <input class="btn btn-danger" id="delete-subtask-btn" type="submit" value="Delete" name="action" formaction="/delete-subtask">
-                        </span>
+                    <form action="/remove-skill-from-subtask" method="post"
+                          th:if="${!subtask.requiredSkills.isEmpty()}">
+                        <input type="hidden" name="subtask-id" th:value="${subtask.id}">
+                        <label for="skill-remover">Remove skill</label>
+                        <select name="skill-id" id="skill-remover">
+                            <option th:each="skill : ${subtask.requiredSkills}" th:value="${skill.id}"
+                                    th:text="${skill.name}"></option>
+                        </select>
+                        <button class="btn btn-warning" id="skill-remover-btn" type="submit">Remove</button>
                     </form>
                 </div>
-            </div>
-            <div class="container-employee-manager" id="container-employee-manager">
-            <form action="/add-employee-to-subtask" method="post" th:if="${!session.allEmployees.isEmpty()}">
-                <input type="hidden" name="subtask-id" th:value="${subtask.id}">
-                <label for="employee-adder">Add employee</label>
-                <select name="employee-id" id="employee-adder">
-                    <option th:each="emp : ${session.allEmployees}" th:value="${emp.id}" th:text="${emp.name}" th:if="${!subtask.isAssigned(emp.id)}"></option>
-                </select>
-                <button class="btn btn-primary" id="add-employee-btn" type="submit">Add</button>
-            </form>
-
-            <form action="/remove-employee-from-subtask" method="post" th:if="${!subtask.assignedEmployees.isEmpty()}">
-                <input type="hidden" name="subtask-id" th:value="${subtask.id}">
-                <label for="employee-remover">Remove employee</label>
-                <select name="employee-id" id="employee-remover">
-                    <option th:each="emp : ${subtask.assignedEmployees}" th:value="${emp.id}" th:text="${emp.name}"></option>
-                </select>
-                <button class="btn btn-warning" id="remove-employee-btn" type="submit">Remove</button>
-            </form>
-
-            <form action="/add-skill-to-subtask" method="post" th:if="${!session.allSkills.isEmpty()}">
-                <input type="hidden" name="subtask-id" th:value="${subtask.id}">
-                <label for="skill-adder">Add skill: </label>
-                <select name="skill-id" id="skill-adder">
-                    <option th:each="skill : ${session.allSkills}" th:value="${skill.id}" th:text="${skill.name}" th:if="${!subtask.hasSkill(skill.id)}"></option>
-                </select>
-                <button class="btn btn-primary" id="skill-adder-btn" type="submit">Add</button>
-            </form>
-
-            <form action="/remove-skill-from-subtask" method="post" th:if="${!subtask.requiredSkills.isEmpty()}">
-                <input type="hidden" name="subtask-id" th:value="${subtask.id}">
-                <label for="skill-remover">Remove skill</label>
-                <select name="skill-id" id="skill-remover">
-                    <option th:each="skill : ${subtask.requiredSkills}" th:value="${skill.id}" th:text="${skill.name}"></option>
-                </select>
-                <button class="btn btn-warning" id="skill-remover-btn" type="submit">Remove</button>
-            </form>
-            </div>
-        </li>
+            </li>
 
 
-    <div id="assigned-employee">
-        <li>
-            <span id="assigned-employee-span">Assigned employees: </span>
-            <span th:each="emp, iter : ${subtask.getAssignedEmployees()}" >
-                <span   th:onmouseover="'javascript:showDetails(\''+ ${emp.id} +'\');'" th:onmouseout="'javascript:hideDetails(\''+ ${emp.id} +'\');'">
-                    <span id="show-employee-details" th:if="${!iter.last}" th:text="${emp.name} + ', '" th:id="emp.id"></span>
+            <div id="assigned-employee">
+                <li>
+                    <span id="assigned-employee-span">Assigned employees: </span>
+                    <span th:each="emp, iter : ${subtask.getAssignedEmployees()}">
+                <span th:onmouseover="'javascript:showDetails(\''+ ${emp.id} +'\');'"
+                      th:onmouseout="'javascript:hideDetails(\''+ ${emp.id} +'\');'">
+                    <span id="show-employee-details" th:if="${!iter.last}" th:text="${emp.name} + ', '"
+                          th:id="emp.id"></span>
                     <span id="show-employee-details2" th:if="${iter.last}" th:text="${emp.name}"></span>
                 </span>
 
@@ -104,53 +131,56 @@
                     <h1 th:text="${emp.name}"></h1><br>
                 </span>
             </span><br>
-            <span id="required-skill">Required skills: </span>
-            <span th:each="skill, iter : ${subtask.requiredSkills}" >
+                    <span id="required-skill">Required skills: </span>
+                    <span th:each="skill, iter : ${subtask.requiredSkills}">
                 <span th:if="${!iter.last}" th:text="${skill.name} + ', '" th:id="skill.id"></span>
                 <span th:if="${iter.last}" th:text="${skill.name}"></span>
             </span>
 
-        </li>
-        </div>
-    </ul>
-</div>
-
-
-<div id="create-new-subtask">
-    <ul>
-        <li>
-            <h3 style="text-align: left">New subtask:</h3>
-            <div class="project-table">
-                <div class="header-group">
-                    <span class="td">Subtask name</span>
-                    <span class="td">Notes</span>
-                    <span class="td">Start date</span>
-                    <span class="td">Due date</span>
-                    <span class="td">Estimated hours to complete</span>
-                    <span class="td"> </span>
-                </div>
-
-                <div class="row-group">
-                    <form method="post" action="/add-new-subtask" class="tr">
-                        <input type="hidden" name="task-id" th:value="${session.taskId}">
-
-                        <span class="td"><input type="text" name="subtask-name"></span>
-                        <span class="td"><textarea name="subtask-description" id="new-subtask-description" cols="30" rows="1"
-                                                   required></textarea></span>
-                        <span class="td"><input type="date" name="start-time"></span>
-                        <span class="td"><input type="date" name="end-time"></span>
-                        <span class="td"><input type="number" name="hours-to-complete"></span>
-
-                        <span class="td">
-                            <input class="btn btn-success" id="save-button-new-subtask" type="submit" value="Save" name="action" formaction="/add-new-subtask">
-                        </span>
-                    </form>
-                </div>
+                </li>
             </div>
-        </li>
-    </ul>
-</div>
-    <a href="/employee-manager">Create and edit employees here</a>
+        </ul>
+
+
+        <div id="create-new-subtask">
+            <ul>
+                <li>
+                    <h3 style="text-align: left">New subtask:</h3>
+                    <div class="project-table">
+                        <div class="header-group">
+                            <span class="td">Subtask name</span>
+                            <span class="td">Notes</span>
+                            <span class="td">Start date</span>
+                            <span class="td">Due date</span>
+                            <span class="td">Estimated hours to complete</span>
+                            <span class="td"> </span>
+                        </div>
+
+                        <div class="row-group">
+                            <form method="post" action="/add-new-subtask" class="tr">
+                                <input type="hidden" name="task-id" th:value="${session.taskId}">
+
+                                <span class="td"><input type="text" name="subtask-name"></span>
+                                <span class="td"><textarea name="subtask-description" id="new-subtask-description"
+                                                           cols="30"
+                                                           rows="1"
+                                                           required></textarea></span>
+                                <span class="td"><input type="date" name="start-time"></span>
+                                <span class="td"><input type="date" name="end-time"></span>
+                                <span class="td"><input type="number" name="hours-to-complete"></span>
+
+                                <span class="td">
+                            <input class="btn btn-success" id="save-button-new-subtask" type="submit" value="Save"
+                                   name="action" formaction="/add-new-subtask">
+                        </span>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </div>
 </div>
 
 </body>
