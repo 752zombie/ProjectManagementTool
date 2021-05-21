@@ -35,10 +35,10 @@
                     <div class="project-table">
                         <div class="header-group">
                             <span class="td">Subtask name</span>
-                            <span class="td">Notes</span>
                             <span class="td">Start date</span>
                             <span class="td">Due date</span>
                             <span class="td">Estimated hours to complete</span>
+                            <span class="td">Notes</span>
                             <span class="td"> </span>
                         </div>
 
@@ -47,13 +47,14 @@
                                 <input name="task-id" th:value="${session.taskId}" type="hidden">
 
                                 <span class="td"><input name="subtask-name" type="text"></span>
+
+                                <span class="td"><input name="start-time" type="date"></span>
+                                <span class="td"><input name="end-time" type="date"></span>
+                                <span class="td"><input name="hours-to-complete" type="number"></span>
                                 <span class="td"><textarea cols="30" id="new-subtask-description"
                                                            name="subtask-description"
                                                            required
                                                            rows="1"></textarea></span>
-                                <span class="td"><input name="start-time" type="date"></span>
-                                <span class="td"><input name="end-time" type="date"></span>
-                                <span class="td"><input name="hours-to-complete" type="number"></span>
 
                                 <span class="td">
                             <input class="btn btn-success" formaction="/add-new-subtask" id="save-button-new-subtask" name="action"
@@ -73,10 +74,11 @@
                 <div class="project-table">
                     <div class="header-group">
                         <span class="td">Subtask name</span>
-                        <span class="td">Notes</span>
+
                         <span class="td">Start date</span>
                         <span class="td">Due date</span>
                         <span class="td">Estimated hours to complete</span>
+                        <span class="td">Notes</span>
                         <span class="td"> </span>
                     </div>
 
@@ -90,10 +92,7 @@
                                                     type="text"></span>
 
 
-                            <span class="td"><textarea cols="30" id="subtask-description" name="subtask-description"
-                                                       required
-                                                       rows="1"
-                                                       th:text="${subtask.description}"></textarea></span>
+
 
                             <span class="td"><input id="start-time" name="start-time" th:value="${subtask.startTime}"
                                                     type="date"></span>
@@ -101,6 +100,11 @@
                                                     type="date"></span>
                             <span class="td"><input id="hours-to-complete" name="hours-to-complete" th:value="${subtask.hoursToComplete}"
                                                     type="number"></span>
+
+                            <span class="td"><textarea cols="30" id="subtask-description" name="subtask-description"
+                                                       required
+                                                       rows="1"
+                                                       th:text="${subtask.description}"></textarea></span>
 
                             <span class="td">
                             <input class="btn btn-success" formaction="/save-subtask" id="save-subtask-btn" name="action"
