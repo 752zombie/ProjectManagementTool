@@ -1,3 +1,4 @@
+
 .content-area1-1 #subtask-ul{
     padding-left: 0;
     width: 100%;
@@ -108,11 +109,12 @@ DIV.header-group {
 #task-description, #new-task-description {
     width:170px;
     transition: 0.5s;
+    line-height: 1;
 
 }
 
 #task-description:focus, #new-task-description:focus {
-
+    line-height: 1;
     width:170px;
     height: 60px;
     transition: 0.5s;
@@ -276,4 +278,10 @@ li#myprojectlist{
 
 #remove-employee-btn {
     line-height: 0.5;
+}
+
+
+#task-text, #current-task-text {
+    margin-top: 70px;
+
 }
