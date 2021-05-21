@@ -33,10 +33,10 @@
             <div class="project-name-top" th:text="${session.project.name}"></div>
         </div>
 
-               <div class="new-task">
+               <div class="new-task" th:if="${!session.isReadOnly}">
                    <h6 id="task-text">New Task:</h6>
                </div>
-        <div class="project-table">
+        <div class="project-table" th:if="${!session.isReadOnly}">
             <div class="header-group">
                 <span class="td">Priority</span>
                 <span class="td">Task name</span>
@@ -53,11 +53,12 @@
             <form action="/add-row-to-tasks" method="post" class="tr">
 
                 <!-- Priority -->
-                        <select name="priority" required>
-                <option class="high-prior" value="high">High</option>
-                <option class="medium-prior" value="medium">Medium</option>
-                <option class="low-prior" value="low">Low</option>
-            </select>
+                <select name="priority" required>
+                    <option class="high-prior" value="high">High</option>
+                    <option class="medium-prior" value="medium">Medium</option>
+                    <option class="low-prior" value="low">Low</option>
+                </select>
+
 
 
                 <span class="td"><input type="text" name="name" required></span>
@@ -112,35 +113,51 @@
                         <input type="hidden" th:value="${task.id}" name="id">
 
                         <!-- SELECT priority -->
-                        <select id="task-priority" name="priority" required>
+                        <select id="task-priority" th:if="${!session.isReadOnly}" name="priority" required>
                             <option class="high-prior" value="high" th:selected="${task.priority=='high'}">High</option>
                             <option class="medium-prior" value="medium" th:selected="${task.priority=='medium'}">Medium
                             </option>
                             <option class="low-prior" value="low" th:selected="${task.priority=='low'}">Low</option>
                         </select>
+                        <span class="td" th:if="${session.isReadOnly}"><input type="text" name="priority" class="look-like-text" th:value="${task.priority}" readonly required></span>
+
 
                         <!-- TASK NAME AND DESCRIPTION -->
-                        <span class="td"><input type="text" id="task-name" name="name" th:value="${task.name}"></span>
-                        <span class="td"><input type="number" id="hours-day" name="estimated-hours-day"
+                        <span class="td" th:if="${!session.isReadOnly}"><input type="text" id="task-name" name="name" th:value="${task.name}"></span>
+                        <span class="td" th:if="${session.isReadOnly}"><input type="text" name="name" th:value="${task.name}" class="look-like-text" readonly></span>
+
+                        <span class="td" th:if="${!session.isReadOnly}"><input type="number" id="hours-day" name="estimated-hours-day"
                                                 th:value="${task.estimatedHoursPrDay}"></span>
+                        <span class="td" th:if="${session.isReadOnly}"><input type="number" name="estimated-hours-day"
+                                                th:value="${task.estimatedHoursPrDay}" class="look-like-text" readonly></span>
 
                         <!-- Count weekends or only weekdays -->
-                        <select id="task-count-weekends" name="count-weekends">
+                        <select id="task-count-weekends" name="count-weekends" th:if="${!session.isReadOnly}">
                             <option value="weekend-false" th:selected="${task.countWeekends=='weekend-false'}">NO
                             </option>
                             <option value="weekend-true" th:selected="${task.countWeekends=='weekend-true'}">YES
                             </option>
                         </select>
 
+                        <span class="td" th:if="${session.isReadOnly}"><input type="text" name="count-weekends" th:value="${task.countWeekends}"
+                                                class="look-like-text" readonly></span>
 
-                        <!-- Work hours and calendar -->
+
+                        <!-- hours total -->
                         <span class="td"><input type="number" id="hours-total" name="estimated-hours-total"
                                                 th:value="${task.estimatedHoursTotal}" class="look-like-text"
                                                 readonly></span>
-                        <span class="td"><input type="date" id="task-start" name="start_time"
+                        <!-- start date -->
+                        <span class="td" th:if="${!session.isReadOnly}"><input type="date" id="task-start" name="start_time"
                                                 th:value="${task.start_time}"></span>
-                        <span class="td"><input type="date" id="task-end" name="end_time"
+                        <span class="td" th:if="${session.isReadOnly}"><input type="date" name="start_time" th:value="${task.start_time}" class="look-like-text" readonly></span>
+
+                        <!-- end date-->
+                        <span class="td" th:if="${!session.isReadOnly}"><input type="date" id="task-end" name="end_time"
                                                 th:value="${task.end_time}"></span>
+                        <span class="td" th:if="${session.isReadOnly}"><input type="date" name="end_time" th:value="${task.end_time}" class="look-like-text" readonly></span>
+
+                        <!-- calculated end date-->
                         <span class="td" th:if="${task.endTimeCanBeCalculated()}"><input type="date"
                                                                                          name="end_time_calculated"
                                                                                          id="end_time_calculated"
@@ -153,18 +170,19 @@
                                                                                           class="look-like-text"
                                                                                           th:value="'N/A'"
                                                                                           readonly></span>
-                        <span class="td"><textarea name="description" id="task-description" cols="30" rows="1"
+                        <span class="td" th:if="${!session.isReadOnly}"><textarea name="description" id="task-description" cols="30" rows="1"
                                                    th:text="${task.description}"></textarea></span>
-                        <span class="td">
-
+                        <span class="td" th:if="${session.isReadOnly}"><textarea name="description" cols="30" rows="1"
+                                                                                  th:text="${task.description}" class="look-like-text" readonly></textarea></span>
 
                         <!-- Buttons -->
-                        <input type="submit" class="btn btn-success" id="btn-success" value="Save" name="action" formaction="/edit-task">
-                        <input type="submit" class="btn btn-danger" id="btn-danger" value="Delete" name="action"
-                               formaction="/edit-task">
-                        <input type="submit" class="btn btn-primary" id="btn-primary" value="View subtasks" name="action"
-                               formaction="/edit-task-with-subtasks">
-                      </span>
+                        <span class="td">
+                            <input th:if="${!session.isReadOnly}" type="submit" class="btn btn-success" id="btn-success" value="Save" name="action" formaction="/edit-task">
+                            <input th:if="${!session.isReadOnly}" type="submit" class="btn btn-danger" id="btn-danger" value="Delete" name="action"
+                                formaction="/edit-task">
+                            <input type="submit" class="btn btn-primary" id="btn-primary" value="View subtasks" name="action"
+                                formaction="/edit-task-with-subtasks">
+                        </span>
                     </form>
                 </div>
 

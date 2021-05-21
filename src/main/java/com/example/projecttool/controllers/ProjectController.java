@@ -34,6 +34,7 @@ public class ProjectController {
             if (!ProjectService.hasAccess(project.getProjectId(), user.getId())) {
                 return ErrorHandler.setCurrentError("You do not have access to that project", session);
             }
+            session.setAttribute("isReadOnly", ProjectService.isReadOnly(project.getProjectId(), user.getId()));
             ArrayList<Task> projectTasks = TaskService.getTasks(project.getProjectId());
             session.setAttribute("projectTasks", projectTasks);
         }
@@ -104,7 +105,7 @@ public class ProjectController {
             // Add current project to session
             Project project = ProjectService.getProject(projectId);
             session.setAttribute("project", project);
-            session.setAttribute("readOnly", ProjectService.isReadOnly(projectId, user.getId()));
+
 
             // Deletes row from project
             if (action.equals("Delete")) {
