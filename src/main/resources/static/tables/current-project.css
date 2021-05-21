@@ -91,7 +91,7 @@ DIV.header-group {
 }
 
 #assigned-employee {
-    margin-top: -95px;
+    margin-top: -40px;
 }
 .assigned-emp {
     margin-bottom: 150px;
@@ -237,11 +237,13 @@ li#myprojectlist{
 #save-button-new-subtask {
     margin-right: 70px;
     line-height: 0.5;
+    height: 31px;
 
 }
 
 #save-subtask-btn {
     line-height: 0.5;
+    height: 31px;
 }
 
 #delete-subtask-btn {
@@ -277,5 +279,5 @@ li#myprojectlist{
 }
 
 .container-employee-manager, #assigned-employee {
-    font-size: 14px;
+    font-size: 15px;
 }
