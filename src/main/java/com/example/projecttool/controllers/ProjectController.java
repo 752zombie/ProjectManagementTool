@@ -120,9 +120,9 @@ public class ProjectController {
             }
 
 
-         if (ProjectService.isReadOnly(projectId)) {
+         if (ProjectService.isReadOnly(projectId, user.getId())) {
 
-             return "share-project/read-only";
+             return "redirect:/task-list";
 
          } else {return "redirect:/task-list";}
 
@@ -144,10 +144,11 @@ public class ProjectController {
         try {
             // Needs current project to get Tasks
             Project project = (Project) session.getAttribute("project");
+            User user = (User) session.getAttribute("user");
 
             // Save changes to row
             if (action.equals("Save")) {
-                TaskService.editTask(taskId, name, description, priority, start_time, end_time, estimatedHoursDay, countWeekends);
+                TaskService.editTask(taskId, name, description, priority, start_time, end_time, estimatedHoursDay, countWeekends, project.getProjectId(), user.getId());
             }
             // Deletes row from project
             else if (action.equals("Delete")) {
@@ -176,13 +177,13 @@ public class ProjectController {
 
         try {
 
-
+            User user = (User) session.getAttribute("user");
 
             // We need project id to edit Task
             Project project = (Project) session.getAttribute("project");
 
             // Adds rows to DB
-            TaskService.addRowToTask(project.getProjectId(), name, description, priority, start_time, end_time, estimatedHoursDay, countWeekends);
+            TaskService.addRowToTask(project.getProjectId(), name, description, priority, start_time, end_time, estimatedHoursDay, countWeekends, user.getId());
 
             // Directs tasks to View
             ArrayList<Task> projectTasks = TaskService.getTasks(project.getProjectId());

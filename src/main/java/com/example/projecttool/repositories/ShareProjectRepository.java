@@ -85,20 +85,21 @@ public class ShareProjectRepository {
     //flawed logic. What if the project was shared with multiple users with different access right. In that case the order
     //that elements of the ResultSet came back would determine whether or not a user could edit a shared project
     //TODO: improve (see above)
-    public static boolean isReadOnly(int projectId) throws SQLException {
+    public static String getAccessLevel(int projectId, int userId) throws SQLException {
 
         Connection connection = DatabaseConnection.getConnection();
-        String isReadOnly = "";
+        String accessLevel = "no-access";
 
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM edit_read WHERE project_id = ?");
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM edit_read WHERE project_id = ? AND collaborator_id = ?");
         statement.setInt(1, projectId);
+        statement.setInt(2, userId);
         ResultSet resultSet = statement.executeQuery();
 
         if (resultSet.next()) {
-            isReadOnly = resultSet.getString("access_level");
-            return isReadOnly.equals("read-only");
+            accessLevel = resultSet.getString("access_level");
         }
-        return false;
+
+        return accessLevel;
 
     }
 
