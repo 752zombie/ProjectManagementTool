@@ -285,3 +285,9 @@ li#myprojectlist{
     margin-top: 70px;
 
 }
+
+.look-like-text {
+    border: none;
+    background: transparent;
+    color: #000;
+}
