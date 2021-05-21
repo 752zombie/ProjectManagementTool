@@ -60,5 +60,9 @@ public class ProjectService {
         return isOwner || isCollaborator;
     }
 
+    public static boolean canEdit(int projectId, int userId) throws SQLException{
+        return hasAccess(projectId, userId) && !isReadOnly(projectId, userId);
+    }
+
 }
 

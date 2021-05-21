@@ -3,8 +3,10 @@ package com.example.projecttool.controllers;
 import com.example.projecttool.models.Employee;
 import com.example.projecttool.models.Skill;
 import com.example.projecttool.models.User;
+import com.example.projecttool.models.project.Project;
 import com.example.projecttool.models.project.Subtask;
 import com.example.projecttool.services.EmployeeService;
+import com.example.projecttool.services.ProjectService;
 import com.example.projecttool.util.ErrorHandler;
 import com.example.projecttool.services.SubtaskService;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 @Controller
 public class SubtaskController {
 
+
     @PostMapping("edit-task-with-subtasks")
     public String viewSubtasks(@RequestParam("id") Integer taskId, HttpSession session)
     {
@@ -33,13 +36,18 @@ public class SubtaskController {
     {
         try {
             User user = (User) session.getAttribute("user");
-            ArrayList<Employee> employees = SubtaskService.getAllEmployees(user.getId());
+            Project project = (Project) session.getAttribute("project");
+            ArrayList<Employee> employees = SubtaskService.getAllEmployees(user.getId(), project.getProjectId());
             session.setAttribute("allEmployees", employees);
             Integer taskId = (Integer) session.getAttribute("taskId");
             ArrayList<Subtask> subtasks = SubtaskService.getSubtasks(taskId);
             session.setAttribute("subtasks", subtasks);
             ArrayList<Skill> skills = EmployeeService.getAllSkills(user.getId());
             session.setAttribute("allSkills", skills);
+
+            if (!ProjectService.hasAccess(project.getProjectId(), user.getId())) {
+                return ErrorHandler.setCurrentError("You do not have access to that project", session);
+            }
         }
 
         catch (SQLException e) {
@@ -55,7 +63,9 @@ public class SubtaskController {
                               @RequestParam("subtask-id") Integer subtaskId, @RequestParam("hours-to-complete") int hoursToComplete, HttpSession session) {
 
         try {
-            SubtaskService.updateSubtask(subtaskId, name, description, startTime, endTime, hoursToComplete);
+            User user = (User) session.getAttribute("user");
+            Project project = (Project) session.getAttribute("project");
+            SubtaskService.updateSubtask(subtaskId, name, description, startTime, endTime, hoursToComplete, project.getProjectId(), user.getId());
         }
 
         catch (SQLException e) {
@@ -72,8 +82,10 @@ public class SubtaskController {
                                 @RequestParam("hours-to-complete") int hoursToComplete, HttpSession session) {
 
         try {
+            User user = (User) session.getAttribute("user");
+            Project project = (Project) session.getAttribute("project");
             Integer taskId = (Integer) session.getAttribute("taskId");
-            SubtaskService.addNewSubtaskToTask(taskId, name, description, startTime, endTime, hoursToComplete);
+            SubtaskService.addNewSubtaskToTask(taskId, name, description, startTime, endTime, hoursToComplete, project.getProjectId(), user.getId());
         }
 
         catch (SQLException e) {
@@ -86,7 +98,9 @@ public class SubtaskController {
     @PostMapping("/delete-subtask")
     public String deleteSubtask(@RequestParam("subtask-id") Integer subtaskId, HttpSession session) {
         try {
-            SubtaskService.deleteSubtask(subtaskId);
+            User user = (User) session.getAttribute("user");
+            Project project = (Project) session.getAttribute("project");
+            SubtaskService.deleteSubtask(subtaskId, project.getProjectId(), user.getId());
         }
 
         catch (SQLException e) {
@@ -99,7 +113,9 @@ public class SubtaskController {
     @PostMapping("/add-employee-to-subtask")
     public String addEmployeeToSubtask(@RequestParam("employee-id") Integer employeeId, @RequestParam("subtask-id") Integer subtaskId, HttpSession session) {
         try {
-            SubtaskService.addEmployeeToSubtask(subtaskId, employeeId);
+            User user = (User) session.getAttribute("user");
+            Project project = (Project) session.getAttribute("project");
+            SubtaskService.addEmployeeToSubtask(subtaskId, employeeId, project.getProjectId(), user.getId());
         }
 
         catch (SQLException e) {
@@ -112,7 +128,9 @@ public class SubtaskController {
     @PostMapping("/remove-employee-from-subtask")
     public String removeEmployeeFromSubtask(@RequestParam("employee-id") Integer employeeId, @RequestParam("subtask-id") Integer subtaskId, HttpSession session) {
         try {
-            SubtaskService.removeEmployeeFromSubtask(subtaskId, employeeId);
+            User user = (User) session.getAttribute("user");
+            Project project = (Project) session.getAttribute("project");
+            SubtaskService.removeEmployeeFromSubtask(subtaskId, employeeId, project.getProjectId(), user.getId());
         }
 
         catch (SQLException e) {
@@ -125,7 +143,9 @@ public class SubtaskController {
     @PostMapping("add-skill-to-subtask")
     public String addSkillToSubtask(@RequestParam("subtask-id") Integer subtaskId, @RequestParam("skill-id") Integer skillId, HttpSession session) {
         try {
-            SubtaskService.addSkillToSubtask(subtaskId, skillId);
+            User user = (User) session.getAttribute("user");
+            Project project = (Project) session.getAttribute("project");
+            SubtaskService.addSkillToSubtask(subtaskId, skillId, project.getProjectId(), user.getId());
         }
 
         catch (SQLException e) {
@@ -138,9 +158,9 @@ public class SubtaskController {
     @PostMapping("/remove-skill-from-subtask")
     public String removeSkillFromSubtask(@RequestParam("subtask-id") Integer subtaskId, @RequestParam("skill-id") Integer skillId, HttpSession session) {
         try {
-            System.out.println(subtaskId);
-            System.out.println(skillId);
-            SubtaskService.removeSkillFromSubtask(subtaskId, skillId);
+            User user = (User) session.getAttribute("user");
+            Project project = (Project) session.getAttribute("project");
+            SubtaskService.removeSkillFromSubtask(subtaskId, skillId, project.getProjectId(), user.getId());
         }
 
         catch (SQLException e) {

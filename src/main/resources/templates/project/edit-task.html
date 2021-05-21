@@ -29,7 +29,7 @@
 
         </div>
 
-        <div class="create-new-subtask">
+        <div class="create-new-subtask" th:if="${!session.isReadOnly}">
             <ul id="new-subtask">
                 <li>
                     <h4 id="subtask-text" style="text-align: center">New subtask:</h4>
@@ -117,7 +117,7 @@
                     </div>
                 </div>
 
-                <div class="container-employee-manager" id="container-employee-manager">
+                <div class="container-employee-manager" id="container-employee-manager" th:if="${!session.isReadOnly}">
                     <form action="/add-employee-to-subtask" method="post"
                           th:if="${subtask.assignedEmployees.size() != session.allEmployees.size()}">
                         <input name="subtask-id" th:value="${subtask.id}" type="hidden">
