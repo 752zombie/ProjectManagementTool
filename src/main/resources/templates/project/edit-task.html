@@ -19,56 +19,55 @@
     <div class="content-area1-1">
 
 
-<div class="container-1">
-        <div>
-            <a href="/task-list" class="signup">Return to project</a>
+        <div class="container-1">
+            <div>
+                <a href="/task-list" class="signup">Return to project</a>
+            </div>
+            <div>
+                <a href="/employee-manager">Create and edit employees here</a>
+            </div>
         </div>
-        <div>
-           <a href="/employee-manager">Create and edit employees here</a>
-        </div>
-</div>
 
+        <div class="create-new-subtask">
+            <ul id="new-subtask">
+                <li>
+                    <h3 id="subtask-text" style="text-align: left">New subtask:</h3>
+                    <div class="project-table">
+                        <div class="header-group">
+                            <span class="td">Subtask name</span>
+                            <span class="td">Notes</span>
+                            <span class="td">Start date</span>
+                            <span class="td">Due date</span>
+                            <span class="td">Estimated hours to complete</span>
+                            <span class="td"> </span>
+                        </div>
 
-        <ul id="subtask-ul" th:each="subtask : ${session.subtasks}">
+                        <div class="row-group">
+                            <form method="post" action="/add-new-subtask" class="tr">
+                                <input type="hidden" name="task-id" th:value="${session.taskId}">
 
-            <div class="create-new-subtask">
-                <ul id="new-subtask">
-                    <li>
-                        <h3 id="subtask-text" style="text-align: left">New subtask:</h3>
-                        <div class="project-table">
-                            <div class="header-group">
-                                <span class="td">Subtask name</span>
-                                <span class="td">Notes</span>
-                                <span class="td">Start date</span>
-                                <span class="td">Due date</span>
-                                <span class="td">Estimated hours to complete</span>
-                                <span class="td"> </span>
-                            </div>
+                                <span class="td"><input type="text" name="subtask-name"></span>
+                                <span class="td"><textarea name="subtask-description" id="new-subtask-description"
+                                                           cols="30"
+                                                           rows="1"
+                                                           required></textarea></span>
+                                <span class="td"><input type="date" name="start-time"></span>
+                                <span class="td"><input type="date" name="end-time"></span>
+                                <span class="td"><input type="number" name="hours-to-complete"></span>
 
-                            <div class="row-group">
-                                <form method="post" action="/add-new-subtask" class="tr">
-                                    <input type="hidden" name="task-id" th:value="${session.taskId}">
-
-                                    <span class="td"><input type="text" name="subtask-name"></span>
-                                    <span class="td"><textarea name="subtask-description" id="new-subtask-description"
-                                                               cols="30"
-                                                               rows="1"
-                                                               required></textarea></span>
-                                    <span class="td"><input type="date" name="start-time"></span>
-                                    <span class="td"><input type="date" name="end-time"></span>
-                                    <span class="td"><input type="number" name="hours-to-complete"></span>
-
-                                    <span class="td">
+                                <span class="td">
                             <input class="btn btn-success" id="save-button-new-subtask" type="submit" value="Save"
                                    name="action" formaction="/add-new-subtask">
                         </span>
-                                </form>
-                            </div>
+                            </form>
                         </div>
-                    </li>
-                </ul>
-            </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
 
+        <h3 id="existing-subtasks" style="text-align: left">Existing subtasks:</h3>
+        <ul id="subtask-ul" th:each="subtask : ${session.subtasks}">
 
             <li>
                 <div class="project-table">
@@ -114,7 +113,7 @@
                 </div>
 
                 <div class="container-employee-manager" id="container-employee-manager">
-                    <form action="/add-employee-to-subtask" method="post" th:if="${!session.allEmployees.isEmpty()}">
+                    <form action="/add-employee-to-subtask" method="post" th:if="${!session.allEmployees.isEmpty() && }">
                         <input type="hidden" name="subtask-id" th:value="${subtask.id}">
                         <label for="employee-adder">Add employee</label>
                         <select name="employee-id" id="employee-adder">
@@ -124,8 +123,7 @@
                         <button class="btn btn-primary" id="add-employee-btn" type="submit">Add</button>
                     </form>
 
-                    <form action="/remove-employee-from-subtask" method="post"
-                          th:if="${!subtask.assignedEmployees.isEmpty()}">
+                    <form action="/remove-employee-from-subtask" method="post" th:if="${!subtask.assignedEmployees.isEmpty()}">
                         <input type="hidden" name="subtask-id" th:value="${subtask.id}">
                         <label for="employee-remover">Remove employee</label>
                         <select name="employee-id" id="employee-remover">
