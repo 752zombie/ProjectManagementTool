@@ -13,10 +13,12 @@
 
 <div class="section1">
     <div class="section1-1">
-        <div class="heading">The easiest way to manage team projects and tasks</div>
-        <div class="subheading">Project Management Tool gives teams everything they need to stay in sync,
-            hit deadlines, and reach their goals..<br> Start planning now!
-            <a href="sign-up" class="signup-fp" methods="get"> Click here to sign up</a>
+        <div th:if="${session.user == null}">
+            <div class="heading">The easiest way to manage team projects and tasks</div>
+            <div class="subheading">Project Management Tool gives teams everything they need to stay in sync,
+                hit deadlines, and reach their goals..<br> Start planning now!
+                <a href="sign-up" class="signup-fp" methods="get"> Click here to sign up</a>
+            </div>
         </div>
     </div>
 </div>
