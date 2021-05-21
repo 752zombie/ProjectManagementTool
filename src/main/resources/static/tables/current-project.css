@@ -285,3 +285,7 @@ li#myprojectlist{
     margin-top: 70px;
 
 }
+
+#subtask-description, #new-subtask-description {
+    line-height: 1;
+}
