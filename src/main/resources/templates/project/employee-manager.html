@@ -30,19 +30,27 @@
         <div class="ul-1">
             <h3>Add employees and skills</h3>
             <ul id="ul-1">
+                <div class="create-new-emp">
                 <li>
+
                     <form action="/create-new-employee" method="post">
                         <label for="new-emp-name">New employee: </label>
                         <input type="text" name="emp-name" id="new-emp-name" placeholder="Employee name">
                         <button class="btn btn-success" type="submit">Save</button>
                     </form>
                 </li>
+               </div>
+
+
                 <li>
+                <div class="create-new-skill">
                     <form action="/create-new-skill" method="post">
                         <label for="skill-name">New skill: </label>
                         <input type="text" name="skill-name" id="skill-name" placeholder="Skill name">
                         <button class="btn btn-success" type="submit">Save</button>
                     </form>
+                </div>
+                <div class="delete-skill">
                     <form action="/delete-skill" method="post" th:if="${!session.allSkills.isEmpty()}">
                         <label for="skill-deleter">Delete a skill: </label>
                         <select name="skill-to-delete" id="skill-deleter">
@@ -51,7 +59,9 @@
                         </select>
                         <button class="btn btn-danger" type="submit">Delete skill</button>
                     </form>
+                </div>
                 </li>
+
             </ul>
         </div>
 
@@ -97,7 +107,7 @@
                         </div>
                         <form action="/delete-employee" method="post">
                             <input type="hidden" name="emp-id" th:value="${emp.id}">
-                            <button class="btn btn-danger" type="submit">Delete</button>
+                            <button class="btn btn-danger" type="submit">Delete employee</button>
                         </form>
                     </div>
                 </li>

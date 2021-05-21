@@ -13,7 +13,7 @@ position: center;
 }
 
 .flex-box-current-employees {
-    border: 1px solid white;
+    border: 3px solid white;
     margin-bottom: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -40,6 +40,18 @@ position: center;
     flex-direction: row;
     justify-content: space-around;
 
+}
+
+.create-new-emp {
+    margin-bottom: 5px;
+}
+.create-new-skill {
+    margin-bottom: 5px;
+    margin-left: 51px;
+}
+
+.delete-skill {
+    margin-left: -98px;
 }
 
 #employee-skills {
