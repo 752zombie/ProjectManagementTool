@@ -91,7 +91,10 @@ DIV.header-group {
 }
 
 #assigned-employee {
-    margin-top: -55px;
+    margin-top: -95px;
+}
+.assigned-emp {
+    margin-bottom: 150px;
 }
 
 #create-new-subtask {
@@ -271,4 +274,8 @@ li#myprojectlist{
 
 #new-subtask-description, #subtask-description {
     line-height: 1;
+}
+
+.container-employee-manager, #assigned-employee {
+    font-size: 14px;
 }
