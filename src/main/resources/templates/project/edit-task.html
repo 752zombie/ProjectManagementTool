@@ -28,6 +28,7 @@
         </div>
 </div>
 
+
         <ul id="subtask-ul" th:each="subtask : ${session.subtasks}">
 
             <div class="create-new-subtask">
@@ -68,6 +69,7 @@
                 </ul>
             </div>
 
+
             <li>
                 <div class="project-table">
                     <div class="header-group">
@@ -94,7 +96,6 @@
                                                        th:text="${subtask.description}"
                                                        required></textarea></span>
 
-                            <!--     <span class="td"><input type="text" id="subtask-description" name="subtask-description" th:value="${subtask.description}"></span> -->
                             <span class="td"><input type="date" id="start-time" name="start-time"
                                                     th:value="${subtask.startTime}"></span>
                             <span class="td"><input type="date" id="end-time" name="end-time"

@@ -46,6 +46,7 @@
             </div>
 
             <div class="row-group">
+
                 <form method="post" action="/edit-task" class="tr" th:each="task : ${session.projectTasks}">
                     <input type="hidden" th:value="${task.id}" name="id">
 
@@ -93,43 +94,44 @@
                                formaction="/edit-task-with-subtasks">
                       </span>
                 </form>
+            </div>
 
 
-                <!-- ADD NEW ROW TO TASK -->
 
-                <!-- Priority -->
-                <form action="/add-row-to-tasks" method="post" class="tr">
-                    <select name="priority" required>
-                        <option class="high-prior" value="high">High</option>
-                        <option class="medium-prior" value="medium">Medium</option>
-                        <option class="low-prior" value="low">Low</option>
-                    </select>
+            <!-- ADD NEW ROW TO TASK -->
 
-                    <span class="td"><input type="text" name="name" required></span>
-                    <span class="td"><input type="number" name="estimated-hours-day" id="estimated-hours-day-new-row"
-                                            required></span>
+            <!-- Priority -->
+            <form action="/add-row-to-tasks" method="post" class="tr">
+                <select name="priority" required>
+                    <option class="high-prior" value="high">High</option>
+                    <option class="medium-prior" value="medium">Medium</option>
+                    <option class="low-prior" value="low">Low</option>
+                </select>
 
-                    <!-- Count weekends or only weekdays -->
-                    <select class="select" name="count-weekends">
-                        <option value="weekend-false">NO</option>
-                        <option value="weekend-true">YES</option>
-                    </select>
+                <span class="td"><input type="text" name="name" required></span>
+                <span class="td"><input type="number" name="estimated-hours-day" id="estimated-hours-day-new-row"
+                                        required></span>
 
-                    <!-- Work hours and calendar -->
-                    <span class="td"><input type="hidden" name="estimated-hours-total"></span>
-                    <span class="td"><input type="date" name="start_time" id="start-time" required></span>
-                    <span class="td"><input type="date" name="end_time" id="end_time"></span>
-                    <span class="td"><input type="hidden" name="fill-for-table-order"></span>
-                    <span class="td"><textarea name="description" id="new-task-description" cols="30" rows="1"
-                                               required></textarea></span>
-                    <span class="td">
+                <!-- Count weekends or only weekdays -->
+                <select class="select" name="count-weekends">
+                    <option value="weekend-false">NO</option>
+                    <option value="weekend-true">YES</option>
+                </select>
+
+                <!-- Work hours and calendar -->
+                <span class="td"><input type="hidden" name="estimated-hours-total"></span>
+                <span class="td"><input type="date" name="start_time" id="start-time" required></span>
+                <span class="td"><input type="date" name="end_time" id="end_time"></span>
+                <span class="td"><input type="hidden" name="fill-for-table-order"></span>
+                <span class="td"><textarea name="description" id="new-task-description" cols="30" rows="1"
+                                           required></textarea></span>
+                <span class="td">
 
                         <!-- Buttons -->
                             <input type="submit" class="btn btn-success" value="Save" name="action"
                                    formaction="add-row-to-tasks">
                         </span>
-                </form>
-            </div>
+            </form>
 
             <p> Sorted by priority </p>
         </div>

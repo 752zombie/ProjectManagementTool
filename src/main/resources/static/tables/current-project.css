@@ -168,7 +168,10 @@ li#myprojectlist{
 }
 
 
+
+
 .project-list .btn-danger {
+
     padding: 10px;
     background: #c7383c;
     border-radius: 4px;
@@ -260,6 +263,7 @@ li#myprojectlist{
 
 #delete-subtask-btn {
     line-height: 0.5;
+    height: 31px;
 }
 
 
