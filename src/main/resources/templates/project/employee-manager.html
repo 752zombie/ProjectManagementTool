@@ -86,7 +86,7 @@
                         <span th:if="${!iter.last}" th:text="${skill.name} + ', '"></span>
                         <span th:if="${iter.last}" th:text="${skill.name}"></span>
                      </span>
-                            <form action="/add-skill-to-employee" method="post">
+                            <form action="/add-skill-to-employee" method="post" th:if="${emp.skills.size() != session.allSkills.size()}">
                                 <input type="hidden" th:value="${emp.id}" name="emp-id">
                                 <label for="skill-adder">Add skill to employee: </label>
                                 <select name="skill-id" id="skill-adder">
@@ -95,7 +95,7 @@
                                 </select>
                                 <button class="btn btn-primary" type="submit">Add skill</button>
                             </form>
-                            <form action="/remove-skill-from-employee" method="post">
+                            <form action="/remove-skill-from-employee" method="post" th:if="${!emp.skills.isEmpty()}">
                                 <input type="hidden" th:value="${emp.id}" name="emp-id">
                                 <label for="skill-remover">Remove skill from employee: </label>
                                 <select name="skill-id" id="skill-remover">
