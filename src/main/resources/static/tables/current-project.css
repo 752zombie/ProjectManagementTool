@@ -292,6 +292,6 @@ li#myprojectlist{
     color: #000;
 }
 
-#subtask-description, #new-task-description {
+#new-subtask-description, #subtask-description {
     line-height: 1;
 }
