@@ -55,7 +55,7 @@ public class ShareProjectController {
 
 
         } catch (SQLException s) {
-            return ErrorHandler.setCurrentError("Could not get shared project", session);
+            return ErrorHandler.setCurrentError("Could not get shared projects", session);
         }
         return "share-project/shared-with-me";
     }

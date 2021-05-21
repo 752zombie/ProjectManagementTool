@@ -1,6 +1,8 @@
 package com.example.projecttool.services;
 
 import com.example.projecttool.models.project.Task;
+import com.example.projecttool.repositories.ProjectRepository;
+import com.example.projecttool.repositories.ShareProjectRepository;
 import com.example.projecttool.repositories.TaskRepository;
 import com.example.projecttool.util.DueDateCalculator;
 import com.example.projecttool.util.PrioritySorterService;
@@ -38,12 +40,12 @@ public class TaskService {
     }
 
     public static void editTask(int taskId, String taskName, String description, String priority, String start_time, String end_time,
-                         int estimatedHoursDay, String countWeekends) throws SQLException {
-
-
-       TaskRepository.editTask(taskId, taskName, description, priority, start_time, end_time, estimatedHoursDay, countWeekends);
-
-       // SHOULD week CHOICE BE ADDED TO TASK OR A NEW TABLE
+                         int estimatedHoursDay, String countWeekends, int projectId, int userId) throws SQLException {
+        boolean canEdit = ShareProjectRepository.getAccessLevel(projectId, userId).equals("read-and-edit");
+        boolean isOwner = ProjectService.isOwner(projectId, userId);
+        if (isOwner || canEdit) {
+            TaskRepository.editTask(taskId, taskName, description, priority, start_time, end_time, estimatedHoursDay, countWeekends);
+        }
     }
 
     public static void deleteTask(int taskId) throws SQLException {
@@ -52,9 +54,14 @@ public class TaskService {
     }
 
     public static  void addRowToTask(int projectId, String name, String description, String priority, String start_time, String end_time,
-                             int estimatedHoursDay, String countWeekends) throws SQLException {
+                             int estimatedHoursDay, String countWeekends, int userId) throws SQLException {
 
-        TaskRepository.addRowToTask(projectId, name, description, priority, start_time, end_time, estimatedHoursDay, countWeekends);
+        boolean canEdit = ShareProjectRepository.getAccessLevel(projectId, userId).equals("read-and-edit");
+        boolean isOwner = ProjectService.isOwner(projectId, userId);
+
+        if (isOwner || canEdit) {
+            TaskRepository.addRowToTask(projectId, name, description, priority, start_time, end_time, estimatedHoursDay, countWeekends);
+        }
 
     }
 

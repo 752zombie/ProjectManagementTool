@@ -103,6 +103,22 @@ public class ProjectRepository {
         statement.execute();
     }
 
+    public static int getOwnerId(int projectId, int userId) throws SQLException{
+        Connection connection = DatabaseConnection.getConnection();
+
+        int ownerId = 0;
+
+        PreparedStatement statement = connection.prepareStatement("SELECT owner_id FROM project WHERE project_id = ?");
+        statement.setInt(1, projectId);
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            ownerId = resultSet.getInt("owner_id");
+        }
+
+        return ownerId;
+    }
+
 
 }
 

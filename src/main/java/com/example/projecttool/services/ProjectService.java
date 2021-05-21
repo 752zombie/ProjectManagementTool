@@ -33,15 +33,32 @@ public class ProjectService {
         return ProjectRepository.getProject(projectId);
     }
 
-    public static boolean isReadOnly(int projectId) throws SQLException {
+    public static boolean isReadOnly(int projectId, int userId) throws SQLException {
+        String accessLevel = ShareProjectRepository.getAccessLevel(projectId, userId);
+        return accessLevel.equals("read-only");
 
-        return ShareProjectRepository.isReadOnly(projectId);
     }
 
     public static void deleteProject(Integer projectId) throws SQLException {
 
             ProjectRepository.deleteProject(projectId);
-        }
-
     }
+
+    public static boolean isOwner(int projectId, int userId) throws SQLException{
+        int ownerId = ProjectRepository.getOwnerId(projectId, userId);
+        return ownerId == userId;
+    }
+
+    public static String getAccessLevel(int projectId, int userId) throws SQLException{
+        return ShareProjectRepository.getAccessLevel(projectId, userId);
+    }
+
+    public static boolean hasAccess(int projectId, int userId) throws SQLException{
+        String accessLevel = ShareProjectRepository.getAccessLevel(projectId, userId);
+        boolean isCollaborator = accessLevel.equals("read-and-edit") || accessLevel.equals("read-only");
+        boolean isOwner = isOwner(projectId, userId);
+        return isOwner || isCollaborator;
+    }
+
+}
 
