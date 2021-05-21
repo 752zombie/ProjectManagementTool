@@ -4,6 +4,16 @@
     margin-top: 15px;
 }
 
+.container-1 {
+
+    display: flex;
+    padding: 10px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+
+}
+
 .container-1 #help {
     padding: 10px;
     margin-left: 5px;
@@ -152,6 +162,7 @@ li#myprojectlist{
 }
 
 .btn-success {
+    height: 31px;
     line-height: 0.5;
     margin-left: -5px;
 }

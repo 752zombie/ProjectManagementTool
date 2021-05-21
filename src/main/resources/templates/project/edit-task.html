@@ -18,11 +18,15 @@
 
     <div class="content-area1-1">
 
-        <div><a href="/task-list" class="signup">Return to project</a></div>
 
-
-       <div> <a href="/employee-manager">Create and edit employees here</a></div>
-
+<div class="container-1">
+        <div>
+            <a href="/task-list" class="signup">Return to project</a>
+        </div>
+        <div>
+           <a href="/employee-manager">Create and edit employees here</a>
+        </div>
+</div>
 
         <ul id="subtask-ul" th:each="subtask : ${session.subtasks}">
 
