@@ -159,39 +159,16 @@ li#myprojectlist{
 }
 
 
-.btn {
-    line-height: 0.5;
-    height: 20px;
+#btn-primary {
+    padding: 6px;
 }
 
-.btn-success {
-    height: 31px;
-    line-height: 0.5;
-    margin-left: -5px;
+#btn-danger {
+    padding: 6px;
 }
-
-
-
-
-.project-list .btn-danger {
-
-    padding: 10px;
-    background: #c7383c;
-    border-radius: 4px;
-    border-color:#525252 ;
-    color: #525252;
-    line-height: 0.5;
+#btn-success {
+    padding: 6px;
 }
-
-.project-list .btn-primary {
-    padding: 10px;
-    background: #e6e6e6;
-    border-radius: 4px;
-    border-color: #525252;
-    color: #525252;
-    line-height: 0.5;
-}
-
 
 
 /* Calendar inputs */
