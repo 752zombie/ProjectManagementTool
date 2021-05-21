@@ -291,3 +291,7 @@ li#myprojectlist{
     background: transparent;
     color: #000;
 }
+
+#subtask-description, #new-task-description {
+    line-height: 1;
+}
