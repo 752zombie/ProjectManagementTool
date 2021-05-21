@@ -30,6 +30,10 @@ public class ProjectController {
         }
 
         try {
+
+            if (!ProjectService.hasAccess(project.getProjectId(), user.getId())) {
+                return ErrorHandler.setCurrentError("You do not have access to that project", session);
+            }
             ArrayList<Task> projectTasks = TaskService.getTasks(project.getProjectId());
             session.setAttribute("projectTasks", projectTasks);
         }
@@ -93,9 +97,14 @@ public class ProjectController {
         try {
             User user = (User) session.getAttribute("user");
 
+            //check if user is allowed to access project
+            if (!ProjectService.hasAccess(projectId, user.getId())) {
+                return ErrorHandler.setCurrentError("You do not have access to that project", session);
+            }
             // Add current project to session
             Project project = ProjectService.getProject(projectId);
             session.setAttribute("project", project);
+            session.setAttribute("readOnly", ProjectService.isReadOnly(projectId, user.getId()));
 
             // Deletes row from project
             if (action.equals("Delete")) {
@@ -105,7 +114,7 @@ public class ProjectController {
                 model.addAttribute("projectList", projectList);
 
 
-                return "project/all-projects";
+                return "redirect:/see-all-projects";
 
             }
             // Ignores shared project
@@ -115,20 +124,16 @@ public class ProjectController {
                 ArrayList<Project> sharedProjects = ShareProjectService.getSharedProjects(user.getId());
                 model.addAttribute("projectList", sharedProjects);
 
-                return "share-project/shared-with-me";
+                return "redirect:/shared-with-me";
 
             }
 
 
-         if (ProjectService.isReadOnly(projectId, user.getId())) {
-
-             return "redirect:/task-list";
-
-         } else {return "redirect:/task-list";}
-
         } catch (SQLException s) {
             return ErrorHandler.setCurrentError("Something went wrong editing project", session);
         }
+
+        return "redirect:/task-list";
 
     }
 
@@ -138,8 +143,6 @@ public class ProjectController {
                            @RequestParam("priority") String priority, @RequestParam("start_time") String start_time,
                            @RequestParam("end_time") String end_time, @RequestParam("estimated-hours-day") int estimatedHoursDay,
                             @RequestParam("action") String action,  @RequestParam("count-weekends") String countWeekends, HttpSession session) {
-
-
 
         try {
             // Needs current project to get Tasks
@@ -153,7 +156,6 @@ public class ProjectController {
             // Deletes row from project
             else if (action.equals("Delete")) {
                 TaskService.deleteTask(taskId);
-
             }
 
             // Sorts and directs edited tasks to View
@@ -177,6 +179,7 @@ public class ProjectController {
 
         try {
 
+
             User user = (User) session.getAttribute("user");
 
             // We need project id to edit Task
@@ -191,7 +194,7 @@ public class ProjectController {
 
 
             return "redirect:/task-list";
-        } catch (SQLException s) {
+        } catch (SQLException e) {
             return ErrorHandler.setCurrentError("Something went wrong editing project", session);
         }
 

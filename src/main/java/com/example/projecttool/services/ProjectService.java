@@ -49,5 +49,16 @@ public class ProjectService {
         return ownerId == userId;
     }
 
+    public static String getAccessLevel(int projectId, int userId) throws SQLException{
+        return ShareProjectRepository.getAccessLevel(projectId, userId);
+    }
+
+    public static boolean hasAccess(int projectId, int userId) throws SQLException{
+        String accessLevel = ShareProjectRepository.getAccessLevel(projectId, userId);
+        boolean isCollaborator = accessLevel.equals("read-and-edit") || accessLevel.equals("read-only");
+        boolean isOwner = isOwner(projectId, userId);
+        return isOwner || isCollaborator;
+    }
+
 }
 
