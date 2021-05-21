@@ -42,6 +42,18 @@ position: center;
 
 }
 
+.create-new-emp {
+    margin-bottom: 5px;
+}
+.create-new-skill {
+    margin-bottom: 5px;
+    margin-left: 51px;
+}
+
+.delete-skill {
+    margin-left: -98px;
+}
+
 #employee-skills {
 
     margin-top: 20px;
