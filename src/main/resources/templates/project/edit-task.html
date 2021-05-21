@@ -113,7 +113,7 @@
                 </div>
 
                 <div class="container-employee-manager" id="container-employee-manager">
-                    <form action="/add-employee-to-subtask" method="post" th:if="${!session.allEmployees.isEmpty() && }">
+                    <form action="/add-employee-to-subtask" method="post" th:if="${subtask.assignedEmployees.size() != session.allEmployees.size()}">
                         <input type="hidden" name="subtask-id" th:value="${subtask.id}">
                         <label for="employee-adder">Add employee</label>
                         <select name="employee-id" id="employee-adder">
@@ -133,7 +133,7 @@
                         <button class="btn btn-warning" id="remove-employee-btn" type="submit">Remove</button>
                     </form>
 
-                    <form action="/add-skill-to-subtask" method="post" th:if="${!session.allSkills.isEmpty()}">
+                    <form action="/add-skill-to-subtask" method="post" th:if="${subtask.requiredSkills.size() != session.allSkills.size()}">
                         <input type="hidden" name="subtask-id" th:value="${subtask.id}">
                         <label for="skill-adder">Add skill: </label>
                         <select name="skill-id" id="skill-adder">
