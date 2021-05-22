@@ -13,4 +13,8 @@ public class ProfileService {
 
     }
 
+    public static void deleteAccount(int userId) throws SQLException{
+        UserRepository.deleteUser(userId);
+    }
+
 }

@@ -4,6 +4,7 @@ import com.example.projecttool.models.User;
 import com.example.projecttool.models.UserAttribute;
 import com.example.projecttool.services.LoginService;
 import com.example.projecttool.services.ProfileService;
+import com.example.projecttool.util.ErrorHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -82,6 +83,29 @@ public class ProfileController {
         }
 
         return "profile/success";
+
+    }
+
+    @GetMapping("/delete-account")
+    public String accountDeletionPage() {
+        return "profile/confirm-delete-page";
+    }
+
+    @PostMapping("/delete-account")
+    public String deleteConfirmation(@RequestParam("action") String action, HttpSession session) {
+        try {
+            User user = (User) session.getAttribute("user");
+            if (action.equals("yes")) {
+                ProfileService.deleteAccount(user.getId());
+                session.invalidate();
+            }
+        }
+
+        catch (SQLException e) {
+            return ErrorHandler.setCurrentError("Something went wrong deleting account", session);
+        }
+
+        return "index";
 
     }
 }
