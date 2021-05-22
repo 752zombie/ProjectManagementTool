@@ -107,24 +107,24 @@
 
 
                             <span class="td"><input id="subtask-name" name="subtask-name" th:value="${subtask.name}"
-                                                    type="text"></span>
+                                                    type="text" th:class="${session.isReadOnly ? 'look-like-text' : ''}" th:readonly="${session.isReadOnly}"></span>
 
 
 
 
                             <span class="td"><input id="start-time" name="start-time" th:value="${subtask.startTime}"
-                                                    type="date"></span>
+                                                    type="date" th:class="${session.isReadOnly ? 'look-like-text' : ''}" th:readonly="${session.isReadOnly}"></span>
                             <span class="td"><input id="end-time" name="end-time" th:value="${subtask.endTime}"
-                                                    type="date"></span>
+                                                    type="date" th:class="${session.isReadOnly ? 'look-like-text' : ''}" th:readonly="${session.isReadOnly}"></span>
                             <span class="td"><input id="hours-to-complete" name="hours-to-complete" th:value="${subtask.hoursToComplete}"
-                                                    type="number"></span>
+                                                    type="number" th:class="${session.isReadOnly ? 'look-like-text' : ''}" th:readonly="${session.isReadOnly}"></span>
 
                             <span class="td"><textarea cols="30" id="subtask-description" name="subtask-description"
                                                        required
                                                        rows="1"
-                                                       th:text="${subtask.description}"></textarea></span>
+                                                       th:text="${subtask.description}" th:class="${session.isReadOnly ? 'look-like-text' : ''}" th:readonly="${session.isReadOnly}"></textarea></span>
 
-                            <span class="td">
+                        <span class="td" th:if="${!session.isReadOnly}">
                             <input class="btn btn-success" formaction="/save-subtask" id="save-subtask-btn" name="action"
                                    type="submit" value="Save">
                             <input class="btn btn-danger" formaction="/delete-subtask" id="delete-subtask-btn" name="action"
