@@ -22,6 +22,11 @@
 
 
         <div class="container-1">
+          <div class="flex-box-1">
+
+              <div class="mover">
+                  <h6>Your employees</h6>
+              </div>
 
             <div th:each="emp, iter : ${session.allEmployees}">
                 <div th:id="${emp.id + 'info'}">
@@ -35,23 +40,25 @@
                     </div>
                 </div>
             </div>
+          </div>
+          <div class="flex-box-2">
 
-            <div>
+            <div class="mover">
                 <a class="signup" href="/task-list">Return to project</a>
             </div>
 
-            <div>
+            <div class="mover">
                 <a href="/share-project" methods="get"> Share project</a>
             </div>
 
-            <div>
-                <a href="/employee-manager">Create and edit employees</a>
+            <div class="mover">
+                <a href="/employee-manager">Edit employees</a>
             </div>
 
             <div>
                 <span><a href="/help-page" class="dropbtn" id="help" methods="get"> Help guide</a></span>
             </div>
-
+          </div>
         </div>
 
         <div id="task-name">
@@ -63,7 +70,7 @@
         <div class="create-new-subtask" th:if="${!session.isReadOnly}">
             <ul id="new-subtask">
                 <li>
-                    <h4 id="subtask-text" style="text-align: center">New subtask:</h4>
+                    <h4 id="subtask-text" style="text-align: center">New subtask</h4>
                     <div class="project-table">
                         <div class="header-group">
                             <span class="td">Subtask name</span>
@@ -99,7 +106,7 @@
             </ul>
         </div>
 
-        <h4 id="existing-subtasks" style="text-align: center">Current subtasks:</h4>
+        <h4 id="existing-subtasks" style="text-align: center">Current subtasks</h4>
         <ul id="subtask-ul" th:each="subtask : ${session.subtasks}">
 
             <li>

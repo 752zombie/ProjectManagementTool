@@ -31,12 +31,12 @@
 
 
         <div class="project-name">
-            <div id="your-projects">Current project:</div>
+            <div id="your-projects">Current project</div>
             <div class="project-name-top" th:text="${session.project.name}"></div>
         </div>
 
                <div class="new-task" th:if="${!session.isReadOnly}">
-                   <h6 id="task-text">New Task:</h6>
+                   <h6 id="task-text">New Task</h6>
                </div>
         <div class="project-table" th:if="${!session.isReadOnly}">
             <div class="header-group">
@@ -92,7 +92,7 @@
                                 <!-- EDIT CURRENT TASKS -->
 
         <div class="current-tasks">
-            <h6 id="current-task-text">Current Tasks:</h6>
+            <h6 id="current-task-text">Current Tasks</h6>
         </div>
 
             <div class="project-table">
@@ -170,6 +170,8 @@
                             <input type="submit" class="btn btn-primary" id="btn-primary" value="View subtasks" name="action"
                                 formaction="/edit-task-with-subtasks">
                         </span>
+
+
                     </form>
                 </div>
 

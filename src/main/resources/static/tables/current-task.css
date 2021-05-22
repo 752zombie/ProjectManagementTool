@@ -7,6 +7,22 @@
 
 }
 
+.flex-box-1 {
+
+    font-size: x-small;
+
+}
+
+.flex-box-2 {
+
+    display: flex;
+    padding: 10px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+
+}
+
 #task-name {
     margin-top: 30px;
     font-size: x-large;
@@ -17,4 +33,8 @@
     padding-bottom: 15px;
     padding-top: 5px;
     color: #2159e8;
+}
+
+.mover {
+    padding: 15px;
 }
