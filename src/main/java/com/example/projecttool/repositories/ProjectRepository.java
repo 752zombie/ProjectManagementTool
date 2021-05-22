@@ -103,7 +103,7 @@ public class ProjectRepository {
         statement.execute();
     }
 
-    public static int getOwnerId(int projectId, int userId) throws SQLException{
+    public static int getOwnerId(int projectId) throws SQLException{
         Connection connection = DatabaseConnection.getConnection();
 
         int ownerId = 0;

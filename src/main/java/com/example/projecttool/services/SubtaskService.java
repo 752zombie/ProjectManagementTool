@@ -2,6 +2,7 @@ package com.example.projecttool.services;
 
 import com.example.projecttool.models.Employee;
 import com.example.projecttool.models.project.Subtask;
+import com.example.projecttool.repositories.ProjectRepository;
 import com.example.projecttool.repositories.SubtaskRepository;
 import com.example.projecttool.repositories.TaskRepository;
 
@@ -40,8 +41,9 @@ public class SubtaskService {
 
     public static ArrayList<Employee> getAllEmployees(int userId, int projectId) throws SQLException {
         ArrayList<Employee> employees = new ArrayList<>();
-        if (ProjectService.canEdit(projectId, userId)) {
-            employees = SubtaskRepository.getAllEmployees(userId);
+        int ownerId = ProjectRepository.getOwnerId(projectId);
+        if (ProjectService.hasAccess(projectId, userId)) {
+            employees = SubtaskRepository.getAllEmployees(ownerId);
         }
 
         return employees;

@@ -45,7 +45,7 @@ public class ProjectService {
     }
 
     public static boolean isOwner(int projectId, int userId) throws SQLException{
-        int ownerId = ProjectRepository.getOwnerId(projectId, userId);
+        int ownerId = ProjectRepository.getOwnerId(projectId);
         return ownerId == userId;
     }
 
