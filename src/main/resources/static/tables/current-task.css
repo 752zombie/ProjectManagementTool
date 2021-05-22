@@ -6,3 +6,15 @@
     justify-content: space-around;
 
 }
+
+#task-name {
+    margin-top: 30px;
+    font-size: x-large;
+}
+
+#task-name-top {
+
+    padding-bottom: 15px;
+    padding-top: 5px;
+    color: #2159e8;
+}
