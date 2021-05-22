@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
     <link rel="stylesheet" href="css/general.css">
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/share-project.css">
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
@@ -18,7 +20,7 @@
     <label for="view-and-edit">Read only</label>
     <input class="clikbtn" type="radio" id="view-and-edit" name="edit" value="read-and-edit">
     <label for="view-and-edit">Read and edit</label>
-    <button class="share" type="submit"> Share </button>
+    <button id="btn-successs" type="submit"> Share </button>
     </div>
 </form>
     </div>
