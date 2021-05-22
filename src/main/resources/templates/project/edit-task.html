@@ -23,13 +23,13 @@
 
         <div class="container-1">
           <div class="flex-box-1">
-
+<!--
               <div class="mover">
                   <h6>Your employees</h6>
-              </div>
+              </div> -->
 
             <div th:each="emp, iter : ${session.allEmployees}">
-                <div th:id="${emp.id + 'info'}">
+                <div th:id="${emp.id + 'info'}" style="display: none">
                     <div>
                         <span th:text="${emp.name}" class="emp-name-hover"></span><br>
                         <span th:if="${!emp.skills.isEmpty()}">Skills: </span>

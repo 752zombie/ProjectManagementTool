@@ -2,6 +2,7 @@ package com.example.projecttool.services;
 
 import com.example.projecttool.models.Employee;
 import com.example.projecttool.models.project.Subtask;
+import com.example.projecttool.repositories.EmployeeRepository;
 import com.example.projecttool.repositories.ProjectRepository;
 import com.example.projecttool.repositories.SubtaskRepository;
 import com.example.projecttool.repositories.TaskRepository;
@@ -53,7 +54,6 @@ public class SubtaskService {
         if (ProjectService.canEdit(projectId, userId)) {
             SubtaskRepository.addEmployeeToSubtask(subtaskId, employeeId);
         }
-
     }
 
     public static void removeEmployeeFromSubtask(int subtaskId, int employeeId, int projectId, int userId) throws SQLException{
