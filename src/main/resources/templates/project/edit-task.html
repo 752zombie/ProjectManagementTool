@@ -210,7 +210,7 @@
 
                     <span id="assigned-employee-span">Assigned employees: </span>
                     <span th:each="emp, iter : ${subtask.getAssignedEmployees()}" th:class="${subtask.id}">
-                        <span th:id="${emp.id}" onmouseover="showDetails(this.id, this.parentElement.className)">
+                        <span th:id="${emp.id}" onmouseover="showDetails(this.id, this.parentElement.className)" onmouseout="hideDetails(this.parentElement.className)">
                             <span id="show-employee-details" th:text="${emp.name}" class="employee-name-subtasks"></span>
                             <span th:if="${!iter.last}" th:text="${', '}"></span>
                         </span>
@@ -220,7 +220,7 @@
                     </span><br>
 
                     <!-- empty div to set employee info into -->
-                    <div th:id="${subtask.id + 'box'}" class="emp-info-hover"></div>
+                    <div th:id="${subtask.id + 'box'}" class="emp-info-hover" style="display: none"></div>
 
 
 
@@ -243,10 +243,11 @@
         let employee = document.getElementById(empId + "info");
         let subtask = document.getElementById(subtaskId + "box");
         subtask.innerHTML = employee.innerHTML;
+        subtask.style.display = "block";
     }
 
-    function hideDetails(empId) {
-        let e = document.getElementById(empId);
+    function hideDetails(subtaskId) {
+        let e = document.getElementById(subtaskId + "box");
         e.style.display = "none";
     }
 </script>
