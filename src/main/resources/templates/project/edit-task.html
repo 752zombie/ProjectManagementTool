@@ -26,9 +26,9 @@
             <div th:each="emp, iter : ${session.allEmployees}">
                 <div th:id="${emp.id + 'info'}">
                     <div>
-                        <span th:text="${emp.name}"></span><br>
-                        <span>Skills: </span>
-                        <span th:each="skill, iter : ${emp.skills}">
+                        <span th:text="${emp.name}" class="emp-name-hover"></span><br>
+                        <span th:if="${!emp.skills.isEmpty()}">Skills: </span>
+                        <span th:each="skill, iter : ${emp.skills}" class="skills-hover">
                             <span th:id="skill.id" th:if="${!iter.last}" th:text="${skill.name} + ', '"></span>
                             <span th:if="${iter.last}" th:text="${skill.name}"></span>
                         </span><br>
@@ -204,7 +204,7 @@
                     <span id="assigned-employee-span">Assigned employees: </span>
                     <span th:each="emp, iter : ${subtask.getAssignedEmployees()}" th:class="${subtask.id}">
                         <span th:id="${emp.id}" onmouseover="showDetails(this.id, this.parentElement.className)">
-                            <a href="/test" id="show-employee-details" th:text="${emp.name}"></a>
+                            <span id="show-employee-details" th:text="${emp.name}" class="employee-name-subtasks"></span>
                             <span th:if="${!iter.last}" th:text="${', '}"></span>
                         </span>
 
@@ -218,9 +218,10 @@
 
 
                     <span id="required-skill">Required skills: </span>
-                    <span th:each="skill, iter : ${subtask.requiredSkills}">
-                <span th:id="skill.id" th:if="${!iter.last}" th:text="${skill.name} + ', '"></span>
-                <span th:if="${iter.last}" th:text="${skill.name}"></span></span>
+                    <span th:each="skill, iter : ${subtask.requiredSkills}" class="required-skills">
+                        <span th:id="skill.id" th:if="${!iter.last}" th:text="${skill.name} + ', '"></span>
+                        <span th:if="${iter.last}" th:text="${skill.name}"></span>
+                    </span>
                 </div>
             </li>
           </div>

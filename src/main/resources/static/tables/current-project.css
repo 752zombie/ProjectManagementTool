@@ -290,6 +290,26 @@ li#myprojectlist{
     border-style: solid;
     border-color: white;
     height: 100px;
-    width: 100px;
+    width: 200px;
     margin: 0 auto;
+    overflow: auto;
+}
+
+.emp-name-hover {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.skills-hover {
+    color: green;
+}
+
+.required-skills {
+    color: green;
+}
+
+.employee-name-subtasks {
+    cursor:pointer;
+    color:blue;
+    text-decoration:underline;
 }
