@@ -7,6 +7,7 @@
     <link href="tables/current-project.css" rel="stylesheet">
     <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" rel="stylesheet">
+    <link href="tables/current-task.css" rel="stylesheet">
 
 </head>
 <body>
@@ -20,14 +21,25 @@
 
 
         <div class="container-1">
+
             <div>
                 <a class="signup" href="/task-list">Return to project</a>
             </div>
+
             <div>
-                <a href="/employee-manager">Create and edit employees here</a>
+                <a href="/share-project" methods="get"> Share project</a>
+            </div>
+
+            <div>
+                <a href="/employee-manager">Create and edit employees</a>
+            </div>
+
+            <div>
+                <span><a href="/help-page" class="dropbtn" id="help" methods="get"> Help guide</a></span>
             </div>
 
         </div>
+
 
         <div class="create-new-subtask" th:if="${!session.isReadOnly}">
             <ul id="new-subtask">
@@ -68,7 +80,7 @@
             </ul>
         </div>
 
-        <h4 id="existing-subtasks" style="text-align: center">Existing subtasks:</h4>
+        <h4 id="existing-subtasks" style="text-align: center">Current subtasks:</h4>
         <ul id="subtask-ul" th:each="subtask : ${session.subtasks}">
 
             <li>

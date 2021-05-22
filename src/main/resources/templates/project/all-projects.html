@@ -25,8 +25,8 @@
                         <span class="project-end" id="project-end" th:text="${project.endTime}"></span><br>
                     <form action="/choose-project-to-edit" method="post">
                        <input type="hidden" name="id" th:value="${project.projectId}">
-                       <button type="submit" class="btn-primary" value="Open" name="action">Edit project</button>
-                       <button type="submit" class="btn-danger" value="Delete" name="action">Delete project</button>
+                       <button type="submit" class="btn btn-primary" value="Open" name="action">Edit project</button>
+                       <button type="submit" class="btn btn-danger" value="Delete" name="action">Delete project</button>
                     </form>
                   </div>
               </li>
