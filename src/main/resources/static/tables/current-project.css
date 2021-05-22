@@ -284,3 +284,12 @@ li#myprojectlist{
 .container-employee-manager, #assigned-employee {
     font-size: 15px;
 }
+
+.emp-info-hover {
+    border-width: 2px;
+    border-style: solid;
+    border-color: white;
+    height: 100px;
+    width: 100px;
+    margin: 0 auto;
+}

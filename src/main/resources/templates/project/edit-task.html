@@ -17,10 +17,24 @@
 <div class="content-area">
 
 
+
     <div class="content-area1-1">
 
 
         <div class="container-1">
+
+            <div th:each="emp, iter : ${session.allEmployees}">
+                <div th:id="${emp.id + 'info'}">
+                    <div>
+                        <span th:text="${emp.name}"></span><br>
+                        <span>Skills: </span>
+                        <span th:each="skill, iter : ${emp.skills}">
+                            <span th:id="skill.id" th:if="${!iter.last}" th:text="${skill.name} + ', '"></span>
+                            <span th:if="${iter.last}" th:text="${skill.name}"></span>
+                        </span><br>
+                    </div>
+                </div>
+            </div>
 
             <div>
                 <a class="signup" href="/task-list">Return to project</a>
@@ -185,24 +199,28 @@
             <li>
                 <div id="assigned-employee">
 
-                    <span id="assigned-employee-span">Assigned employees: </span>
-                    <span th:each="emp, iter : ${subtask.getAssignedEmployees()}">
-                <span th:onmouseout="'javascript:hideDetails(\''+ ${emp.id} +'\');'"
-                      th:onmouseover="'javascript:showDetails(\''+ ${emp.id} +'\');'">
-                    <span id="show-employee-details" th:id="emp.id" th:if="${!iter.last}"
-                          th:text="${emp.name} + ', '"></span>
-                    <span id="show-employee-details2" th:if="${iter.last}" th:text="${emp.name}"></span>
-                </span>
 
-                <span style="display: none" th:id="${emp.id + 'popup'}">
-                    <h1 th:text="${emp.name}"></h1><br>
-                </span>
-            </span><br>
+
+                    <span id="assigned-employee-span">Assigned employees: </span>
+                    <span th:each="emp, iter : ${subtask.getAssignedEmployees()}" th:class="${subtask.id}">
+                        <span th:id="${emp.id}" onmouseover="showDetails(this.id, this.parentElement.className)">
+                            <a href="/test" id="show-employee-details" th:text="${emp.name}"></a>
+                            <span th:if="${!iter.last}" th:text="${', '}"></span>
+                        </span>
+
+
+
+                    </span><br>
+
+                    <!-- empty div to set employee info into -->
+                    <div th:id="${subtask.id + 'box'}" class="emp-info-hover"></div>
+
+
+
                     <span id="required-skill">Required skills: </span>
                     <span th:each="skill, iter : ${subtask.requiredSkills}">
                 <span th:id="skill.id" th:if="${!iter.last}" th:text="${skill.name} + ', '"></span>
-                <span th:if="${iter.last}" th:text="${skill.name}"></span>
-            </span>
+                <span th:if="${iter.last}" th:text="${skill.name}"></span></span>
                 </div>
             </li>
           </div>
@@ -213,13 +231,14 @@
 </body>
 
 <script>
-    function showDetails(empId) {
-        let e = document.getElementById(empId + "popup");
-        e.style.display = "block";
+    function showDetails(empId, subtaskId) {
+        let employee = document.getElementById(empId + "info");
+        let subtask = document.getElementById(subtaskId + "box");
+        subtask.innerHTML = employee.innerHTML;
     }
 
     function hideDetails(empId) {
-        let e = document.getElementById(empId + "popup");
+        let e = document.getElementById(empId);
         e.style.display = "none";
     }
 </script>
