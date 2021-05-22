@@ -7,6 +7,7 @@ import com.example.projecttool.models.project.Project;
 import com.example.projecttool.models.project.Subtask;
 import com.example.projecttool.services.EmployeeService;
 import com.example.projecttool.services.ProjectService;
+import com.example.projecttool.services.TaskService;
 import com.example.projecttool.util.ErrorHandler;
 import com.example.projecttool.services.SubtaskService;
 import org.springframework.stereotype.Controller;
@@ -40,6 +41,8 @@ public class SubtaskController {
             ArrayList<Employee> employees = SubtaskService.getAllEmployees(user.getId(), project.getProjectId());
             session.setAttribute("allEmployees", employees);
             Integer taskId = (Integer) session.getAttribute("taskId");
+            String taskName = TaskService.getTaskName(taskId);
+            session.setAttribute("taskName", taskName);
             ArrayList<Subtask> subtasks = SubtaskService.getSubtasks(taskId);
             session.setAttribute("subtasks", subtasks);
             ArrayList<Skill> skills = EmployeeService.getAllSkills(user.getId());

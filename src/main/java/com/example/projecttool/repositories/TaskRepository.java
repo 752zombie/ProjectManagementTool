@@ -147,6 +147,18 @@ public class TaskRepository {
         return resultSet.getInt(1);
     }
 
+    public static String getTaskName(Integer taskId) throws SQLException {
+
+        Connection connection = DatabaseConnection.getConnection();
+
+        PreparedStatement statement = connection.prepareStatement("SELECT task_name FROM tasks WHERE id = ?");
+        statement.setInt(1, taskId);
+        ResultSet resultSet = statement.executeQuery();
+        resultSet.next();
+
+        return resultSet.getString(1);
+
+    }
 }
 
 

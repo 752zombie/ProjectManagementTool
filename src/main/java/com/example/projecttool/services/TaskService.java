@@ -72,4 +72,9 @@ public class TaskService {
     public static int getEstimatedTimeToComplete(int taskId) throws SQLException{
         return TaskRepository.getTotalHoursToComplete(taskId);
     }
+
+    public static String getTaskName(Integer taskId) throws SQLException {
+
+        return TaskRepository.getTaskName(taskId);
+    }
 }
