@@ -26,7 +26,7 @@ public class EmployeeService {
     }
 
     public static void createNewEmployee(String name, int userId) throws SQLException{
-        EmployeeRepository.createNewEmployee(name, userId, 0);
+        EmployeeRepository.createNewEmployee(name, userId);
     }
 
     public static void createNewSkill(int userId, String skillName) throws SQLException{

@@ -54,6 +54,7 @@ public class SubtaskController {
         }
 
         catch (SQLException e) {
+            e.printStackTrace();
             return ErrorHandler.setCurrentError("Something went wrong loading the subtask page", session);
         }
 

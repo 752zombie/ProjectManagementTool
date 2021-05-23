@@ -27,13 +27,12 @@ public class EmployeeRepository {
         statement.execute();
     }
 
-    public static void createNewEmployee(String employeeName, int userId, int hoursPerDay) throws SQLException{
+    public static void createNewEmployee(String employeeName, int userId) throws SQLException{
         Connection connection = DatabaseConnection.getConnection();
 
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO employees(emp_name, user_id, hours_per_day) VALUES (?, ?, ?)");
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO employees(emp_name, user_id) VALUES (?, ?)");
         statement.setString(1, employeeName);
         statement.setInt(2, userId);
-        statement.setInt(3, hoursPerDay);
         statement.execute();
     }
 
@@ -92,12 +91,6 @@ public class EmployeeRepository {
 
     }
 
-    public static void setHoursPerDay(int employeeId, int hoursPerDay) throws SQLException{
-        Connection connection = DatabaseConnection.getConnection();
 
-        PreparedStatement statement = connection.prepareStatement("UPDATE employees SET hours_per_day = ? WHERE employeeId = ?");
-        statement.setInt(1, hoursPerDay);
-        statement.setInt(2, employeeId);
-    }
 
 }

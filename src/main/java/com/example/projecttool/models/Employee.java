@@ -6,13 +6,12 @@ public class Employee {
     int id;
     String name;
     List<Skill> skills;
-    private int hoursPerDay;
 
-    public Employee(int id, String name, List<Skill> skills, int hoursPerDay) {
+    public Employee(int id, String name, List<Skill> skills) {
         this.id = id;
         this.name = name;
         this.skills = skills;
-        this.hoursPerDay = hoursPerDay;
+
     }
 
     public Employee(String name, List<Skill> skills) {
@@ -32,13 +31,6 @@ public class Employee {
         return skills;
     }
 
-    public int getHoursPerDay() {
-        return hoursPerDay;
-    }
-
-    public void setHoursPerDay(int hoursPerDay) {
-        this.hoursPerDay = hoursPerDay;
-    }
 
     public boolean hasSkill(int skillId) {
         for (Skill skill : skills) {

@@ -69,10 +69,9 @@ public class SubtaskRepository {
             while (resultSet.next()) {
                 int employeeId = resultSet.getInt("emp_id");
                 String employeeName = resultSet.getString("emp_name");
-                int hoursPerDay = resultSet.getInt("hours_per_day");
                 ArrayList<Skill> skills = getEmployeeSkills(employeeId);
 
-                employees.add(new Employee(employeeId, employeeName, skills, hoursPerDay));
+                employees.add(new Employee(employeeId, employeeName, skills));
 
             }
 
@@ -186,9 +185,8 @@ public class SubtaskRepository {
         while (resultSet.next()) {
             int empId = resultSet.getInt("emp_id");
             String empName = resultSet.getString("emp_name");
-            int hoursPerDay = resultSet.getInt("hours_per_day");
             ArrayList<Skill> skills = getEmployeeSkills(empId);
-            employees.add(new Employee(empId, empName, skills, hoursPerDay));
+            employees.add(new Employee(empId, empName, skills));
         }
 
         return employees;
