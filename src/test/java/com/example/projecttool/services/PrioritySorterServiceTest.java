@@ -1,11 +1,9 @@
 package com.example.projecttool.services;
 
 import com.example.projecttool.models.project.Task;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;

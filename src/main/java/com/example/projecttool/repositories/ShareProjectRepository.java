@@ -14,7 +14,6 @@ public class ShareProjectRepository {
     public static ArrayList<Project> getSharedProjects(int userId) throws SQLException {
 
         Connection connection = DatabaseConnection.getConnection();
-        ArrayList<Project> sharedProjects = new ArrayList<>();
 
         PreparedStatement statement = connection.prepareStatement("SELECT * \n" +
                 "FROM project\n" +
@@ -22,17 +21,8 @@ public class ShareProjectRepository {
                 "ON  project.project_id = collaborators.project_id\n" +
                 "WHERE collaborator_id = ?");
         statement.setInt(1, userId);
-        ResultSet resultSet = statement.executeQuery();
+        return ProjectRepository.getProjects(statement);
 
-        while (resultSet.next()) {
-            int project_id = resultSet.getInt("project_id");
-            String project_name = resultSet.getString("name");
-            String start_time = resultSet.getString("start_time");
-            String end_time = resultSet.getString("end_time");
-
-            sharedProjects.add(new Project(project_id, project_name, start_time, end_time));
-        }
-        return sharedProjects;
     }
 
     public static void shareProject(String receiverMail, String editOrRead, int projectId) throws SQLException {

@@ -69,9 +69,6 @@ public class TaskService {
         return TaskRepository.getTotalNumberOfEmployeesAssigned(taskId);
     }
 
-    public static int getEstimatedTimeToComplete(int taskId) throws SQLException{
-        return TaskRepository.getTotalHoursToComplete(taskId);
-    }
 
     public static String getTaskName(Integer taskId) throws SQLException {
 

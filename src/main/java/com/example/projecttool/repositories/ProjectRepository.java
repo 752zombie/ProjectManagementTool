@@ -45,21 +45,12 @@ public class ProjectRepository {
     public static ArrayList<Project> getProjects(int userId) throws SQLException {
 
         Connection connection = DatabaseConnection.getConnection();
-        ArrayList<Project> projectList = new ArrayList<>();
 
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM project WHERE owner_id = ?");
         statement.setInt(1, userId);
-        ResultSet resultSet = statement.executeQuery();
 
-        while (resultSet.next()) {
-            int project_id = resultSet.getInt("project_id");
-            String project_name = resultSet.getString("name");
-            String start_time = resultSet.getString("start_time");
-            String end_time = resultSet.getString("end_time");
+        return getProjects(statement);
 
-            projectList.add(new Project(project_id, project_name, start_time, end_time));
-        }
-        return projectList;
     }
 
     public static Project getProject(int projectId) throws SQLException {
@@ -117,6 +108,22 @@ public class ProjectRepository {
         }
 
         return ownerId;
+    }
+
+    public static ArrayList<Project> getProjects(PreparedStatement statement) throws SQLException{
+        ArrayList<Project> projectList = new ArrayList<>();
+
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            int project_id = resultSet.getInt("project_id");
+            String project_name = resultSet.getString("name");
+            String start_time = resultSet.getString("start_time");
+            String end_time = resultSet.getString("end_time");
+
+            projectList.add(new Project(project_id, project_name, start_time, end_time));
+        }
+        return projectList;
     }
 
 
