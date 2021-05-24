@@ -23,6 +23,38 @@
 
 }
 
+
+.create-new-subtask{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+#container-employee-manager {
+    margin-left: 1250px;
+}
+
+#assigned-employee {
+    margin-top: -30px;
+}
+.assigned-emp {
+
+    margin-bottom: 150px;
+}
+
+#create-new-subtask {
+    margin-top: 70px;
+
+}
+
+#show-employee-details {
+    margin-bottom: -50px;
+}
+#show-employee-details2 {
+    margin-bottom: -50px;
+}
+
+
+
 #task-name {
     margin-top: 30px;
     font-size: x-large;
@@ -38,3 +70,4 @@
 .mover {
     padding: 15px;
 }
+

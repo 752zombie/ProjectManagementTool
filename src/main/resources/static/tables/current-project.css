@@ -81,36 +81,6 @@ DIV.header-group {
     width: 100%;
     margin-top: 15px;
 }
-
-.create-new-subtask{
-    margin-top: 100px;
-    margin-bottom: 100px;
-}
-
-#container-employee-manager {
-    margin-left: 1250px;
-}
-
-#assigned-employee {
-    margin-top: -40px;
-}
-.assigned-emp {
-    margin-top: 50px;
-    margin-bottom: 150px;
-}
-
-#create-new-subtask {
-    margin-top: 70px;
-
-}
-
-#show-employee-details {
-    margin-bottom: -50px;
-}
-#show-employee-details2 {
-    margin-bottom: -50px;
-}
-
 #task-description, #new-task-description {
     width:170px;
     transition: 0.5s;
