@@ -43,7 +43,7 @@ public class ProjectController {
             return ErrorHandler.setCurrentError("Something went wrong retrieving tasks", session);
         }
 
-        return "project/current-project";
+        return "project/edit-project-tasks";
 
     }
 

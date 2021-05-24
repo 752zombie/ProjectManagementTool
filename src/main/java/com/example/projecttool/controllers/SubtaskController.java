@@ -58,7 +58,7 @@ public class SubtaskController {
             return ErrorHandler.setCurrentError("Something went wrong loading the subtask page", session);
         }
 
-        return "project/edit-task";
+        return "project/edit-project-subtasks";
     }
 
     @PostMapping("save-subtask")
