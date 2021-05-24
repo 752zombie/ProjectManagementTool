@@ -36,8 +36,6 @@ public class DatabaseConnection {
     public static String urlStatic;
 
 
-    private DatabaseConnection() { }
-
 
     public static Connection getConnection()  {
 
