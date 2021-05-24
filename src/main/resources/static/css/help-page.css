@@ -1,3 +1,17 @@
+img {
+
+    max-width: 70%;
+    min-height: 150%;
+    border: 1px solid black;
+}
+
+
+.content-area1-1 {
+
+    color: #170eff;
+}
+
+
 .container-1 {
     align-items: center;
 }
