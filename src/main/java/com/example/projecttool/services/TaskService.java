@@ -1,11 +1,10 @@
 package com.example.projecttool.services;
 
 import com.example.projecttool.models.project.Task;
-import com.example.projecttool.repositories.ProjectRepository;
 import com.example.projecttool.repositories.ShareProjectRepository;
 import com.example.projecttool.repositories.TaskRepository;
 import com.example.projecttool.util.DueDateCalculator;
-import com.example.projecttool.util.PrioritySorterService;
+import com.example.projecttool.util.PrioritySorter;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public class TaskService {
             }
         }
 
-        PrioritySorterService.sortTasksByPriority(allTasks);
+        PrioritySorter.sortTasksByPriority(allTasks);
 
         return allTasks;
 
