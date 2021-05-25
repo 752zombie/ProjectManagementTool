@@ -41,7 +41,7 @@ public class TaskController {
             return ErrorHandler.setCurrentError("Something went wrong retrieving tasks", session);
         }
 
-        return "project/edit-project-tasks";
+        return "project/tasks";
 
     }
 
