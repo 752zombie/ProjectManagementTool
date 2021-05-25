@@ -2,7 +2,6 @@ package com.example.projecttool.controllers;
 
 import com.example.projecttool.models.user.User;
 import com.example.projecttool.models.project.Project;
-import com.example.projecttool.util.ErrorHandler;
 import com.example.projecttool.services.ShareProjectService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,7 +37,7 @@ public class ShareProjectController {
             }
 
         } catch (SQLException s) {
-            return ErrorHandler.setCurrentError("Something went wrong adding collaborator", session);
+            return ErrorHandlerController.setCurrentError("Something went wrong adding collaborator", session);
         }
         return "share-project/share-complete";
     }
@@ -55,7 +54,7 @@ public class ShareProjectController {
 
 
         } catch (SQLException s) {
-            return ErrorHandler.setCurrentError("Could not get shared projects", session);
+            return ErrorHandlerController.setCurrentError("Could not get shared projects", session);
         }
         return "share-project/shared-with-me";
     }

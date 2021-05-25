@@ -5,7 +5,6 @@ import com.example.projecttool.models.project.Project;
 import com.example.projecttool.models.project.Task;
 import com.example.projecttool.services.ProjectService;
 import com.example.projecttool.services.TaskService;
-import com.example.projecttool.util.ErrorHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,13 +23,13 @@ public class TaskController {
         User user = (User) session.getAttribute("user");
         Project project = (Project) session.getAttribute("project");
         if (user == null || project == null) {
-            return ErrorHandler.setCurrentError("You must be logged in and have selected a project to access this page", session);
+            return ErrorHandlerController.setCurrentError("You must be logged in and have selected a project to access this page", session);
         }
 
         try {
 
             if (!ProjectService.hasAccess(project.getProjectId(), user.getId())) {
-                return ErrorHandler.setCurrentError("You do not have access to that project", session);
+                return ErrorHandlerController.setCurrentError("You do not have access to that project", session);
             }
             session.setAttribute("isReadOnly", ProjectService.isReadOnly(project.getProjectId(), user.getId()));
             ArrayList<Task> projectTasks = TaskService.getTasks(project.getProjectId());
@@ -38,7 +37,7 @@ public class TaskController {
         }
 
         catch (SQLException e) {
-            return ErrorHandler.setCurrentError("Something went wrong retrieving tasks", session);
+            return ErrorHandlerController.setCurrentError("Something went wrong retrieving tasks", session);
         }
 
         return "project/tasks";
@@ -72,7 +71,7 @@ public class TaskController {
 
 
         } catch (SQLException s) {
-            return ErrorHandler.setCurrentError("Something went wrong editing project", session);
+            return ErrorHandlerController.setCurrentError("Something went wrong editing project", session);
         }
         return "redirect:/task-list";
     }
@@ -102,7 +101,7 @@ public class TaskController {
 
             return "redirect:/task-list";
         } catch (SQLException e) {
-            return ErrorHandler.setCurrentError("Something went wrong editing project", session);
+            return ErrorHandlerController.setCurrentError("Something went wrong editing project", session);
         }
 
     }

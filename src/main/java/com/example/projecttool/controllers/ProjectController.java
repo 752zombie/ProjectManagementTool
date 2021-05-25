@@ -2,7 +2,6 @@ package com.example.projecttool.controllers;
 
 import com.example.projecttool.models.user.User;
 import com.example.projecttool.models.project.Project;
-import com.example.projecttool.util.ErrorHandler;
 import com.example.projecttool.services.ProjectService;
 import com.example.projecttool.services.ShareProjectService;
 import org.springframework.stereotype.Controller;
@@ -41,7 +40,7 @@ public class ProjectController {
         }
 
         catch (SQLException e) { ;
-            return ErrorHandler.setCurrentError("Something went wrong editing project", session);
+            return ErrorHandlerController.setCurrentError("Something went wrong editing project", session);
         }
 
         return "redirect:task-list";
@@ -59,7 +58,7 @@ public class ProjectController {
                 return "project/all-projects";
 
             } catch (SQLException e) {
-                return ErrorHandler.setCurrentError("Something went wrong retrieving project list", session);
+                return ErrorHandlerController.setCurrentError("Something went wrong retrieving project list", session);
             }
         }
 
@@ -72,7 +71,7 @@ public class ProjectController {
 
             //check if user is allowed to access project
             if (!ProjectService.hasAccess(projectId, user.getId())) {
-                return ErrorHandler.setCurrentError("You do not have access to that project", session);
+                return ErrorHandlerController.setCurrentError("You do not have access to that project", session);
             }
             // Add current project to session
             Project project = ProjectService.getProject(projectId);
@@ -103,7 +102,7 @@ public class ProjectController {
 
 
         } catch (SQLException s) {
-            return ErrorHandler.setCurrentError("Something went wrong editing project", session);
+            return ErrorHandlerController.setCurrentError("Something went wrong editing project", session);
         }
 
         return "redirect:/task-list";

@@ -8,7 +8,6 @@ import com.example.projecttool.models.project.Subtask;
 import com.example.projecttool.services.EmployeeService;
 import com.example.projecttool.services.ProjectService;
 import com.example.projecttool.services.TaskService;
-import com.example.projecttool.util.ErrorHandler;
 import com.example.projecttool.services.SubtaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,13 +48,13 @@ public class SubtaskController {
             session.setAttribute("allSkills", skills);
 
             if (!ProjectService.hasAccess(project.getProjectId(), user.getId())) {
-                return ErrorHandler.setCurrentError("You do not have access to that project", session);
+                return ErrorHandlerController.setCurrentError("You do not have access to that project", session);
             }
         }
 
         catch (SQLException e) {
             e.printStackTrace();
-            return ErrorHandler.setCurrentError("Something went wrong loading the subtask page", session);
+            return ErrorHandlerController.setCurrentError("Something went wrong loading the subtask page", session);
         }
 
         return "project/subtasks";
@@ -73,7 +72,7 @@ public class SubtaskController {
         }
 
         catch (SQLException e) {
-            return ErrorHandler.setCurrentError("Something went wrong saving changes", session);
+            return ErrorHandlerController.setCurrentError("Something went wrong saving changes", session);
         }
 
         return "redirect:view-subtasks";
@@ -93,7 +92,7 @@ public class SubtaskController {
         }
 
         catch (SQLException e) {
-            return ErrorHandler.setCurrentError("Something went wrong adding new subtask to task", session);
+            return ErrorHandlerController.setCurrentError("Something went wrong adding new subtask to task", session);
         }
 
         return "redirect:view-subtasks";
@@ -108,7 +107,7 @@ public class SubtaskController {
         }
 
         catch (SQLException e) {
-            return ErrorHandler.setCurrentError("Something went deleting subtask", session);
+            return ErrorHandlerController.setCurrentError("Something went deleting subtask", session);
         }
 
         return "redirect:view-subtasks";
@@ -123,7 +122,7 @@ public class SubtaskController {
         }
 
         catch (SQLException e) {
-            return ErrorHandler.setCurrentError("Something went wrong adding employee to subtask", session);
+            return ErrorHandlerController.setCurrentError("Something went wrong adding employee to subtask", session);
         }
 
         return  "redirect:/view-subtasks";
@@ -138,7 +137,7 @@ public class SubtaskController {
         }
 
         catch (SQLException e) {
-            return ErrorHandler.setCurrentError("Something went wrong removing employee from subtask", session);
+            return ErrorHandlerController.setCurrentError("Something went wrong removing employee from subtask", session);
         }
 
         return  "redirect:/view-subtasks";
@@ -153,7 +152,7 @@ public class SubtaskController {
         }
 
         catch (SQLException e) {
-            return ErrorHandler.setCurrentError("Something went wrong adding skill to subtask", session);
+            return ErrorHandlerController.setCurrentError("Something went wrong adding skill to subtask", session);
         }
 
         return  "redirect:/view-subtasks";
@@ -168,7 +167,7 @@ public class SubtaskController {
         }
 
         catch (SQLException e) {
-            return ErrorHandler.setCurrentError("Something went wrong removing skill from subtask", session);
+            return ErrorHandlerController.setCurrentError("Something went wrong removing skill from subtask", session);
         }
 
         return  "redirect:/view-subtasks";

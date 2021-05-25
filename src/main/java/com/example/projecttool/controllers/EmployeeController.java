@@ -4,7 +4,6 @@ import com.example.projecttool.models.project.Employee;
 import com.example.projecttool.models.project.Skill;
 import com.example.projecttool.models.user.User;
 import com.example.projecttool.services.EmployeeService;
-import com.example.projecttool.util.ErrorHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +20,7 @@ public class EmployeeController {
     public String employeeManager(HttpSession session) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
-            return ErrorHandler.setCurrentError("You need to be logged in to access the employee manager", session);
+            return ErrorHandlerController.setCurrentError("You need to be logged in to access the employee manager", session);
         }
 
         try {
@@ -32,7 +31,7 @@ public class EmployeeController {
         }
 
         catch (SQLException e) {
-            return ErrorHandler.setCurrentError("Error retrieving employees", session);
+            return ErrorHandlerController.setCurrentError("Error retrieving employees", session);
         }
 
         return "project/employee-manager";
@@ -45,7 +44,7 @@ public class EmployeeController {
         }
 
         catch (SQLException e) {
-            return ErrorHandler.setCurrentError("Something went wrong updating employee name", session);
+            return ErrorHandlerController.setCurrentError("Something went wrong updating employee name", session);
         }
 
         return "redirect:/employee-manager";
@@ -58,7 +57,7 @@ public class EmployeeController {
         }
 
         catch (SQLException e) {
-            return ErrorHandler.setCurrentError("Error deleting employee", session);
+            return ErrorHandlerController.setCurrentError("Error deleting employee", session);
         }
 
         return "redirect:/employee-manager";
@@ -72,7 +71,7 @@ public class EmployeeController {
         }
 
         catch (SQLException e) {
-            return ErrorHandler.setCurrentError("Error creating employee", session);
+            return ErrorHandlerController.setCurrentError("Error creating employee", session);
         }
 
         return "redirect:/employee-manager";
@@ -86,7 +85,7 @@ public class EmployeeController {
         }
 
         catch (SQLException e) {
-            return ErrorHandler.setCurrentError("Error creating new skill", session);
+            return ErrorHandlerController.setCurrentError("Error creating new skill", session);
         }
 
         return "redirect:/employee-manager";
@@ -99,7 +98,7 @@ public class EmployeeController {
         }
 
         catch (SQLException e) {
-            return ErrorHandler.setCurrentError("Error deleting skill", session);
+            return ErrorHandlerController.setCurrentError("Error deleting skill", session);
         }
 
         return "redirect:/employee-manager";
@@ -112,7 +111,7 @@ public class EmployeeController {
         }
 
         catch (SQLException e) {
-            return ErrorHandler.setCurrentError("Error adding skill to employee", session);
+            return ErrorHandlerController.setCurrentError("Error adding skill to employee", session);
         }
 
         return "redirect:/employee-manager";
@@ -125,7 +124,7 @@ public class EmployeeController {
         }
 
         catch (SQLException e) {
-            return ErrorHandler.setCurrentError("Error removing skill from employee", session);
+            return ErrorHandlerController.setCurrentError("Error removing skill from employee", session);
         }
 
         return "redirect:/employee-manager";
