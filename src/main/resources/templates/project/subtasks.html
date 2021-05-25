@@ -62,7 +62,9 @@
         </div>
 
         <div id="task-name">
-            <div id="your-task">Current Task:</div>
+            <div id="your-task">
+               Current Task:
+            </div>
             <div id="task-name-top" th:text="${session.taskName}"></div>
         </div>
 
@@ -70,7 +72,7 @@
         <div class="create-new-subtask" th:if="${!session.isReadOnly}">
             <ul id="new-subtask">
                 <li>
-                    <h4 id="subtask-text" style="text-align: center">New subtask</h4>
+                    <h6 id="subtask-text" style="text-align: center">New subtask</h6>
                     <div class="project-table">
                         <div class="header-group">
                             <span class="td">Subtask name</span>
@@ -106,7 +108,8 @@
             </ul>
         </div>
 
-        <h4 id="existing-subtasks" style="text-align: center">Current subtasks</h4>
+        <h6 id="existing-subtasks">
+            Current subtasks</h6>
         <ul id="subtask-ul" th:each="subtask : ${session.subtasks}">
 
             <li>

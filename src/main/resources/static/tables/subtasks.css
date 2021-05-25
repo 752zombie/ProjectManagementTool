@@ -27,7 +27,7 @@
 
 
 .create-new-subtask{
-    margin-top: 100px;
+    margin-top: 70px;
     margin-bottom: 100px;
 }
 
@@ -43,8 +43,10 @@
     margin-bottom: 150px;
 }
 
+
+
 #create-new-subtask {
-    margin-top: 70px;
+    margin-top: 50px;
 
 }
 
@@ -61,7 +63,6 @@
 }
 
 
-
 #task-name {
     margin-top: 30px;
     font-size: x-large;
@@ -72,6 +73,10 @@
     padding-bottom: 15px;
     padding-top: 5px;
     color: #2159e8;
+}
+
+#existing-subtasks {
+    text-align: center;
 }
 
 .mover {
