@@ -1,7 +1,6 @@
 package com.example.projecttool.repositories;
 
 import com.example.projecttool.models.project.Skill;
-import com.example.projecttool.services.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

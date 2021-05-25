@@ -1,4 +1,4 @@
-package com.example.projecttool.services;
+package com.example.projecttool.repositories;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

@@ -1,7 +1,6 @@
 package com.example.projecttool.repositories;
 
 import com.example.projecttool.models.project.Project;
-import com.example.projecttool.services.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
