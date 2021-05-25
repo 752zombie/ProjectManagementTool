@@ -1,8 +1,8 @@
 package com.example.projecttool.repositories;
 
 
-import com.example.projecttool.models.User;
-import com.example.projecttool.models.UserAttribute;
+import com.example.projecttool.models.user.User;
+import com.example.projecttool.models.user.UserAttribute;
 import com.example.projecttool.services.DatabaseConnection;
 
 import java.sql.Connection;

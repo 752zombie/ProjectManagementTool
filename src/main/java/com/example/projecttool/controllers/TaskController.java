@@ -1,6 +1,6 @@
 package com.example.projecttool.controllers;
 
-import com.example.projecttool.models.User;
+import com.example.projecttool.models.user.User;
 import com.example.projecttool.models.project.Project;
 import com.example.projecttool.models.project.Task;
 import com.example.projecttool.services.ProjectService;

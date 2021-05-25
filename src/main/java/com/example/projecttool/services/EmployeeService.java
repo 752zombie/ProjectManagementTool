@@ -1,7 +1,7 @@
 package com.example.projecttool.services;
 
-import com.example.projecttool.models.Employee;
-import com.example.projecttool.models.Skill;
+import com.example.projecttool.models.project.Employee;
+import com.example.projecttool.models.project.Skill;
 import com.example.projecttool.repositories.EmployeeRepository;
 import com.example.projecttool.repositories.SubtaskRepository;
 

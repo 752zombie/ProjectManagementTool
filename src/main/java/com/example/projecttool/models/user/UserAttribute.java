@@ -1,4 +1,4 @@
-package com.example.projecttool.models;
+package com.example.projecttool.models.user;
 
 public enum UserAttribute {
     name,

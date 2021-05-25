@@ -1,7 +1,7 @@
 package com.example.projecttool.controllers;
 
 
-import com.example.projecttool.models.User;
+import com.example.projecttool.models.user.User;
 import com.example.projecttool.services.LoginService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

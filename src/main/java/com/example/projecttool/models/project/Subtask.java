@@ -1,8 +1,5 @@
 package com.example.projecttool.models.project;
 
-import com.example.projecttool.models.Employee;
-import com.example.projecttool.models.Skill;
-
 import java.sql.Date;
 import java.util.List;
 

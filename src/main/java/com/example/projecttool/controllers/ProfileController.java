@@ -1,7 +1,7 @@
 package com.example.projecttool.controllers;
 
-import com.example.projecttool.models.User;
-import com.example.projecttool.models.UserAttribute;
+import com.example.projecttool.models.user.User;
+import com.example.projecttool.models.user.UserAttribute;
 import com.example.projecttool.services.LoginService;
 import com.example.projecttool.services.ProfileService;
 import com.example.projecttool.util.ErrorHandler;

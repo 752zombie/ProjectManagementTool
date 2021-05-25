@@ -1,6 +1,6 @@
 package com.example.projecttool.services;
 
-import com.example.projecttool.models.User;
+import com.example.projecttool.models.user.User;
 import com.example.projecttool.repositories.UserRepository;
 
 import java.sql.SQLException;

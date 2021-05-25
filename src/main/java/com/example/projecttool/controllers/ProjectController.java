@@ -1,12 +1,10 @@
 package com.example.projecttool.controllers;
 
-import com.example.projecttool.models.User;
+import com.example.projecttool.models.user.User;
 import com.example.projecttool.models.project.Project;
-import com.example.projecttool.models.project.Task;
 import com.example.projecttool.util.ErrorHandler;
 import com.example.projecttool.services.ProjectService;
 import com.example.projecttool.services.ShareProjectService;
-import com.example.projecttool.services.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

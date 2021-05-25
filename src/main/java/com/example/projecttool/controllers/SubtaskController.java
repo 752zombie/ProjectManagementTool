@@ -1,8 +1,8 @@
 package com.example.projecttool.controllers;
 
-import com.example.projecttool.models.Employee;
-import com.example.projecttool.models.Skill;
-import com.example.projecttool.models.User;
+import com.example.projecttool.models.project.Employee;
+import com.example.projecttool.models.project.Skill;
+import com.example.projecttool.models.user.User;
 import com.example.projecttool.models.project.Project;
 import com.example.projecttool.models.project.Subtask;
 import com.example.projecttool.services.EmployeeService;
