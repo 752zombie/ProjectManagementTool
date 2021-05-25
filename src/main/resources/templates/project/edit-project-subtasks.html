@@ -28,7 +28,7 @@
                   <h6>Your employees:</h6>
               </div>
 
-            <div th:each="emp, iter : ${session.allEmployees}">
+            <div id="current-employees" th:each="emp, iter : ${session.allEmployees}">
                 <div th:id="${emp.id + 'info'}">
                     <div>
                         <span th:text="${emp.name}" class="emp-name-hover"></span><br>
