@@ -133,9 +133,9 @@
 
                         <!-- Count weekends or only weekdays -->
                         <select id="task-count-weekends" name="count-weekends" th:class="${session.isReadOnly ? 'look-like-text' : ''}">
-                            <option value="weekend-false" th:disabled="${task.countWeekends != 'weekend-false'}" th:selected="${task.countWeekends=='weekend-false'}">NO
+                            <option value="weekend-false" th:disabled="${session.isReadOnly && task.countWeekends != 'weekend-false'}" th:selected="${task.countWeekends=='weekend-false'}">NO
                             </option>
-                            <option value="weekend-true" th:disabled="${task.countWeekends != 'weekend-true'}" th:selected="${task.countWeekends=='weekend-true'}">YES
+                            <option value="weekend-true" th:disabled="${session.isReadOnly && task.countWeekends != 'weekend-true'}" th:selected="${task.countWeekends=='weekend-true'}">YES
                             </option>
                         </select>
 
