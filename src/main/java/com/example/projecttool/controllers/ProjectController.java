@@ -77,6 +77,10 @@ public class ProjectController {
             Project project = ProjectService.getProject(projectId);
             session.setAttribute("project", project);
 
+            if (!ProjectService.getInstance().addProjectWithTasks(projectId)) {
+                return ErrorHandlerController.setCurrentError("Something went wrong editing project", session);
+            }
+
 
             // Deletes row from project
             if (action.equals("Delete")) {

@@ -1,12 +1,89 @@
 package com.example.projecttool.services;
 
 import com.example.projecttool.models.project.Project;
+import com.example.projecttool.models.project.Task;
 import com.example.projecttool.repositories.ProjectRepository;
 import com.example.projecttool.repositories.ShareProjectRepository;
+import com.example.projecttool.repositories.TaskRepository;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ProjectService {
+
+    private final Map<Integer, Project> loadedProjects;
+    private static ProjectService projectService;
+
+    private ProjectService() {
+        loadedProjects = new HashMap<>();
+    }
+
+    public static ProjectService getInstance() {
+        if (projectService == null) {
+            projectService = new ProjectService();
+        }
+
+        return projectService;
+    }
+
+    public Map<Integer, Project> getLoadedProjects() {
+        return loadedProjects;
+    }
+
+    public boolean addProjectWithTasks(int projectId) {
+        if (!loadedProjects.containsKey(projectId)) {
+            try {
+                Project project = getProject(projectId);
+                HashMap<Integer, Task> tasks = TaskRepository.getTasks(projectId);
+                project.setTasks(tasks);
+                System.out.println(project.getTasks());
+                project.setCurrentlyAccessing(project.getCurrentlyAccessing() + 1);
+                loadedProjects.put(projectId, project);
+            }
+
+            catch (Exception e) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public Project getProjectInMap(int projectId) {
+        return loadedProjects.get(projectId);
+    }
+
+    public Task getTask(int projectId, int taskId) {
+        return loadedProjects.get(projectId).getTasks().get(taskId);
+    }
+
+    public void deleteTask(int projectId, int taskId) {
+        loadedProjects.get(projectId).getTasks().remove(taskId);
+    }
+
+    public Map<Integer, Task> getTaskMap(int projectId) {
+        System.out.println(loadedProjects.get(projectId));
+        return loadedProjects.get(projectId).getTasks();
+    }
+
+
+
+    //used for memory cleanup
+    //should be called when a user stops accessing a certain project or the client disconnects from the server(session is no longer valid)
+    //does not delete a project from the database
+    public void removeProject(int projectId) {
+        if (loadedProjects.containsKey(projectId)) {
+            Project project = loadedProjects.get(projectId);
+            project.setCurrentlyAccessing(project.getCurrentlyAccessing() - 1);
+
+            if (project.getCurrentlyAccessing() < 1) {
+                loadedProjects.remove(projectId);
+            }
+        }
+    }
+
 
 
     public static Project nameYourProject(int userId, String projectName, String projectStart, String projectEnd) throws SQLException {
@@ -40,7 +117,7 @@ public class ProjectService {
     }
 
     public static void deleteProject(Integer projectId) throws SQLException {
-
+            ProjectService.getInstance().removeProject(projectId);
             ProjectRepository.deleteProject(projectId);
     }
 

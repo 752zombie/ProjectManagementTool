@@ -112,30 +112,30 @@
                 <div class="row-group">
 
                     <form method="post" action="/edit-task" class="tr" th:each="task : ${session.projectTasks}">
-                        <input type="hidden" th:value="${task.id}" name="id">
+                        <input type="hidden" th:value="${task.value.id}" name="id">
 
                         <!-- SELECT priority -->
                         <select id="task-priority" name="priority" required th:class="${session.isReadOnly ? 'look-like-text' : ''}">
-                            <option class="high-prior" th:disabled="${session.isReadOnly && task.priority != 'high'}" value="high" th:selected="${task.priority=='high'}">High</option>
-                            <option class="medium-prior" th:disabled="${session.isReadOnly && task.priority != 'medium'}" value="medium" th:selected="${task.priority=='medium'}">Medium</option>
-                            <option class="low-prior" th:disabled="${session.isReadOnly && task.priority != 'low'}" value="low" th:selected="${task.priority=='low'}">Low</option>
+                            <option class="high-prior" th:disabled="${session.isReadOnly && task.value.priority != 'high'}" value="high" th:selected="${task.value.priority=='high'}">High</option>
+                            <option class="medium-prior" th:disabled="${session.isReadOnly && task.value.priority != 'medium'}" value="medium" th:selected="${task.value.priority=='medium'}">Medium</option>
+                            <option class="low-prior" th:disabled="${session.isReadOnly && task.value.priority != 'low'}" value="low" th:selected="${task.value.priority=='low'}">Low</option>
                         </select>
 
 
 
                         <!-- TASK NAME AND DESCRIPTION -->
-                        <span class="td"><input type="text" id="task-name" name="name" th:value="${task.name}" th:readonly="${session.isReadOnly}" th:class="${session.isReadOnly ? 'look-like-text' : ''}"></span>
+                        <span class="td"><input type="text" id="task-name" name="name" th:value="${task.value.name}" th:readonly="${session.isReadOnly}" th:class="${session.isReadOnly ? 'look-like-text' : ''}"></span>
 
 
                         <span class="td"><input type="number" id="hours-day" name="estimated-hours-day"
-                                                th:value="${task.estimatedHoursPrDay}" th:class="${session.isReadOnly ? 'look-like-text' : ''}" th:readonly="${session.isReadOnly}"></span>
+                                                th:value="${task.value.estimatedHoursPrDay}" th:class="${session.isReadOnly ? 'look-like-text' : ''}" th:readonly="${session.isReadOnly}"></span>
 
 
                         <!-- Count weekends or only weekdays -->
                         <select id="task-count-weekends" name="count-weekends" th:class="${session.isReadOnly ? 'look-like-text' : ''}">
-                            <option value="weekend-false" th:disabled="${session.isReadOnly && task.countWeekends != 'weekend-false'}" th:selected="${task.countWeekends=='weekend-false'}">NO
+                            <option value="weekend-false" th:disabled="${session.isReadOnly && task.value.countWeekends != 'weekend-false'}" th:selected="${task.value.countWeekends=='weekend-false'}">NO
                             </option>
-                            <option value="weekend-true" th:disabled="${session.isReadOnly && task.countWeekends != 'weekend-true'}" th:selected="${task.countWeekends=='weekend-true'}">YES
+                            <option value="weekend-true" th:disabled="${session.isReadOnly && task.value.countWeekends != 'weekend-true'}" th:selected="${task.value.countWeekends=='weekend-true'}">YES
                             </option>
                         </select>
 
@@ -143,23 +143,23 @@
 
                         <!-- hours total -->
                         <span class="td"><input type="number" id="hours-total" name="estimated-hours-total"
-                                                th:value="${task.estimatedHoursTotal}" class="look-like-text"
+                                                th:value="${task.value.estimatedHoursTotal}" class="look-like-text"
                                                 readonly></span>
                         <!-- start date -->
                         <span class="td"><input type="date" id="task-start" name="start_time"
-                                                th:value="${task.start_time}" th:readonly="${session.isReadOnly}" th:class="${session.isReadOnly ? 'look-like-text' : ''}"></span>
+                                                th:value="${task.value.start_time}" th:readonly="${session.isReadOnly}" th:class="${session.isReadOnly ? 'look-like-text' : ''}"></span>
 
                         <!-- end date-->
                         <span class="td"><input type="date" id="task-end" name="end_time"
-                                                th:value="${task.end_time}" th:readonly="${session.isReadOnly}" th:class="${session.isReadOnly ? 'look-like-text' : ''}"></span>
+                                                th:value="${task.value.end_time}" th:readonly="${session.isReadOnly}" th:class="${session.isReadOnly ? 'look-like-text' : ''}"></span>
 
                         <!-- calculated end date-->
-                        <span class="td"><input th:type="${task.endTimeCanBeCalculated() ? 'date' : 'text'}" name="end_time_calculated" id="end_time_calculated" class="look-like-text"
-                                                th:value="${task.endTimeCanBeCalculated() ? task.end_time_calculated : 'N/A'}" readonly></span>
+                        <span class="td"><input th:type="${task.value.endTimeCanBeCalculated() ? 'date' : 'text'}" name="end_time_calculated" id="end_time_calculated" class="look-like-text"
+                                                th:value="${task.value.endTimeCanBeCalculated() ? task.value.end_time_calculated : 'N/A'}" readonly></span>
 
                         <!-- task description -->
                         <span class="td"><textarea name="description" id="task-description" cols="30" rows="1"
-                                                   th:text="${task.description}" th:readonly="${session.isReadOnly}" th:class="${session.isReadOnly ? 'look-like-text' : ''}"></textarea></span>
+                                                   th:text="${task.value.description}" th:readonly="${session.isReadOnly}" th:class="${session.isReadOnly ? 'look-like-text' : ''}"></textarea></span>
 
 
                         <!-- Buttons -->

@@ -5,14 +5,15 @@ import com.example.projecttool.models.project.Task;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TaskRepository {
 
 
-    public static ArrayList<Task> getTasks(int projectId) throws SQLException {
+    public static HashMap<Integer, Task> getTasks(int projectId) throws SQLException {
 
         Connection connection = DatabaseConnection.getConnection();
-        ArrayList<Task> taskList = new ArrayList<>();
+        HashMap<Integer, Task> taskList = new HashMap<>();
 
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM tasks WHERE project_id = ?");
         statement.setInt(1, projectId);
@@ -29,7 +30,7 @@ public class TaskRepository {
             int estimatedHoursPrDay = resultSet.getInt("estimated_hours_day");
             String countWeekends = resultSet.getString("count_weekends");
 
-           taskList.add(new Task(id, project_name, project_description, start_time, end_time, priority, estimatedHours, estimatedHoursPrDay, countWeekends));
+           taskList.put(id, new Task(id, project_name, project_description, start_time, end_time, priority, estimatedHours, estimatedHoursPrDay, countWeekends));
         }
 
         return taskList;
@@ -158,6 +159,16 @@ public class TaskRepository {
 
         return resultSet.getString(1);
 
+    }
+
+    //method contains race condition, but fixing is out of scope
+    public static int getNewestTaskId(int projectId) throws SQLException{
+        Connection connection = DatabaseConnection.getConnection();
+
+        PreparedStatement statement = connection.prepareStatement("SELECT MAX(id) FROM tasks WHERE project_id = ?");
+        statement.setInt(1, projectId);
+        ResultSet resultSet = statement.executeQuery();
+        return resultSet.next() ? resultSet.getInt(1) : -1;
     }
 }
 

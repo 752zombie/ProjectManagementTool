@@ -6,6 +6,7 @@ import com.example.projecttool.models.project.Task;
 import com.example.projecttool.services.ProjectService;
 import com.example.projecttool.services.TaskService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,13 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 
 @Controller
 public class TaskController {
 
 
     @GetMapping("/task-list")
-    public String taskList(HttpSession session) {
+    public String taskList(HttpSession session, Model model) {
         User user = (User) session.getAttribute("user");
         Project project = (Project) session.getAttribute("project");
         if (user == null || project == null) {
@@ -32,8 +34,9 @@ public class TaskController {
                 return ErrorHandlerController.setCurrentError("You do not have access to that project", session);
             }
             session.setAttribute("isReadOnly", ProjectService.isReadOnly(project.getProjectId(), user.getId()));
-            ArrayList<Task> projectTasks = TaskService.getTasks(project.getProjectId());
-            session.setAttribute("projectTasks", projectTasks);
+            Map<Integer, Task> tasks = TaskService.getTasks(project.getProjectId());
+            session.setAttribute("projectTasks", tasks);
+
         }
 
         catch (SQLException e) {
@@ -61,13 +64,9 @@ public class TaskController {
             }
             // Deletes row from project
             else if (action.equals("Delete")) {
-                TaskService.deleteTask(taskId);
+                TaskService.deleteTask(project.getProjectId(), taskId);
             }
 
-            // Sorts and directs edited tasks to View
-            ArrayList<Task> projectTasks = TaskService.getTasks(project.getProjectId());
-
-            session.setAttribute("projectTasks", projectTasks);
 
 
         } catch (SQLException s) {
@@ -94,9 +93,6 @@ public class TaskController {
             // Adds rows to DB
             TaskService.addRowToTask(project.getProjectId(), name, description, priority, start_time, end_time, estimatedHoursDay, countWeekends, user.getId());
 
-            // Directs tasks to View
-            ArrayList<Task> projectTasks = TaskService.getTasks(project.getProjectId());
-            session.setAttribute("projectTasks", projectTasks);
 
 
             return "redirect:/task-list";
