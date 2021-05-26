@@ -27,7 +27,7 @@ public class ProjectController {
     @PostMapping("start-new-project")
     public String nameYourProject(@RequestParam("project_name") String projectName, @RequestParam("project_start") String projectStart,
                                   @RequestParam("project_end") String projectEnd, HttpSession session) {
-        
+
         try {
             User user = (User) session.getAttribute("user");
 
