@@ -33,9 +33,10 @@ public class TaskController {
             if (!ProjectService.hasAccess(project.getProjectId(), user.getId())) {
                 return ErrorHandlerController.setCurrentError("You do not have access to that project", session);
             }
-            session.setAttribute("isReadOnly", ProjectService.isReadOnly(project.getProjectId(), user.getId()));
+
             Map<Integer, Task> tasks = TaskService.getTasks(project.getProjectId());
             session.setAttribute("projectTasks", tasks);
+            session.setAttribute("isReadOnly", ProjectService.isReadOnly(project.getProjectId(), user.getId()));
 
         }
 

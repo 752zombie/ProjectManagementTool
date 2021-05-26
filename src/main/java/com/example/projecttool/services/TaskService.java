@@ -5,11 +5,8 @@ import com.example.projecttool.models.project.Task;
 import com.example.projecttool.repositories.ShareProjectRepository;
 import com.example.projecttool.repositories.TaskRepository;
 import com.example.projecttool.util.DueDateCalculator;
-import com.example.projecttool.util.PrioritySorter;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 public class TaskService {
@@ -72,7 +69,7 @@ public class TaskService {
         boolean isOwner = ProjectService.isOwner(projectId, userId);
 
         if (isOwner || canEdit) {
-            Project project = ProjectService.getInstance().getProjectInMap(projectId);
+            Project project = ProjectService.getInstance().getProject(projectId);
             TaskRepository.addRowToTask(projectId, name, description, priority, start_time, end_time, estimatedHoursDay, countWeekends);
             int taskId = TaskRepository.getNewestTaskId(projectId);
             Task task = new Task(taskId, name, description, start_time, end_time, priority, TaskRepository.getTotalHoursToComplete(taskId), estimatedHoursDay, countWeekends);

@@ -28,14 +28,10 @@ public class ProjectService {
         return projectService;
     }
 
-    public Map<Integer, Project> getLoadedProjects() {
-        return loadedProjects;
-    }
-
-    public boolean addProjectWithTasks(int projectId) {
+    public boolean loadProjectWithTasks(int projectId) {
         if (!loadedProjects.containsKey(projectId)) {
             try {
-                Project project = getProject(projectId);
+                Project project = ProjectRepository.getProject(projectId);
                 HashMap<Integer, Task> tasks = TaskRepository.getTasks(projectId);
                 project.setTasks(tasks);
                 System.out.println(project.getTasks());
@@ -51,7 +47,7 @@ public class ProjectService {
         return true;
     }
 
-    public Project getProjectInMap(int projectId) {
+    public Project getProject(int projectId) {
         return loadedProjects.get(projectId);
     }
 
@@ -104,11 +100,6 @@ public class ProjectService {
         return ProjectRepository.getProjects(userId);
     }
 
-
-    public static Project getProject(int projectId) throws SQLException {
-
-        return ProjectRepository.getProject(projectId);
-    }
 
     public static boolean isReadOnly(int projectId, int userId) throws SQLException {
         String accessLevel = ShareProjectRepository.getAccessLevel(projectId, userId);
