@@ -28,7 +28,6 @@ public class ProjectController {
     public String nameYourProject(@RequestParam("project_name") String projectName, @RequestParam("project_start") String projectStart,
                                   @RequestParam("project_end") String projectEnd, HttpSession session) {
 
-
         try {
             User user = (User) session.getAttribute("user");
 
@@ -36,6 +35,10 @@ public class ProjectController {
            Project project = ProjectService.nameYourProject(user.getId(), projectName, projectStart, projectEnd);
 
            session.setAttribute("project", project);
+
+            if (!ProjectService.getInstance().loadProjectWithTasks(project.getProjectId())) {
+                return ErrorHandlerController.setCurrentError("Something went wrong editing project", session);
+            }
 
         }
 
@@ -73,9 +76,16 @@ public class ProjectController {
             if (!ProjectService.hasAccess(projectId, user.getId())) {
                 return ErrorHandlerController.setCurrentError("You do not have access to that project", session);
             }
+
+
+            if (!ProjectService.getInstance().loadProjectWithTasks(projectId)) {
+                return ErrorHandlerController.setCurrentError("Something went wrong editing project", session);
+            }
+
             // Add current project to session
-            Project project = ProjectService.getProject(projectId);
+            Project project = ProjectService.getInstance().getProject(projectId);
             session.setAttribute("project", project);
+
 
 
             // Deletes row from project
